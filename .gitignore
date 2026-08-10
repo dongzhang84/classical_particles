@@ -1,0 +1,53 @@
+# ---- Secrets / local config ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.*
+
+# ---- macOS ----
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Notebooks ----
+*.nbconvert.ipynb
+
+# ---- Editors / IDE ----
+.vscode/
+.idea/
+*.swp
+*~
+
+# ---- LaTeX (若以后写稿) ----
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# ---- 本地产物 ----
+scratch/
+tmp/
+out/
+figures/*.png
+!figures/.gitkeep
+paper.txt
