@@ -1,0 +1,62 @@
+%% figures/fig-preaccel.tex -- Figure for Sec. 3.3.
+%% Pulled into notes.tex with \input{figures/fig-preaccel}.
+%% Needs pgfplots, loaded in the main preamble.
+%%
+%% Both curves solve tau_0 adot - a = -(J/m) delta(t). Integrating across the
+%% delta gives a(0+) - a(0-) = -J/(m tau_0), which fixes each branch once one
+%% end condition is chosen:
+%%
+%%   a(t) = 0 for t<0   ->  a = -(J/m tau_0) exp(t/tau_0) for t>0   (runaway)
+%%   a(t) = 0 for t>0   ->  a = +(J/m tau_0) exp(t/tau_0) for t<0   (pre-acc.)
+%%
+%% The two are reflections of each other through the origin, which is the point
+%% of drawing them on one axis. Plotted in units of J/(m tau_0).
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=11.2cm, height=6.0cm,
+  xlabel={$\tau/\taunought$}, ylabel={$a\ \ [\,J/m\taunought\,]$},
+  xmin=-3.1, xmax=3.1, ymin=-1.45, ymax=1.45,
+  axis lines=middle,
+  ytick={-1,1}, yticklabels={,},
+  xtick={-3,-2,-1,1,2,3},
+  every axis y label/.style={at={(ticklabel* cs:1.0)},anchor=south east},
+  every axis x label/.style={at={(ticklabel* cs:1.0)},anchor=north west},
+  clip=true, samples=90, font=\footnotesize,
+]
+  %% the impulse
+  \draw[->,thick,gray] (axis cs:0,0) -- (axis cs:0,1.33);
+  \node[anchor=west,font=\footnotesize,gray]
+       at (axis cs:0.07,1.30) {$J\,\delta(\tau)$};
+
+  %% branch 1: no pre-acceleration, runaway afterwards
+  \addplot[domain=-3.1:0,thick] {0};
+  \addplot[domain=0:0.38,thick] {-exp(x)};
+  \fill (axis cs:0,-1) circle (1.3pt);
+
+  %% branch 2: asymptotic condition, pre-acceleration beforehand
+  \addplot[domain=-3.1:0,thick,dashed] {exp(x)};
+  \addplot[domain=0:3.1,thick,dashed] {0};
+  \fill (axis cs:0,1) circle (1.3pt);
+
+  \node[anchor=west,font=\footnotesize,align=left] at (axis cs:0.55,-0.80)
+       {$a(0^-)=0$\\runs away after};
+  \node[anchor=east,font=\footnotesize,align=right] at (axis cs:-0.45,0.80)
+       {$a(\infty)=0$\\acts before};
+\end{axis}
+\end{tikzpicture}
+\caption{The choice Dirac's asymptotic condition makes. Both curves solve the
+same equation with the same impulse, and differ only in which end condition is
+imposed. Fixing the acceleration to vanish before the blow, as an
+initial-value problem would, gives the solid curve: nothing happens until
+$\tau=0$ and the particle then runs away, as in Fig.~\ref{fig:runaway}(b).
+Fixing it to vanish at $\tau\to+\infty$ instead gives the dashed curve: the
+runaway is gone, the particle ends in uniform motion with exactly the velocity
+change $J/m$ that the impulse should produce, and it acquires that velocity
+\emph{before} the impulse arrives, over a time of order $\taunought$. The two
+branches are reflections of each other through the origin. There is no third
+branch, and no choice that avoids both.
+\label{fig:preaccel}}
+\end{figure}

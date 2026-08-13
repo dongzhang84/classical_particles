@@ -1,0 +1,71 @@
+%% figures/fig-simultaneity.tex -- Figure for Sec. 2.1.4.
+%% Pulled into notes.tex with \input{figures/fig-simultaneity}.
+%% Needs tikz with the arrows.meta library, loaded in the main preamble.
+%%
+%% Geometry: the world line is x = 0.18 t^2, so the velocity at time t is
+%% v = 0.36 t. In an (x,t) diagram the simultaneity line of the instantaneous
+%% rest frame at an event has slope dt/dx = v there, so the two slices drawn
+%% in panel (a) have slopes 0.432 and 0.648 and cannot be parallel. Every
+%% number below follows from those two lines; nothing is drawn by eye.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[>={Stealth[length=5pt]},scale=2.1,line join=round]
+
+%% ---------------- panel (a): the particle's own simultaneity ----------
+\begin{scope}
+  \fill[gray!20] (-0.5,0.872) -- (1.35,1.671) -- (1.35,2.297) -- (-0.5,1.098)
+     -- cycle;
+  %% the two rest-frame slices
+  \draw (-0.5,0.872) -- (1.35,1.671);
+  \draw (-0.5,1.098) -- (1.35,2.297);
+  \node[right,font=\footnotesize] at (1.36,1.66) {$\tau$};
+  \node[right,font=\footnotesize] at (1.36,2.30) {$\tau+\Delta\tau$};
+  %% world line
+  \draw[very thick] plot[domain=0.62:2.6,samples=60,smooth]
+       ({0.18*\x*\x},\x);
+  \node[left] at (0.02,2.5) {$\gamma$};
+  %% acceleration
+  \draw[->,thick] (0.259,1.2) -- (0.72,1.2);
+  \node[below,font=\footnotesize] at (0.49,1.19) {$a$};
+  %% the gap, measured at both ends
+  \draw[<->] (-0.4,0.915) -- (-0.4,1.163);
+  \draw[<->] (1.25,1.628) -- (1.25,2.232);
+  \node[left,font=\footnotesize]  at (-0.42,1.04) {narrower};
+  \node[right,font=\footnotesize] at (1.27,1.93) {wider};
+  \node at (0.42,0.12) {(a) Dirac};
+\end{scope}
+
+%% ---------------- panel (b): constant time in one frame ---------------
+\begin{scope}[xshift=3.25cm]
+  \fill[gray!20] (-0.5,1.27) rectangle (1.35,1.694);
+  \draw (-0.5,1.27)  -- (1.35,1.27);
+  \draw (-0.5,1.694) -- (1.35,1.694);
+  \node[right,font=\footnotesize] at (1.36,1.27)  {$t$};
+  \node[right,font=\footnotesize] at (1.36,1.694) {$t+\Delta t$};
+  \draw[very thick] plot[domain=0.62:2.6,samples=60,smooth]
+       ({0.18*\x*\x},\x);
+  \node[left] at (0.02,2.5) {$\gamma$};
+  \draw[->,thick] (0.259,1.2) -- (0.72,1.2);
+  \node[below,font=\footnotesize] at (0.49,1.19) {$a$};
+  \draw[<->] (-0.4,1.27) -- (-0.4,1.694);
+  \draw[<->] (1.25,1.27) -- (1.25,1.694);
+  \node[left,font=\footnotesize]  at (-0.46,1.48) {uniform};
+  \node at (0.42,0.12) {(b) Lorentz};
+\end{scope}
+
+\end{tikzpicture}
+\caption{Where the $4/3$ goes. Both panels show the same accelerating world
+line $\gamma$ and the same slab of it, and differ only in what is being called
+``at the same moment''. \emph{(a)} Dirac's tube is built from the particle's own
+succession of rest frames. Because the velocity changes along $\gamma$,
+successive slices are not parallel: they fan open on the side the particle is
+accelerating towards, and the slab is wider there. That fanning is the factor
+$1+\varepsilon\,a\cdot n$ of Eq.~(\ref{eq:tubeelement}). \emph{(b)} Collecting
+field momentum at constant time in one chosen frame gives parallel slices and a
+slab of uniform thickness, with no such factor. The wedge by which the two
+shaded regions differ is worth exactly one third of the electromagnetic mass,
+which is the whole of the discrepancy between Eqs.~(\ref{eq:massren}) and
+(\ref{eq:divterm}).
+\label{fig:simultaneity}}
+\end{figure}
