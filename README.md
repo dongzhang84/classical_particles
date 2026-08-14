@@ -1,13 +1,27 @@
 # classical_particles
 
-一份 2006 年的本科毕业论文，以及二十年后对它的回顾。
+三篇关于经典电荷运动的旧稿（2006、2010、2011），二十年后对它们的回顾，以及正在重写的笔记。
 
 ## 内容
 
+### 原始文稿
+
 | 文件 | 说明 |
 |---|---|
-| [`original_paper.pdf`](original_paper.pdf) | 《论电荷和质点的运动》，南京大学天文学系本科毕业论文，2006 年 6 月，79 页 |
+| [`original_papers/2006paper.pdf`](original_papers/2006paper.pdf) | 《论电荷和质点的运动》，南京大学天文学系本科毕业论文，2006 年 6 月，79 页 |
+| [`original_papers/2010paper.pdf`](original_papers/2010paper.pdf) | *How Much Energy Electrons Can Emit? Radiation Theory Based on the Lorentz-Dirac Equation and other Modified Equations*，Ohio State，18 页，**未完成** |
+| [`original_papers/2011paper.pdf`](original_papers/2011paper.pdf) | *Radiation Reaction in Ultra-High Magnetic Fields and Highest Energy Cosmic Rays with Their Neutrinos*，4 页，**未完成** |
+
+2010 那篇用两个算例判别 LD 及其修正方程：一维谐振束缚电子的**辐射谱轮廓**因方程而异；强磁场中超相对论电子的同步辐射在 `Bγ > 10¹⁶ G` 时功率显著偏离经典的 `P ∝ v²γ²`。
+
+2011 那篇处理超高磁场中的辐射反作用与超高能宇宙线。值得注意的是它**已经改用降阶后的 Landau–Lifshitz 形式**（把 `ȧ` 换成 `Ḟ_ext/m`），而不再是 2006 年那条修改 LD 的路线；结论是 `bω₀ > 1` 时辐射功率与 `γ` 无关，趋于常数，与同步辐射的 `γ²` 和曲率辐射的 `γ⁴` 都不同。
+
+### 回顾与重写
+
+| 文件 | 说明 |
+|---|---|
 | [`REVIEW_2026.md`](REVIEW_2026.md) | 2026 年的回顾：原文梳理 + 领域二十年进展 + 可能的后续方向 |
+| [`notes/notes.pdf`](notes/notes.pdf) | 正在重写的笔记，AASTeX preprint 格式。把 2006 年那篇的经典电子部分按一条线索重排，并与它当年所依据的文献对照 |
 
 ## 原文讲了什么
 
