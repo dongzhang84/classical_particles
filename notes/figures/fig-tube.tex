@@ -1,0 +1,94 @@
+%% figures/fig-tube.tex -- Figure 1, Dirac's world tube.
+%% Pulled into notes.tex with \input{figures/fig-tube}.
+%% Needs tikz with the arrows.meta library, loaded in the main preamble.
+%%
+%% Geometry note: the world line is x = 0.3*sin(45 s), so dx/ds vanishes
+%% at s = 2. The point annotated in panel (a) is placed there, which is
+%% why u(tau) can be drawn straight up and the separation exactly
+%% horizontal -- the right angle in the figure is true, not suggested.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[>={Stealth[length=5pt]},line join=round]
+
+%% ---------------- panel (a): the tube construction ----------------
+\begin{scope}
+  %% end caps, dashed: the integration is over the wall only
+  \draw[dashed] (0,0) ellipse [x radius=1, y radius=0.28];
+  \draw[dashed] (0,4) ellipse [x radius=1, y radius=0.28];
+  %% tube walls
+  \draw plot[domain=0:4,samples=80,smooth] ({0.3*sin(45*\x) - 1},\x);
+  \draw plot[domain=0:4,samples=80,smooth] ({0.3*sin(45*\x) + 1},\x);
+  %% hyperplane of simultaneity through z(tau)
+  \draw[dashed,gray] (-1.6,2) -- (1.85,2);
+  %% world line, drawn through both caps so it reads as a line
+  \draw[very thick] plot[domain=-0.55:4.55,samples=90,smooth]
+       ({0.3*sin(45*\x)},\x);
+  \node[right] at (0.02,4.78) {$\gamma$};
+  %% proper times
+  \node[left] at (-1.08,0) {$\tau_1$};
+  \node[left] at (-1.08,4) {$\tau_2$};
+  %% annotated point: world line is momentarily vertical here, so u is
+  %% straight up and the separation is horizontal
+  \draw[->,very thick] (0.3,2) -- (0.3,3.05);
+  \node[left] at (0.3,2.86) {$u(\tau)$};
+  \draw[->] (0.3,2) -- (1.27,2);
+  \node[below] at (0.8,1.95) {$\varepsilon$};
+  \draw (0.3,2.2) -- (0.5,2.2) -- (0.5,2);
+  \fill (0.3,2) circle (1.7pt);
+  \node[below left,xshift=3pt] at (0.3,1.94) {$z(\tau)$};
+  \fill (1.3,2) circle (1.7pt);
+  \node[above right,xshift=-2pt] at (1.3,2.0) {$x$};
+  \node[right] at (1.08,3.45) {$\Sigma_{\rm tube}$};
+  \node at (0,-1.25) {(a)};
+\end{scope}
+
+%% ---------------- panel (b): the choice of tube is immaterial ----------
+\begin{scope}[xshift=7.1cm]
+  %% source-free region between the two tubes
+  \fill[gray!20]
+     plot[domain=0:4,samples=80,smooth] ({0.3*sin(45*\x) - 1.35},\x)
+  -- plot[domain=4:0,samples=80,smooth] ({0.3*sin(45*\x) + 1.35},\x)
+  -- cycle;
+  \fill[white]
+     plot[domain=0:4,samples=80,smooth] ({0.3*sin(45*\x) - 0.5},\x)
+  -- plot[domain=4:0,samples=80,smooth] ({0.3*sin(45*\x) + 0.5},\x)
+  -- cycle;
+  %% caps, so both surfaces read as tubes
+  \draw[gray] (0,0) ellipse [x radius=1.35, y radius=0.34];
+  \draw[gray] (0,4) ellipse [x radius=1.35, y radius=0.34];
+  \draw[gray] (0,0) ellipse [x radius=0.5,  y radius=0.16];
+  \draw[gray] (0,4) ellipse [x radius=0.5,  y radius=0.16];
+  %% walls
+  \draw plot[domain=0:4,samples=80,smooth] ({0.3*sin(45*\x) - 0.5},\x);
+  \draw plot[domain=0:4,samples=80,smooth] ({0.3*sin(45*\x) + 0.5},\x);
+  \draw plot[domain=0:4,samples=80,smooth] ({0.3*sin(45*\x) - 1.35},\x);
+  \draw plot[domain=0:4,samples=80,smooth] ({0.3*sin(45*\x) + 1.35},\x);
+  \draw[very thick] plot[domain=-0.55:4.55,samples=90,smooth]
+       ({0.3*sin(45*\x)},\x);
+  \node[right] at (0.02,4.78) {$\gamma$};
+  %% leaders to the two walls
+  \draw[->,gray] (2.15,3.15) -- (0.73,3.15);
+  \node[right,gray] at (2.1,3.15) {$\Sigma$};
+  \draw[->,gray] (2.15,1.15) -- (1.61,1.15);
+  \node[right,gray] at (2.1,1.15) {$\Sigma'$};
+  \node at (-0.95,2) {$V$};
+  \node at (0,-1.25) {(b)};
+\end{scope}
+
+\end{tikzpicture}
+\caption{Dirac's construction. \emph{(a)} The tube. At each proper time the
+point $z(\tau)$ on the world line $\gamma$ carries a sphere of radius
+$\varepsilon$, drawn in the hyperplane of simultaneity of $z(\tau)$ --- the
+dashed line --- so that the separation $x-z(\tau)$ to a point $x$ of the tube is
+orthogonal to the four-velocity $u(\tau)$, as in Eq.~(\ref{eq:diractube}).
+Dragging that sphere along $\gamma$ from $\tau_1$ to $\tau_2$ sweeps out
+$\Sigma_{\rm tube}$. The end caps are drawn dashed as a reminder that the
+integration is carried out over the wall alone; see
+Sec.~\ref{sec:reservations}. \emph{(b)} Why the choice of tube does not matter.
+Two tubes $\Sigma$ and $\Sigma'$ enclose the same world line, and the region
+$V$ between them contains no charge, so the flux of $T^{\mu\nu}$ through the two
+is the same by Eq.~(\ref{eq:tubeindep}). The balance may therefore be read on
+any surface, including one that keeps well away from the singular world line.
+\label{fig:tube}}
+\end{figure}
