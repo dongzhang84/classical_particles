@@ -44,6 +44,10 @@ env/
 *.fdb_latexmk
 *.fls
 
+# ---- notes/ 只 push PDF，源文件一律不上 ----
+notes/*
+!notes/notes.pdf
+
 # ---- 本地产物 ----
 scratch/
 tmp/
