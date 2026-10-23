@@ -527,3 +527,8 @@ APS 页面显示被引 116 次（Citing Articles 90），可作为下一轮的�
 - 1988 年博士论文的确认。
 - 第 3.2 节列出的 ℓ=1 工具文献（Zerilli、Burko、Kodama–Ishibashi、Moncrief）尚未读。
 - Kosyakov 2019、Birnholtz 2014、Goldberger–Rothstein 2006、Chruściel 2021 的出版信息未在本轮补核。
+
+### 3.7 补记：第 3.3 节评注的改正
+
+第 3.3 节说"$\xi\le1$ 时两者预言完全不同"，**这是错的**。静态球壳必须在视界外，$R > r_+ \ge m \ge q^2/m > R_{\rm cl}$，所以 $\xi\le1$ 时任何可达的球壳都同时满足两种判据，两者一致地预言没有 runaway。两种判据真正分歧的区域在 $\xi>1$：$R_{m_0} < R < R_{\rm cl}$，带宽 $m/2$。路线图 v2.1 第 3.1 节已改正。
+
