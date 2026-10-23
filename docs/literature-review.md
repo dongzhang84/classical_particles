@@ -532,3 +532,81 @@ APS 页面显示被引 116 次（Citing Articles 90），可作为下一轮的�
 
 第 3.3 节说"$\xi\le1$ 时两者预言完全不同"，**这是错的**。静态球壳必须在视界外，$R > r_+ \ge m \ge q^2/m > R_{\rm cl}$，所以 $\xi\le1$ 时任何可达的球壳都同时满足两种判据，两者一致地预言没有 runaway。两种判据真正分歧的区域在 $\xi>1$：$R_{m_0} < R < R_{\rm cl}$，带宽 $m/2$。路线图 v2.1 第 3.1 节已改正。
 
+
+---
+
+## 4. 第四轮（2010–2026 年的现代文献）
+
+> 2026-10-23 · 第四轮
+> 起因：前三轮主要从老文献往回追参考文献，结果偏老。本轮改为往前追引用（谁引用了 Gralla–Harte–Wald、Spohn 2000、Levine–Moniz–Sharp、ADM、Kozameh–Newman），并专查三个现代领域：数学物理（Kiessling 一系）、弱引力猜想与超极端物质、有尺寸电荷与世界线有效场论。四路并行，主要用 INSPIRE（arXiv 和 Semantic Scholar 的接口中途限流）。
+> 关键原话已由主线程在原文中复核：Steane 2015 关于引力的一节和"no known physical object"一句；Galley–Leibovich–Rothstein 2012 回复中"worldline shifts"一段。
+
+### 4.0 本轮结论
+
+1. **不是半个世纪没人想，而是主流认为对电子已经解决。** 平直时空中：有尺寸物体裸质量为正就没有 runaway（精确结果）；LD/LL 是它的近似（Gralla–Harte–Wald 2009 严格化）；电子交给 QED。引力被舍弃，是因为对电子只有 $10^{-43}$（Steane 2015 明确这样论证）。
+2. **2010–2026 年没有人问过或算过"自引力能否改变有尺寸带电体的 runaway 判据"**，包括 $G$ 一阶的后牛顿计算。$\xi>1$ 判决带也没人做过。
+3. **GR 中的点电荷：黑洞或负裸质量**（Kiessling–Tahvildar-Zadeh 2019 引 Geroch–Traschen；Ponce de León 2004）。
+4. **猜想 B 没有人完整写过，但零件都已发表**（Steane 2015；Galley–Leibovich–Rothstein 2012 回复；Sokolov 2009）。
+5. **改正**：第三轮之后我曾凭记忆说 Kiessling 2019 论证"守恒律不能唯一确定点电荷受力"，**说反了**。见 4.2。
+
+### 4.1 往前追引用：现代对 runaway 的共识
+
+自 2009 年起的引用数（INSPIRE）：Gralla–Harte–Wald 148，Spohn 2000 72，Levine–Moniz–Sharp 20，ADM 1960 61，Adamo–Kozameh–Newman 165。
+
+**共识：runaway 是点粒子近似的产物，降阶是正当的。**
+- Gralla–Harte–Wald 2009【全文】："no runaway behavior occurs in the context of perturbation theory … There is no corresponding justification for using the ALD equation."
+- Poisson–Pound–Vega 2011【全文】：点粒子只是有尺寸物体的理想化，在这个近似下用 $f_{\rm ext}/m$ 代替加速度是自洽的。
+- Burton–Noble 2014【全文】："an extended charge is not subject to runaways … provided its radius exceeds cτ"。
+- **Steane, *Am. J. Phys.* 83, 256 (2015), arXiv:1402.1106【全文，已复核】**："there is no known physical object, having a positive bare mass, whose equation of motion has runaway solutions"。§II B 用牛顿模型加入引力自能 $-Gm^2/2R$，重新得到 ADM 的 $q/m=\sqrt G$，随即指出电子的 $q/m$ 大 $2\times10^{21}$ 倍而舍弃引力。只有能量论证，没有动力学。
+- 异议或细化：Ekman, Heinzl & Ilderton 2021（降阶级数发散，需要 Borel–Padé 重求和）【摘要】；Kosyakov 2019（把 runaway 当作物理）【全文】。
+
+**其他现代工作**（均不涉及引力改变判据）：Moxon & Flanagan 2018（Gralla–Harte–Wald 推广到电荷二阶，平直时空）【全文】；Harte, Blanco & Flanagan 2025（自相互作用有尺寸物体满足有效场中的 MPD 方程，形式体系）【摘要】；Casadio 2013（ADM 球壳的静态重推，加最小长度）【摘要】；Verma 等 2026（Einstein–Maxwell 后牛顿带电双星，直接用 LL 降阶）【全文检索】。
+
+**问过"引力能否消除 runaway"的只有 Newman 一系**：Kozameh & Quiroga 2012 声称没有 runaway，但细看是因为把零质量无穷远处的辐射数据当作给定的，不是引力的作用【全文，解读】；Quiroga 2017 断言额外的 Bondi 数据项"would give well behaved solutions"，没有证明【全文】。
+
+**$G$ 一阶或后牛顿的 runaway 判据计算：没有找到。**
+
+### 4.2 数学物理：Kiessling 一系
+
+- **Kiessling, *PRD* 100, 065012 (2019), arXiv:1907.11239【全文】**：粒子动量直接假设为 $p = m_b\gamma v$（式 (12)）。受力由总动量守恒定义，只有场动量局部可积时才有意义，所以排除标准 Maxwell–Lorentz 理论，适用于 Bopp–Landé–Thomas–Podolsky（BLTP）电动力学。结果：受力只依赖 $q, v, a$，"the infamous third-order time derivative … does not show up"，运动方程是加速度的 Volterra 积分方程，局部适定。**这与我此前凭记忆的说法相反。**
+- **Kiessling 2012, arXiv:1107.2286【全文】**：才是讨论歧义的那篇。自力的正则化"cannot be expected to be unique"；静态 Born–Infeld 两电荷解守恒一切，所以"simply postulating their conservation does not suffice to produce the right motions"。最后用 Hamilton–Jacobi 定律确定 $P$。
+- **裸质量的符号**：McGuigan & Kiessling 2026（*IJMPA* 41, 2650044, arXiv:2506.08799）【全文】：常场问题中，截断到 $O(\kappa^3)$ 时 $m_b<0$ 出现 runaway；$O(\kappa^4)$ 时出现来回振荡、幅度增长的"over-stability"，问题开放。氢原子光谱要求 $\kappa$ 大，因而 $m_b$ 为大的负值。
+- **加入 GR**：Kiessling & Tahvildar-Zadeh 2019（*IJMPD* 28, 1930017, arXiv:1906.00308）【全文】：打开引力后，只改电磁定律"is by itself not sufficient to obtain even a merely well-defined joint initial value problem"，引力耦合也要改。引 Geroch–Traschen：没有黑洞的奇点不能有正裸质量。Burtscher–Kiessling–Tahvildar-Zadeh 2021：弱 Bianchi 恒等式对裸 RN 奇点不成立，对 Hoffmann 的负裸质量 Born–Infeld 点电荷时空成立。
+- **这一系没有人讨论 Eliezer 型的高阶项**，$p = m_b\gamma v$ 总是直接假设。
+
+### 4.3 弱引力猜想与超极端物质
+
+- **没有任何 2000–2026 年的论文研究自引力下 $\xi>1$ 带电物体的 runaway 或辐射反作用稳定性。**
+- 弱引力猜想文献里的"自力"指两个相同粒子之间的静态力，不是辐射反作用。Harlow 等 2023 综述【全文】："the electron satisfies the WGC by more than 20 orders of magnitude"；脚注说电荷的经典半径小于康普顿波长，经典自能应在康普顿半径处截断（与路线图第 0.2 节一致）。全文没有 runaway、radiation reaction、Lorentz–Dirac 等词。
+- "自力作为宇宙监督者"（Zimmerman, Vega, Poisson & Haas 2013）【全文】：$q\gg m$ 的粒子落入近极端 RN 黑洞，自力阻止过充；轨迹事先给定，不反馈，不讨论 runaway。Sorce & Wald 2017：二阶计算，Kerr–Newman 不能被过充或过旋【摘要】。
+- 带电星体（Anninos & Rothman 2002；Arbañil, Lemos & Zanchin；Bonnor 星）：都是 $Q\le M$ 或恰好极端，静态或径向，没有辐射反作用。
+- Ponce de León 2004【摘要】：GR 中的电磁质量电子模型一般需要负质量的核心。
+- D'Andrea, Luty & Verhaaren 2019【全文】：平直时空中 runaway 来自负裸质量，尺寸大于经典半径即可消除。
+
+### 4.4 有尺寸电荷与世界线有效场论（猜想 B）
+
+- **Galley, Leibovich & Rothstein, *PRL* 105, 094802 (2010)【全文】**：带电球壳的有限尺寸修正在 $O(R^2)$；极化率算符列出但留待以后。
+- **Forgács, Herpay & Kovács, *PRL* 109, 029501 (2012)** 与 Kazinski（arXiv:1103.0537）：指出漏掉了 $O(R)$ 的 $\int a^2\,d\tau$ 项，球壳系数 $-\tfrac29 e^2R$（取自 Nodvik 1964）。
+- **Galley, Leibovich & Rothstein 的回复, *PRL* 109, 029502 (2012)【全文，已复核】**："the worldline of the point charge in the effective theory is not an observable. Hence, one may perform worldline shifts by amounts of order R without changing the predictions"；该项可由 $x^\mu \to x^\mu - (C/m)a^\mu$ 消去，并入偶极算符。**评注**：对 $C\int a^2$ 变分得到正比于 $\dot a$ 的动量修正，即 Eliezer/Bhabha 型的 $P_2$ 项；系数 $\propto e^2R$，点极限下为零。原文没有这样说。
+- Steane 2015【全文】：LL 与 Eliezer/Ford–O'Connell 方程"only differ at the next higher order in … the width of the charge distribution"。
+- Sokolov 2009（*JETP* 109, 207）【摘要】：明确重提狄拉克的"arbitrary choice"，选了另一个与 $u$ 不共线的四动量，但没有当作结构问题。
+- Medina 2006（*J. Phys. A* 39, 3801，**不是** *Am. J. Phys.*）【摘要】：需要 $m_0 > m_e/3$，给出半径下限；满足时"never run away"。
+- Goldberger & Rothstein 2006【全文】（引力情形）：Ricci 世界线算符"can be removed by a redefinition of the metric tensor"。
+- Jakobsen 2024（*PRL* 132, 151601）【全文】：世界线 EFT 中的自旋、磁化、电极化修正。
+- 激光等离子体综述（Di Piazza 等 2012；Blackburn 2020；Gonoskov 等 2022）【全文】：都认为 LAD 有病态，模拟几乎只用 LL 方程。
+- **结论**：猜想 B 没有被完整写下；"Eliezer 的 $P_{2i}$ 歧义正是世界线重定义的冗余"以及"点极限选出 $P_{2i}=0$"都没有找到。
+
+### 4.5 讨论中澄清的问题（2026-10-23）
+
+本轮汇报后，讨论中澄清了几件事，已写进路线图 v3 第 0 节：
+
+- 经典半径与康普顿波长之比 $=e^2/\hbar c=\alpha$，与质量无关。**任何单个基本粒子（电子、质子、μ 子……）都在经典的病发作之前进入量子区域**，所以本项目不研究基本粒子。
+- 电子的自加速被量子力学解决，不是被引力；引力要到 $10^{-34}$ cm 才变强，那里属于量子引力，经典理论回答不了。电子不是黑洞。
+- 电荷数 $N\gtrsim12$ 时经典处理自洽。本项目的对象是经典宏观带电物体；判据真正起作用的是接近黑洞那样致密的带电天体。
+- $10^{-34}$ cm 以下的问题在量子引力框架里有人讨论（引力作为普适正规化子：DeWitt 1964；Isham–Salam–Strathdee 1971–72；QED 加引力的跑动：Robinson–Wilczek 2006；弱引力猜想）。前三项凭记忆，待核。
+
+### 4.6 仍未完成
+
+- Boulware 1973、Levine–Moniz–Sharp 1977 全文（付费墙）。
+- 4.5 节中凭记忆列出的量子引力方向文献。
+- Ekman, Heinzl & Ilderton 2021 关于降阶级数发散的全文。
