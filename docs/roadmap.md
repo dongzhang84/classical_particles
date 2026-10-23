@@ -89,6 +89,8 @@ $$m_0 = m_e - \frac{q^2}{2R} + \frac{G m_e^2}{2R}$$
 
 > **猜想 A（引力消除 runaway）**
 > 平直时空中，点电荷的 runaway 根源于点极限要求裸质量为负（Levine–Moniz–Sharp 的结果指向这一点）。在 Einstein–Maxwell 理论中，ADM 表明点极限下总质量有限，裸质量不必为负。因此引力可能从根上消除 runaway。
+>
+> *第 0 步第一轮检索后需要改写，修订版猜想 A′ 见第 9.4 节。*
 
 > **猜想 B（狄拉克选择题的答案）**
 > Eliezer 型的 $B^\mu$ 推广（在 $P_{\rm mech}$ 中加入 $P_2\ddot u$、$P_4 u^{(4)}$ 等项），降阶后在 $\tau_0$ 一阶全部等价于 LL；从二阶开始出现的差别，对应粒子的内部结构（如电极化率），而不是同一个点电荷的不同运动定律。任何有尺寸的电荷取点极限，都会选出 $P_{2i}=0$，也就是 LD。
@@ -142,6 +144,8 @@ $P_2$ 从二阶开始进入，形式上等价于一个 $\propto E^2$ 的极化�
 - 已有人完整做过 → 换问题，或改为在其基础上推进。
 - 只做了一部分 → 锁定空着的那一块。
 - 完全空白 → 进入第 1 步。
+
+**进展**：第一轮检索结果见第 9 节。
 
 ---
 
@@ -338,3 +342,170 @@ $P_2$ 从二阶开始进入，形式上等价于一个 $\propto E^2$ 的极化�
 - P. Zimmerman, E. Poisson, arXiv:1404.7039.
 - T. M. Linz, J. L. Friedman, A. G. Wiseman, arXiv:1406.5112.
 - TheoPhysEval, arXiv:2610.16733（题 1d、1e：修正电动力学中的辐射阻尼与二体问题）.
+
+---
+
+## 9. 第 0 步文献核查：第一轮结果
+
+> 2026-10-23 · 第一轮检索
+> 说明：以下内容来自摘要和检索工具对原文的摘读，**还没有逐篇通读原文**。标【待读】的条目是关键文献，结论依赖它们，需要读全文确认。文献编号、作者和期刊信息也都还没有逐条核对。
+> 9.1、9.2 是检索记录；9.3 是对检索结果的评注和交叉检查；9.4、9.5 是由此对路线图做的调整。
+
+### 9.1 核心问题：引力能否消除自加速
+
+**初步结论：有人做过一部分，答案倾向于"引力本身不能消除，视界可以"。**
+
+#### (1) Lun & Chow，arXiv:gr-qc/9409024（1994）【待读】
+
+*The role of the apparent horizon in the evolution of Robinson–Trautman Einstein–Maxwell space-times*
+
+- **研究对象**：Robinson–Trautman Einstein–Maxwell 时空，即完整的非线性广义相对论加电磁场。它描述一个带电、不旋转、同时辐射引力波和电磁波的紧致源。
+- **结果**：这类时空的演化方程**存在 runaway 解**。在 Reissner–Nordström 附近线性化，偶极（ℓ = 1）模式的增长率为
+  $$\lambda = \frac{3M}{2Q^2}$$
+  这**正好等于** LD 方程中自由电荷 runaway 的指数 $1/\tau_0 = 3m/2e^2$（取 $G=c=1$）。
+- **视界条件**：如果要求存在过去的表观视界，runaway 被排除。视界存在时，Bondi 质量满足 $M_B^2 \ge Q^2$，即次极端条件。
+- **作者猜想**：带视界的这类时空会稳定地演化到 Reissner–Nordström。
+
+**含义**：在完整的 Einstein–Maxwell 理论里，狄拉克方程的 runaway 原封不动地出现了，增长率一模一样。去掉它的不是引力本身，而是视界。视界只在 $Q \le M$ 时存在，而电子的 $Q/M \approx 2\times10^{21}$，远超这个条件。
+
+#### (2) Newman、Kozameh、Adamo 等的系列工作
+
+- Adamo, Newman, Kozameh, *Living Rev. Relativ.*（arXiv:0906.2155）
+- Newman, *Gen. Rel. Grav.* 50, 111 (2018)
+- 只用 Einstein 方程和 Maxwell 方程，从无穷远处零质量渐近场推出 Abraham–Lorentz–Dirac 辐射反作用力，以及牛顿第二定律、Dirac 旋磁比等经典结果。
+- 【待读】他们如何处理 runaway。
+
+#### (3) 超极端 Reissner–Nordström 的稳定性
+
+- **Dotti, Gleiser 等，arXiv:gr-qc/0607052**：超极端（$Q > M$）Reissner–Nordström 裸奇点**线性不稳定**，存在无穷多个精确的不稳定解。【待读：增长率是否等于 $3M/2Q^2$？】
+- **Delucchi，*Class. Quantum Grav.*（2026，arXiv:2602.19015）**：把超极端 Reissner–Nordström 当作点电荷的自场。在适当的边界条件下，线性扰动的演化是幺正的，没有束缚态，奇点"动力学上沉默"。未讨论运动方程或 runaway。
+- 两者结论不同，差别应该来自奇点处边界条件的选取。
+
+#### (4) ADM 带电球壳的动力学
+
+- 没有找到把 ADM 1960 的静态结果推广到运动方程的工作。arXiv:1303.2706 只做静态。
+- 这一块目前看是空白，但需要再查一轮（带电壳层坍缩、Boulware 1973 等）。
+
+### 9.2 狄拉克的选择题（$B^\mu$ 的不唯一性）
+
+**初步结论：有人讨论过歧义本身，但没找到"Eliezer 型推广等价于粒子内部结构"的明确陈述。**
+
+| 文献 | 要点 |
+|---|---|
+| Kosyakov, *Phys. Rep.* (2019), arXiv:1812.03290 | 认为取 $p^\mu = mv^\mu$ "除了类比力学之外没有依据" |
+| Tabensky, *Phys. Rev. D* 13, 267 (1976) | Lorentz 力项与截断方式无关；辐射反作用项依赖截断方式和推导约定 |
+| arXiv:hep-th/0405121 | Schott 项不能作为附加项随意加进机械动量 |
+| Birnholtz, arXiv:1410.5871 | 在有效场论框架下处理 LD 的初始条件 |
+| *Phys. Rev. D* 12, 1576 (1975) | *Resolution of an ambiguity in the derivation of the Lorentz–Dirac equation*【待读，本轮未能打开】 |
+| 世界线有效场论（Goldberger–Rothstein 一路） | 高阶导数项与极化率的对应：未找到直接针对 Dirac/Eliezer 的文章，可能是圈内默认的常识 |
+
+### 9.3 评注：对第一轮结果的交叉检查
+
+#### 9.3.1 关键数字还没有核实
+
+全篇最关键的一个数，是 $\lambda = 3M/2Q^2$ 与 $1/\tau_0$ 正好相等，目前它只来自摘要。量纲是对的：$G=c=1$ 时 $\tau_0 = 2e^2/3m$，$1/\tau_0 = 3m/2e^2$，两边形式一致。但"正好相等"必须读全文确认。
+
+更便宜、也更符合 §5 AI 使用规范中验证规则的做法，是**自己推一遍**：在 RN 背景下写出 RT–Maxwell 方程 ℓ=1 部分的线性化，求特征根。这一步工作量不大，也可以顺带检验 AI 推导的可靠性。
+
+#### 9.3.2 视界：动力学结果，还是选择条件？
+
+Lun–Chow 的条件是**要求存在过去的表观视界**。要读清楚这个条件的地位：
+
+- 如果视界是演化的结果（给定一般初始数据，有视界的解自动没有 runaway 模式），那确实是"视界消除了 runaway"。
+- 如果视界是人为加的边界条件，那它和 Dirac 用渐近条件剔除 runaway 是同一类操作：只是换了一种选解的方式。
+
+另外，线性化增长率 $3M/2Q^2$ 本身与 $Q/M$ 的取值无关，次极端时同样存在这个模式。所以问题在于：次极端情形下，这个模式是被方程本身排除的，还是被视界条件排除的。
+
+"自加速和宇宙监督是同一件事"这个说法是强还是弱，取决于这一点。
+
+#### 9.3.3 Q ≤ M 这个巧合可能很平凡，而 ADM 球壳恰好能检验它
+
+**(a) 与 Levine–Moniz–Sharp 的关系。** LMS 的判据是：物体尺寸小于经典半径 $Q^2/M$ 时出现 runaway。有视界时，物体的有效尺寸不小于 $r_+ \ge M$；而
+$$M \ge \frac{Q^2}{M} \iff Q \le M .$$
+所以 Lun–Chow 的视界条件，可能只是把 LMS 判据里的"尺寸"换成了视界半径。
+
+**(b) ADM 球壳不需要视界，也得到同一条边界。** 由
+$$m_0 = m - \frac{q^2}{2R} + \frac{G m^2}{2R}$$
+（$c=1$），裸质量为负的条件是
+$$R < \frac{q^2 - G m^2}{2m}.$$
+
+- $q \le \sqrt G\, m$（$\xi \le 1$）时，右边非正，**任何半径的球壳裸质量都为正**，按 LMS 判据没有 runaway。
+- $q > \sqrt G\, m$（$\xi > 1$）时，才存在会 runaway 的小半径；临界半径在 $\xi \to 1$ 时连续地趋于零。
+- 对电子，临界半径 $\approx r_e/2$，引力修正为 $10^{-43}$ 量级（第 2 节）。
+
+**(c) 结论。** 两个模型从不同机制得到同一条边界 $\xi = 1$：
+
+| 模型 | 去除 runaway 的机制 | 边界 |
+|---|---|---|
+| Robinson–Trautman（Lun–Chow） | 视界 | $Q \le M$ |
+| ADM 球壳（若 LMS 判据在 GR 中成立） | 引力束缚能使裸质量为正 | $q \le \sqrt G\, m$ |
+
+因此，ADM 动力学**不是**换个模型把 RT 的结论重复一遍，而是**区分这两种机制的判决性计算**。前提是 LMS 判据在广义相对论中仍然成立，这正是第 2b 步要检验的。
+
+#### 9.3.4 与 Dotti–Gleiser 的比较要具体
+
+- 要比的是 **ℓ=1** 模式的增长率，不是任意不稳定模式。
+- 裸奇点处的边界条件不唯一。Delucchi 选的边界条件下没有增长模式，说明增长率本身依赖边界条件。
+- 这与 Dirac 的情形结构相同：runaway 在不在，取决于加什么条件（Dirac 的渐近条件 ↔ 奇点处的边界条件）。这个结构对应本身，可能比"增长率是否相等"更有意思。
+
+#### 9.3.5 狄拉克选择题
+
+"可能是 EFT 圈内常识"的判断合理，与第 6 节风险表中的定位（可能性中、影响低）一致。猜想 B 维持原定位：作为独立短文，不作为主结论。
+
+### 9.4 对路线图的影响
+
+**1. 猜想 A 需要改写。** "引力消除 runaway"在 Robinson–Trautman 模型里不成立：引力把 runaway 原样保留了下来。修订为：
+
+> **猜想 A′（runaway 的尺寸判据）**
+> runaway 出现，当且仅当物体的尺寸小于它的经典半径。在 Einstein–Maxwell 理论中，"尺寸"可以是物质半径（ADM 球壳），也可以是视界半径（Robinson–Trautman）；两种情况下，引力的作用都是把 runaway 存在与否的边界移到 $\xi = q/(\sqrt G\, m) = 1$。
+
+**2. 一个可能更强的问题：自加速与宇宙监督。**
+
+> runaway 只在没有视界时存在；没有视界，就是超极端，就是裸奇点。
+> 那么，**狄拉克方程的自加速和宇宙监督假设，是不是同一件事的两面？**
+
+可检验的一步：超极端 Reissner–Nordström 的 ℓ=1 不稳定模式（Dotti–Gleiser），增长率是否就是 $3M/2Q^2$？如果是，"电子的自加速"就是"裸奇点的不稳定性"。
+
+需要查清 Lun–Chow 或后人是否已经明确写过这个联系。同时要注意 9.3.3：如果 $\xi = 1$ 这条边界只是 LMS 判据的改写，这个联系就可能是平凡的。
+
+**3. ADM 动力学重新定位。** 它仍然是空白，而且按 9.3.3，它的意义比原先设想的更大：它是区分"视界机制"与"裸质量机制"的判决性计算。第 2 步保留，2b 的目标改为：
+
+- 检验 LMS 判据在 GR 中是否成立；
+- 重点研究 $\xi \to 1^+$ 附近 runaway 根的行为（临界半径趋于零，几何趋于退化）。
+
+### 9.5 下一轮要做的事
+
+按优先级排列：
+
+1. **读 Lun & Chow 全文**：确认增长率 $3M/2Q^2$；确认视界条件是演化结果还是边界条件（9.3.2）；查它的引用，看谁后来接着做了。
+2. **自己推 ℓ=1 增长率**：RN 背景下 RT–Maxwell 方程的线性化，两次独立推导加 SymPy 校验。
+3. **读 Dotti–Gleiser**：比较 ℓ=1 不稳定模式的增长率与 $3M/2Q^2$；记录所用的奇点边界条件，与 Delucchi 对比。
+4. **查 Newman–Kozameh 如何处理 runaway。**
+5. **补读 *PRD* 12, 1576 (1975)。**
+6. **再查一轮 ADM 带电球壳的动力学**（带电壳层坍缩、Boulware 1973、Israel 结合条件下的壳层运动）。
+7. **核对第 8 节和 9.6 节全部文献的作者、卷号、页码。**
+
+### 9.6 本轮新增参考文献（均待核）
+
+**Einstein–Maxwell 中的 runaway 与视界**
+- Lun & Chow, *The role of the apparent horizon in the evolution of Robinson–Trautman Einstein–Maxwell space-times*, arXiv:gr-qc/9409024 (1994).
+- T. M. Adamo, E. T. Newman, C. N. Kozameh, *Living Rev. Relativ.*, arXiv:0906.2155.
+- E. T. Newman, *Gen. Rel. Grav.* 50, 111 (2018).
+
+**超极端 Reissner–Nordström**
+- G. Dotti, R. J. Gleiser 等, arXiv:gr-qc/0607052.
+- Delucchi, *Class. Quantum Grav.* (2026), arXiv:2602.19015.
+
+**带电球壳**
+- arXiv:1303.2706（ADM 带电球壳，静态）.
+- D. G. Boulware (1973)，带电壳层【待查具体文献】.
+
+**$B^\mu$ 的不唯一性与 LD 方程的推导**
+- B. P. Kosyakov, *Phys. Rep.* (2019), arXiv:1812.03290.
+- R. Tabensky, *Phys. Rev. D* 13, 267 (1976).
+- *Resolution of an ambiguity in the derivation of the Lorentz–Dirac equation*, *Phys. Rev. D* 12, 1576 (1975).
+- arXiv:hep-th/0405121.
+- O. Birnholtz, arXiv:1410.5871.
+
+**世界线有效场论**
+- W. D. Goldberger, I. Z. Rothstein, *Phys. Rev. D* 73, 104029 (2006).
