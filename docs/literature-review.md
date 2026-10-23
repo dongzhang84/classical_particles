@@ -610,3 +610,70 @@ APS 页面显示被引 116 次（Citing Articles 90），可作为下一轮的�
 - Boulware 1973、Levine–Moniz–Sharp 1977 全文（付费墙）。
 - 4.5 节中凭记忆列出的量子引力方向文献。
 - Ekman, Heinzl & Ilderton 2021 关于降阶级数发散的全文。
+
+---
+
+## 5. 第五轮（两种辐射反作用同时存在：有没有人做过）
+
+> 2026-10-23 · 第五轮
+> 起因：项目的初衷是"引力辐射和电磁辐射同时存在、量级相当、都不能忽略时，物体怎么运动"。前四轮偏到了单个电荷的自加速判据上。本轮三路并行，分别查自力、后牛顿/后闵可夫斯基、数值相对论与观测。主要用 INSPIRE 和 arXiv 全文。
+> 主线程已在原文中复核：Placidi 等 2025 §VII 中"2.5PN … can be neglected at the global 2PN accuracy"一句；Camps–Hadar–Manton 2017 中"back-reaction on the trajectory is negligible"一句；Verma 等 2026 的交叉频率公式。
+
+### 5.0 本轮结论
+
+1. **两种辐射反作用量级相当时的运动，在三种方法里都没有人做过。** 已有工作要么只算能流不算运动方程，要么只含一种反作用，要么避开了两者相当的区域。
+2. **量级相当有两种方式**（路线图第 0.3 节）：电荷质量比之差 $\Delta\xi\sim3v$，这是每个 $\Delta\xi\neq0$ 的双星旋近途中都会穿过的交叉区；或 $\Delta\xi=0$ 且接近极端，此时电磁四极 / 引力四极 $=\xi^2/4$。
+3. 路线图因此改为 v4，主线改为这个问题。
+
+### 5.1 小物体：耦合自力
+
+- **Zimmerman & Poisson, *PRD* 90, 084030 (2014), arXiv:1406.5111【全文】**：电真空背景中质量 $m$、电荷 $e$ 的耦合一阶运动方程 $ma^\mu = eF^\mu{}_\nu u^\nu + F_{\rm local} + F_{\rm tail}$。降阶前的局部项：引力部分 $m^2(-\tfrac{11}{3}\dot a+\dots)$，电磁部分（即 ALD）$e^2(\tfrac23\dot a+\dots)$，混合项 $4me\,a^cF_{ac}$。随后用背景洛伦兹力降阶（式 8.15–8.16），不剩 $\dot a$，所以没有 runaway；此外不讨论 runaway。尾巴项含电磁–引力的混合格林函数。
+- **评注（检索代理的推论）**：所有耦合项都正比于背景场 $F$，所以在不带电的 Schwarzschild 或 Kerr 背景上，一阶时两个问题解耦。
+- **Linz, Friedman & Wiseman, *PRD* 90, 084031 (2014), arXiv:1406.5112【全文】**：发散的质量是 $m_{\rm GR}+m_{\rm EM}$，没有混合的 $e\cdot m$ 部分；有限自力中有 $e\cdot m$ 项。从小的有尺寸物体出发的严格推导"has not yet been done"。
+- **Burton & Osburn, *PRD* 102, 104030 (2020), arXiv:2010.12984【全文】**：带电点源的 RN 微扰方程；圆轨道、轨道平均的旋近和波形，$q/\mu$ 到 0.9。原文说 RN 中引力和电磁自力"not"被算过，只有初步工作；偏心轨道和 Kerr–Newman（"especially challenging"）都未做。
+- **Zhu & Osburn, *PRD* 97, 104058 (2018)【全文】**：黑洞带电、小物体不带电的耦合能流。
+- **Zimmerman, Vega, Poisson & Haas, *PRD* 87, 041501 (2013)【全文】**：近极端 RN 上的纯电磁自力，故意去掉引力；承认电磁场诱导的引力扰动及其反向作用"cannot be so easily justified"。
+- **Torres & Dolan, *PRD* 106, 024024 (2022)【全文】**：Kerr 圆轨道上完整的纯电磁自力；估计致密天体的净电荷要超过每太阳质量约 $10^{18}$ C，电磁驱动的旋近才能和引力的相比。
+- **German 等, *PRD* 109, 044068 (2024)【全文】**：Kerr 上电磁能流驱动的偏心旋近，与引力能流按手选权重混合。
+- 其他【摘要】：Zimmerman 2015（EFT 重推）；Zhang & Gong 2022（Schwarzschild 上带电粒子，两种能流分开算）；Zi 等 2023（Kerr–Newman 近似波形）；Bini, Geralico & Ruffini 2007（静态带电质量的精确一阶解）；Castillo, Vega & Wardell 2018（RN 上是**标量**荷）；Sarkar 等 2021（声称有额外修正项，未计算）。
+- **未做**：任何数值的耦合自力（局部、保守、交叉尾巴）；RN 上的偏心或自洽轨道；Kerr–Newman；二阶；耦合情形的严格推导。
+
+### 5.2 质量相当：后牛顿与后闵可夫斯基
+
+- **Placidi, Grilli, Orselli & Pegorin, *PRD* 112, 124060 (2025), arXiv:2509.20432【全文，已复核】**：2PN 保守拉格朗日量/哈密顿量 + 1.5PN 电偶极反作用（式 52，正比于 $q_1m_2-q_2m_1$，等比时恒为零）。原文："The next-to-leading dissipative effects, being 2.5PN corrections (of both dipolar and quadrupolar nature), can be neglected at the global 2PN accuracy"。
+- **Placidi, Grilli, Pegorin & Orselli, arXiv:2609.02825 (2026)【全文】**：能流和波形模式到 2PN，MPM 与 EFT 交叉检验；含偶极尾巴和电磁源的记忆项；引力能流领头阶带因子 $(1-\eta_1\eta_2)^{4/3}$。脚注 6 明确排除 $\eta_1=\eta_2=1$：那是"a no-force configuration, rather than an ordinary quasi-circular inspiral"。
+- **Verma, Mediratta, Kilari & Nigam, *EPJC* 86, 830 (2026), arXiv:2512.18637【全文，已复核】**：LD 方程用 LL 降阶（附录 A 讨论 runaway 和预加速）；1PN Darwin + 1.5PN 哈密顿量；平衡律中加入引力四极能流，得到交叉频率 $f_{\rm cross}\simeq2.2\times10^3\,{\rm Hz}\,(M_\odot/M)|\eta_2-\eta_1|^3/(1-\eta_1\eta_2)$，$60M_\odot$ 时为 $36\,{\rm Hz}\,|\eta_2-\eta_1|^3/(1-\eta_1\eta_2)$。
+- **Zhang, Liu, Zhang & Guo, *PRD* 114, 044088 (2026), arXiv:2604.10654【全文】**：次领头阶能流、准圆轨道 $\dot\omega$、带电 ISCO。图只到 $|\kappa|\le0.6$。
+- **Zhang, Ruan, Liu & Guo, arXiv:2609.15119 (2026)【全文】**：偶极主导、四极主导两个区域分别给出频域波形；"在偶极–四极过渡区一致有效的波形"列为未完成。
+- **Camps, Hadar & Manton, *PRD* 96, 061501 (2017), arXiv:1704.08520【全文，已复核】**：任意质量的两个极端 RN 黑洞的 Ferrell–Eardley 模空间运动，解析算出引力和电磁四极波形；电偶极、磁偶极到 $O(v)$ 为零；引力辐射能量 $O(v^5)$，"its dissipative back-reaction on the trajectory is negligible"，没有加入。
+- **Wilson-Gerow, *JHEP* 05 (2024) 265【全文】**：任意电荷的 3PM 保守散射；极端时与 Ferrell–Eardley 对照；极端时没有简化。
+- **Alonzo-Artiles & Kraus, *PRD* 113, 124061 (2026)【全文】**：2PM RN 哈密顿量；辐射效应列为以后的工作。
+- **Gupta, *PRD* 112, 104047 (2025)【摘要 + 部分全文】**：2PN 保守 EFT 拉格朗日量。
+- 其他【摘要】：Khalil 等 2018、Julié 2018（Einstein–Maxwell–dilaton）；Saketh 等 2022（纯电磁，无引力）；Liu 等 2020（双荷黑洞）；Christiansen 等 2021（偶极驱动的圆化）；Henry 等 2024（Einstein–Maxwell 的 MPM 形式体系）。
+- **检索代理的估算（待第 1 步复核）**：等比时电磁四极 / 引力四极能流 $=\eta^2/4$；与 Camps 等"$\eta=1$ 时电四极与引力四极相同"一致。
+- **未做**：同时含 2.5PN 引力四极、电磁四极、电偶极次领头修正的运动方程；$\eta_1=\eta_2\to1$ 附近的任何旋近、波形或稳定性研究；带辐射反作用或带 $(1-\eta)$ 修正的模空间动力学；带电引力体的后闵可夫斯基辐射反作用。
+
+### 5.3 强场：数值相对论与观测
+
+- **Zilhão 等, *PRD* 85, 124062 (2012), arXiv:1205.1063【全文】**：等比同号正碰，$\xi$ 到 0.98；引力波能量下降约 $10^3$；解析估计 $E_{\rm EM}/E_{\rm GW}=\xi^2/4$，数值相对论在 $\xi=0.98$ 时约 22%。
+- **Zilhão 等, *PRD* 89, 044008 (2014), arXiv:1311.6483【全文】**：异号正碰，$|\xi|$ 到 0.99；$|\xi|\approx0.37$ 时电磁辐射超过引力辐射，$0.99$ 时约 5.8 倍（偶极主导）。
+- **Bozzola & Paschalidis, *PRL* 126, 041103 (2021)；*PRD* 104, 044004 (2021)【全文】**：第一批带电黑洞准圆旋近，$\xi\le0.3$；同号时 98% 的电磁能量在 $\ell=2$，异号时 98% 在偶极；作者预期 $\xi^2$ 标度在大 $\xi$ 时失效。
+- **Bozzola & Paschalidis, *PRD* 108, 064010 (2023), arXiv:2309.04368【全文】**：同号到 $\xi=0.6$，绕转圈数约为不带电的两倍；$\xi\to1$ 时并合时间趋于无穷，辐射趋于零。
+- **Tomie 等, arXiv:2610.31177 (2026)【摘要 + 浏览】**：Einstein–Maxwell–dilaton，$\xi=\pm0.7$，目前电荷最高的旋近。
+- 其他【摘要】：Smith, Paschalidis & Bozzola 2025（散射与 zoom-whirl，$\xi\le0.6$）；Bozzola 2022（高能正碰）；Luna 等 2022（反冲）；Liebling & Palenzuela 2016（磁荷）；Mukherjee 等 arXiv:2202.12133（初值到 0.9 极端，未用于旋近）。
+- **所有模拟都取两个黑洞 $|\xi|$ 相等**，没有同号不等比的旋近。
+- **动机与载体**：Cardoso 等 2016【全文】：暗 U(1) 电荷可避开等离子体中和与 Schwinger 放电，"even extremal BHs with Q/M ∼ 1 are allowed"；普通等离子体吸积下放电时间约 $8\times10^{-7}$ s。其他【摘要】：Kritos & Silk 2022（近极端原初黑洞）；Santiago 等 2025（暗电荷原初黑洞）；Maldacena 2021（磁荷黑洞）；反对：Harris & Kahn 2026（中子星难以带暗电荷）。
+- **观测限制【摘要】**：Gupta 等 2021，$|\xi|\lesssim0.2$–$0.3$（1σ）；Carullo 等 2022，$\xi<0.33$（90%）；Gu, Wang & Shao 2024，$\xi<0.37$（90%）；Hu 等 2025；LISA 只有极端质量比旋近的预测（Zhang & Gong 2022）。没有论文声称暗电荷的 $\xi\sim1$ 已被排除。
+- **非黑洞带电天体**：只有单个带电星体的球对称演化（Ghezzi 2005，无辐射）和带电标量场坍缩（Hod & Piran 1997–98）。没有带电星体或壳层组成的双星，没有 $\xi>1$ 的动力学。
+- **未做**：偶极被压低而两种辐射相当的束缚轨道；$\xi>0.7$ 的旋近；以两种反作用共同改变轨道为中心的研究；带电星体、壳层双星；$\xi>1$。
+
+### 5.4 对路线图的影响
+
+- 主线改为三个核心问题：Q1 完整 2.5PN 双辐射反作用运动方程；Q2 穿越偶极–四极交叉区的旋近和波形；Q3 近极端双星的辐射驱动运动。强场（耦合自力、数值相对论）为第二阶段。
+- 前四轮关于自加速判据和狄拉克选择题的内容降为附录支线。它们与主线的联系是降阶的合法性：旋近阶段 $\tau_0/T\sim\xi^2v^3\ll1$，降阶成立。
+
+### 5.5 仍未完成
+
+- 标量–张量理论的 2.5PN 运动方程（Mirshekari & Will 2013）是否可以直接搬到电磁情形：凭记忆，待核。
+- 纯电磁两体（$G\to0$）高阶辐射反作用的已知结果：出处待查。
+- Placidi 等、Zhang 等、Camps 等全文的逐条记号与规范对照（第 1 步之前完成）。
