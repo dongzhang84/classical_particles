@@ -70,7 +70,7 @@ Gralla–Wald 2008 中，近区背景稳态、渐近平直不是假设，而是�
 | 从无穷远渐近场推运动 | Newman、Kozameh 一系；runaway 仍在，所用模型不适定，"答案未知" |
 | 近极端 | 静态平衡解（Majumdar–Papapetrou）、慢速散射（Ferrell–Eardley）已知；辐射反作用和有效方程的适定性没有人做 |
 
-"耦合情形没有人严格做过"：2026-11-18 对照 ZP、LFW、Gralla 2010、Gralla 2013、Harte–Blanco–Flanagan 2025 的原文确认。LFW 结论原话："What has not yet been done is to extend to the coupled fields we consider here the underlying justification based on variants of matched asymptotic expansion"。详见第四节。
+"耦合情形没有人严格做过"：2026-11-18 对照 ZP、LFW、Gralla 2010、Gralla 2013、Harte–Blanco–Flanagan 2025 的原文确认。**2026-11-24 补查**：INSPIRE 上检索引用 GW 2008、GHW 2009 的论文，发现漏查的 Futamase–Hogan–Itoh 2008（PRD 78, 104014, arXiv:0811.4020）。他们从 Einstein–Maxwell 真空方程推出了外场中小带电黑洞的运动方程，但依赖对展开形式的具体假设，尾巴项含未定函数，看不到引力自力项，背景场为零时尾巴消失，也没有与 ZP 对照。它是最接近的前人工作，已写入论文引言；"空缺"的表述随之收窄为：没有人在一般假设下、连同引力自力一起推出，并与 ZP 对照。LFW 结论原话："What has not yet been done is to extend to the coupled fields we consider here the underlying justification based on variants of matched asymptotic expansion"。详见第四节。
 
 ---
 
