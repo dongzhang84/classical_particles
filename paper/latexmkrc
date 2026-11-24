@@ -1,0 +1,2 @@
+$pdf_mode = 5;   # xelatex: ctexart 不能用 pdflatex 编译
+$bibtex_use = 2;
