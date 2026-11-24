@@ -55,19 +55,36 @@
 
 考虑满足论文第 2 节假设的单参数解族 $(g_{ab}(\lambda),A_a(\lambda))$，并设 $\lambda\to0$ 的普通极限 $(g_{ab},A_a)$ 和零阶世界线 $\gamma$ 已经确定。本节先处理背景场 $F=0$ 的情形（情形 1、2）；$F\neq0$ 时需要补充的项在第~\ref{sec:L3} 节讨论。
 
-在 Fermi 坐标中，背景度规在 $\gamma$ 附近为
+\paragraph{背景度规。}沿测地线 $\gamma$ 取不转动的 Fermi 坐标 $(t,x^i)$：$t$ 是 $\gamma$ 上的固有时，$x^i$ 是从 $\gamma$ 出发、与 $\gamma$ 正交的测地线的仿射参数乘以平行移动的正交标架。在 $\gamma$ 附近，背景度规为 \citep{ManasseMisner1963}
 \begin{equation}
-g_{\alpha\beta}=\eta_{\alpha\beta}+B_{\alpha i\beta j}x^ix^j+O(x^3),
+g_{00}=-1-R_{0i0j}x^ix^j,\qquad g_{0i}=-\tfrac23R_{0jik}x^jx^k,\qquad g_{ij}=\delta_{ij}-\tfrac13R_{ikjl}x^kx^l,
+\end{equation}
+误差为 $O(x^3)$，Riemann 分量在 $\gamma$ 上取值。下面统一写成
+\begin{equation}
+g_{\alpha\beta}=\eta_{\alpha\beta}+B_{\alpha i\beta j}x^ix^j+O(x^3),\qquad B_{0i0j}=-R_{0i0j}.
 \label{eq:fermi}
 \end{equation}
-其中 $B_{0i0j}=-R_{0i0j}$，$B_{0ijk}$、$B_{ikjl}$ 也由 Riemann 张量在 $\gamma$ 上的值给出。一阶扰动 $(h_{ab},a_a)$ 是点源的推迟解，在 Lorenz 规范下，它在 $\gamma$ 附近的展开为
+
+\paragraph{一阶扰动。}由论文第 3 节，一阶扰动 $(h_{ab},a_a)$ 是质量 $M$、电荷 $q$ 的点源在背景中的推迟解。$F=0$ 时两种扰动不耦合，在 Lorenz 规范下分别为
+\begin{equation}
+\bar h_{ab}(x)=4M\!\int_\gamma G^+_{ab a'b'}(x,z')\,u^{a'}u^{b'}\,\dd\tau',\qquad
+a_a(x)=q\!\int_\gamma G^+_{a a'}(x,z')\,u^{a'}\,\dd\tau',
+\label{eq:retarded}
+\end{equation}
+其中 $\bar h_{ab}=h_{ab}-\tfrac12g_{ab}h$，$G^+$ 是相应波动算子的推迟 Green 函数，归一化取 \citet{PoissonPoundVega2011} 的约定。$x$ 在 $\gamma$ 的正规邻域内时，$G^+$ 有 Hadamard 形式：光锥上的直接部分加光锥内部的尾巴部分。尾巴部分对 \eqref{eq:retarded} 的贡献是
+\begin{equation}
+h^{\rm tail}_{ab}(x)=4M\!\int_{-\infty}^{\tau^-}\!\Big(G^+_{aba'b'}-\tfrac12g_{ab}G^{+\,c}{}_{c\,a'b'}\Big)u^{a'}u^{b'}\,\dd\tau',\qquad
+a^{\rm tail}_a(x)=q\!\int_{-\infty}^{\tau^-}\!G^+_{aa'}\,u^{a'}\,\dd\tau',
+\label{eq:tail}
+\end{equation}
+积分上限 $\tau^-$ 表示去掉光锥上的部分，这正是 MiSaTaQuWa \citep{MinoSasakiTanaka1997,QuinnWald1997} 和 DeWitt--Brehme \citep{DeWittBrehme1960} 中的尾巴积分。它在 $\gamma$ 附近光滑，可以 Taylor 展开。直接部分在 Fermi 坐标中的展开由 Hadamard 系数在 $\gamma$ 附近的协变展开给出 \citep{DeWittBrehme1960,PoissonPoundVega2011}：领头项是 $2M\delta_{\alpha\beta}/r$ 和 Coulomb 势；$O(r^0)$ 的项正比于 $\gamma$ 的加速度，测地线时为零；$O(r)$ 的项正比于 $\gamma$ 上的 Riemann 张量。合起来，
 \begin{align}
 h_{\alpha\beta}&=\frac{2M}{r}\,\delta_{\alpha\beta}+h^{\rm tail}_{\alpha\beta}+h^{\rm tail}_{\alpha\beta\gamma}x^\gamma+M\mathcal R_{\alpha\beta}+O(r^2),
 \label{eq:hfar}\\
-a_\alpha&=-\frac qr\,\delta_{\alpha0}+a^{\rm tail}_\alpha+a^{\rm tail}_{\alpha,\gamma}x^\gamma+q\,\mathcal S_\alpha+O(r^2).
+a_\alpha&=-\frac qr\,\delta_{\alpha0}+a^{\rm tail}_\alpha+a^{\rm tail}_{\alpha,\gamma}x^\gamma+q\,\mathcal S_\alpha+O(r^2),
 \label{eq:afar}
 \end{align}
-$h^{\rm tail}$、$a^{\rm tail}$ 是推迟 Green 函数尾巴部分沿过去世界线积分在 $\gamma$ 上的值。对 $00$、$0i$ 分量有 $h^{\rm tail}_{\alpha\beta\gamma}=h^{\rm tail}_{\alpha\beta,\gamma}$，下面只用到这些分量。$M\mathcal R_{\alpha\beta}$、$q\mathcal S_\alpha$ 是曲率修正，量级为 $MR\,r$、$qR\,r$，只含 $\ell=0,2$ 部分。$F=0$ 时两种扰动不耦合：$h$ 是 Schwarzschild 型点质量的推迟场，$a$ 是弯曲真空背景上点电荷的推迟场。零阶运动是测地线，所以在 $O(r^0)$ 上没有局部项。
+其中 $h^{\rm tail}_{\alpha\beta}$、$a^{\rm tail}_\alpha$ 是 \eqref{eq:tail} 在 $\gamma$ 上的值，$h^{\rm tail}_{\alpha\beta\gamma}x^\gamma$、$a^{\rm tail}_{\alpha,\gamma}x^\gamma$ 是它们的一阶 Taylor 项，$M\mathcal R_{\alpha\beta}$、$q\mathcal S_\alpha$ 是直接部分的 $O(r)$ 曲率项。度规部分的这一形式也是 \citet{GrallaWald2008} 第 IV 节的出发点；他们指出对 $00$、$0i$ 分量有 $h^{\rm tail}_{\alpha\beta\gamma}=h^{\rm tail}_{\alpha\beta,\gamma}$，下面只用到这些分量。曲率项 $\mathcal R_{\alpha\beta}$、$\mathcal S_\alpha$ 对 $n$ 是二次的，只含 $\ell=0,2$ 部分。
 
 \subsection{近区展开}
 
@@ -80,14 +97,19 @@ $h^{\rm tail}$、$a^{\rm tail}$ 是推迟 Green 函数尾巴部分沿过去世�
 \bar g_{\alpha\beta}&=\bar g^{(0)}_{\alpha\beta}+\lambda\,\bar g^{(1)}_{\alpha\beta}+\lambda^2\bar g^{(2)}_{\alpha\beta}+O(\lambda^3),\\
 \bar A_\alpha&=\bar A^{(0)}_\alpha+\lambda\,\bar A^{(1)}_\alpha+\lambda^2\bar A^{(2)}_\alpha+O(\lambda^3).
 \end{align}
-零阶是近区背景，在各向同性坐标中
+零阶是近区背景。Reissner--Nordstr\"om 解在各向同性半径 $\bar r$ 下为
+\begin{equation}
+\dd\bar s^2=-\left(\frac{1-\frac{M^2-q^2}{4\bar r^2}}{\big(1+\frac M{2\bar r}\big)^2-\frac{q^2}{4\bar r^2}}\right)^{\!2}\dd\bar t^2+\left(\Big(1+\frac M{2\bar r}\Big)^2-\frac{q^2}{4\bar r^2}\right)^{\!2}\dd\bar x^i\dd\bar x^i,\qquad
+\bar A=-\frac{q}{R(\bar r)}\,\dd\bar t,
+\end{equation}
+其中 $R=\bar r\big[(1+\tfrac M{2\bar r})^2-\tfrac{q^2}{4\bar r^2}\big]$ 是面积半径。按 $1/\bar r$ 展开得
 \begin{gather}
 \bar g^{(0)}_{00}=-1+\frac{2M}{\bar r}-\frac{2M^2+q^2}{\bar r^2}+\dots,\qquad
 \bar g^{(0)}_{ij}=\Big(1+\frac{2M}{\bar r}+\frac{3M^2-q^2}{2\bar r^2}+\dots\Big)\delta_{ij},\nonumber\\
 \bar A^{(0)}_0=-\frac q{\bar r}+\frac{qM}{\bar r^2}+\dots,
 \label{eq:RN}
 \end{gather}
-即 Reissner--Nordstr\"om 解（$q=0$ 时为 Schwarzschild 解）。一阶是
+$q=0$ 时为 Schwarzschild 解。一阶是
 \begin{equation}
 \bar g^{(1)}_{\alpha\beta}=h^{\rm tail}_{\alpha\beta}+2\zeta_{(\alpha,\beta)}+\frac1{\bar r}K_{\alpha\beta}(\theta,\phi)+O\Big(\frac1{\bar r^2}\Big)+\bar t\,O\Big(\frac1{\bar r^3}\Big),
 \end{equation}
@@ -113,7 +135,7 @@ D_{\alpha\beta i}=h^{\rm tail}_{\alpha\beta i}+2\zeta_{(\alpha,\beta)i}+2B_{\alp
 Q_{00}=Q^A_in^i,\qquad Q_{i0}=Q^B_jn^jn_i+Q^C_i,\qquad Q_{ij}=Q^D_kn^kn_in_j+Q^E_{(i}n_{j)}+Q^F_kn^k\delta_{ij},
 \label{eq:harm}
 \end{equation}
-系数 $Q^A_i,\dots,Q^F_i$ 是三维矢量（对应 $\ell=1$ 的三个 $m$ 值）。时间反演下 $g_{00}$、$g_{ij}$、$A_0$ 为偶，$g_{0i}$、$A_i$ 为奇。于是 \eqref{eq:g2}、\eqref{eq:A2} 中进入的部分是
+这是由 $n^i$、$\delta_{ij}$ 和一个常矢量能构造的全部对称张量，即 $\ell=1$ 电宇称张量谐函数的一般组合；磁宇称部分还含 $\epsilon_{ijk}$，与此处无关。系数 $Q^A_i,\dots,Q^F_i$ 是三维矢量（对应 $\ell=1$ 的三个 $m$ 值）。时间反演下 $g_{00}$、$g_{ij}$、$A_0$ 为偶，$g_{0i}$、$A_i$ 为奇。于是 \eqref{eq:g2}、\eqref{eq:A2} 中进入的部分是
 \begin{align}
 D_{00k}\bar x^k&=\bar r\,D^A_in^i,\qquad D_{i00}\,\bar t=\bar t\,D^C_i,\qquad
 D_{ijk}\bar x^k\big|_{\ell=1}=\bar r\big(n_{(i}D^E_{j)}+\delta_{ij}D^F_kn^k\big),
@@ -210,7 +232,7 @@ $\xi_i=\bar r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc$\\
 二阶方程现在是 Einstein 方程 $R_{ab}-8\pi T_{ab}=0$ 和 Maxwell 方程 $\nabla_bF^{ab}=0$ 在 $\lambda^2$ 阶的部分。逐项估计 $\bar r\to\infty$ 时的阶次，只看 $\ell=1$：
 \begin{enumerate}
 \item Einstein 方程的电磁源是场的二次式。Coulomb 场（$\sim q/\bar r^2$）与 \eqref{eq:Eharm} 中常数尾巴场的交叉项 $\sim q/\bar r^2$，为 $\ell=1$，进入。Coulomb 场与 $H'$（场 $\sim1/\bar r$）、$\dot K'$（场 $\sim\bar t/\bar r^2$）的交叉项是 $1/\bar r^3$ 及更高阶；度规扰动乘 Coulomb 场的平方是 $q^2/\bar r^3$。这两类都不进入。
-\item Maxwell 方程线性化后为 $\nabla_bY^{ab}=0$，其中
+\item Maxwell 方程线性化后为 $\nabla_bY^{ab}=0$（论文第 3 节，推导见其附录 A），其中
 \begin{equation}
 Y^{ab}=f^{ab}+\tfrac12h\,F^{ab}-h^{ac}F_c{}^b-h^{bd}F^a{}_d ,
 \label{eq:Y}
@@ -218,7 +240,7 @@ Y^{ab}=f^{ab}+\tfrac12h\,F^{ab}-h^{ac}F_c{}^b-h^{bd}F^a{}_d ,
 $f=\dd a$，$F$ 是近区背景场。度规的 $D$ 项（$\sim\bar r$）乘 Coulomb 场（$\sim q/\bar r^2$）得 $q/\bar r$，求散度后为 $q/\bar r^2$，进入。常数尾巴场在背景 $M/\bar r$ 修正下的散度 $\sim M/\bar r^2$，进入。$H'$、$\dot K'$ 在平直背景中的散度，进入。
 \item 一阶近区场的二次项：一阶近区度规是常数加 $K/\bar r$，一阶近区电磁场在 $F=0$ 时只有 $1/\bar r^2$ 的齐次部分，乘积都在 $1/\bar r^3$ 以下，不进入。这与情形 1 中 $G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$ 不进入的理由相同。
 \end{enumerate}
-所以在 $1/\bar r^2$、$\bar t/\bar r^3$ 阶上，需要的近区背景只是 \eqref{eq:bg1} 加上 $\bar A^{(0)}=-(q/\bar r)\dd\bar t$。Einstein 方程中，$8\pi T_{ab}$ 对扰动线性化，保留 $O(q)$ 的项：
+所以在 $1/\bar r^2$、$\bar t/\bar r^3$ 阶上，需要的近区背景只是 \eqref{eq:bg1} 加上 $\bar A^{(0)}=-(q/\bar r)\dd\bar t$。Einstein 方程中，把论文第 3 节的 $\delta(4\pi T_{ab})$ 用于近区，背景场取 Coulomb 场；含 $hFF$ 的项是 $O(q^2)$，在 $1/\bar r^3$ 阶，略去，保留 $O(q)$ 的项：
 \begin{equation}
 8\pi\,\delta T_{ab}=2\big(F_{ac}f_b{}^c+f_{ac}F_b{}^c-\tfrac12\eta_{ab}F_{cd}f^{cd}\big).
 \end{equation}
