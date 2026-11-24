@@ -50,9 +50,10 @@ $$\bar g_{\bar\mu\bar\nu}(\lambda;t_0;\bar t,\bar x^i)=g_{\mu\nu}(\lambda;t_0+\l
 $$g_{\mu\nu}=b_{\mu\nu}(t)+O(r)+\lambda\Big[\frac{c_{\mu\nu}(t,\theta,\phi)}{r}+O(1)\Big]+O(\lambda^2), \tag{2.6}$$
 $A_\mu$ 的展开形式相同，系数记为 $b^{[A]}_\mu$、$c^{[A]}_\mu$。从这个展开读出三个结果。
 
-第一，远区背景 $(g,A)|_{\lambda=0}$ 是一个在 $\gamma$ 上光滑的电真空解，其中的电磁场 $F$ 一般不为零，这就是物体所处的外场。第二，一阶远区扰动 $(h_{ab},a_a)\equiv\partial_\lambda(g_{ab},A_a)|_{\lambda=0}$ 在 $\gamma$ 附近最多像 $1/r$ 那样奇异。第三，近区背景
-$$\bar g^{(0)}_{\bar\mu\bar\nu}=b_{\mu\nu}(t_0)+\frac{c_{\mu\nu}(t_0,\theta,\phi)}{\bar r}+O(\bar r^{-2}),\qquad
-\bar A^{(0)}_{\bar\mu}=b^{[A]}_\mu(t_0)+\frac{c^{[A]}_\mu(t_0,\theta,\phi)}{\bar r}+O(\bar r^{-2}) \tag{2.7}$$
+第一，远区背景 $(g,A)\vert_{\lambda=0}$ 是一个在 $\gamma$ 上光滑的电真空解，其中的电磁场 $F$ 一般不为零，这就是物体所处的外场。第二，一阶远区扰动 $(h_{ab},a_a)\equiv\partial_\lambda(g_{ab},A_a)\vert_{\lambda=0}$ 在 $\gamma$ 附近最多像 $1/r$ 那样奇异。第三，近区背景
+
+$$\bar g^{(0)}_{\bar\mu\bar\nu}=b_{\mu\nu}(t_0)+\frac{c_{\mu\nu}(t_0,\theta,\phi)}{\bar r}+O(\bar r^{-2}),\qquad \bar A^{(0)}_{\bar\mu}=b^{[A]}_\mu(t_0)+\frac{c^{[A]}_\mu(t_0,\theta,\phi)}{\bar r}+O(\bar r^{-2}) \tag{2.7}$$
+
 不依赖 $\bar t$，在 $\bar r\to\infty$ 时趋于常数，并且满足 Einstein–Maxwell 方程。也就是说，近区背景是一个稳态、渐近平直的电真空解。稳态性是推出来的，不是假设的：它来自 $g_{\mu\nu}(\lambda)$ 对 $t$ 的光滑性（Gralla 2010；GW 称之为"derived here rather than assumed"）。常数 $b^{[A]}_\mu(t_0)$ 是纯规范。
 
 外场在近区里出现的阶次可以直接读出。由 (2.5)，$\bar F_{\bar\mu\bar\nu}=\lambda F_{\mu\nu}$，所以远区背景的电磁场在近区里是一个 $O(\lambda)$ 的均匀场；它的梯度和背景曲率在近区里都是 $O(\lambda^2)$。这和 GW 中潮汐场出现在近区二阶是同样的结构。一个推论是，外场在物体上感应出的偶极大小约为 $(\lambda M)^3F$，它产生的力比洛伦兹力高 $\lambda^2$ 阶，不进入一阶运动。
