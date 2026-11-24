@@ -229,4 +229,37 @@ M\ddot Z^i\supset q\,(E^0_i-E^C_i)=q\,f^{\rm tail}_{i0},
 
 \paragraph{第 2 级：通过。}在背景不带电的情形，由 Einstein--Maxwell 场方程推出：带电小物体的一阶运动只由正则场驱动，引力和电磁两部分解耦。据我们所知，这一情形此前没有在 GW 的框架下推出过（见 CHANGELOG 2026-11-24 的新颖性补查）。
 
+%======================================================================
+\section{第 3 级：物体不带电，背景带电（规划）}
+%======================================================================
+
+本节只写分析和计划，计算尚未开始。
+
+\subsection{3a：与前两级不同的地方}
+
+\paragraph{目标。}由论文第 5 节，ZP 方程取 $q=0$ 后为
+\begin{equation}
+M a^\mu=\tfrac53M^2(g^{\mu\nu}+u^\mu u^\nu)F_{\nu\lambda}F^{\lambda\rho}u_\rho+(\text{耦合 Green 函数给出的引力尾巴}).
+\end{equation}
+在 $\gamma$ 的静止系中，$F_{i\lambda}F^{\lambda}{}_{0}$ 正比于坡印廷矢量 $(\boldsymbol E\times\boldsymbol B)_i$。局部项的方向是背景场的能流方向。
+
+\paragraph{不同一：时间反演不再分块。}前两级只取时间反演为偶的部分，这在背景时间反演不变时成立。现在背景电场为偶、磁场为奇，坡印廷矢量为奇。背景场与扰动的乘积会把偶的扰动和奇的扰动混在一起，所以必须同时保留两种宇称的 $\ell=1$ 扰动，提取全部 $R_{00}$、$R_{0i}$、$R_{ij}$ 在 $1/r^2$ 和 $t/r^3$ 两阶的系数。未知齐次项的数目大约加倍。
+
+\paragraph{不同二：远区一阶场有确定的 $\ell=1$ 局部项。}第 1、2 级中，远区一阶场在 $\gamma$ 附近除了奇异部分和尾巴，只有 $M\mathcal R_{\alpha\beta}$、$q\mathcal S_\alpha$ 这类曲率修正，它们只有 $\ell=0,2$ 部分。现在扰动方程是耦合的：
+\begin{itemize}
+\item $h\sim2M/r$ 通过 Maxwell 方程中的 $\tfrac12hF-2hF$ 项诱导出电磁扰动 $a\sim M\,F\,n$（量级 $r^0$，$\ell=1$），这在近区里就是 Schwarzschild 黑洞在均匀外场中的一阶响应；
+\item 这个电磁扰动和背景场的交叉应力，加上背景 Ricci 张量（$\propto F^2$）与 $M/r$ 的乘积，又在度规中产生 $h\sim M F^2 r$ 型的项，其中含有 $\ell=1$ 部分（形如 $M(\boldsymbol E\times\boldsymbol B)\cdot\boldsymbol n\,r$）。
+\end{itemize}
+这些项不是自由的尾巴数据，而是由远区一阶方程在 $\gamma$ 附近的局部解确定的特解。它们的 $\ell=1$ 部分会进入 $D^A$、$D^C$ 等系数，从而给出正比于 $M F^2$ 的局部力。$\tfrac53M^2FF$ 应当就从这里来。
+
+\subsection{计划}
+\begin{enumerate}
+\item \textbf{局部解。}在 Fermi 坐标中，把远区一阶耦合方程（论文式 (3.11)、(3.12)，$q=0$）在 $\gamma$ 附近逐阶求解：$a$ 到 $O(r)$，$h$ 到 $O(r)$，背景度规取到 $O(r^2)$（含 Ricci 部分 $R_{ab}=2(F_{ac}F_b{}^c-\tfrac14g_{ab}F^2)$），背景势取到 $O(r^2)$。写成多项式乘 $1/r$ 幂的拟设，代入方程，逐阶解线性方程组。尾巴部分作为自由常数保留。检验：$a$ 的 $r^0$ 项应与 Schwarzschild 黑洞在均匀场中的一阶解（Wald 1974 型）在远处的展开一致。
+\item \textbf{近区展开。}平移到质心，写出近区到 $O(\lambda^2)$ 的度规和势，包括两种时间宇称的 $\ell=1$ 未知齐次项。
+\item \textbf{近区二阶方程。}这一级不再逐项挑选进入的乘积，而是直接计算完整 Einstein--Maxwell 方程在 $\lambda^2$ 阶的系数，避免估计遗漏。为控制表达式大小，背景场取特定方向（例如 $\boldsymbol E\parallel x$、$\boldsymbol B\parallel y$，坡印廷矢量沿 $z$），并另取一组方向复算，检验结果的协变性。
+\item \textbf{消元与对照。}消去未知项，得到 $\ddot Z^i$ 中的局部力，与 $\tfrac53MFF$ 对照；尾巴部分与耦合 Green 函数的尾巴对照。
+\item \textbf{规范检验。}同前两级：微分同胚同时作用在度规、背景势和一阶势上，必须落在零空间里。
+\end{enumerate}
+预计工作量明显大于前两级，第 1 步（局部解）本身就需要单独核对。
+
 \end{document}

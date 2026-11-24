@@ -26,7 +26,7 @@
 \begin{enumerate}
 \setlength{\itemsep}{0pt}
 \item \S\ref{sec:retarded}：引理~B 给出了证明概要，所引奇异性传播定理（对角主部方程组的情形）的确切出处和条件待核；化到 Lorenz 规范这一步的光滑性也待核。
-\item \S\ref{sec:firstorder}：主结果（命题~\ref{prop:main}）尚未证明，\S\ref{sec:remaining} 列出的计算尚未完成。摘要和结论中关于主结果的表述，要等这一步完成后再写定。
+\item \S\ref{sec:firstorder}：主结果（命题~\ref{prop:main}）在 $F=0$ 时已由计算机代数推出（\S\ref{sec:F0done}）；$F\neq0$ 的情形尚未完成。摘要和结论中关于主结果的表述，要等这一步完成后再写定。
 \item \S\ref{sec:H}：唯一性定理的条件，目前依据 Lopes Costa (2010) 的摘要和 Chru\'sciel 等 (2012) 的综述概括，没有逐条对照定理原文。
 \item \S\ref{sec:dipoles}：电真空稳态解多极矩在坐标变换下的行为（偶极层只差平移和转动）需要对照 Simon (1984) 原文核实。
 \item \S\ref{sec:conditions}：电磁规范变换的光滑性要求是我们补的，是否够用要在一阶计算中检验。
@@ -37,7 +37,7 @@
 \end{center}
 
 \begin{abstract}
-小物体在带电背景中运动时，电磁辐射反作用和引力辐射反作用同时出现，并且相互耦合。描述这种运动的一阶方程已由 Zimmerman 和 Poisson、Linz、Friedman 和 Wiseman 从点粒子模型写出，但其中“驱动运动的只是正则场”这一步是作为假设引入的。本文用 Gralla 和 Wald 的“一族精确解”方法，从 Einstein--Maxwell 场方程出发研究带电小黑洞的运动。我们把三条极限假设写成 Einstein--Maxwell 的形式，补上电磁规范的光滑性要求和零磁荷条件，并加入近区背景是严格次极端 Kerr--Newman 解的假设。由这些假设，我们推出零阶的洛伦兹力，得到一阶远区的耦合分布方程组，并论证一阶远区场是推迟解：这一点在 Gralla、Harte 和 Wald 的电磁情形中是假设，在这里成为推论。我们给出一阶运动的定义，证明在黑洞假设下质心和电荷中心在这一阶重合，并把一阶运动方程表述为一个与 Zimmerman--Poisson 方程等价的命题。完成这一命题的证明所需的近区二阶计算，我们逐步列出。
+小物体在带电背景中运动时，电磁辐射反作用和引力辐射反作用同时出现，并且相互耦合。描述这种运动的一阶方程已由 Zimmerman 和 Poisson、Linz、Friedman 和 Wiseman 从点粒子模型写出，但其中“驱动运动的只是正则场”这一步是作为假设引入的。本文用 Gralla 和 Wald 的“一族精确解”方法，从 Einstein--Maxwell 场方程出发研究带电小黑洞的运动。我们把三条极限假设写成 Einstein--Maxwell 的形式，补上电磁规范的光滑性要求和零磁荷条件，并加入近区背景是严格次极端 Kerr--Newman 解的假设。由这些假设，我们推出零阶的洛伦兹力，得到一阶远区的耦合分布方程组，并论证一阶远区场是推迟解：这一点在 Gralla、Harte 和 Wald 的电磁情形中是假设，在这里成为推论。我们给出一阶运动的定义，证明在黑洞假设下质心和电荷中心在这一阶重合，并把一阶运动方程表述为一个与 Zimmerman--Poisson 方程等价的命题。在背景不带电的情形，我们用计算机代数完成了所需的近区二阶计算，证明了这一命题：运动方程在 Gralla--Wald 的结果之外恰好多出尾巴电场的洛伦兹力；计算中还发现 Gralla--Wald 文中一个矩阵有两行笔误，但不影响其运动方程。背景带电的情形，我们给出了计算的步骤和新的困难。
 \end{abstract}
 
 \tableofcontents
@@ -339,7 +339,23 @@ GW 第 VI 节在真空情形完成了这一计算：在近区二阶方程中提�
 \item \textbf{普适关系。}从所得线性方程组中消去未知的齐次项（GW 中的 $H_{\alpha\beta}$、$\dot K_{\alpha\beta}$ 及其电磁对应），找出只含 $\ddot\zeta^i$、背景场、尾巴场的关系，即一阶运动方程。
 \item \textbf{对照。}把所得方程与 \eqref{eq:ZP82} 的线性化逐项比较，包括三类项：两种尾巴场各自的贡献，混合尾巴项，以及正比于 $\nabla F$、$FF$ 的局部项。
 \end{enumerate}
-第 4 步是计算量最大、也是与 GW 差别最大的地方。我们计划用计算机代数完成第 3--5 步，并用 $F=0$ 时回到 GW 式 (108) 作为第一项检验。
+第 4 步是计算量最大、也是与 GW 差别最大的地方。我们用计算机代数完成第 3--5 步，并分四级推进，每级只引入一样新东西：真空且 $q=0$；$q\neq0$、$F=0$；$q=0$、$F\neq0$；完整情形。全部中间步骤记录在项目的验证计算文档中（\texttt{derivations/p1/calc.pdf}）。
+
+\subsection{已完成的部分：背景不带电}\label{sec:F0done}
+
+\paragraph{第一级：复现 GW。}对线性化 Schwarzschild 近区背景，我们重新计算了 GW 式 (106) 的 $\ell=1$ 线性化 Ricci 矩阵。60 个系数中 55 个与 GW 相同；其余 5 个（$R^A$ 行 1 个、$R^F$ 行 4 个）不同。不截断的直接计算和三个纯规范扰动都支持我们的结果：纯规范扰动必须落在正确矩阵的零空间里，我们的矩阵满足这一点，GW 的矩阵恰好在这两行不满足。给出运动方程的关系 GW 式 (108) 只用到 $R^B$、$R^D$、$R^E$ 三行，不受影响，我们复现了它。
+
+\paragraph{第二级：物体带电，背景不带电。}取 $F=0$，近区背景为 Reissner--Nordstr\"om。近区二阶方程中第一次出现电磁项：Einstein 方程中 Coulomb 场与尾巴电场的交叉应力，Maxwell 方程中度规扰动作用在 Coulomb 场上的项，以及尾巴场在背景度规中的散度。$\ell=1$ 的方程组共 9 行（Einstein 6 行、Maxwell 3 行），含 9 个未知齐次项。消去全部未知项后，只剩一个关系：
+\begin{equation}
+-MD^A_i+2MD^C_i+2q\,\big(E^C_i-E^0_i\big)=0,
+\end{equation}
+其中 $E^0_i=\partial_ia^{\rm tail}_0$、$E^C_i=\partial_0a^{\rm tail}_i$ 在 $\gamma$ 上取值。与 GW 的推导相比，运动方程恰好多出一项
+\begin{equation}
+M\ddot Z^i\supset q\,f^{\rm tail}_{i0},
+\end{equation}
+即尾巴电场对电荷的洛伦兹力，系数为 1，没有其他新项。四个纯规范变换（三个同时作用在度规和 Coulomb 势上的微分同胚，一个电磁规范变换）都落在方程组的零空间里。背景为真空、零阶运动为测地线时，正则电磁场在 $\gamma$ 上就是尾巴场，所以这一结果就是 MiSaTaQuWa 方程加 DeWitt--Brehme 的尾巴力。也就是说，\textbf{在 $F=0$ 的情形，命题~\ref{prop:main} 成立}。
+
+$F\neq0$ 的情形（第三、四级）尚未完成。与前两级相比，有两点新的困难：背景磁场在时间反演下为奇，GW 按时间宇称分块的做法不再适用；远区一阶场含有由耦合确定的 $\ell=1$ 局部项（形如 $MF\,n$ 和 $MF^2r$），需要先在 $\gamma$ 附近求出局部解。
 
 %======================================================================
 \section{检验}\label{sec:checks}
@@ -373,7 +389,7 @@ GW 第 VI 节在真空情形完成了这一计算：在近区二阶方程中提�
 
 \paragraph{近极端情形。}(i)--(iii) 是对固定 $\xi$ 提出的。常数 $\bar R$、光滑性背后的导数界，都可能依赖 $\xi$。GW 允许近区一阶扰动随 $\bar t$ 线性增长、二阶扰动随 $\bar t$ 二次增长。在近极端 Kerr--Newman 背景上，近区扰动的弛豫时间约为 $1/\kappa$，$\kappa$ 是表面引力，在 $\xi\to1$（取 $\bar a=0$）时趋于零。因此，按 $\lambda$ 展开的各阶系数可能在 $\xi\to1$ 时发散，使展开对 $\xi$ 不一致。要回答推导在何处失效，需要追踪每一步中的 $\xi$ 依赖，这正是本文把每条假设的用处都写明的原因。这一问题留给后续的工作。
 
-\paragraph{现状。}本文已经完成的部分是：假设的表述（第~\ref{sec:assumptions} 节），零阶运动和一阶远区方程组（第~\ref{sec:zeroth} 节，其中推迟解一步依赖引理 B 所引定理的核对），一阶运动的定义以及质心与电荷中心的重合（\S\ref{sec:motion-def}、\S\ref{sec:dipoles}），以及目标方程的极限检验（第~\ref{sec:checks} 节）。主结果命题~\ref{prop:main} 的证明，需要完成 \S\ref{sec:remaining} 列出的近区二阶计算。
+\paragraph{现状。}本文已经完成的部分是：假设的表述（第~\ref{sec:assumptions} 节），零阶运动和一阶远区方程组（第~\ref{sec:zeroth} 节，其中推迟解一步依赖引理 B 所引定理的核对），一阶运动的定义以及质心与电荷中心的重合（\S\ref{sec:motion-def}、\S\ref{sec:dipoles}），以及目标方程的极限检验（第~\ref{sec:checks} 节）。主结果命题~\ref{prop:main} 在背景不带电时已经推出（\S\ref{sec:F0done}）；背景带电的情形需要完成 \S\ref{sec:remaining} 中的第三、四级计算。
 
 %======================================================================
 \appendix
