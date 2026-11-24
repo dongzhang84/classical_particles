@@ -132,4 +132,101 @@ GW 的另一个关系 (107) 含 $D^E$、$D^F$，由正确的矩阵得不出来�
 
 \paragraph{第 1 级：通过。}运动方程所依赖的关系 GW (108) 被复现；矩阵中 GW 的两行笔误被独立检验确认。工具链（线性化 Ricci、阶次提取、$\ell=1$ 拟合）可用于后面三级。
 
+%======================================================================
+\section{第 2 级：物体带电，背景不带电}
+%======================================================================
+
+背景是真空解（$F=0$，$R_{ab}=0$），物体带质量 $M$ 和电荷 $q$。由 \eqref{eq:L1matrix} 的推导方式，这一级要回答：近区二阶方程中第一次出现的电磁项，是否恰好给出电磁尾巴力，而不带来别的项。
+
+\subsection{2a：哪些项进入 $\ell=1$、$1/r^2$ 阶的方程}
+
+\paragraph{远区。}背景是真空，零阶运动是测地线（论文第 3 节的洛伦兹力方程在 $F=0$ 时）。远区一阶场在 Lorenz 规范、Fermi 坐标中，在 $\gamma$ 附近为
+\begin{align}
+h_{\alpha\beta}&=\frac{2M}{r}\delta_{\alpha\beta}+h^{\rm tail}_{\alpha\beta}+h^{\rm tail}_{\alpha\beta i}x^i+M\mathcal R_{\alpha\beta}+O(r^2)\qquad\text{（GW 式 (64)，不变）},\\
+a_\alpha&=-\frac qr\,t_\alpha+a^{\rm tail}_\alpha+a^{\rm tail}_{\alpha i}x^i+q\,\mathcal S_\alpha+O(r^2).
+\end{align}
+$F=0$ 时两种扰动不耦合，所以度规部分与 GW 完全相同；电磁部分是弯曲真空背景上点电荷的推迟场（DeWitt--Brehme），$a^{\rm tail}$ 是其尾巴部分在 $\gamma$ 上的值，$q\mathcal S_\alpha$ 是与 GW 的 $M\mathcal R_{\alpha\beta}$ 类似的曲率修正项，量级 $q\,R\,r$。测地运动下没有 $O(r^0)$ 的局部项。
+
+\paragraph{二阶远区在 $1/r^2$ 阶的特解。}在各向同性坐标中，Reissner--Nordstr\"om 度规和势展开到二阶为
+\begin{equation}
+g_{00}=-1+\frac{2M}{r}-\frac{2M^2+q^2}{r^2},\qquad g_{ij}=\Big(1+\frac{2M}r+\frac{3M^2-q^2}{2r^2}\Big)\delta_{ij},\qquad A_0=-\frac qr+\frac{qM}{r^2}.
+\end{equation}
+$q=0$ 时回到 GW 式 (71)。这些都是 $\ell=0$ 项，只作为近区背景的 $1/\bar r^2$ 部分出现。
+
+\paragraph{近区二阶扰动中新出现的电磁项。}平移到质心后（\S4.2；在 (H) 下电偶极同时为零），按 GW 式 (84) 的方式作近区展开。电磁势在 $O(\lambda^2)$ 上的 $\ell=1$、时间反演为偶的部分为
+\begin{align}
+\bar a^{(2)}_0&=E^0_i\,x^i+H'\!\cdot n+\dots,\\
+\bar a^{(2)}_i&=t\,E^C_i+\frac tr\big(K'^B\!\cdot n\,n_i+K'^C_i\big)+\dots,
+\end{align}
+其中 $E^0_i=\partial_ia^{\rm tail}_0$、$E^C_i=\partial_0a^{\rm tail}_i$（在 $\gamma$ 上取值）来自远区尾巴场的梯度，二者之差 $E^C_i-E^0_i=f^{\rm tail}_{0i}$ 是尾巴电场；$H'$、$K'^B$、$K'^C$ 是未知的齐次项，与 GW 的 $H$、$\dot K$ 地位相同。坐标平移作用在 Coulomb 场上产生的项都是 $\lambda^2/r$ 或 $\lambda^2r^0$ 型，按 GW 的做法并入未知项；$q\mathcal S_\alpha$ 只有 $\ell=0,2$ 部分。时间反演的约定：$a_0$ 为偶、$a_i$ 为奇，所以 $a_0\propto x$、$a_i\propto t$ 的组合是偶的，$a_i\propto x$（磁场型）是奇的，不进入。
+
+\paragraph{哪些乘积项进入 $1/\bar r^2$ 阶。}逐项估计（$\bar r\to\infty$，只看 $\ell=1$）：
+\begin{enumerate}
+\item Einstein 方程的电磁源 $8\pi T_{ab}$ 是场的二次式。Coulomb 场 $\sim q/\bar r^2$ 与 $\bar a^{(2)}$ 中的常数尾巴场的交叉项 $\sim q/\bar r^2$，是 $\ell=1$，\textbf{进入}。Coulomb 场与 $H'$（场 $\sim1/\bar r$）、$K'$（场 $\sim t/\bar r^2$）的交叉项是 $1/\bar r^3$ 及更高阶，不进入。度规扰动乘 Coulomb 场的平方是 $q^2/\bar r^3$，不进入。
+\item Maxwell 方程：线性化 Maxwell 算子 \eqref{eq:M1} 中的 $\tfrac12hF-2hF$ 项，用度规的 $D$ 项（$\sim\bar r$）乘 Coulomb 场（$\sim q/\bar r^2$）得 $q/\bar r$，求散度后是 $q/\bar r^2$，\textbf{进入}。尾巴场（常数）在背景 $M/\bar r$ 修正下的散度 $\sim M/\bar r^2$，\textbf{进入}。$H'$、$K'$ 的平直部分，\textbf{进入}。度规的 $B_{\alpha i\beta j}x^ix^j$ 和 $\mathcal R$、$\mathcal S$ 项只有 $\ell=0,2$。
+\item 一阶近区场的二次项：一阶近区度规是常数加 $K/\bar r$，一阶近区电磁场在 $F=0$ 时只有 $1/\bar r^2$ 的齐次部分；它们的乘积都在 $1/\bar r^3$ 以下，不进入。这与 GW 中 $G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$ 不进入相同。
+\end{enumerate}
+于是第 2 级的方程组是：度规部分仍是 \eqref{eq:L1matrix}，但 $R_{00}$、$R_{ij}$ 行多了一个正比于 $q\,(E^C-E^0)$ 的源；另加 Maxwell 方程的 $\ell=1$ 部分：$\mathcal M^0|_{1/r^2}=R^X\!\cdot n$，$\mathcal M^i|_{t/r^3}=R^Y\!\cdot n\,n_i+R^Z_i$（$\mathcal M^0$ 为偶，$\mathcal M^i$ 为奇，所以后者取 $t$ 的奇次项）。
+
+\paragraph{预期。}如果“驱动运动的只是正则场”在这一级成立，消去全部未知项后应得到 GW 式 (108) 加一个尾巴电场项：
+\begin{equation}
+-MD^A_i+2MD^C_i+\kappa\,q\,(E^C_i-E^0_i)=0,
+\end{equation}
+代入 GW 式 (109)、(110) 的推导，得 $\ddot Z^i=(\text{GW 的各项})-\tfrac{\kappa q}{2M}f^{\rm tail}_{0i}$。洛伦兹力 $M\ddot Z^i=q\,f^{\rm tail}_{i0}=-q\,f^{\rm tail}_{0i}$ 要求 $\kappa=2$。$\kappa$ 的值，以及没有别的项，就是第 2 级要检验的内容。
+
+\subsection{2b：计算结果}
+
+代码 \texttt{code/level2.py}（约 19 分钟），输出存于 \texttt{code/level2\_matrix.txt}。所有拟合残差为零（输出为纯 $\ell=1$），各矢量系数间无分量混合。表中竖线左边的 6 列是已知量，右边的 9 列是未知齐次项：
+{\small\setlength{\arraycolsep}{3pt}
+\begin{equation}
+\begin{array}{c|rrrrrr|rrrrrrrrr}
+ & D^A & D^C & D^E & D^F & E^0 & E^C & H^A & H^D & H^E & H^F & K^B & K^C & H' & K'^B & K'^C\\\hline
+R^A & \tfrac32M & -M & \tfrac12M & \tfrac12M & -2q & 2q & 1&0&0&0&1&-1&0&0&0\\
+R^B & 0 & 3M & 0&0&0&0& 0&0&0&0&\tfrac32&\tfrac32&0&0&0\\
+R^C & 0 & -M & 0&0&0&0& 0&0&0&0&-\tfrac12&-\tfrac12&0&0&0\\
+R^D & 3M & 0 & 0 & 3M &0&0& \tfrac32&-\tfrac32&0&-\tfrac32&3&0&0&0&0\\
+R^E & 0 & -2M & 0 & -2M & 4q & -4q & -1&1&0&1&-1&1&0&0&0\\
+R^F & -\tfrac32M & M & \tfrac12M & -\tfrac52M & -2q & 2q & -\tfrac12&\tfrac32&0&\tfrac32&-1&0&0&0&0\\\hline
+R^X & \tfrac12q & 0 & \tfrac12q & \tfrac12q & -2M & 2M & 0&0&0&0&0&0&-2&-1&1\\
+R^Y & 0 & -3q & 0&0&0&0& 0&0&0&0&0&0&0&3&3\\
+R^Z & 0 & q & 0&0&0&0& 0&0&0&0&0&0&0&-1&-1
+\end{array}
+\label{eq:L2matrix}
+\end{equation}}
+前 6 行是 Einstein 方程（$R_{ab}-8\pi T_{ab}$），后 3 行是 Maxwell 方程。观察：
+\begin{enumerate}
+\item Einstein 各行的度规系数与第 1 级 \eqref{eq:L1matrix}（未乘 $-\tfrac12$ 的形式）逐项相同。
+\item 电磁源只通过 $E^C-E^0=f^{\rm tail}_{0i}$ 进入，不单独依赖 $E^0$ 或 $E^C$。这是电磁规范不变性的要求。
+\item Maxwell 行中出现 $q\,D$ 项（度规扰动作用在 Coulomb 场上）和 $M(E^C-E^0)$ 项（尾巴场在背景度规中的散度），与 2a 的估计一致。
+\end{enumerate}
+
+\paragraph{规范检验（\texttt{code/gauge\_test2.py}）。}纯规范扰动必须落在 \eqref{eq:L2matrix} 的零空间里。微分同胚同时作用在度规和 Coulomb 势上，$\delta a=\mathcal L_\xi(-q\,\mathrm dt/r)$：
+\begin{center}\small
+\begin{tabular}{p{0.2\textwidth}p{0.48\textwidth}l}
+\hline
+规范变换 & 产生的非零分量 & 结果\\
+\hline
+$\xi_0=t\,(c\cdot x)$ & $D^A=2c,\ D^C=c,\ K^B=-2Mc,\ H'=qc,\ K'^C=qc$ & 全零\\
+$\xi_i=(c\cdot x)\,x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc,\ H'=qc$ & 全零\\
+$\xi_i=r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc,\ H'=qc$ & 全零\\
+$\psi=t\,(c\cdot x)$（电磁规范） & $E^0=E^C=c$ & 全零\\
+\hline
+\end{tabular}
+\end{center}
+前三个检验同时检验了 Maxwell 行中的 $q\,D$ 耦合项和 $K'$、$H'$ 列。
+
+\subsection{得到的关系}
+
+消去全部 9 个未知列，只剩一个非平凡组合，仍是 $-\tfrac23R^B+\tfrac23R^D+R^E$（与第 1 级相同，Maxwell 行不参与）：
+\begin{equation}
+-MD^A_i+2MD^C_i+2q\,\big(E^C_i-E^0_i\big)=0,
+\end{equation}
+即预期中的 $\kappa=2$。代入 GW 式 (109)、(110) 的推导（$D^C_i$ 中含 $\ddot\zeta_i$，系数为 1），新增的一项是
+\begin{equation}
+M\ddot Z^i\supset q\,(E^0_i-E^C_i)=q\,f^{\rm tail}_{i0},
+\end{equation}
+正是尾巴电场对电荷的洛伦兹力，系数为 1。背景是真空、零阶运动是测地线时，DeWitt--Brehme 的局部项为零，正则场就是尾巴场，所以这一结果就是“MiSaTaQuWa 加 DeWitt--Brehme 尾巴力”，没有多余的项。
+
+\paragraph{第 2 级：通过。}在背景不带电的情形，由 Einstein--Maxwell 场方程推出：带电小物体的一阶运动只由正则场驱动，引力和电磁两部分解耦。据我们所知，这一情形此前没有在 GW 的框架下推出过（见 CHANGELOG 2026-11-24 的新颖性补查）。
+
 \end{document}
