@@ -1,6 +1,22 @@
 # classical_particles
 
-三篇关于经典电荷运动的旧稿（2006、2010、2011），二十年后对它们的回顾，以及正在重写的笔记。
+三篇关于经典电荷运动的旧稿（2006、2010、2011），二十年后对它们的回顾，以及由此展开的研究。
+
+## 当前主线（2026-11 起）
+
+**带电小黑洞在电磁与引力辐射反作用同时存在时的一阶运动**：用 Gralla–Wald 的"一族精确解"方法，从 Einstein–Maxwell 场方程推导运动方程，与 Zimmerman–Poisson 2014 的方程对照。
+
+| 文件 | 说明 |
+|---|---|
+| [`paper/paper.pdf`](paper/paper.pdf) | 论文草稿（中文，xelatex）。主结果（一阶运动方程）尚未证明，首页列出全部待办 |
+| [`derivations/p1/calc.pdf`](derivations/p1/calc.pdf) | 验证计算工作文档：分四级逐步推进，记录每一步的中间式子和检验 |
+| [`derivations/p1/`](derivations/p1/) | 推导草稿（C0、C1）和计算代码 |
+| [`docs/problem.md`](docs/problem.md) | 问题陈述与新颖性核查 |
+| [`CHANGELOG.md`](CHANGELOG.md) | 每一步做了什么、得到什么、还欠什么 |
+
+进度：验证计算第 1 级（复现 Gralla–Wald 2008）已通过；第 2 级（物体带电，背景不带电）待做。
+
+## 早期内容
 
 ## 内容
 
