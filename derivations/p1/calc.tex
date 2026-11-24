@@ -1,0 +1,135 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\numberwithin{equation}{section}
+
+\title{一阶运动的验证计算}
+\author{}
+\date{工作文档 \quad 开始于 2026 年 11 月 24 日}
+
+\begin{document}
+\maketitle
+
+\noindent 本文档记录论文第 4.4 节所列计算的全部中间步骤，供逐式核对。每一级只引入一样新东西，并与一个已知答案对照：
+
+\begin{center}\small
+\begin{tabular}{cp{0.17\textwidth}p{0.33\textwidth}p{0.3\textwidth}}
+\hline
+级 & 情形 & 新引入的东西 & 对照的答案\\
+\hline
+1 & $q=0$，$F=0$ & 无，检验工具和记号 & GW 式 (106)--(108)\\
+2 & $q\neq0$，$F=0$ & 近区 Coulomb 场；二阶近区方程中的电磁源 & MiSaTaQuWa + DeWitt--Brehme 尾巴\\
+3 & $q=0$，$F\neq0$ & 背景场带来的耦合 & ZP 取 $q\to0$：$\tfrac53M^2FF$ + 耦合尾巴\\
+4 & 完整 & 两者同时出现；规范混合项 $\zeta^cF_{ca}$ & ZP 式 (8.2) 的线性化\\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent 每一节固定写五项：输入、中间式子（与 GW 或 ZP 的公式编号并排）、得到的关系、代码、是否通过。代码在 \texttt{derivations/p1/code/}，用项目内的 \texttt{.venv}（sympy 1.14）运行。
+
+\tableofcontents
+
+%======================================================================
+\section{记号与约定}
+%======================================================================
+
+近区坐标记为 $(t,x^i)$，即 GW 的 $(\bar t,\bar x^i)$，去掉横线；$r=|x|$，$n^i=x^i/r$。号差 $(-,+,+,+)$。$\delta_{\alpha\beta}$ 是 Kronecker 符号（$\delta_{00}=1$）。对称化含 $\tfrac12$：$n_{(i}D_{j)}=\tfrac12(n_iD_j+n_jD_i)$。线性化 Ricci 张量对背景度规取，指标全在下。
+
+\paragraph{共用工具（\texttt{code/series.py}）。}
+\begin{enumerate}
+\item \texttt{linearized\_ricci}：背景为 $\eta+Mb^{(1)}$，计算 $\eta+Mb^{(1)}+\epsilon h$ 的 Ricci 张量中 $\epsilon^1$ 的部分，保留到 $M^1$。逆度规展开到 $M\epsilon$ 交叉项。
+\item \texttt{radial\_coeff}：令 $x^i=\rho\,n^i$，$n^i$ 取分量为有理数的单位矢量（毕达哥拉斯四元组），取出 $t^k\rho^{p}$ 的系数。
+\item \texttt{fit\_l1}：在 8 个方向上把系数与 $\ell=1$ 张量谐函数的拟设比较，解出拟设中的矢量系数；残差为零即说明输出是纯 $\ell=1$。
+\end{enumerate}
+
+%======================================================================
+\section{第 1 级：复现 GW}
+%======================================================================
+
+\subsection{输入}
+
+近区背景取 GW 式 (86) 的 $O(M)$ 部分，即各向同性坐标中线性化的 Schwarzschild 度规：
+\begin{equation}
+\bar g^{(0)}_{\alpha\beta}=\eta_{\alpha\beta}+\frac{2M}{r}\,\delta_{\alpha\beta}.
+\end{equation}
+$M^2/r^2$ 项只影响 $1/r^3$ 阶，不进入下面的系数。自旋取零。
+
+近区二阶扰动只取 $\ell=1$、电宇称、时间反演为偶的部分，按 GW 式 (98)--(101)：
+\begin{align}
+h_{00}&=r\,D^A\!\cdot n+H^A\!\cdot n,\\
+h_{i0}&=t\,D^C_i+\frac tr\big(K^B\!\cdot n\,n_i+K^C_i\big),\\
+h_{ij}&=r\big(n_{(i}D^E_{j)}+\delta_{ij}\,D^F\!\cdot n\big)+H^D\!\cdot n\,n_in_j+H^E_{(i}n_{j)}+H^F\!\cdot n\,\delta_{ij}.
+\end{align}
+这里 $K^B$、$K^C$ 即 GW 的 $\dot K^B$、$\dot K^C$。背景是球对称的，所以只有 $\ell=1$ 的输入能产生 $\ell=1$ 的输出；GW 中 $B_{\alpha i\beta j}x^ix^j$、$MR_{\alpha\beta}$ 两项没有 $\ell=1$ 部分，不必放入。
+
+\subsection{中间式子：线性化 Ricci 张量的 $\ell=1$ 系数}
+
+按 GW 式 (94)--(96) 的形式提取
+\begin{align}
+R_{00}\big|_{1/r^2}&=R^A\!\cdot n,\\
+R_{ij}\big|_{1/r^2}&=R^D\!\cdot n\,n_in_j+R^E_{(i}n_{j)}+R^F\!\cdot n\,\delta_{ij},\\
+R_{i0}\big|_{t/r^3}&=R^B\!\cdot n\,n_i+R^C_i .
+\end{align}
+在 8 个方向上拟合的残差全部为零，即输出确为纯 $\ell=1$；各矢量系数之间没有分量混合（各向同性）。所得线性关系为（列依次为 $D^A,D^C,D^E,D^F,H^A,H^D,H^E,H^F,K^B,K^C$）
+\begin{equation}
+\begin{pmatrix}R^A\\R^B\\R^C\\R^D\\R^E\\R^F\end{pmatrix}
+=-\frac12
+\begin{pmatrix}
+-3M & \mathbf{2M} & -M & -M & -2 & 0 & 0 & 0 & -2 & 2\\
+0 & -6M & 0 & 0 & 0 & 0 & 0 & 0 & -3 & -3\\
+0 & 2M & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1\\
+-6M & 0 & 0 & -6M & -3 & 3 & 0 & 3 & -6 & 0\\
+0 & 4M & 0 & 4M & 2 & -2 & 0 & -2 & 2 & -2\\
+\mathbf{3M} & \mathbf{-2M} & \mathbf{-M} & \mathbf{5M} & 1 & -3 & 0 & -3 & 2 & 0
+\end{pmatrix}
+\begin{pmatrix}D^A\\D^C\\D^E\\D^F\\H^A\\H^D\\H^E\\H^F\\K^B\\K^C\end{pmatrix}.
+\label{eq:L1matrix}
+\end{equation}
+这与 GW 式 (106)（去掉自旋列）相比，60 个系数中 55 个相同。加粗的 5 个不同：GW 的 $R^A$ 行 $D^C$ 列为 $0$；$R^F$ 行 $D^A,D^C,D^E,D^F$ 四列为 $0,\,3M,\,-3M,\,9M$。GW 原文这一页已渲染成图片核对，转录无误。
+
+\subsection{两边不同时谁对：独立检验}
+
+\paragraph{(a) 不截断的直接计算。}\texttt{code/check\_dc.py} 对 $h_{i0}=t\,C_i$ 直接计算完整度规的 Ricci 张量（不做任何截断），再对 $\epsilon$ 求导、对 $M$ 展开到一阶，得 $R_{00}|_{1/r^2}=-M\,C\!\cdot n$，即 $R^A$ 行 $D^C$ 列的系数为 $-M$（乘 $-\tfrac12$ 前为 $2M$），与 \eqref{eq:L1matrix} 一致。
+
+\paragraph{(b) 纯规范扰动。}背景 $\eta+2M\delta/r$ 在 $O(M)$ 上是真空解，所以纯规范扰动 $h=\mathcal L_\xi\bar g^{(0)}$ 的线性化 Ricci 张量必须为零，它的 $(D,H,K)$ 分量必须是正确矩阵的零向量。\texttt{code/gauge\_test.py} 取三个时间反演为偶的 $\ell=1$ 规范矢量（下标在下）：
+\begin{center}\small
+\begin{tabular}{p{0.2\textwidth}p{0.4\textwidth}p{0.3\textwidth}}
+\hline
+规范矢量 & 产生的非零分量 & 结果\\
+\hline
+$\xi_0=t\,(c\cdot x)$ & $D^A=2c,\ D^C=c,\ K^B=-2Mc$ & 本文矩阵：全零；GW：$R^A,R^F$ 行不为零\\
+$\xi_i=(c\cdot x)\,x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc$ & 本文矩阵：全零；GW：$R^F$ 行不为零\\
+$\xi_i=r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc$ & 本文矩阵：全零；GW：$R^F$ 行不为零\\
+\hline
+\end{tabular}
+\end{center}
+第一个规范模式可以手算核对：$\xi^0=-(1+\psi)\,t\,c\cdot x$，$\psi=2M/r$，于是 $h_{00}=2c\cdot x$，$h_{0i}=t\,c_i-(2Mt/r)(c\cdot n)n_i$，其余为零。代入 GW 的 $R^A$ 行：$-\tfrac12[-3M\cdot2c+0\cdot c-2\cdot(-2Mc)]=Mc\neq0$。
+
+\paragraph{结论。}GW 式 (106) 的 $R^A$ 行和 $R^F$ 行有误，本文的 \eqref{eq:L1matrix} 通过了全部检验。
+
+\subsection{得到的关系}
+
+求 \eqref{eq:L1matrix} 中 $H$、$K$ 各列的左零空间，即消去所有未知齐次项。得到 3 个组合，其中 2 个在 $D$ 各列上也为零（是行之间的恒等关系），只有 1 个给出非平凡关系：
+\begin{equation}
+-M D^A_i+2M D^C_i=0 .
+\end{equation}
+这正是 GW 式 (108) 在无自旋时的形式。GW 由此得到运动方程 (110)、(111)。这个组合只用到 $R^B$、$R^D$、$R^E$ 三行，不经过有误的两行，所以 GW 的运动方程不受影响。
+
+GW 的另一个关系 (107) 含 $D^E$、$D^F$，由正确的矩阵得不出来；它来自有误的行。GW 自己说明 (107) “does not yield restrictions on the motion”，所以这也不影响运动方程。
+
+\subsection{代码与结果}
+
+\begin{itemize}
+\item \texttt{code/level1.py}：生成 \eqref{eq:L1matrix}，约 2.5 分钟。
+\item \texttt{code/check\_dc.py}：检验 (a)。
+\item \texttt{code/gauge\_test.py}：检验 (b)。
+\end{itemize}
+
+\paragraph{第 1 级：通过。}运动方程所依赖的关系 GW (108) 被复现；矩阵中 GW 的两行笔误被独立检验确认。工具链（线性化 Ricci、阶次提取、$\ell=1$ 拟合）可用于后面三级。
+
+\end{document}
