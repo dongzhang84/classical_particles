@@ -625,7 +625,7 @@ h^{\rm R}_{ta}\supset m\big(2R_{atct}+F_{at}F_{ct}-F_{ae}F^e{}_c-\delta_{ac}F_{e
 脚本 & 内容 & 用时\\
 \hline
 \texttt{level1.py} & 不经分解，直接计算 $\eta+Mb+\epsilon h$ 的 Ricci 张量，生成 \eqref{eq:L1matrix} & 约 2.5 分钟\\
-\texttt{level1\_detail.py} & 按 \eqref{eq:R0}--\eqref{eq:R1b} 逐列、逐部分计算，核对 \S\ref{sec:Hcols}、\S\ref{sec:Dcols} 的手算（输出存于 \texttt{level1\_detail.out}） & 约 15 秒\\
+\texttt{level1\_detail.py} & 按 \eqref{eq:R0}--\eqref{eq:R1b} 逐列、逐部分计算，核对 \S\ref{sec:Hcols}、\S\ref{sec:Dcols} 的手算 & 约 15 秒\\
 \texttt{check\_dc.py} & 对 $h_{i0}=\bar t\,C_i$ 作不截断的 Ricci 计算，核对第一行 $D^C$ 列 & 数秒\\
 \texttt{gauge\_test.py} & 情形 1 的规范检验 & 数秒\\
 \texttt{level2.py} & 生成 \eqref{eq:L2matrix}，写入 \texttt{level2\_matrix.txt} & 约 19 分钟\\
