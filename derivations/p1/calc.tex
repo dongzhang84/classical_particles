@@ -8,6 +8,7 @@
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 
 \numberwithin{equation}{section}
+\emergencystretch=3em
 \newcommand{\dd}{\mathrm d}
 
 \title{一阶运动的近区推导}
@@ -156,69 +157,322 @@ $B_{\alpha i\beta j}\bar x^i\bar x^j$ 和 $\mathcal R$、$\mathcal S$ 是 $x$ �
 \label{sec:L1}
 %======================================================================
 
-\subsection{近区二阶方程}
+本节 $q=0$，背景是真空解。为简化记号，本节省略近区量上的横线：$t,x^i,r,n^i$ 指 $\bar t,\bar x^i,\bar r,\bar n^i$，度规扰动 $h_{ab}$ 指 $\bar g^{(2)}_{ab}$。
 
-$q=0$ 时近区二阶方程为 $G^{(1)}[\bar g^{(2)}]=-G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$。右边的项都形如 $\bar g^{(1)}\partial\partial\bar g^{(1)}$、$\partial\bar g^{(1)}\partial\bar g^{(1)}$，或含背景 Christoffel 符号 $\Gamma=O(\bar r^{-2})$ 及其导数；由 $\bar g^{(1)}$ 的形式，它们都不贡献 $1/\bar r^2$ 和 $\bar t/\bar r^3$ 阶。左边的 $O(1)$、$O(1/\bar r)$ 阶由远区一阶方程保证为零。所以在这两个阶次上，$\bar g^{(2)}$ 满足以
+\subsection{近区二阶方程}
+\label{sec:L1eq}
+
+把 \eqref{eq:RN}（取 $q=0$）记为 $g^{(0)}$。近区展开代入真空 Einstein 方程，按 $\lambda$ 的次数整理，$\lambda^2$ 阶给出
 \begin{equation}
-\bar g^{(0)}_{\alpha\beta}=\eta_{\alpha\beta}+\frac{2M}{\bar r}\,\delta_{\alpha\beta}
+G^{(1)}[\bar g^{(2)}]=-G^{(2)}[\bar g^{(1)},\bar g^{(1)}],
+\label{eq:secondorder}
+\end{equation}
+其中 $G^{(1)}$、$G^{(2)}$ 是 Einstein 张量在 $g^{(0)}$ 附近展开的一次项和二次项。我们要在 $r\to\infty$ 的领头非平凡阶次上使用 \eqref{eq:secondorder}。下面逐项估计两边各项的阶次。
+
+\paragraph{右边。}由 \S\ref{sec:expansions}，$\bar g^{(1)}=c_{ab}+K_{ab}(\theta,\phi)/r+O(1/r^2)+t\,O(1/r^3)$，其中 $c_{ab}=h^{\rm tail}_{ab}+2\zeta_{(a,b)}$ 是常数。$G^{(2)}$ 的每一项都是 $\bar g^{(1)}$ 的二次式，可以分为五类：(i) $\bar g^{(1)}\partial\partial\bar g^{(1)}$；(ii) $\partial\bar g^{(1)}\partial\bar g^{(1)}$；(iii) $\Gamma\,\bar g^{(1)}\partial\bar g^{(1)}$；(iv) $\Gamma\Gamma\,\bar g^{(1)}\bar g^{(1)}$；(v) $(\partial\Gamma)\,\bar g^{(1)}\bar g^{(1)}$。这里 $\Gamma=O(M/r^2)$、$\partial\Gamma=O(M/r^3)$ 是背景的 Christoffel 符号及其导数。常数 $c_{ab}$ 的导数为零，所以 (i) 至多是 $c\,\partial\partial(K/r)=O(1/r^3)$，(ii) 是 $O(1/r^4)$，(iii) 是 $O(1/r^4)$，(iv) 是 $O(1/r^4)$，(v) 是 $O(1/r^3)$。含 $t$ 的项还要多乘至少 $1/r^3$。所以右边对 $1/r^2$ 和 $t/r^3$ 两阶都没有贡献，在这两阶上 $\bar g^{(2)}$ 满足齐次线性化方程 $G^{(1)}[\bar g^{(2)}]=0$，等价地 $R^{(1)}[\bar g^{(2)}]=0$。
+
+\paragraph{左边。}由 \eqref{eq:g2}，$\bar g^{(2)}$ 由五类项组成。设线性化 Ricci 算子按 $M$ 展开为 $R^{(1)}=\mathcal R_0+M\mathcal R_1+M^2\mathcal R_2+\dots$，$\mathcal R_0$ 是平直时空的线性化 Ricci 算子，$\mathcal R_k$ 含背景度规中 $M^k/r^k$ 的项，每多一个 $M$ 就多一个 $1/r$。于是：
+\begin{enumerate}
+\item $B_{a i b j}x^ix^j$：$\mathcal R_0$ 给出 $O(1)$，等于背景 Ricci 张量在 $\gamma$ 上的值，真空中为零。$M\mathcal R_1$ 给出 $O(1/r)$，$M^2\mathcal R_2$ 给出 $O(1/r^2)$。这一项是 $x$ 的二次式，只有 $\ell=0,2$ 部分；背景球对称，线性化算子不改变 $\ell$，所以它对 $\ell=1$ 没有贡献。
+\item $M\mathcal R_{ab}$：同样是 $x$ 的二次式（量级 $Mr$），只有 $\ell=0,2$ 部分，不贡献 $\ell=1$。它的 $O(1/r)$ 部分与上一项的 $O(1/r)$ 部分相消，这正是远区一阶方程 $G^{(1)}[h]=0$ 在 $\gamma$ 附近 $O(r^{-1})$ 的内容。
+\item $D_{abc}x^c$：对 $x$ 线性，$\mathcal R_0$ 作用为零（两次导数）。$M\mathcal R_1$ 给出 $O(M/r^2)$；$M^2\mathcal R_2$ 给出 $O(M^2/r^3)$，不进入。所以 $D$ 列只经过 $O(M)$ 算子进入，系数正比于 $M$。
+\item $H_{ab}(\theta,\phi)$：量级 $r^0$。$\mathcal R_0$ 给出 $O(1/r^2)$，$M\mathcal R_1$ 给出 $O(M/r^3)$，不进入。所以 $H$ 列只经过平直算子进入，系数与 $M$ 无关。
+\item $t\,\dot K_{ab}/r$：$\mathcal R_0$ 给出 $O(t/r^3)$，对 $t$ 求导的项给出 $O(1/r^2)$；$M\mathcal R_1$ 给出 $O(Mt/r^4)$、$O(M/r^3)$，不进入。所以 $\dot K$ 列也只经过平直算子进入。
+\end{enumerate}
+$\bar g^{(2)}$ 中再没有比 $O(1/r^2)$、$O(t/r^3)$ 更低的 $\ell=1$ 项，所以这两阶就是领头的非平凡阶。这也说明背景只需保留到 $O(M)$：
+\begin{equation}
+g^{(0)}_{ab}=\eta_{ab}+M b_{ab},\qquad b_{ab}=2\Phi\,\delta_{ab},\qquad \Phi=\frac1r .
 \label{eq:bg1}
 \end{equation}
-为背景的齐次线性化真空方程。\eqref{eq:RN} 中 $M^2/\bar r^2$ 及更高阶的项只影响 $1/\bar r^3$ 阶。
 
-背景球对称，所以只有 \eqref{eq:Dharm} 和齐次项中 $\ell=1$ 的部分能产生 $\ell=1$ 的输出。把线性化 Ricci 张量按 \eqref{eq:harm} 写成
+\paragraph{只取 $\ell=1$、电宇称、时间反演为偶的部分。}背景 \eqref{eq:bg1} 是静态、球对称、反射对称的，所以线性化算子与转动、空间反射、时间反演都对易，不同 $\ell$、不同宇称、不同时间宇称的部分互不混合。$\ddot\zeta_i$ 是电宇称、时间反演为偶的 $\ell=1$ 量，所以只需要这一部分。线性化 Ricci 张量的这一部分在两个阶次上写成
 \begin{gather}
-R_{00}\big|_{1/\bar r^2}=\frac{1}{\bar r^2}R^A_in^i,\qquad
-R_{i0}\big|_{\bar t/\bar r^3}=\frac{\bar t}{\bar r^3}\big(R^B_jn^jn_i+R^C_i\big),\nonumber\\
-R_{ij}\big|_{1/\bar r^2}=\frac1{\bar r^2}\big(R^D_kn^kn_in_j+R^E_{(i}n_{j)}+R^F_kn^k\delta_{ij}\big),
+R_{00}\big|_{1/r^2}=\frac{1}{r^2}R^A_in^i,\qquad
+R_{i0}\big|_{t/r^3}=\frac{t}{r^3}\big(R^B_jn^jn_i+R^C_i\big),\nonumber\\
+R_{ij}\big|_{1/r^2}=\frac1{r^2}\big(R^D_kn^kn_in_j+R^E_{(i}n_{j)}+R^F_kn^k\delta_{ij}\big).
+\label{eq:Rharm}
 \end{gather}
-直接计算（附录~\ref{app:code}）给出
+$R_{i0}$ 在时间反演下为奇，偶的部分必须是 $t$ 的奇函数，所以取 $t/r^3$ 阶。输入是 \S\ref{sec:expansions} 中的 10 个矢量：
+\begin{align}
+h_{00}&=r\,D^A\!\cdot n+H^A\!\cdot n,\nonumber\\
+h_{i0}&=t\,D^C_i+\frac tr\big(\dot K^B\!\cdot n\,n_i+\dot K^C_i\big),\label{eq:L1input}\\
+h_{ij}&=r\big(n_{(i}D^E_{j)}+\delta_{ij}\,D^F\!\cdot n\big)+H^D\!\cdot n\,n_in_j+H^E_{(i}n_{j)}+H^F\!\cdot n\,\delta_{ij}.\nonumber
+\end{align}
+每一列都是一个常矢量 $V$ 与 $n$、$\delta_{ij}$ 的组合，背景各向同性，所以每一列的输出对 $V$ 线性且各向同性，必然取 \eqref{eq:Rharm} 的形式，不会出现分量混合，也不会出现别的张量结构。下面逐列计算。
+
+\subsection{线性化 Ricci 张量到 $O(M)$}
+\label{sec:Ricci}
+
+记 $g=\eta+Mb+\epsilon h$，取 $R_{ab}$ 中 $\epsilon$ 一次的部分，保留到 $M$ 一次。约定
+\begin{gather}
+R_{ab}=\partial_c\Gamma^c{}_{ab}-\partial_b\Gamma^c{}_{ca}+\Gamma^c{}_{cd}\Gamma^d{}_{ab}-\Gamma^c{}_{bd}\Gamma^d{}_{ca},\nonumber\\
+\Gamma^c{}_{ab}=g^{cd}\Gamma_{dab},\qquad \Gamma_{dab}=\tfrac12(\partial_ag_{bd}+\partial_bg_{ad}-\partial_dg_{ab}).
+\end{gather}
+$\Gamma_{dab}$ 对 $g$ 线性：$\Gamma_{dab}=M\,G_{dab}+\tfrac12\epsilon\,P_{dab}$，其中
+\begin{equation}
+G_{dab}=\delta_{bd}\Phi_a+\delta_{ad}\Phi_b-\delta_{ab}\Phi_d,\qquad
+P_{dab}=\partial_ah_{bd}+\partial_bh_{ad}-\partial_dh_{ab},
+\label{eq:GP}
+\end{equation}
+$\Phi_a=\partial_a\Phi$，即 $\Phi_0=0$，$\Phi_i=-n_i/r^2$。逆度规 $g^{cd}=\eta^{cd}-Mb^{cd}-\epsilon h^{cd}+O(M^2,\epsilon^2,M\epsilon)$，指标用 $\eta$ 升，$b^{cd}=2\Phi\delta^{cd}$；$M\epsilon$ 项乘的是 $\partial\eta=0$，不出现。于是
+\begin{equation}
+\Gamma^c{}_{ab}=M\,G^c{}_{ab}+\epsilon\,C^c{}_{ab}+M\epsilon\,X^c{}_{ab}+\dots,\qquad
+C^c{}_{ab}=\tfrac12\eta^{cd}P_{dab},\qquad
+X^c{}_{ab}=-\Phi\,\delta^{cd}P_{dab}-h^{cd}G_{dab},
+\label{eq:Xdef}
+\end{equation}
+$G^c{}_{ab}=\eta^{cd}G_{dab}$。由 \eqref{eq:GP}，背景 Christoffel 符号的非零分量为
+\begin{equation}
+G^i{}_{00}=G^0{}_{0i}=-\Phi_i=\frac{n_i}{r^2},\qquad
+G^k{}_{ij}=-\frac{\delta_{jk}n_i+\delta_{ik}n_j-\delta_{ij}n_k}{r^2},\qquad
+G^c{}_{cd}=2\Phi_d .
+\label{eq:Gcomp}
+\end{equation}
+代入 Ricci 张量，$\epsilon$ 一次的部分为 $R_{ab}=\mathcal R_0[h]_{ab}+M\big(\mathcal R_{1a}[h]+\mathcal R_{1b}[h]\big)_{ab}$，其中
+\begin{align}
+\mathcal R_0[h]_{ab}&=\partial_cC^c{}_{ab}-\partial_bC^c{}_{ca}
+=\tfrac12\big(\partial^c\partial_ah_{bc}+\partial^c\partial_bh_{ac}-\Box h_{ab}-\partial_a\partial_bh\big),
+\label{eq:R0}\\
+\mathcal R_{1a}[h]_{ab}&=\partial_cX^c{}_{ab}-\partial_bX^c{}_{ca},
+\label{eq:R1a}\\
+\mathcal R_{1b}[h]_{ab}&=G^c{}_{cd}C^d{}_{ab}+C^c{}_{cd}G^d{}_{ab}-G^c{}_{bd}C^d{}_{ca}-C^c{}_{bd}G^d{}_{ca},
+\label{eq:R1b}
+\end{align}
+$h=\eta^{ab}h_{ab}$。对本节的输入，$\partial_0^2h=0$，平直部分 \eqref{eq:R0} 的分量为
+\begin{align}
+\mathcal R_0[h]_{00}&=\partial_0\partial_kh_{0k}-\tfrac12\nabla^2h_{00},\nonumber\\
+\mathcal R_0[h]_{0i}&=\tfrac12\big(\partial_0\partial_kh_{ik}+\partial_i\partial_kh_{0k}-\nabla^2h_{0i}-\partial_0\partial_ih_{kk}\big),\label{eq:R0comp}\\
+\mathcal R_0[h]_{ij}&=\tfrac12\big(\partial_k\partial_ih_{jk}+\partial_k\partial_jh_{ik}-\nabla^2h_{ij}+\partial_i\partial_jh_{00}-\partial_i\partial_jh_{kk}\big)-\partial_0\partial_{(i}h_{j)0}.\nonumber
+\end{align}
+
+\subsection{常用恒等式}
+
+设 $V$ 是常矢量，$f$ 是 $n$ 的零次齐次函数。
+\begin{gather}
+\partial_ir=n_i,\qquad \partial_in_j=\frac{\delta_{ij}-n_in_j}{r},\qquad \partial_kn_k=\frac2r,\qquad n_k\partial_kf=0,\nonumber\\
+\partial_i\partial_j(V\!\cdot n)=\frac{3(V\!\cdot n)n_in_j-V_in_j-V_jn_i-\delta_{ij}V\!\cdot n}{r^2},
+\label{eq:id-ddVn}\\
+\partial_k\Big(\frac{V_k}{r}\Big)=-\frac{V\!\cdot n}{r^2},\qquad
+\partial_k\Big(\frac{n_kf}{r}\Big)=\frac{f}{r^2},\qquad
+\partial_j\Big(\frac{(V\!\cdot n)n_i}{r}\Big)=\frac{V_jn_i+\delta_{ij}V\!\cdot n-3(V\!\cdot n)n_in_j}{r^2},
+\label{eq:id-div}\\
+\partial_k\Big(\frac{V_kn_in_j}{r}\Big)=\frac{V_in_j+V_jn_i-3(V\!\cdot n)n_in_j}{r^2},\qquad
+\nabla^2\big(r^pY_\ell\big)=\big[p(p+1)-\ell(\ell+1)\big]r^{p-2}Y_\ell .
+\label{eq:id-lap}
+\end{gather}
+最后一式中 $Y_\ell$ 是 $n$ 的 $\ell$ 阶球谐函数（零次齐次）。例如 $\nabla^2(V\!\cdot n)=-2V\!\cdot n/r^2$。
+
+\subsection{齐次项各列：平直算子}
+\label{sec:Hcols}
+
+由 \S\ref{sec:L1eq}，$H$、$\dot K$ 各列只需 \eqref{eq:R0comp}。
+
+\paragraph{$H^A$ 列：$h_{00}=H^A\!\cdot n$。}静态，只有 $h_{00}$。由 \eqref{eq:R0comp}，$R_{00}=-\tfrac12\nabla^2(H^A\!\cdot n)=H^A\!\cdot n/r^2$，$R_{0i}=0$，$R_{ij}=\tfrac12\partial_i\partial_j(H^A\!\cdot n)$。用 \eqref{eq:id-ddVn}，
+\begin{equation}
+R_{00}=\frac{H^A\!\cdot n}{r^2},\qquad
+R_{ij}=\frac1{r^2}\Big(\tfrac32H^A\!\cdot n\,n_in_j-H^A_{(i}n_{j)}-\tfrac12H^A\!\cdot n\,\delta_{ij}\Big).
+\end{equation}
+
+\paragraph{$H^F$ 列：$h_{ij}=f\,\delta_{ij}$，$f=H^F\!\cdot n$。}$\partial_kh_{jk}=\partial_jf$，$h_{kk}=3f$，$\nabla^2h_{ij}=-2f\delta_{ij}/r^2$。由 \eqref{eq:R0comp}，$R_{00}=R_{0i}=0$，
+\begin{equation}
+R_{ij}=\tfrac12\big(2\partial_i\partial_jf+2f\delta_{ij}/r^2-3\partial_i\partial_jf\big)
+=\frac1{r^2}\Big(-\tfrac32H^F\!\cdot n\,n_in_j+H^F_{(i}n_{j)}+\tfrac32H^F\!\cdot n\,\delta_{ij}\Big).
+\end{equation}
+
+\paragraph{$H^D$ 列：$h_{ij}=f\,n_in_j$，$f=H^D\!\cdot n$。}$\partial_kh_{jk}=(\partial_kn_k)n_jf=2fn_j/r$，用 \eqref{eq:id-div} 得 $\partial_i\partial_kh_{jk}=2(H^D_jn_i+\delta_{ij}f-3fn_in_j)/r^2$。$h_{kk}=f$。$fn_in_j$ 分解为 $\ell=3$ 部分 $f n_in_j-\tfrac15(\delta_{ij}f+H^D_in_j+H^D_jn_i)$ 和 $\ell=1$ 部分 $\tfrac15(\delta_{ij}f+H^D_in_j+H^D_jn_i)$，由 \eqref{eq:id-lap}（$p=0$），
+\begin{equation*}
+\nabla^2h_{ij}=\frac{-12fn_in_j+2\delta_{ij}f+2(H^D_in_j+H^D_jn_i)}{r^2}.
+\end{equation*}
+代入 \eqref{eq:R0comp}，$R_{00}=R_{0i}=0$，
+\begin{equation}
+R_{ij}=\frac1{r^2}\Big(-\tfrac32H^D\!\cdot n\,n_in_j+H^D_{(i}n_{j)}+\tfrac32H^D\!\cdot n\,\delta_{ij}\Big),
+\end{equation}
+与 $H^F$ 列相同。这不是巧合：$h_{ij}=(V\!\cdot n)(n_in_j-\delta_{ij})$ 在平直时空中是纯规范的，由 $\partial_j\big[(V\!\cdot x)n_i\big]=V_jn_i+(V\!\cdot n)(\delta_{ij}-n_in_j)$，它等于 $\partial_{(i}\xi_{j)}$，$\xi_i=rV_i-(V\!\cdot x)n_i$。
+
+\paragraph{$H^E$ 列：$h_{ij}=H^E_{(i}n_{j)}$。}$h_{ij}=\partial_{(i}\xi_{j)}$，$\xi_i=rH^E_i$，在平直时空中是纯规范的，所以 $\mathcal R_0$ 为零。这一列对 \eqref{eq:Rharm} 没有贡献。
+
+\paragraph{$\dot K^C$ 列：$h_{i0}=tV_i/r$，$V=\dot K^C$。}由 \eqref{eq:R0comp} 和 \eqref{eq:id-div}：
+$R_{00}=\partial_0\partial_kh_{0k}=\partial_k(V_k/r)=-V\!\cdot n/r^2$；
+$R_{0i}=\tfrac12(\partial_i\partial_kh_{0k}-\nabla^2h_{0i})$，其中 $\partial_i\partial_kh_{0k}=-t\,\partial_i(V\!\cdot n/r^2)=t(3V\!\cdot n\,n_i-V_i)/r^3$，$\nabla^2(1/r)=0$；
+$R_{ij}=-\partial_0\partial_{(i}h_{j)0}=-\partial_{(i}(V_{j)}/r)=V_{(i}n_{j)}/r^2$。即
+\begin{equation}
+R_{00}=-\frac{V\!\cdot n}{r^2},\qquad R_{i0}=\frac t{r^3}\Big(\tfrac32V\!\cdot n\,n_i-\tfrac12V_i\Big),\qquad R_{ij}=\frac{V_{(i}n_{j)}}{r^2}.
+\end{equation}
+
+\paragraph{$\dot K^B$ 列：$h_{i0}=t(V\!\cdot n)n_i/r$，$V=\dot K^B$。}
+$R_{00}=\partial_k\big((V\!\cdot n)n_k/r\big)=V\!\cdot n/r^2$。
+$\partial_kh_{0k}=tV\!\cdot n/r^2$，所以 $\partial_i\partial_kh_{0k}=t(V_i-3V\!\cdot n\,n_i)/r^3$。$(V\!\cdot n)n_i=\big[(V\!\cdot n)n_i-\tfrac13V_i\big]+\tfrac13V_i$ 是 $\ell=2$ 与 $\ell=0$ 之和，由 \eqref{eq:id-lap}（$p=-1$），$\nabla^2h_{0i}=-6t\big[(V\!\cdot n)n_i-\tfrac13V_i\big]/r^3$。于是 $R_{0i}=\tfrac12t(3V\!\cdot n\,n_i-V_i)/r^3$。
+$R_{ij}=-\partial_{(i}\big((V\!\cdot n)n_{j)}/r\big)$，用 \eqref{eq:id-div}。即
+\begin{equation}
+R_{00}=\frac{V\!\cdot n}{r^2},\qquad R_{i0}=\frac t{r^3}\Big(\tfrac32V\!\cdot n\,n_i-\tfrac12V_i\Big),\qquad
+R_{ij}=\frac1{r^2}\big(3V\!\cdot n\,n_in_j-V_{(i}n_{j)}-V\!\cdot n\,\delta_{ij}\big).
+\end{equation}
+两个 $\dot K$ 列的 $R_{i0}$ 相同，所以 $R^B$、$R^C$ 只依赖 $\dot K^B+\dot K^C$。
+
+\subsection{远区数据各列：$O(M)$ 算子}
+\label{sec:Dcols}
+
+$D$ 各列对 $x,t$ 线性，$P_{dab}$ 和 $C^c{}_{ab}$ 都是常数，$\mathcal R_0$ 为零。只需 \eqref{eq:R1a}、\eqref{eq:R1b}。
+
+\paragraph{$D^C$ 列：$h_{i0}=tV_i$，$V=D^C$。}这一列决定 \eqref{eq:L1matrix} 第一行中有争议的系数，我们写出全部步骤。$P_{dab}$ 的非零分量只有 $P_{i00}=2\partial_0h_{0i}=2V_i$，所以 $C^i{}_{00}=V_i$，其余为零；$C^c{}_{cd}=0$。$h^{0i}=-tV_i$。由 \eqref{eq:Xdef}，
+\begin{gather*}
+X^i{}_{00}=-\Phi P_{i00}=-\frac{2V_i}{r},\qquad
+X^0{}_{00}=-h^{0k}G_{k00}=tV_k\cdot(-\Phi_k)=\frac{tV\!\cdot n}{r^2},\\
+X^0{}_{ij}=-h^{0k}G_{kij}=-\frac t{r^2}\big(V_in_j+V_jn_i-\delta_{ij}V\!\cdot n\big),\qquad
+X^i{}_{0j}=-h^{i0}G_{00j}=-\frac{tV_in_j}{r^2},
+\end{gather*}
+其余为零。注意 $X^c{}_{c0}=X^0{}_{00}+X^k{}_{k0}=0$，$X^c{}_{ci}=0$。
+\begin{itemize}
+\item $R_{00}$：$\mathcal R_{1a}=\partial_0X^0{}_{00}+\partial_kX^k{}_{00}=\dfrac{V\!\cdot n}{r^2}+\dfrac{2V\!\cdot n}{r^2}=\dfrac{3V\!\cdot n}{r^2}$。$\mathcal R_{1b}$ 的四项：$G^c{}_{cd}C^d{}_{00}=2\Phi_kV_k=-2V\!\cdot n/r^2$；$C^c{}_{cd}G^d{}_{00}=0$；$-G^c{}_{0d}C^d{}_{c0}=-G^0{}_{0k}C^k{}_{00}=-V\!\cdot n/r^2$；$-C^c{}_{0d}G^d{}_{c0}=-C^k{}_{00}G^0{}_{k0}=-V\!\cdot n/r^2$。合计 $\mathcal R_{1b}=-4V\!\cdot n/r^2$。所以
+\begin{equation}
+R_{00}=M(3-4)\frac{V\!\cdot n}{r^2}=-\frac{M\,D^C\!\cdot n}{r^2}.
+\label{eq:DC00}
+\end{equation}
+\item $R_{i0}$：$\mathcal R_{1a}=\partial_kX^k{}_{i0}-\partial_0X^c{}_{ci}=-tV_k\partial_k(n_i/r^2)=\dfrac t{r^3}\big(3V\!\cdot n\,n_i-V_i\big)$；$\mathcal R_{1b}$ 不含 $t$，不贡献 $t/r^3$ 阶。
+\item $R_{ij}$：$\mathcal R_{1a}=\partial_0X^0{}_{ij}+\partial_kX^k{}_{ij}-\partial_jX^c{}_{ci}=-\dfrac1{r^2}\big(V_in_j+V_jn_i-\delta_{ij}V\!\cdot n\big)$；$C$ 的唯一非零分量 $C^k{}_{00}$ 不出现在 \eqref{eq:R1b} 的 $ij$ 分量中，所以 $\mathcal R_{1b}$ 为零。
+\end{itemize}
+
+\paragraph{$D^A$ 列：$h_{00}=r\,V\!\cdot n=V\!\cdot x$，$V=D^A$。}$P_{00i}=P_{0i0}=V_i$，$P_{i00}=-V_i$，所以 $C^0{}_{0i}=C^i{}_{00}=-\tfrac12V_i$，$C^c{}_{ci}=-\tfrac12V_i$，$C^c{}_{c0}=0$。这正是均匀引力场 $h_{00}=V\!\cdot x$ 的 Christoffel 符号。由 \eqref{eq:Xdef}，$h^{00}=V\!\cdot x$，
+\begin{equation*}
+X^0{}_{0i}=-\Phi V_i-(V\!\cdot x)\Phi_i=\frac{-V_i+(V\!\cdot n)n_i}{r},\qquad X^i{}_{00}=\Phi V_i=\frac{V_i}r,
+\end{equation*}
+其余为零。
+\begin{itemize}
+\item $R_{00}$：$\mathcal R_{1a}=\partial_kX^k{}_{00}=-V\!\cdot n/r^2$。$\mathcal R_{1b}$：$2\Phi_kC^k{}_{00}=V\!\cdot n/r^2$；$C^c{}_{ck}G^k{}_{00}=-\tfrac12V\!\cdot n/r^2$；$-G^c{}_{0d}C^d{}_{c0}=-(G^0{}_{0k}C^k{}_{00}+G^k{}_{00}C^0{}_{k0})=V\!\cdot n/r^2$；$-C^c{}_{0d}G^d{}_{c0}=-(C^0{}_{0k}G^k{}_{00}+C^k{}_{00}G^0{}_{k0})=V\!\cdot n/r^2$。合计 $\tfrac52V\!\cdot n/r^2$。所以 $R_{00}=\tfrac32M\,V\!\cdot n/r^2$。
+\item $R_{i0}$：静态，所有项都不含 $t$，在 $t/r^3$ 阶为零。
+\item $R_{ij}$：$\mathcal R_{1a}=-\partial_jX^0{}_{0i}$，由 \eqref{eq:id-div}，$=-\big(V_in_j+V_jn_i+\delta_{ij}V\!\cdot n-3V\!\cdot n\,n_in_j\big)/r^2$。$\mathcal R_{1b}$：第一项为零（$C^d{}_{ij}=0$）；$C^c{}_{ck}G^k{}_{ij}=\tfrac12(V_jn_i+V_in_j-\delta_{ij}V\!\cdot n)/r^2$；$-G^0{}_{j0}C^0{}_{0i}=\tfrac12V_in_j/r^2$；$-C^0{}_{j0}G^0{}_{0i}=\tfrac12V_jn_i/r^2$。合计 $(V_in_j+V_jn_i-\tfrac12\delta_{ij}V\!\cdot n)/r^2$。两者相加，
+\begin{equation*}
+R_{ij}=\frac{M}{r^2}\Big(3V\!\cdot n\,n_in_j-\tfrac32V\!\cdot n\,\delta_{ij}\Big).
+\end{equation*}
+\end{itemize}
+
+\paragraph{$D^E$、$D^F$ 列：静态的空间扰动。}对 $h_{00}=h_{0i}=0$、$h_{ij}$ 不含 $t$ 的扰动，$X^0{}_{ab}=0$，$X^k{}_{0i}=0$，
+\begin{equation}
+X^k{}_{00}=-\frac{h_{kl}n_l}{r^2},\qquad
+X^k{}_{ij}=-\frac{P_{kij}}{r}+\frac{h_{kj}n_i+h_{ki}n_j-\delta_{ij}h_{kl}n_l}{r^2},
+\label{eq:Xspatial}
+\end{equation}
+$\mathcal R_{1a}$ 的 $00$ 分量为 $\partial_kX^k{}_{00}$，$ij$ 分量为 $\partial_kX^k{}_{ij}-\partial_jX^k{}_{ki}$；$\mathcal R_{1b}$ 的 $00$ 分量只剩 $C^l{}_{lk}G^k{}_{00}$，$ij$ 分量为 $2\Phi_kC^k{}_{ij}+C^l{}_{lk}G^k{}_{ij}-G^l{}_{jk}C^k{}_{li}-C^l{}_{jk}G^k{}_{li}$。
+
+$D^E$（$h_{ij}=\tfrac12(V_ix_j+V_jx_i)$）：$P_{kij}=V_k\delta_{ij}$，$C^k{}_{ij}=\tfrac12V_k\delta_{ij}$，$C^l{}_{lk}=\tfrac12V_k$；$h_{kl}n_l=\tfrac12r(V_k+n_kV\!\cdot n)$。由 \eqref{eq:Xspatial}，
+\begin{equation*}
+X^k{}_{ij}=\frac1r\Big[-\tfrac32V_k\delta_{ij}+V_kn_in_j+\tfrac12n_k(V_jn_i+V_in_j)-\tfrac12\delta_{ij}n_kV\!\cdot n\Big],\qquad X^k{}_{ki}=\frac{-V_i+(V\!\cdot n)n_i}{r}.
+\end{equation*}
+用 \eqref{eq:id-div}、\eqref{eq:id-lap}：$\partial_kX^k{}_{00}=0$；$\partial_kX^k{}_{ij}=\big[\delta_{ij}V\!\cdot n+\tfrac32(V_in_j+V_jn_i)-3V\!\cdot n\,n_in_j\big]/r^2$，$\partial_jX^k{}_{ki}=\big[V_in_j+V_jn_i+\delta_{ij}V\!\cdot n-3V\!\cdot n\,n_in_j\big]/r^2$，相减得 $\mathcal R_{1a,ij}=V_{(i}n_{j)}/r^2$。$\mathcal R_{1b}$：$00$ 分量 $\tfrac12V\!\cdot n/r^2$；$ij$ 分量的四项依次为 $-\delta_{ij}V\!\cdot n$、$-\tfrac12(V_jn_i+V_in_j-\delta_{ij}V\!\cdot n)$、$\tfrac12(V_in_j+\delta_{ij}V\!\cdot n-V_jn_i)$、$\tfrac12(\delta_{ij}V\!\cdot n+V_jn_i-V_in_j)$（均除以 $r^2$），$\delta_{ij}V\!\cdot n$ 的系数合计 $-1+\tfrac12+\tfrac12+\tfrac12=\tfrac12$，$V_in_j$ 与 $V_jn_i$ 的系数各为 $-\tfrac12$，即 $\mathcal R_{1b,ij}=(-V_{(i}n_{j)}+\tfrac12\delta_{ij}V\!\cdot n)/r^2$。所以
+\begin{equation*}
+R_{00}=\frac{M}{2}\frac{V\!\cdot n}{r^2},\qquad R_{ij}=\frac M{2}\frac{V\!\cdot n\,\delta_{ij}}{r^2}.
+\end{equation*}
+
+$D^F$（$h_{ij}=\delta_{ij}V\!\cdot x$）：$P_{kij}=\delta_{jk}V_i+\delta_{ik}V_j-\delta_{ij}V_k$，$C^l{}_{lk}=\tfrac32V_k$；$h_{kl}n_l=r(V\!\cdot n)n_k$。由 \eqref{eq:Xspatial}，$X^k{}_{00}=-(V\!\cdot n)n_k/r$，
+\begin{equation*}
+X^k{}_{ij}=\frac1r\big[-\delta_{jk}V_i-\delta_{ik}V_j+\delta_{ij}V_k+(\delta_{kj}n_i+\delta_{ki}n_j-\delta_{ij}n_k)V\!\cdot n\big],\qquad X^k{}_{ki}=\frac{3\big(-V_i+(V\!\cdot n)n_i\big)}{r}.
+\end{equation*}
+于是 $\mathcal R_{1a,00}=-V\!\cdot n/r^2$；$\partial_kX^k{}_{ij}=\big[2(V_in_j+V_jn_i)-6V\!\cdot n\,n_in_j\big]/r^2$，$\partial_jX^k{}_{ki}=3\big[V_in_j+V_jn_i+\delta_{ij}V\!\cdot n-3V\!\cdot n\,n_in_j\big]/r^2$，相减得 $\mathcal R_{1a,ij}=\big[3V\!\cdot n\,n_in_j-(V_in_j+V_jn_i)-3\delta_{ij}V\!\cdot n\big]/r^2$。$\mathcal R_{1b}$：$00$ 分量 $\tfrac32V\!\cdot n/r^2$；$ij$ 分量中，前两项给出 $\tfrac52(V_i\Phi_j+V_j\Phi_i)-\tfrac52\delta_{ij}V\!\cdot\Phi$，后两项给出 $-\tfrac52(V_i\Phi_j+V_j\Phi_i)+2\delta_{ij}V\!\cdot\Phi$，合计 $-\tfrac12\delta_{ij}V\!\cdot\Phi=\tfrac12\delta_{ij}V\!\cdot n/r^2$。所以
+\begin{equation*}
+R_{00}=\frac{M}{2}\frac{V\!\cdot n}{r^2},\qquad
+R_{ij}=\frac M{r^2}\Big(3V\!\cdot n\,n_in_j-2V_{(i}n_{j)}-\tfrac52V\!\cdot n\,\delta_{ij}\Big).
+\end{equation*}
+
+\subsection{合成}
+
+把各列结果按 \eqref{eq:Rharm} 读出系数。下表列出每一列各部分的贡献（$\mathcal R_{1a}$、$\mathcal R_{1b}$ 已乘 $M$；空格为零；$H^E$ 列全为零，未列出）：
+\begin{center}\small
+\begin{tabular}{l|l|cccccc}
+\hline
+列 & 部分 & $R^A$ & $R^B$ & $R^C$ & $R^D$ & $R^E$ & $R^F$\\
+\hline
+$D^A$ & $\mathcal R_{1a}$ & $-M$ & & & $3M$ & $-2M$ & $-M$\\
+ & $\mathcal R_{1b}$ & $\tfrac52M$ & & & & $2M$ & $-\tfrac12M$\\
+$D^C$ & $\mathcal R_{1a}$ & $3M$ & $3M$ & $-M$ & & $-2M$ & $M$\\
+ & $\mathcal R_{1b}$ & $-4M$ & & & & & \\
+$D^E$ & $\mathcal R_{1a}$ & & & & & $M$ & \\
+ & $\mathcal R_{1b}$ & $\tfrac12M$ & & & & $-M$ & $\tfrac12M$\\
+$D^F$ & $\mathcal R_{1a}$ & $-M$ & & & $3M$ & $-2M$ & $-3M$\\
+ & $\mathcal R_{1b}$ & $\tfrac32M$ & & & & & $\tfrac12M$\\
+\hline
+$H^A$ & $\mathcal R_0$ & $1$ & & & $\tfrac32$ & $-1$ & $-\tfrac12$\\
+$H^D$ & $\mathcal R_0$ & & & & $-\tfrac32$ & $1$ & $\tfrac32$\\
+$H^F$ & $\mathcal R_0$ & & & & $-\tfrac32$ & $1$ & $\tfrac32$\\
+$\dot K^B$ & $\mathcal R_0$ & $1$ & $\tfrac32$ & $-\tfrac12$ & $3$ & $-1$ & $-1$\\
+$\dot K^C$ & $\mathcal R_0$ & $-1$ & $\tfrac32$ & $-\tfrac12$ & & $1$ & \\
+\hline
+\end{tabular}
+\end{center}
+相加即得
 \begin{equation}
 \begin{pmatrix}R^A\\R^B\\R^C\\R^D\\R^E\\R^F\end{pmatrix}
-=-\frac12
-\begin{pmatrix}
--3M & 2M & -M & -M & -2 & 0 & 0 & 0 & -2 & 2\\
-0 & -6M & 0 & 0 & 0 & 0 & 0 & 0 & -3 & -3\\
-0 & 2M & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1\\
--6M & 0 & 0 & -6M & -3 & 3 & 0 & 3 & -6 & 0\\
-0 & 4M & 0 & 4M & 2 & -2 & 0 & -2 & 2 & -2\\
-3M & -2M & -M & 5M & 1 & -3 & 0 & -3 & 2 & 0
+=\begin{pmatrix}
+\tfrac32M & -M & \tfrac12M & \tfrac12M & 1 & 0 & 0 & 0 & 1 & -1\\
+0 & 3M & 0 & 0 & 0 & 0 & 0 & 0 & \tfrac32 & \tfrac32\\
+0 & -M & 0 & 0 & 0 & 0 & 0 & 0 & -\tfrac12 & -\tfrac12\\
+3M & 0 & 0 & 3M & \tfrac32 & -\tfrac32 & 0 & -\tfrac32 & 3 & 0\\
+0 & -2M & 0 & -2M & -1 & 1 & 0 & 1 & -1 & 1\\
+-\tfrac32M & M & \tfrac12M & -\tfrac52M & -\tfrac12 & \tfrac32 & 0 & \tfrac32 & -1 & 0
 \end{pmatrix}
 \begin{pmatrix}D^A\\D^C\\D^E\\D^F\\H^A\\H^D\\H^E\\H^F\\\dot K^B\\\dot K^C\end{pmatrix}.
 \label{eq:L1matrix}
 \end{equation}
-各矢量系数之间没有分量混合，这是背景各向同性的结果。
+矩阵的结构与 \S\ref{sec:L1eq} 的阶次分析一致：$D$ 列全部正比于 $M$，$H$、$\dot K$ 列与 $M$ 无关；$H^E$ 列为零，$H^D$、$H^F$ 两列相同，$\dot K^B$、$\dot K^C$ 在 $R^B$、$R^C$ 中只以和的形式出现，这些都来自平直时空中的规范自由度。
+
+上面每一列、每一部分的结果都由一个独立实现的符号计算逐项核对（附录~\ref{app:code} 中的 \texttt{level1\_detail.py}，它直接按 \eqref{eq:R0}--\eqref{eq:R1b} 计算），合成的矩阵又与不经分解、直接计算 $\eta+Mb+\epsilon h$ 的 Ricci 张量所得的矩阵（\texttt{level1.py}）一致。
 
 \subsection{检验：纯规范扰动}
 
-\eqref{eq:bg1} 在 $O(M)$ 上是真空解，所以纯规范扰动 $h=\mathcal L_\xi\bar g^{(0)}$ 的线性化 Ricci 张量为零，它的系数必须是 \eqref{eq:L1matrix} 的零向量。取三个 $\ell=1$、时间反演为偶的规范矢量（下标在下）：
+\eqref{eq:bg1} 在 $O(M)$ 上是真空解，所以纯规范扰动 $h=\mathcal L_\xi g^{(0)}$ 的线性化 Ricci 张量为零，它的系数必须是 \eqref{eq:L1matrix} 的零向量。取三个 $\ell=1$、时间反演为偶的规范矢量（下标在下）：
 \begin{center}\small
 \begin{tabular}{p{0.22\textwidth}p{0.55\textwidth}}
 \hline
 规范矢量 & 产生的非零系数\\
 \hline
-$\xi_0=\bar t\,(c\cdot\bar x)$ & $D^A=2c,\ D^C=c,\ \dot K^B=-2Mc$\\
-$\xi_i=(c\cdot\bar x)\,\bar x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc$\\
-$\xi_i=\bar r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc$\\
+$\xi_0=t\,(c\cdot x)$ & $D^A=2c,\ D^C=c,\ \dot K^B=-2Mc$\\
+$\xi_i=(c\cdot x)\,x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc$\\
+$\xi_i=r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc$\\
 \hline
 \end{tabular}
 \end{center}
-三者都在 \eqref{eq:L1matrix} 的零空间中。第一个可以手算：$\xi^0=-(1+2M/\bar r)\,\bar t\,c\cdot\bar x$，于是 $h_{00}=2c\cdot\bar x$，$h_{0i}=\bar t\,c_i-(2M\bar t/\bar r)(c\cdot n)n_i$；代入第一行得 $-\tfrac12[-3M\cdot2c+2M\cdot c-2\cdot(-2Mc)]=0$。
+以第一个为例：$\xi^0=-(1+2M/r)\,t\,c\cdot x$，$h_{ab}=\xi^c\partial_cg^{(0)}_{ab}+g^{(0)}_{cb}\partial_a\xi^c+g^{(0)}_{ac}\partial_b\xi^c$ 给出 $h_{00}=2c\cdot x$，$h_{0i}=t\,c_i-(2Mt/r)(c\cdot n)n_i$，其余为零，即表中的系数。代入 \eqref{eq:L1matrix} 第一行：$\tfrac32M\cdot2c-M\cdot c+1\cdot(-2Mc)=0$；第二、三行：$3Mc+\tfrac32(-2Mc)=0$，$-Mc-\tfrac12(-2Mc)=0$；第四行：$3M\cdot 2c+3\cdot(-2Mc)=0$；第五行：$-2Mc-(-2Mc)=0$；第六行：$-3Mc+Mc-(-2Mc)=0$。另两个规范矢量同样落在零空间中。
 
-\subsection{运动方程}
+\subsection{消元与运动方程}
 
-真空方程要求 \eqref{eq:L1matrix} 左边为零。这给出 6 个方程，其中含 7 个未知矢量 $H^A,\dots,\dot K^C$。要得到不依赖近区结构的关系，应消去全部未知项，即求未知列的左零空间。它有 3 维，其中 2 个组合在 $D$ 列上也为零（是行之间的恒等关系），只有组合 $-\tfrac23R^B+\tfrac23R^D+R^E$ 给出非平凡关系：
+真空方程要求 \eqref{eq:L1matrix} 左边为零。写成方程：
+\begin{align}
+0&=\tfrac32MD^A-MD^C+\tfrac12MD^E+\tfrac12MD^F+H^A+\dot K^B-\dot K^C,\tag{A}\\
+0&=3MD^C+\tfrac32(\dot K^B+\dot K^C),\tag{B}\\
+0&=-MD^C-\tfrac12(\dot K^B+\dot K^C),\tag{C}\\
+0&=3MD^A+3MD^F+\tfrac32(H^A-S)+3\dot K^B,\tag{D}\\
+0&=-2MD^C-2MD^F-H^A+S-\dot K^B+\dot K^C,\tag{E}\\
+0&=-\tfrac32MD^A+MD^C+\tfrac12MD^E-\tfrac52MD^F-\tfrac12H^A+\tfrac32S-\dot K^B,\tag{F}
+\end{align}
+其中 $S=H^D+H^F$。未知项只以 $H^A$、$S$、$\dot K^B$、$\dot K^C$ 四个组合出现，$H^E$ 不出现。我们要找不含未知项的组合。
+
+(B) $=-3\times$(C)，两式等价。由 (C)，$\dot K^B+\dot K^C=-2MD^C$。(D) 中出现 $H^A-S$，(E) 中出现 $-(H^A-S)$，所以 $\tfrac23$(D)$+$(E) 消去 $H^A$、$S$：
+\begin{equation*}
+0=2MD^A+2MD^F+2\dot K^B-2MD^C-2MD^F-\dot K^B+\dot K^C
+=2MD^A-2MD^C+(\dot K^B+\dot K^C).
+\end{equation*}
+再用 (C) 代入 $\dot K^B+\dot K^C=-2MD^C$，即 $-\tfrac23$(B)$+\tfrac23$(D)$+$(E)：
 \begin{equation}
 -MD^A_i+2MD^C_i=0 .
 \label{eq:rel1}
 \end{equation}
-代入 \eqref{eq:DAC}，并用 $B_{0i0j}=-R_{0i0j}$，得
+还要确认 (A)、(F) 不再给出新的关系，它们只用来确定齐次项。组合 $-$(A)$-\tfrac23$(B)$+$(D)$+$(F) 中未知项消去，$D$ 项也恒等于零：
+\begin{equation*}
+\big(-\tfrac32+3-\tfrac32\big)MD^A+\big(1-2+1\big)MD^C+\big(-\tfrac12+\tfrac12\big)MD^E+\big(-\tfrac12+3-\tfrac52\big)MD^F=0 ,
+\end{equation*}
+所以它是恒等关系，不给出新的约束。未知列的秩为 3，左零空间是 3 维，由 (B)$+3$(C)、上面这个组合和 \eqref{eq:rel1} 的组合张成，其中只有 \eqref{eq:rel1} 是非平凡的。
+
+\paragraph{运动方程。}代入 \eqref{eq:DAC}，$D^A_i=h^{\rm tail}_{00,i}+2B_{0i0j}\zeta^j$，$D^C_i=h^{\rm tail}_{i0,0}+\ddot\zeta_i$，并用 $B_{0i0j}=-R_{0i0j}$：
+\begin{equation*}
+-M\big(h^{\rm tail}_{00,i}-2R_{0i0j}\zeta^j\big)+2M\big(h^{\rm tail}_{i0,0}+\ddot\zeta_i\big)=0,
+\end{equation*}
+即
 \begin{equation}
 \ddot\zeta_i=-R_{0i0j}\zeta^j-h^{\rm tail}_{i0,0}+\tfrac12h^{\rm tail}_{00,i}.
 \label{eq:eom1}
 \end{equation}
-第一项是测地偏离，后两项是尾巴场给出的自力。写成协变形式，这就是 MiSaTaQuWa 方程沿 $\gamma$ 线性化后的形式，与 \citet{GrallaWald2008} 在无自旋时的结果一致。
+第一项是测地偏离。后两项在 $\gamma$ 的静止系中就是 $-\tfrac12(g^{ab}+u^au^b)\big(2\nabla_ch^{\rm tail}_{bd}-\nabla_bh^{\rm tail}_{cd}\big)u^cu^d$ 的空间分量，即尾巴场给出的自力。所以 \eqref{eq:eom1} 是 MiSaTaQuWa 方程 \citep{MinoSasakiTanaka1997,QuinnWald1997} 沿 $\gamma$ 线性化后的形式，与 \citet{GrallaWald2008} 在无自旋时的结果一致。
 
-\paragraph{注：与文献中矩阵的比较。}\citet{GrallaWald2008} 给出的对应矩阵（其式 (106)，去掉自旋列）与 \eqref{eq:L1matrix} 在 60 个系数中有 5 个不同：第一行 $D^C$ 列，他们为 $0$；最后一行 $D^A,D^C,D^E,D^F$ 列，他们为 $0,3M,-3M,9M$。他们的矩阵不满足上面的规范检验（例如第一个规范矢量代入其第一行得 $Mc\neq0$），而 \eqref{eq:L1matrix} 满足；对 $h_{i0}=\bar t\,C_i$ 不作截断的直接计算也给出第一行 $D^C$ 列为 $2M$。所以那两行是排印错误。\eqref{eq:rel1} 只用到第二、四、五行，运动方程不受影响。他们给出的另一个关系含 $D^E$、$D^F$，由 \eqref{eq:L1matrix} 推不出来；他们也指出它不约束运动。
+\paragraph{注：与文献中矩阵的比较。}\citet{GrallaWald2008} 给出的对应矩阵（其式 (106)，去掉自旋列；他们的归一化是 \eqref{eq:L1matrix} 乘 $-2$）与 \eqref{eq:L1matrix} 在 60 个系数中有 5 个不同：第一行 $D^C$ 列，他们为 $0$，我们为 $-M$（\eqref{eq:DC00}）；最后一行 $D^A,D^C,D^E,D^F$ 列，他们相当于 $0,-\tfrac32M,\tfrac32M,-\tfrac92M$，我们为 $-\tfrac32M,M,\tfrac12M,-\tfrac52M$。他们的矩阵不满足上面的规范检验（例如第一个规范矢量代入其第一行得 $Mc\neq0$），而 \eqref{eq:L1matrix} 满足；\S\ref{sec:Dcols} 的手算和不作截断的直接计算也都给出第一行 $D^C$ 列为 $-M$。所以那两行是排印错误。\eqref{eq:rel1} 只用到 (B)、(D)、(E) 三行，运动方程不受影响。他们给出的另一个关系含 $D^E$、$D^F$，在正确的矩阵中对应上面的恒等组合，不是约束；他们也指出它不约束运动。
 
 %======================================================================
 \section{情形 2：真空背景，带电物体}
@@ -255,7 +509,7 @@ Maxwell 方程中保留 $O(1)$、$O(M)$、$O(q)$ 的项；$O(qM)$ 及更高阶�
 
 \subsection{系数矩阵}
 
-直接计算给出下表。竖线左边的 6 列是远区数据，右边的 9 列是未知齐次项；前 6 行是 Einstein 方程，后 3 行是 Maxwell 方程。Einstein 各行按 \eqref{eq:L1matrix} 未乘 $-\tfrac12$ 时的归一化给出。
+直接计算给出下表。竖线左边的 6 列是远区数据，右边的 9 列是未知齐次项；前 6 行是 Einstein 方程，后 3 行是 Maxwell 方程。Einstein 各行的归一化与 \eqref{eq:L1matrix} 相同。
 {\small\setlength{\arraycolsep}{3pt}
 \begin{equation}
 \begin{array}{c|rrrrrr|rrrrrrrrr}
@@ -272,7 +526,7 @@ R^Z & 0 & q & 0&0&0&0& 0&0&0&0&0&0&0&-1&-1
 \end{array}
 \label{eq:L2matrix}
 \end{equation}}
-有三点可以直接看出。第一，Einstein 各行的度规系数与 \eqref{eq:L1matrix} 逐项相同。第二，电磁源只通过 $E^C-E^0$ 进入，不单独依赖 $E^0$ 或 $E^C$，这是电磁规范不变性的要求。第三，Maxwell 行中出现 $q\,D$ 项（度规扰动作用在 Coulomb 场上）和 $M(E^C-E^0)$ 项（尾巴场在背景度规中的散度），与上一小节的估计一致。
+有三点可以直接看出。第一，Einstein 各行的度规系数与 \eqref{eq:L1matrix} 逐项相同，即度规部分的推导不受电荷影响。第二，电磁源只通过 $E^C-E^0$ 进入，不单独依赖 $E^0$ 或 $E^C$，这是电磁规范不变性的要求。第三，Maxwell 行中出现 $q\,D$ 项（度规扰动作用在 Coulomb 场上）和 $M(E^C-E^0)$ 项（尾巴场在背景度规中的散度），与上一小节的估计一致。
 
 \subsection{检验：纯规范扰动}
 
@@ -370,7 +624,8 @@ h^{\rm R}_{ta}\supset m\big(2R_{atct}+F_{at}F_{ct}-F_{ae}F^e{}_c-\delta_{ac}F_{e
 \hline
 脚本 & 内容 & 用时\\
 \hline
-\texttt{level1.py} & 生成 \eqref{eq:L1matrix} & 约 2.5 分钟\\
+\texttt{level1.py} & 不经分解，直接计算 $\eta+Mb+\epsilon h$ 的 Ricci 张量，生成 \eqref{eq:L1matrix} & 约 2.5 分钟\\
+\texttt{level1\_detail.py} & 按 \eqref{eq:R0}--\eqref{eq:R1b} 逐列、逐部分计算，核对 \S\ref{sec:Hcols}、\S\ref{sec:Dcols} 的手算（输出存于 \texttt{level1\_detail.out}） & 约 15 秒\\
 \texttt{check\_dc.py} & 对 $h_{i0}=\bar t\,C_i$ 作不截断的 Ricci 计算，核对第一行 $D^C$ 列 & 数秒\\
 \texttt{gauge\_test.py} & 情形 1 的规范检验 & 数秒\\
 \texttt{level2.py} & 生成 \eqref{eq:L2matrix}，写入 \texttt{level2\_matrix.txt} & 约 19 分钟\\
