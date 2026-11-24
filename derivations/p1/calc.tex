@@ -254,7 +254,9 @@ M a^\mu=\tfrac53M^2(g^{\mu\nu}+u^\mu u^\nu)F_{\nu\lambda}F^{\lambda\rho}u_\rho+(
 
 \subsection{计划}
 \begin{enumerate}
-\item \textbf{局部解。}在 Fermi 坐标中，把远区一阶耦合方程（论文式 (3.11)、(3.12)，$q=0$）在 $\gamma$ 附近逐阶求解：$a$ 到 $O(r)$，$h$ 到 $O(r)$，背景度规取到 $O(r^2)$（含 Ricci 部分 $R_{ab}=2(F_{ac}F_b{}^c-\tfrac14g_{ab}F^2)$），背景势取到 $O(r^2)$。写成多项式乘 $1/r$ 幂的拟设，代入方程，逐阶解线性方程组。尾巴部分作为自由常数保留。检验：$a$ 的 $r^0$ 项应与 Schwarzschild 黑洞在均匀场中的一阶解（Wald 1974 型）在远处的展开一致。
+\item \textbf{局部展开（从 ZP 导入）。}需要远区一阶耦合场在 $\gamma$ 附近的展开：$a$ 到 $O(r)$，$h$ 到 $O(r)$。\emph{注意：这一步不能只靠解局部方程。}$h$ 中 $O(r)$ 阶的 $\ell=1$ 项形如 $M\,\boldsymbol S\cdot\boldsymbol x$（$\boldsymbol S\propto\boldsymbol E\times\boldsymbol B$），对 $x$ 线性、光滑，与齐次解中的尾巴项 $h^{\rm tail}_{\alpha\beta i}x^i$ 形式相同。局部方程只能确定两者之和，分不开哪部分属于“局部”、哪部分属于尾巴。这个分法由推迟 Green 函数的 Hadamard 分解给出：直接部分（ZP 的 $U$ 系数）给出局部项，尾巴部分（$V$ 系数沿世界线的积分）给出尾巴。所以第 1 步应当从 ZP 第 VI--VIII 节导入耦合 Hadamard 系数（ZP 式 (8.4)、(8.18)、(8.19)），在 Fermi 坐标中展开。这样做是合理的：Hadamard 构造本身是严格的，本项目要检验的是“运动只由正则场驱动”这一步，而不是 Green 函数。导入之后用局部方程做一致性检验：导入的展开必须满足远区一阶方程（式 (3.11)、(3.12)）。另一项检验：$a$ 的 $r^0$ 项应与 Schwarzschild 黑洞在均匀场中的一阶解（Wald 1974 型）在远处的展开一致。
+
+\textbf{线索：}ZP 第 VIII.B 节已在 Fermi 坐标中写出正则势展开到 $O(s)$ 的形式（ZP 式 (8.9a)--(8.9c)、(8.11a)、(8.11b)），其中正是所需的局部项，例如 $h^{\rm R}_{ta}\supset m\big(2R_{atct}+F_{at}F_{ct}-F_{ae}F^e{}_c-\delta_{ac}F_{et}F^{et}\big)x^c$，以及 $b^{\rm R}_a\supset-mF_{at}$（即 $a\sim MF$ 的 $r^0$ 项）。奇异部分的展开见 ZP 式 (8.18)、(8.19)，Hadamard 系数见 ZP 式 (8.4a)--(8.4j)。下一步是把这些式子对照 ZP 原文图片逐式转录（PDF 文字层的排版不可靠），取 $e=0$。
 \item \textbf{近区展开。}平移到质心，写出近区到 $O(\lambda^2)$ 的度规和势，包括两种时间宇称的 $\ell=1$ 未知齐次项。
 \item \textbf{近区二阶方程。}这一级不再逐项挑选进入的乘积，而是直接计算完整 Einstein--Maxwell 方程在 $\lambda^2$ 阶的系数，避免估计遗漏。为控制表达式大小，背景场取特定方向（例如 $\boldsymbol E\parallel x$、$\boldsymbol B\parallel y$，坡印廷矢量沿 $z$），并另取一组方向复算，检验结果的协变性。
 \item \textbf{消元与对照。}消去未知项，得到 $\ddot Z^i$ 中的局部力，与 $\tfrac53MFF$ 对照；尾巴部分与耦合 Green 函数的尾巴对照。
