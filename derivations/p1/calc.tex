@@ -3,184 +3,241 @@
 
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{amsmath,amssymb}
+\usepackage[authoryear,round]{natbib}
 \usepackage{xcolor}
-\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 
 \numberwithin{equation}{section}
+\newcommand{\dd}{\mathrm d}
 
-\title{一阶运动的验证计算}
+\title{一阶运动的近区推导}
 \author{}
-\date{工作文档 \quad 开始于 2026 年 11 月 24 日}
+\date{工作文档 \quad 2026 年 11 月}
 
 \begin{document}
 \maketitle
 
-\noindent 本文档记录论文第 4.4 节所列计算的全部中间步骤，供逐式核对。每一级只引入一样新东西，并与一个已知答案对照：
-
-\begin{center}\small
-\begin{tabular}{cp{0.17\textwidth}p{0.33\textwidth}p{0.3\textwidth}}
-\hline
-级 & 情形 & 新引入的东西 & 对照的答案\\
-\hline
-1 & $q=0$，$F=0$ & 无，检验工具和记号 & GW 式 (106)--(108)\\
-2 & $q\neq0$，$F=0$ & 近区 Coulomb 场；二阶近区方程中的电磁源 & MiSaTaQuWa + DeWitt--Brehme 尾巴\\
-3 & $q=0$，$F\neq0$ & 背景场带来的耦合 & ZP 取 $q\to0$：$\tfrac53M^2FF$ + 耦合尾巴\\
-4 & 完整 & 两者同时出现；规范混合项 $\zeta^cF_{ca}$ & ZP 式 (8.2) 的线性化\\
-\hline
-\end{tabular}
-\end{center}
-
-\noindent 每一节固定写五项：输入、中间式子（与 GW 或 ZP 的公式编号并排）、得到的关系、代码、是否通过。代码在 \texttt{derivations/p1/code/}，用项目内的 \texttt{.venv}（sympy 1.14）运行。
+\begin{abstract}
+本文给出论文第 4 节所述一阶运动的近区推导。推导按复杂程度分四种情形进行：真空背景上的不带电物体；真空背景上的带电物体；电真空背景上的不带电物体；一般情形。前两种情形已完成。第一种情形重新得到 MiSaTaQuWa 方程，第二种情形在其上恰好多出电磁尾巴场的洛伦兹力，即背景不带电时一阶运动只由正则场驱动。第三种情形给出了问题的结构分析和计算步骤，计算尚未完成。所有系数都由符号计算得到，实现与检验见附录~\ref{app:code}。
+\end{abstract}
 
 \tableofcontents
 
 %======================================================================
-\section{记号与约定}
+\section{引言}
 %======================================================================
 
-近区坐标记为 $(t,x^i)$，即 GW 的 $(\bar t,\bar x^i)$，去掉横线；$r=|x|$，$n^i=x^i/r$。号差 $(-,+,+,+)$。$\delta_{\alpha\beta}$ 是 Kronecker 符号（$\delta_{00}=1$）。对称化含 $\tfrac12$：$n_{(i}D_{j)}=\tfrac12(n_iD_j+n_jD_i)$。线性化 Ricci 张量对背景度规取，指标全在下。
+论文中的主命题要求：在一阶上，驱动带电小黑洞运动的只是推迟场的正则部分。要从场方程推出这一点，需要在近区二阶方程中提取 $\ell=1$ 的部分，消去未知的齐次解，得到只含远区数据的关系，再把它解释为运动方程。这一方法由 \citet{GrallaWald2008} 在真空中建立。耦合情形下，近区方程中出现电磁源和背景场带来的耦合，矩阵的结构和需要提取的阶次都会改变。
 
-\paragraph{共用工具（\texttt{code/series.py}）。}
-\begin{enumerate}
-\item \texttt{linearized\_ricci}：背景为 $\eta+Mb^{(1)}$，计算 $\eta+Mb^{(1)}+\epsilon h$ 的 Ricci 张量中 $\epsilon^1$ 的部分，保留到 $M^1$。逆度规展开到 $M\epsilon$ 交叉项。
-\item \texttt{radial\_coeff}：令 $x^i=\rho\,n^i$，$n^i$ 取分量为有理数的单位矢量（毕达哥拉斯四元组），取出 $t^k\rho^{p}$ 的系数。
-\item \texttt{fit\_l1}：在 8 个方向上把系数与 $\ell=1$ 张量谐函数的拟设比较，解出拟设中的矢量系数；残差为零即说明输出是纯 $\ell=1$。
-\end{enumerate}
+为了让每一步新出现的东西都能单独检验，我们按下表的顺序推导。每种情形只比前一种多引入一类项，并且都有一个已知的答案可以对照。
+
+\begin{center}\small
+\begin{tabular}{cp{0.17\textwidth}p{0.33\textwidth}p{0.3\textwidth}}
+\hline
+情形 & 参数 & 新出现的项 & 已知答案\\
+\hline
+1 & $q=0$，$F=0$ & 无 & MiSaTaQuWa \citep{MinoSasakiTanaka1997,QuinnWald1997}\\
+2 & $q\neq0$，$F=0$ & Coulomb 场；近区方程中的电磁源 & 再加 DeWitt--Brehme 尾巴力 \citep{DeWittBrehme1960,Hobbs1968}\\
+3 & $q=0$，$F\neq0$ & 背景场带来的耦合 & \citet{ZimmermanPoisson2014} 取 $q\to0$\\
+4 & 一般 & 两者同时出现；规范混合项 $\zeta^cF_{ca}$ & \citet{ZimmermanPoisson2014} 的线性化\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{记号。}号差 $(-,+,+,+)$，$G=c=1$。$(t,x^i)$ 是沿零阶世界线 $\gamma$ 的 Fermi 坐标，$r=|x|$，$n^i=x^i/r$。$\delta_{\alpha\beta}$ 是 Kronecker 符号（$\delta_{00}=1$）。对称化含 $\tfrac12$：$n_{(i}D_{j)}=\tfrac12(n_iD_j+n_jD_i)$。下标中的逗号表示偏导数，点表示对 $t$ 的导数。
 
 %======================================================================
-\section{第 1 级：复现 GW}
+\section{远区与近区展开}
+\label{sec:expansions}
 %======================================================================
 
-\subsection{输入}
+\subsection{远区展开}
 
-近区背景取 GW 式 (86) 的 $O(M)$ 部分，即各向同性坐标中线性化的 Schwarzschild 度规：
+考虑满足论文第 2 节假设的单参数解族 $(g_{ab}(\lambda),A_a(\lambda))$，并设 $\lambda\to0$ 的普通极限 $(g_{ab},A_a)$ 和零阶世界线 $\gamma$ 已经确定。本节先处理背景场 $F=0$ 的情形（情形 1、2）；$F\neq0$ 时需要补充的项在第~\ref{sec:L3} 节讨论。
+
+在 Fermi 坐标中，背景度规在 $\gamma$ 附近为
 \begin{equation}
-\bar g^{(0)}_{\alpha\beta}=\eta_{\alpha\beta}+\frac{2M}{r}\,\delta_{\alpha\beta}.
+g_{\alpha\beta}=\eta_{\alpha\beta}+B_{\alpha i\beta j}x^ix^j+O(x^3),
+\label{eq:fermi}
 \end{equation}
-$M^2/r^2$ 项只影响 $1/r^3$ 阶，不进入下面的系数。自旋取零。
-
-近区二阶扰动只取 $\ell=1$、电宇称、时间反演为偶的部分，按 GW 式 (98)--(101)：
+其中 $B_{0i0j}=-R_{0i0j}$，$B_{0ijk}$、$B_{ikjl}$ 也由 Riemann 张量在 $\gamma$ 上的值给出。一阶扰动 $(h_{ab},a_a)$ 是点源的推迟解，在 Lorenz 规范下，它在 $\gamma$ 附近的展开为
 \begin{align}
-h_{00}&=r\,D^A\!\cdot n+H^A\!\cdot n,\\
-h_{i0}&=t\,D^C_i+\frac tr\big(K^B\!\cdot n\,n_i+K^C_i\big),\\
-h_{ij}&=r\big(n_{(i}D^E_{j)}+\delta_{ij}\,D^F\!\cdot n\big)+H^D\!\cdot n\,n_in_j+H^E_{(i}n_{j)}+H^F\!\cdot n\,\delta_{ij}.
+h_{\alpha\beta}&=\frac{2M}{r}\,\delta_{\alpha\beta}+h^{\rm tail}_{\alpha\beta}+h^{\rm tail}_{\alpha\beta\gamma}x^\gamma+M\mathcal R_{\alpha\beta}+O(r^2),
+\label{eq:hfar}\\
+a_\alpha&=-\frac qr\,\delta_{\alpha0}+a^{\rm tail}_\alpha+a^{\rm tail}_{\alpha,\gamma}x^\gamma+q\,\mathcal S_\alpha+O(r^2).
+\label{eq:afar}
 \end{align}
-这里 $K^B$、$K^C$ 即 GW 的 $\dot K^B$、$\dot K^C$。背景是球对称的，所以只有 $\ell=1$ 的输入能产生 $\ell=1$ 的输出；GW 中 $B_{\alpha i\beta j}x^ix^j$、$MR_{\alpha\beta}$ 两项没有 $\ell=1$ 部分，不必放入。
+$h^{\rm tail}$、$a^{\rm tail}$ 是推迟 Green 函数尾巴部分沿过去世界线积分在 $\gamma$ 上的值。对 $00$、$0i$ 分量有 $h^{\rm tail}_{\alpha\beta\gamma}=h^{\rm tail}_{\alpha\beta,\gamma}$，下面只用到这些分量。$M\mathcal R_{\alpha\beta}$、$q\mathcal S_\alpha$ 是曲率修正，量级为 $MR\,r$、$qR\,r$，只含 $\ell=0,2$ 部分。$F=0$ 时两种扰动不耦合：$h$ 是 Schwarzschild 型点质量的推迟场，$a$ 是弯曲真空背景上点电荷的推迟场。零阶运动是测地线，所以在 $O(r^0)$ 上没有局部项。
 
-\subsection{中间式子：线性化 Ricci 张量的 $\ell=1$ 系数}
+\subsection{近区展开}
 
-按 GW 式 (94)--(96) 的形式提取
+取 $t_0$ 为 $\gamma$ 上的一个时刻，定义标度坐标 $\bar t=(t-t_0)/\lambda$、$\bar x^i=x^i/\lambda$，以及标度场 $\bar g=\lambda^{-2}g$、$\bar A=\lambda^{-1}A$。后者的分量在标度坐标中与原分量相同：$\bar A_{\bar\mu}=A_\mu$。
+
+近区展开前先作平移 $x^i=\hat x^i+\lambda\zeta^i(t)$，$\zeta^0=0$，并选取 $\zeta^i$ 使近区零阶解的质量偶极在每个时刻都为零。论文第 4.2 节说明，在假设 (H) 下这一平移同时消去电偶极，且 $\zeta^i(t)$ 就是世界线的一阶修正 $Z^i(t)$。平移使度规扰动多出 $2\zeta_{(\alpha,\beta)}$；背景势在 $F=0$ 时可取为零，所以平移不改变势。
+
+把 \eqref{eq:fermi}--\eqref{eq:afar} 按 $\lambda$ 展开，并去掉坐标上的记号 $\hat{}\,$，得
 \begin{align}
-R_{00}\big|_{1/r^2}&=R^A\!\cdot n,\\
-R_{ij}\big|_{1/r^2}&=R^D\!\cdot n\,n_in_j+R^E_{(i}n_{j)}+R^F\!\cdot n\,\delta_{ij},\\
-R_{i0}\big|_{t/r^3}&=R^B\!\cdot n\,n_i+R^C_i .
+\bar g_{\alpha\beta}&=\bar g^{(0)}_{\alpha\beta}+\lambda\,\bar g^{(1)}_{\alpha\beta}+\lambda^2\bar g^{(2)}_{\alpha\beta}+O(\lambda^3),\\
+\bar A_\alpha&=\bar A^{(0)}_\alpha+\lambda\,\bar A^{(1)}_\alpha+\lambda^2\bar A^{(2)}_\alpha+O(\lambda^3).
 \end{align}
-在 8 个方向上拟合的残差全部为零，即输出确为纯 $\ell=1$；各矢量系数之间没有分量混合（各向同性）。所得线性关系为（列依次为 $D^A,D^C,D^E,D^F,H^A,H^D,H^E,H^F,K^B,K^C$）
+零阶是近区背景，在各向同性坐标中
+\begin{gather}
+\bar g^{(0)}_{00}=-1+\frac{2M}{\bar r}-\frac{2M^2+q^2}{\bar r^2}+\dots,\qquad
+\bar g^{(0)}_{ij}=\Big(1+\frac{2M}{\bar r}+\frac{3M^2-q^2}{2\bar r^2}+\dots\Big)\delta_{ij},\nonumber\\
+\bar A^{(0)}_0=-\frac q{\bar r}+\frac{qM}{\bar r^2}+\dots,
+\label{eq:RN}
+\end{gather}
+即 Reissner--Nordstr\"om 解（$q=0$ 时为 Schwarzschild 解）。一阶是
+\begin{equation}
+\bar g^{(1)}_{\alpha\beta}=h^{\rm tail}_{\alpha\beta}+2\zeta_{(\alpha,\beta)}+\frac1{\bar r}K_{\alpha\beta}(\theta,\phi)+O\Big(\frac1{\bar r^2}\Big)+\bar t\,O\Big(\frac1{\bar r^3}\Big),
+\end{equation}
+其中 $K_{\alpha\beta}$ 是近区一阶齐次解，未知。二阶是
+\begin{align}
+\bar g^{(2)}_{\alpha\beta}&=B_{\alpha i\beta j}\bar x^i\bar x^j+D_{\alpha\beta\gamma}\bar x^\gamma+M\mathcal R_{\alpha\beta}(\bar x)+H_{\alpha\beta}(\theta,\phi)+\frac{\bar t}{\bar r}\dot K_{\alpha\beta}(\theta,\phi)+\dots,
+\label{eq:g2}\\
+\bar A^{(2)}_{\alpha}&=a^{\rm tail}_{\alpha,\gamma}\bar x^\gamma+q\,\mathcal S_\alpha(\bar x)+H'_{\alpha}(\theta,\phi)+\frac{\bar t}{\bar r}\dot K'_{\alpha}(\theta,\phi)+\dots,
+\label{eq:A2}
+\end{align}
+其中 $\bar x^0=\bar t$，省略号是在 $\bar r\to\infty$ 时衰减更快的项。$H$、$\dot K$、$H'$、$\dot K'$ 是近区二阶的未知齐次项。度规中的远区数据合成
+\begin{equation}
+D_{\alpha\beta0}=h^{\rm tail}_{\alpha\beta,0}+2\zeta_{(\alpha,\beta)0},\qquad
+D_{\alpha\beta i}=h^{\rm tail}_{\alpha\beta i}+2\zeta_{(\alpha,\beta)i}+2B_{\alpha i\beta j}\zeta^j .
+\label{eq:Ddef}
+\end{equation}
+最后一项来自平移作用在 \eqref{eq:fermi} 的二次项上。平移作用在 Coulomb 势上只产生偶极型的 $1/\bar r^2$ 项，已被质心条件消去；它在 $\lambda^2$ 阶产生的其余项都是 $\bar r^{-1}$、$\bar r^0$ 型，并入 $H'$、$\dot K'$。
+
+\subsection{要提取的部分}
+
+一阶运动 $\ddot\zeta^i$ 是 $\ell=1$、电宇称、时间反演为偶的量，所以只需提取近区二阶方程中同一类型的部分。$\ell=1$ 的对称张量 $Q_{\alpha\beta}$ 的电宇称部分可写成
+\begin{equation}
+Q_{00}=Q^A_in^i,\qquad Q_{i0}=Q^B_jn^jn_i+Q^C_i,\qquad Q_{ij}=Q^D_kn^kn_in_j+Q^E_{(i}n_{j)}+Q^F_kn^k\delta_{ij},
+\label{eq:harm}
+\end{equation}
+系数 $Q^A_i,\dots,Q^F_i$ 是三维矢量（对应 $\ell=1$ 的三个 $m$ 值）。时间反演下 $g_{00}$、$g_{ij}$、$A_0$ 为偶，$g_{0i}$、$A_i$ 为奇。于是 \eqref{eq:g2}、\eqref{eq:A2} 中进入的部分是
+\begin{align}
+D_{00k}\bar x^k&=\bar r\,D^A_in^i,\qquad D_{i00}\,\bar t=\bar t\,D^C_i,\qquad
+D_{ijk}\bar x^k\big|_{\ell=1}=\bar r\big(n_{(i}D^E_{j)}+\delta_{ij}D^F_kn^k\big),
+\label{eq:Dharm}\\
+a^{\rm tail}_{0,k}\bar x^k&=\bar r\,E^0_in^i,\qquad a^{\rm tail}_{i,0}\,\bar t=\bar t\,E^C_i,
+\label{eq:Eharm}
+\end{align}
+以及齐次项 $H_{00}=H^A_in^i$，$\dot K_{i0}=\dot K^B_jn^jn_i+\dot K^C_i$，$H_{ij}=H^D_kn^kn_in_j+H^E_{(i}n_{j)}+H^F_kn^k\delta_{ij}$，$H'_0=H'_in^i$，$\dot K'_i=\dot K'^B_jn^jn_i+\dot K'^C_i$。由 \eqref{eq:Ddef}，取 $\zeta_0=0$，
+\begin{equation}
+D^A_i=h^{\rm tail}_{00,i}+2B_{0i0j}\zeta^j,\qquad D^C_i=h^{\rm tail}_{i0,0}+\ddot\zeta_i,\qquad
+E^C_i-E^0_i=a^{\rm tail}_{i,0}-a^{\rm tail}_{0,i}=-f^{\rm tail}_{i0}.
+\label{eq:DAC}
+\end{equation}
+$B_{\alpha i\beta j}\bar x^i\bar x^j$ 和 $\mathcal R$、$\mathcal S$ 是 $x$ 的二次式，没有 $\ell=1$ 部分，不进入。
+
+%======================================================================
+\section{情形 1：真空背景，不带电物体}
+\label{sec:L1}
+%======================================================================
+
+\subsection{近区二阶方程}
+
+$q=0$ 时近区二阶方程为 $G^{(1)}[\bar g^{(2)}]=-G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$。右边的项都形如 $\bar g^{(1)}\partial\partial\bar g^{(1)}$、$\partial\bar g^{(1)}\partial\bar g^{(1)}$，或含背景 Christoffel 符号 $\Gamma=O(\bar r^{-2})$ 及其导数；由 $\bar g^{(1)}$ 的形式，它们都不贡献 $1/\bar r^2$ 和 $\bar t/\bar r^3$ 阶。左边的 $O(1)$、$O(1/\bar r)$ 阶由远区一阶方程保证为零。所以在这两个阶次上，$\bar g^{(2)}$ 满足以
+\begin{equation}
+\bar g^{(0)}_{\alpha\beta}=\eta_{\alpha\beta}+\frac{2M}{\bar r}\,\delta_{\alpha\beta}
+\label{eq:bg1}
+\end{equation}
+为背景的齐次线性化真空方程。\eqref{eq:RN} 中 $M^2/\bar r^2$ 及更高阶的项只影响 $1/\bar r^3$ 阶。
+
+背景球对称，所以只有 \eqref{eq:Dharm} 和齐次项中 $\ell=1$ 的部分能产生 $\ell=1$ 的输出。把线性化 Ricci 张量按 \eqref{eq:harm} 写成
+\begin{gather}
+R_{00}\big|_{1/\bar r^2}=\frac{1}{\bar r^2}R^A_in^i,\qquad
+R_{i0}\big|_{\bar t/\bar r^3}=\frac{\bar t}{\bar r^3}\big(R^B_jn^jn_i+R^C_i\big),\nonumber\\
+R_{ij}\big|_{1/\bar r^2}=\frac1{\bar r^2}\big(R^D_kn^kn_in_j+R^E_{(i}n_{j)}+R^F_kn^k\delta_{ij}\big),
+\end{gather}
+直接计算（附录~\ref{app:code}）给出
 \begin{equation}
 \begin{pmatrix}R^A\\R^B\\R^C\\R^D\\R^E\\R^F\end{pmatrix}
 =-\frac12
 \begin{pmatrix}
--3M & \mathbf{2M} & -M & -M & -2 & 0 & 0 & 0 & -2 & 2\\
+-3M & 2M & -M & -M & -2 & 0 & 0 & 0 & -2 & 2\\
 0 & -6M & 0 & 0 & 0 & 0 & 0 & 0 & -3 & -3\\
 0 & 2M & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1\\
 -6M & 0 & 0 & -6M & -3 & 3 & 0 & 3 & -6 & 0\\
 0 & 4M & 0 & 4M & 2 & -2 & 0 & -2 & 2 & -2\\
-\mathbf{3M} & \mathbf{-2M} & \mathbf{-M} & \mathbf{5M} & 1 & -3 & 0 & -3 & 2 & 0
+3M & -2M & -M & 5M & 1 & -3 & 0 & -3 & 2 & 0
 \end{pmatrix}
-\begin{pmatrix}D^A\\D^C\\D^E\\D^F\\H^A\\H^D\\H^E\\H^F\\K^B\\K^C\end{pmatrix}.
+\begin{pmatrix}D^A\\D^C\\D^E\\D^F\\H^A\\H^D\\H^E\\H^F\\\dot K^B\\\dot K^C\end{pmatrix}.
 \label{eq:L1matrix}
 \end{equation}
-这与 GW 式 (106)（去掉自旋列）相比，60 个系数中 55 个相同。加粗的 5 个不同：GW 的 $R^A$ 行 $D^C$ 列为 $0$；$R^F$ 行 $D^A,D^C,D^E,D^F$ 四列为 $0,\,3M,\,-3M,\,9M$。GW 原文这一页已渲染成图片核对，转录无误。
+各矢量系数之间没有分量混合，这是背景各向同性的结果。
 
-\subsection{两边不同时谁对：独立检验}
+\subsection{检验：纯规范扰动}
 
-\paragraph{(a) 不截断的直接计算。}\texttt{code/check\_dc.py} 对 $h_{i0}=t\,C_i$ 直接计算完整度规的 Ricci 张量（不做任何截断），再对 $\epsilon$ 求导、对 $M$ 展开到一阶，得 $R_{00}|_{1/r^2}=-M\,C\!\cdot n$，即 $R^A$ 行 $D^C$ 列的系数为 $-M$（乘 $-\tfrac12$ 前为 $2M$），与 \eqref{eq:L1matrix} 一致。
-
-\paragraph{(b) 纯规范扰动。}背景 $\eta+2M\delta/r$ 在 $O(M)$ 上是真空解，所以纯规范扰动 $h=\mathcal L_\xi\bar g^{(0)}$ 的线性化 Ricci 张量必须为零，它的 $(D,H,K)$ 分量必须是正确矩阵的零向量。\texttt{code/gauge\_test.py} 取三个时间反演为偶的 $\ell=1$ 规范矢量（下标在下）：
+\eqref{eq:bg1} 在 $O(M)$ 上是真空解，所以纯规范扰动 $h=\mathcal L_\xi\bar g^{(0)}$ 的线性化 Ricci 张量为零，它的系数必须是 \eqref{eq:L1matrix} 的零向量。取三个 $\ell=1$、时间反演为偶的规范矢量（下标在下）：
 \begin{center}\small
-\begin{tabular}{p{0.2\textwidth}p{0.4\textwidth}p{0.3\textwidth}}
+\begin{tabular}{p{0.22\textwidth}p{0.55\textwidth}}
 \hline
-规范矢量 & 产生的非零分量 & 结果\\
+规范矢量 & 产生的非零系数\\
 \hline
-$\xi_0=t\,(c\cdot x)$ & $D^A=2c,\ D^C=c,\ K^B=-2Mc$ & 本文矩阵：全零；GW：$R^A,R^F$ 行不为零\\
-$\xi_i=(c\cdot x)\,x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc$ & 本文矩阵：全零；GW：$R^F$ 行不为零\\
-$\xi_i=r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc$ & 本文矩阵：全零；GW：$R^F$ 行不为零\\
+$\xi_0=\bar t\,(c\cdot\bar x)$ & $D^A=2c,\ D^C=c,\ \dot K^B=-2Mc$\\
+$\xi_i=(c\cdot\bar x)\,\bar x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc$\\
+$\xi_i=\bar r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc$\\
 \hline
 \end{tabular}
 \end{center}
-第一个规范模式可以手算核对：$\xi^0=-(1+\psi)\,t\,c\cdot x$，$\psi=2M/r$，于是 $h_{00}=2c\cdot x$，$h_{0i}=t\,c_i-(2Mt/r)(c\cdot n)n_i$，其余为零。代入 GW 的 $R^A$ 行：$-\tfrac12[-3M\cdot2c+0\cdot c-2\cdot(-2Mc)]=Mc\neq0$。
+三者都在 \eqref{eq:L1matrix} 的零空间中。第一个可以手算：$\xi^0=-(1+2M/\bar r)\,\bar t\,c\cdot\bar x$，于是 $h_{00}=2c\cdot\bar x$，$h_{0i}=\bar t\,c_i-(2M\bar t/\bar r)(c\cdot n)n_i$；代入第一行得 $-\tfrac12[-3M\cdot2c+2M\cdot c-2\cdot(-2Mc)]=0$。
 
-\paragraph{结论。}GW 式 (106) 的 $R^A$ 行和 $R^F$ 行有误，本文的 \eqref{eq:L1matrix} 通过了全部检验。
+\subsection{运动方程}
 
-\subsection{得到的关系}
-
-求 \eqref{eq:L1matrix} 中 $H$、$K$ 各列的左零空间，即消去所有未知齐次项。得到 3 个组合，其中 2 个在 $D$ 各列上也为零（是行之间的恒等关系），只有 1 个给出非平凡关系：
+真空方程要求 \eqref{eq:L1matrix} 左边为零。这给出 6 个方程，其中含 7 个未知矢量 $H^A,\dots,\dot K^C$。要得到不依赖近区结构的关系，应消去全部未知项，即求未知列的左零空间。它有 3 维，其中 2 个组合在 $D$ 列上也为零（是行之间的恒等关系），只有组合 $-\tfrac23R^B+\tfrac23R^D+R^E$ 给出非平凡关系：
 \begin{equation}
--M D^A_i+2M D^C_i=0 .
+-MD^A_i+2MD^C_i=0 .
+\label{eq:rel1}
 \end{equation}
-这正是 GW 式 (108) 在无自旋时的形式。GW 由此得到运动方程 (110)、(111)。这个组合只用到 $R^B$、$R^D$、$R^E$ 三行，不经过有误的两行，所以 GW 的运动方程不受影响。
+代入 \eqref{eq:DAC}，并用 $B_{0i0j}=-R_{0i0j}$，得
+\begin{equation}
+\ddot\zeta_i=-R_{0i0j}\zeta^j-h^{\rm tail}_{i0,0}+\tfrac12h^{\rm tail}_{00,i}.
+\label{eq:eom1}
+\end{equation}
+第一项是测地偏离，后两项是尾巴场给出的自力。写成协变形式，这就是 MiSaTaQuWa 方程沿 $\gamma$ 线性化后的形式，与 \citet{GrallaWald2008} 在无自旋时的结果一致。
 
-GW 的另一个关系 (107) 含 $D^E$、$D^F$，由正确的矩阵得不出来；它来自有误的行。GW 自己说明 (107) “does not yield restrictions on the motion”，所以这也不影响运动方程。
-
-\subsection{代码与结果}
-
-\begin{itemize}
-\item \texttt{code/level1.py}：生成 \eqref{eq:L1matrix}，约 2.5 分钟。
-\item \texttt{code/check\_dc.py}：检验 (a)。
-\item \texttt{code/gauge\_test.py}：检验 (b)。
-\end{itemize}
-
-\paragraph{第 1 级：通过。}运动方程所依赖的关系 GW (108) 被复现；矩阵中 GW 的两行笔误被独立检验确认。工具链（线性化 Ricci、阶次提取、$\ell=1$ 拟合）可用于后面三级。
+\paragraph{注：与文献中矩阵的比较。}\citet{GrallaWald2008} 给出的对应矩阵（其式 (106)，去掉自旋列）与 \eqref{eq:L1matrix} 在 60 个系数中有 5 个不同：第一行 $D^C$ 列，他们为 $0$；最后一行 $D^A,D^C,D^E,D^F$ 列，他们为 $0,3M,-3M,9M$。他们的矩阵不满足上面的规范检验（例如第一个规范矢量代入其第一行得 $Mc\neq0$），而 \eqref{eq:L1matrix} 满足；对 $h_{i0}=\bar t\,C_i$ 不作截断的直接计算也给出第一行 $D^C$ 列为 $2M$。所以那两行是排印错误。\eqref{eq:rel1} 只用到第二、四、五行，运动方程不受影响。他们给出的另一个关系含 $D^E$、$D^F$，由 \eqref{eq:L1matrix} 推不出来；他们也指出它不约束运动。
 
 %======================================================================
-\section{第 2 级：物体带电，背景不带电}
+\section{情形 2：真空背景，带电物体}
+\label{sec:L2}
 %======================================================================
 
-背景是真空解（$F=0$，$R_{ab}=0$），物体带质量 $M$ 和电荷 $q$。由 \eqref{eq:L1matrix} 的推导方式，这一级要回答：近区二阶方程中第一次出现的电磁项，是否恰好给出电磁尾巴力，而不带来别的项。
+背景仍是真空解（$F=0$，$R_{ab}=0$），物体带质量 $M$ 和电荷 $q$。近区零阶背景是 \eqref{eq:RN}，近区二阶扰动包括 \eqref{eq:A2} 中的势。要回答的问题是：近区二阶方程中第一次出现的电磁项，是否恰好给出电磁尾巴场的洛伦兹力，而不带来别的项。
 
-\subsection{2a：哪些项进入 $\ell=1$、$1/r^2$ 阶的方程}
+\subsection{进入 $1/\bar r^2$ 阶的项}
 
-\paragraph{远区。}背景是真空，零阶运动是测地线（论文第 3 节的洛伦兹力方程在 $F=0$ 时）。远区一阶场在 Lorenz 规范、Fermi 坐标中，在 $\gamma$ 附近为
-\begin{align}
-h_{\alpha\beta}&=\frac{2M}{r}\delta_{\alpha\beta}+h^{\rm tail}_{\alpha\beta}+h^{\rm tail}_{\alpha\beta i}x^i+M\mathcal R_{\alpha\beta}+O(r^2)\qquad\text{（GW 式 (64)，不变）},\\
-a_\alpha&=-\frac qr\,t_\alpha+a^{\rm tail}_\alpha+a^{\rm tail}_{\alpha i}x^i+q\,\mathcal S_\alpha+O(r^2).
-\end{align}
-$F=0$ 时两种扰动不耦合，所以度规部分与 GW 完全相同；电磁部分是弯曲真空背景上点电荷的推迟场（DeWitt--Brehme），$a^{\rm tail}$ 是其尾巴部分在 $\gamma$ 上的值，$q\mathcal S_\alpha$ 是与 GW 的 $M\mathcal R_{\alpha\beta}$ 类似的曲率修正项，量级 $q\,R\,r$。测地运动下没有 $O(r^0)$ 的局部项。
-
-\paragraph{二阶远区在 $1/r^2$ 阶的特解。}在各向同性坐标中，Reissner--Nordstr\"om 度规和势展开到二阶为
-\begin{equation}
-g_{00}=-1+\frac{2M}{r}-\frac{2M^2+q^2}{r^2},\qquad g_{ij}=\Big(1+\frac{2M}r+\frac{3M^2-q^2}{2r^2}\Big)\delta_{ij},\qquad A_0=-\frac qr+\frac{qM}{r^2}.
-\end{equation}
-$q=0$ 时回到 GW 式 (71)。这些都是 $\ell=0$ 项，只作为近区背景的 $1/\bar r^2$ 部分出现。
-
-\paragraph{近区二阶扰动中新出现的电磁项。}平移到质心后（\S4.2；在 (H) 下电偶极同时为零），按 GW 式 (84) 的方式作近区展开。电磁势在 $O(\lambda^2)$ 上的 $\ell=1$、时间反演为偶的部分为
-\begin{align}
-\bar a^{(2)}_0&=E^0_i\,x^i+H'\!\cdot n+\dots,\\
-\bar a^{(2)}_i&=t\,E^C_i+\frac tr\big(K'^B\!\cdot n\,n_i+K'^C_i\big)+\dots,
-\end{align}
-其中 $E^0_i=\partial_ia^{\rm tail}_0$、$E^C_i=\partial_0a^{\rm tail}_i$（在 $\gamma$ 上取值）来自远区尾巴场的梯度，二者之差 $E^C_i-E^0_i=f^{\rm tail}_{0i}$ 是尾巴电场；$H'$、$K'^B$、$K'^C$ 是未知的齐次项，与 GW 的 $H$、$\dot K$ 地位相同。坐标平移作用在 Coulomb 场上产生的项都是 $\lambda^2/r$ 或 $\lambda^2r^0$ 型，按 GW 的做法并入未知项；$q\mathcal S_\alpha$ 只有 $\ell=0,2$ 部分。时间反演的约定：$a_0$ 为偶、$a_i$ 为奇，所以 $a_0\propto x$、$a_i\propto t$ 的组合是偶的，$a_i\propto x$（磁场型）是奇的，不进入。
-
-\paragraph{哪些乘积项进入 $1/\bar r^2$ 阶。}逐项估计（$\bar r\to\infty$，只看 $\ell=1$）：
+二阶方程现在是 Einstein 方程 $R_{ab}-8\pi T_{ab}=0$ 和 Maxwell 方程 $\nabla_bF^{ab}=0$ 在 $\lambda^2$ 阶的部分。逐项估计 $\bar r\to\infty$ 时的阶次，只看 $\ell=1$：
 \begin{enumerate}
-\item Einstein 方程的电磁源 $8\pi T_{ab}$ 是场的二次式。Coulomb 场 $\sim q/\bar r^2$ 与 $\bar a^{(2)}$ 中的常数尾巴场的交叉项 $\sim q/\bar r^2$，是 $\ell=1$，\textbf{进入}。Coulomb 场与 $H'$（场 $\sim1/\bar r$）、$K'$（场 $\sim t/\bar r^2$）的交叉项是 $1/\bar r^3$ 及更高阶，不进入。度规扰动乘 Coulomb 场的平方是 $q^2/\bar r^3$，不进入。
-\item Maxwell 方程：线性化 Maxwell 算子 \eqref{eq:M1} 中的 $\tfrac12hF-2hF$ 项，用度规的 $D$ 项（$\sim\bar r$）乘 Coulomb 场（$\sim q/\bar r^2$）得 $q/\bar r$，求散度后是 $q/\bar r^2$，\textbf{进入}。尾巴场（常数）在背景 $M/\bar r$ 修正下的散度 $\sim M/\bar r^2$，\textbf{进入}。$H'$、$K'$ 的平直部分，\textbf{进入}。度规的 $B_{\alpha i\beta j}x^ix^j$ 和 $\mathcal R$、$\mathcal S$ 项只有 $\ell=0,2$。
-\item 一阶近区场的二次项：一阶近区度规是常数加 $K/\bar r$，一阶近区电磁场在 $F=0$ 时只有 $1/\bar r^2$ 的齐次部分；它们的乘积都在 $1/\bar r^3$ 以下，不进入。这与 GW 中 $G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$ 不进入相同。
-\end{enumerate}
-于是第 2 级的方程组是：度规部分仍是 \eqref{eq:L1matrix}，但 $R_{00}$、$R_{ij}$ 行多了一个正比于 $q\,(E^C-E^0)$ 的源；另加 Maxwell 方程的 $\ell=1$ 部分：$\mathcal M^0|_{1/r^2}=R^X\!\cdot n$，$\mathcal M^i|_{t/r^3}=R^Y\!\cdot n\,n_i+R^Z_i$（$\mathcal M^0$ 为偶，$\mathcal M^i$ 为奇，所以后者取 $t$ 的奇次项）。
-
-\paragraph{预期。}如果“驱动运动的只是正则场”在这一级成立，消去全部未知项后应得到 GW 式 (108) 加一个尾巴电场项：
+\item Einstein 方程的电磁源是场的二次式。Coulomb 场（$\sim q/\bar r^2$）与 \eqref{eq:Eharm} 中常数尾巴场的交叉项 $\sim q/\bar r^2$，为 $\ell=1$，进入。Coulomb 场与 $H'$（场 $\sim1/\bar r$）、$\dot K'$（场 $\sim\bar t/\bar r^2$）的交叉项是 $1/\bar r^3$ 及更高阶；度规扰动乘 Coulomb 场的平方是 $q^2/\bar r^3$。这两类都不进入。
+\item Maxwell 方程线性化后为 $\nabla_bY^{ab}=0$，其中
 \begin{equation}
--MD^A_i+2MD^C_i+\kappa\,q\,(E^C_i-E^0_i)=0,
+Y^{ab}=f^{ab}+\tfrac12h\,F^{ab}-h^{ac}F_c{}^b-h^{bd}F^a{}_d ,
+\label{eq:Y}
 \end{equation}
-代入 GW 式 (109)、(110) 的推导，得 $\ddot Z^i=(\text{GW 的各项})-\tfrac{\kappa q}{2M}f^{\rm tail}_{0i}$。洛伦兹力 $M\ddot Z^i=q\,f^{\rm tail}_{i0}=-q\,f^{\rm tail}_{0i}$ 要求 $\kappa=2$。$\kappa$ 的值，以及没有别的项，就是第 2 级要检验的内容。
+$f=\dd a$，$F$ 是近区背景场。度规的 $D$ 项（$\sim\bar r$）乘 Coulomb 场（$\sim q/\bar r^2$）得 $q/\bar r$，求散度后为 $q/\bar r^2$，进入。常数尾巴场在背景 $M/\bar r$ 修正下的散度 $\sim M/\bar r^2$，进入。$H'$、$\dot K'$ 在平直背景中的散度，进入。
+\item 一阶近区场的二次项：一阶近区度规是常数加 $K/\bar r$，一阶近区电磁场在 $F=0$ 时只有 $1/\bar r^2$ 的齐次部分，乘积都在 $1/\bar r^3$ 以下，不进入。这与情形 1 中 $G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$ 不进入的理由相同。
+\end{enumerate}
+所以在 $1/\bar r^2$、$\bar t/\bar r^3$ 阶上，需要的近区背景只是 \eqref{eq:bg1} 加上 $\bar A^{(0)}=-(q/\bar r)\dd\bar t$。Einstein 方程中，$8\pi T_{ab}$ 对扰动线性化，保留 $O(q)$ 的项：
+\begin{equation}
+8\pi\,\delta T_{ab}=2\big(F_{ac}f_b{}^c+f_{ac}F_b{}^c-\tfrac12\eta_{ab}F_{cd}f^{cd}\big).
+\end{equation}
+Maxwell 方程中保留 $O(1)$、$O(M)$、$O(q)$ 的项；$O(qM)$ 及更高阶的项进入 $1/\bar r^3$ 阶。Maxwell 方程的 $\ell=1$ 部分按
+\begin{equation}
+\mathcal M^0\big|_{1/\bar r^2}=\frac1{\bar r^2}R^X_in^i,\qquad
+\mathcal M^i\big|_{\bar t/\bar r^3}=\frac{\bar t}{\bar r^3}\big(R^Y_jn^jn^i+R^Z_i\big)
+\end{equation}
+提取：$\mathcal M^0$ 在时间反演下为偶，$\mathcal M^i$ 为奇，后者取 $\bar t$ 的奇次项。
 
-\subsection{2b：计算结果}
+\paragraph{预期。}如果一阶运动只由正则场驱动，消去全部未知项后应得到 \eqref{eq:rel1} 加一个尾巴电场项，$-MD^A_i+2MD^C_i+\kappa\,q\,(E^C_i-E^0_i)=0$。由 \eqref{eq:DAC}，它给出 $M\ddot\zeta_i=(\text{情形 1 的各项})+\tfrac\kappa2\,q\,f^{\rm tail}_{i0}$。洛伦兹力 $M\ddot\zeta_i=q\,f^{\rm tail}_{i0}$ 要求 $\kappa=2$。
 
-代码 \texttt{code/level2.py}（约 19 分钟），输出存于 \texttt{code/level2\_matrix.txt}。所有拟合残差为零（输出为纯 $\ell=1$），各矢量系数间无分量混合。表中竖线左边的 6 列是已知量，右边的 9 列是未知齐次项：
+\subsection{系数矩阵}
+
+直接计算给出下表。竖线左边的 6 列是远区数据，右边的 9 列是未知齐次项；前 6 行是 Einstein 方程，后 3 行是 Maxwell 方程。Einstein 各行按 \eqref{eq:L1matrix} 未乘 $-\tfrac12$ 时的归一化给出。
 {\small\setlength{\arraycolsep}{3pt}
 \begin{equation}
 \begin{array}{c|rrrrrr|rrrrrrrrr}
- & D^A & D^C & D^E & D^F & E^0 & E^C & H^A & H^D & H^E & H^F & K^B & K^C & H' & K'^B & K'^C\\\hline
+ & D^A & D^C & D^E & D^F & E^0 & E^C & H^A & H^D & H^E & H^F & \dot K^B & \dot K^C & H' & \dot K'^B & \dot K'^C\\\hline
 R^A & \tfrac32M & -M & \tfrac12M & \tfrac12M & -2q & 2q & 1&0&0&0&1&-1&0&0&0\\
 R^B & 0 & 3M & 0&0&0&0& 0&0&0&0&\tfrac32&\tfrac32&0&0&0\\
 R^C & 0 & -M & 0&0&0&0& 0&0&0&0&-\tfrac12&-\tfrac12&0&0&0\\
@@ -193,75 +250,115 @@ R^Z & 0 & q & 0&0&0&0& 0&0&0&0&0&0&0&-1&-1
 \end{array}
 \label{eq:L2matrix}
 \end{equation}}
-前 6 行是 Einstein 方程（$R_{ab}-8\pi T_{ab}$），后 3 行是 Maxwell 方程。观察：
-\begin{enumerate}
-\item Einstein 各行的度规系数与第 1 级 \eqref{eq:L1matrix}（未乘 $-\tfrac12$ 的形式）逐项相同。
-\item 电磁源只通过 $E^C-E^0=f^{\rm tail}_{0i}$ 进入，不单独依赖 $E^0$ 或 $E^C$。这是电磁规范不变性的要求。
-\item Maxwell 行中出现 $q\,D$ 项（度规扰动作用在 Coulomb 场上）和 $M(E^C-E^0)$ 项（尾巴场在背景度规中的散度），与 2a 的估计一致。
-\end{enumerate}
+有三点可以直接看出。第一，Einstein 各行的度规系数与 \eqref{eq:L1matrix} 逐项相同。第二，电磁源只通过 $E^C-E^0$ 进入，不单独依赖 $E^0$ 或 $E^C$，这是电磁规范不变性的要求。第三，Maxwell 行中出现 $q\,D$ 项（度规扰动作用在 Coulomb 场上）和 $M(E^C-E^0)$ 项（尾巴场在背景度规中的散度），与上一小节的估计一致。
 
-\paragraph{规范检验（\texttt{code/gauge\_test2.py}）。}纯规范扰动必须落在 \eqref{eq:L2matrix} 的零空间里。微分同胚同时作用在度规和 Coulomb 势上，$\delta a=\mathcal L_\xi(-q\,\mathrm dt/r)$：
+\subsection{检验：纯规范扰动}
+
+微分同胚 $\xi$ 同时改变度规和 Coulomb 势，$\delta\bar A=\mathcal L_\xi(-q\,\dd\bar t/\bar r)$；电磁规范变换 $\psi$ 只改变势。这些纯规范扰动都必须落在 \eqref{eq:L2matrix} 的零空间里：
 \begin{center}\small
-\begin{tabular}{p{0.2\textwidth}p{0.48\textwidth}l}
+\begin{tabular}{p{0.22\textwidth}p{0.6\textwidth}}
 \hline
-规范变换 & 产生的非零分量 & 结果\\
+规范变换 & 产生的非零系数\\
 \hline
-$\xi_0=t\,(c\cdot x)$ & $D^A=2c,\ D^C=c,\ K^B=-2Mc,\ H'=qc,\ K'^C=qc$ & 全零\\
-$\xi_i=(c\cdot x)\,x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc,\ H'=qc$ & 全零\\
-$\xi_i=r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc,\ H'=qc$ & 全零\\
-$\psi=t\,(c\cdot x)$（电磁规范） & $E^0=E^C=c$ & 全零\\
+$\xi_0=\bar t\,(c\cdot\bar x)$ & $D^A=2c,\ D^C=c,\ \dot K^B=-2Mc,\ H'=qc,\ \dot K'^C=qc$\\
+$\xi_i=(c\cdot\bar x)\,\bar x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc,\ H'=qc$\\
+$\xi_i=\bar r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc,\ H'=qc$\\
+$\psi=\bar t\,(c\cdot\bar x)$ & $E^0=E^C=c$\\
 \hline
 \end{tabular}
 \end{center}
-前三个检验同时检验了 Maxwell 行中的 $q\,D$ 耦合项和 $K'$、$H'$ 列。
+四者都在零空间中。前三个同时检验了 Maxwell 行中的 $q\,D$ 耦合项和 $H'$、$\dot K'$ 列。
 
-\subsection{得到的关系}
+\subsection{运动方程}
 
-消去全部 9 个未知列，只剩一个非平凡组合，仍是 $-\tfrac23R^B+\tfrac23R^D+R^E$（与第 1 级相同，Maxwell 行不参与）：
+消去全部 9 个未知列，只剩一个非平凡组合，仍是 $-\tfrac23R^B+\tfrac23R^D+R^E$，Maxwell 行不参与：
 \begin{equation}
--MD^A_i+2MD^C_i+2q\,\big(E^C_i-E^0_i\big)=0,
+-MD^A_i+2MD^C_i+2q\,\big(E^C_i-E^0_i\big)=0 ,
+\label{eq:rel2}
 \end{equation}
-即预期中的 $\kappa=2$。代入 GW 式 (109)、(110) 的推导（$D^C_i$ 中含 $\ddot\zeta_i$，系数为 1），新增的一项是
+即 $\kappa=2$。代入 \eqref{eq:DAC}，
 \begin{equation}
-M\ddot Z^i\supset q\,(E^0_i-E^C_i)=q\,f^{\rm tail}_{i0},
+M\ddot\zeta_i=M\big(-R_{0i0j}\zeta^j-h^{\rm tail}_{i0,0}+\tfrac12h^{\rm tail}_{00,i}\big)+q\,f^{\rm tail}_{i0}.
+\label{eq:eom2}
 \end{equation}
-正是尾巴电场对电荷的洛伦兹力，系数为 1。背景是真空、零阶运动是测地线时，DeWitt--Brehme 的局部项为零，正则场就是尾巴场，所以这一结果就是“MiSaTaQuWa 加 DeWitt--Brehme 尾巴力”，没有多余的项。
+新增的一项正是尾巴电场对电荷的洛伦兹力，系数为 1，没有别的项。背景是真空、零阶运动是测地线时，DeWitt--Brehme 力中的局部项为零，电磁正则场就是尾巴场。所以 \eqref{eq:eom2} 就是 MiSaTaQuWa 力与 DeWitt--Brehme 尾巴力 \citep{DeWittBrehme1960,Hobbs1968} 之和沿 $\gamma$ 的线性化。
 
-\paragraph{第 2 级：通过。}在背景不带电的情形，由 Einstein--Maxwell 场方程推出：带电小物体的一阶运动只由正则场驱动，引力和电磁两部分解耦。据我们所知，这一情形此前没有在 GW 的框架下推出过（见 CHANGELOG 2026-11-24 的新颖性补查）。
+于是，在背景不带电的情形，由 Einstein--Maxwell 场方程推出：带电小物体的一阶运动只由正则场驱动，引力和电磁两部分解耦。据我们所知，这一情形此前没有在 \citet{GrallaWald2008} 的框架下推出过；\citet{FutamaseHoganItoh2008} 的结果在这一情形只剩 Abraham--Lorentz--Dirac 项，没有尾巴项。
 
 %======================================================================
-\section{第 3 级：物体不带电，背景带电（规划）}
+\section[情形 3：电真空背景，不带电物体]{情形 3：电真空背景，不带电物体（结构分析）}
+\label{sec:L3}
 %======================================================================
 
-本节只写分析和计划，计算尚未开始。
+本节给出情形 3 的结构分析和计算步骤，计算尚未完成。
 
-\subsection{3a：与前两级不同的地方}
+\subsection{目标}
 
-\paragraph{目标。}由论文第 5 节，ZP 方程取 $q=0$ 后为
+\citet{ZimmermanPoisson2014} 的运动方程取 $q=0$ 后为
 \begin{equation}
 M a^\mu=\tfrac53M^2(g^{\mu\nu}+u^\mu u^\nu)F_{\nu\lambda}F^{\lambda\rho}u_\rho+(\text{耦合 Green 函数给出的引力尾巴}).
+\label{eq:target3}
 \end{equation}
-在 $\gamma$ 的静止系中，$F_{i\lambda}F^{\lambda}{}_{0}$ 正比于坡印廷矢量 $(\boldsymbol E\times\boldsymbol B)_i$。局部项的方向是背景场的能流方向。
+在 $\gamma$ 的静止系中，$F_{i\lambda}F^{\lambda}{}_{0}$ 正比于坡印廷矢量 $(\boldsymbol E\times\boldsymbol B)_i$，局部项沿背景场的能流方向。
 
-\paragraph{不同一：时间反演不再分块。}前两级只取时间反演为偶的部分，这在背景时间反演不变时成立。现在背景电场为偶、磁场为奇，坡印廷矢量为奇。背景场与扰动的乘积会把偶的扰动和奇的扰动混在一起，所以必须同时保留两种宇称的 $\ell=1$ 扰动，提取全部 $R_{00}$、$R_{0i}$、$R_{ij}$ 在 $1/r^2$ 和 $t/r^3$ 两阶的系数。未知齐次项的数目大约加倍。
+\subsection{与前两种情形的不同}
 
-\paragraph{不同二：远区一阶场有确定的 $\ell=1$ 局部项。}第 1、2 级中，远区一阶场在 $\gamma$ 附近除了奇异部分和尾巴，只有 $M\mathcal R_{\alpha\beta}$、$q\mathcal S_\alpha$ 这类曲率修正，它们只有 $\ell=0,2$ 部分。现在扰动方程是耦合的：
+\paragraph{时间反演不再分块。}前两种情形只取时间反演为偶的部分，这在背景时间反演不变时成立。现在背景电场为偶、磁场为奇，坡印廷矢量为奇。背景场与扰动的乘积会把两种宇称的扰动混在一起，所以必须同时保留两种宇称的 $\ell=1$ 扰动，提取全部 $R_{00}$、$R_{0i}$、$R_{ij}$ 在 $1/\bar r^2$ 和 $\bar t/\bar r^3$ 两阶的系数。未知齐次项的数目约为前两种情形的两倍。
+
+\paragraph{远区一阶场有确定的 $\ell=1$ 局部项。}前两种情形中，\eqref{eq:hfar}、\eqref{eq:afar} 里除了奇异部分和尾巴，只有 $M\mathcal R$、$q\mathcal S$ 这类曲率修正，它们没有 $\ell=1$ 部分。现在扰动方程是耦合的：
 \begin{itemize}
-\item $h\sim2M/r$ 通过 Maxwell 方程中的 $\tfrac12hF-2hF$ 项诱导出电磁扰动 $a\sim M\,F\,n$（量级 $r^0$，$\ell=1$），这在近区里就是 Schwarzschild 黑洞在均匀外场中的一阶响应；
-\item 这个电磁扰动和背景场的交叉应力，加上背景 Ricci 张量（$\propto F^2$）与 $M/r$ 的乘积，又在度规中产生 $h\sim M F^2 r$ 型的项，其中含有 $\ell=1$ 部分（形如 $M(\boldsymbol E\times\boldsymbol B)\cdot\boldsymbol n\,r$）。
+\item $h\sim2M/r$ 通过 \eqref{eq:Y} 中的 $hF$ 项诱导出电磁扰动 $a\sim M\,F\,n$（量级 $r^0$，$\ell=1$）。在近区里，这就是 Schwarzschild 黑洞在均匀外场中的一阶响应。
+\item 这一电磁扰动与背景场的交叉应力，加上背景 Ricci 张量（$\propto F^2$）与 $M/r$ 的乘积，在度规中产生 $h\sim MF^2r$ 型的项，其中含 $\ell=1$ 部分，形如 $M(\boldsymbol E\times\boldsymbol B)\cdot\boldsymbol x$。
 \end{itemize}
-这些项不是自由的尾巴数据，而是由远区一阶方程在 $\gamma$ 附近的局部解确定的特解。它们的 $\ell=1$ 部分会进入 $D^A$、$D^C$ 等系数，从而给出正比于 $M F^2$ 的局部力。$\tfrac53M^2FF$ 应当就从这里来。
+这些项会进入 $D^A$、$D^C$ 等系数，从而给出正比于 $MF^2$ 的局部力；\eqref{eq:target3} 中的 $\tfrac53M^2FF$ 应当从这里来。
 
-\subsection{计划}
+\paragraph{局部项与尾巴项的分离。}上述 $O(r)$ 的 $\ell=1$ 项对 $x$ 线性且光滑，与 \eqref{eq:hfar} 中的尾巴项 $h^{\rm tail}_{\alpha\beta\gamma}x^\gamma$ 形式相同。只解 $\gamma$ 附近的局部方程，只能确定两者之和，不能确定哪部分属于局部、哪部分属于尾巴。这一分法由推迟 Green 函数的 Hadamard 分解给出：直接部分给出局部项，尾巴部分沿过去世界线的积分给出尾巴。所以展开 \eqref{eq:hfar}、\eqref{eq:afar} 在 $F\neq0$ 时要由耦合 Hadamard 系数构造。这一构造本身是严格的，本文要检验的是“运动只由正则场驱动”这一步，而不是 Green 函数。\citet{ZimmermanPoisson2014} 第 VIII 节已在 Fermi 坐标中给出正则势展开到一阶的形式，其中有所需的局部项，例如
+\begin{equation}
+h^{\rm R}_{ta}\supset m\big(2R_{atct}+F_{at}F_{ct}-F_{ae}F^e{}_c-\delta_{ac}F_{et}F^{et}\big)x^c,\qquad b^{\rm R}_a\supset-mF_{at},
+\end{equation}
+后者就是 $a\sim MF$ 的 $r^0$ 项。
+
+\subsection{计算步骤}
 \begin{enumerate}
-\item \textbf{局部展开（从 ZP 导入）。}需要远区一阶耦合场在 $\gamma$ 附近的展开：$a$ 到 $O(r)$，$h$ 到 $O(r)$。\emph{注意：这一步不能只靠解局部方程。}$h$ 中 $O(r)$ 阶的 $\ell=1$ 项形如 $M\,\boldsymbol S\cdot\boldsymbol x$（$\boldsymbol S\propto\boldsymbol E\times\boldsymbol B$），对 $x$ 线性、光滑，与齐次解中的尾巴项 $h^{\rm tail}_{\alpha\beta i}x^i$ 形式相同。局部方程只能确定两者之和，分不开哪部分属于“局部”、哪部分属于尾巴。这个分法由推迟 Green 函数的 Hadamard 分解给出：直接部分（ZP 的 $U$ 系数）给出局部项，尾巴部分（$V$ 系数沿世界线的积分）给出尾巴。所以第 1 步应当从 ZP 第 VI--VIII 节导入耦合 Hadamard 系数（ZP 式 (8.4)、(8.18)、(8.19)），在 Fermi 坐标中展开。这样做是合理的：Hadamard 构造本身是严格的，本项目要检验的是“运动只由正则场驱动”这一步，而不是 Green 函数。导入之后用局部方程做一致性检验：导入的展开必须满足远区一阶方程（式 (3.11)、(3.12)）。另一项检验：$a$ 的 $r^0$ 项应与 Schwarzschild 黑洞在均匀场中的一阶解（Wald 1974 型）在远处的展开一致。
-
-\textbf{线索：}ZP 第 VIII.B 节已在 Fermi 坐标中写出正则势展开到 $O(s)$ 的形式（ZP 式 (8.9a)--(8.9c)、(8.11a)、(8.11b)），其中正是所需的局部项，例如 $h^{\rm R}_{ta}\supset m\big(2R_{atct}+F_{at}F_{ct}-F_{ae}F^e{}_c-\delta_{ac}F_{et}F^{et}\big)x^c$，以及 $b^{\rm R}_a\supset-mF_{at}$（即 $a\sim MF$ 的 $r^0$ 项）。奇异部分的展开见 ZP 式 (8.18)、(8.19)，Hadamard 系数见 ZP 式 (8.4a)--(8.4j)。下一步是把这些式子对照 ZP 原文图片逐式转录（PDF 文字层的排版不可靠），取 $e=0$。
-\item \textbf{近区展开。}平移到质心，写出近区到 $O(\lambda^2)$ 的度规和势，包括两种时间宇称的 $\ell=1$ 未知齐次项。
-\item \textbf{近区二阶方程。}这一级不再逐项挑选进入的乘积，而是直接计算完整 Einstein--Maxwell 方程在 $\lambda^2$ 阶的系数，避免估计遗漏。为控制表达式大小，背景场取特定方向（例如 $\boldsymbol E\parallel x$、$\boldsymbol B\parallel y$，坡印廷矢量沿 $z$），并另取一组方向复算，检验结果的协变性。
-\item \textbf{消元与对照。}消去未知项，得到 $\ddot Z^i$ 中的局部力，与 $\tfrac53MFF$ 对照；尾巴部分与耦合 Green 函数的尾巴对照。
-\item \textbf{规范检验。}同前两级：微分同胚同时作用在度规、背景势和一阶势上，必须落在零空间里。
+\item 由耦合 Hadamard 系数写出 $F\neq0$ 时 \eqref{eq:hfar}、\eqref{eq:afar} 的推广，$h$ 和 $a$ 都到 $O(r)$，取 $e=0$。导入的展开必须满足远区一阶方程，这是第一项检验；$a$ 的 $r^0$ 项还应与 Schwarzschild 黑洞在均匀场中的一阶解在远处的展开一致。
+\item 平移到质心，写出近区到 $O(\lambda^2)$ 的度规和势，包括两种时间宇称的 $\ell=1$ 未知齐次项，以及平移在背景势上产生的 $\zeta^cF_{ca}$ 项。
+\item 计算完整 Einstein--Maxwell 方程在 $\lambda^2$ 阶的系数，不再逐项挑选进入的乘积，以免遗漏。为控制表达式大小，背景场取特定方向（例如 $\boldsymbol E\parallel x$、$\boldsymbol B\parallel y$），再取另一组方向复算，检验结果的协变性。
+\item 消去未知项，得到 $\ddot\zeta^i$ 中的局部力，与 \eqref{eq:target3} 的局部项对照；尾巴部分与耦合 Green 函数的尾巴对照。
+\item 规范检验：微分同胚同时作用在度规、背景势和一阶势上，必须落在零空间里。
 \end{enumerate}
-预计工作量明显大于前两级，第 1 步（局部解）本身就需要单独核对。
+
+%======================================================================
+\appendix
+\section{计算的实现}
+\label{app:code}
+%======================================================================
+
+代码在 \texttt{derivations/p1/code/}，用项目内的 \texttt{.venv}（sympy 1.14）运行，全部为精确有理数运算。
+
+\paragraph{共用工具（\texttt{series.py}）。}
+\begin{enumerate}
+\item \texttt{linearized\_ricci}：背景为 $\eta+Mb^{(1)}$，计算 $\eta+Mb^{(1)}+\epsilon h$ 的 Ricci 张量中 $\epsilon^1$ 的部分，保留到 $M^1$，逆度规展开到 $M\epsilon$ 交叉项。
+\item \texttt{radial\_coeff}：令 $x^i=\rho\,n^i$，$n^i$ 取分量为有理数的单位矢量（由毕达哥拉斯四元组构造），取出 $t^k\rho^p$ 的系数。
+\item \texttt{fit\_l1}：在 8 个方向上把系数与 \eqref{eq:harm} 型的拟设比较，解出矢量系数。残差为零说明输出是纯 $\ell=1$。
+\end{enumerate}
+
+\paragraph{各脚本。}
+\begin{center}\small
+\begin{tabular}{p{0.22\textwidth}p{0.56\textwidth}l}
+\hline
+脚本 & 内容 & 用时\\
+\hline
+\texttt{level1.py} & 生成 \eqref{eq:L1matrix} & 约 2.5 分钟\\
+\texttt{check\_dc.py} & 对 $h_{i0}=\bar t\,C_i$ 作不截断的 Ricci 计算，核对第一行 $D^C$ 列 & 数秒\\
+\texttt{gauge\_test.py} & 情形 1 的规范检验 & 数秒\\
+\texttt{level2.py} & 生成 \eqref{eq:L2matrix}，写入 \texttt{level2\_matrix.txt} & 约 19 分钟\\
+\texttt{gauge\_test2.py} & 情形 2 的规范检验 & 数秒\\
+\hline
+\end{tabular}
+\end{center}
+\texttt{level2.py} 中 Maxwell 方程按 $\partial_b\big[f^{ab}+M f^{ab}_{(M)}+Y^{ab}_{(q)}\big]$ 计算：$f^{ab}_{(M)}$ 是 $f$ 在背景 $M/\bar r$ 修正下的 $O(M)$ 部分，$Y^{ab}_{(q)}$ 是 \eqref{eq:Y} 中含 Coulomb 场的项。$(-g)^{-1/2}$ 因子的 $O(M)$ 部分乘在已是 $O(1/\bar r^2)$ 的量上，只影响 $1/\bar r^3$ 阶。
+
+\bibliographystyle{plainnat}
+\bibliography{../../paper/refs}
 
 \end{document}
