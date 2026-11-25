@@ -1218,11 +1218,11 @@ Ma_i\big|_{\rm self}=-\tfrac12q\,h^{\rm R}_{00}E_i-q\,h^{\rm R}_{ij}E_j+q\,f^{\r
 \end{itemize}
 
 %======================================================================
-\section[情形 5：二阶的关键问题：带电黑洞的诱导偶极]{情形 5：二阶的关键问题：带电黑洞的诱导偶极（框架）}
+\section[情形 5：二阶的关键问题：带电黑洞的诱导偶极]{情形 5：二阶的关键问题：带电黑洞的诱导偶极}
 \label{sec:L5}
 %======================================================================
 
-本节是框架，计算尚未开始。它回答两个问题：为什么一阶的结果被"锁定"为 Detweiler--Whiting 形式；到二阶，什么地方可能打破这一形式。后一个问题归结为一个可以在几天内算完的试点：带电黑洞在均匀外场中的诱导偶极。
+本节回答两个问题：为什么一阶的结果被"锁定"为 Detweiler--Whiting 形式；到二阶，什么地方可能打破这一形式。后一个问题归结为一个试点：带电黑洞在均匀外场中的诱导偶极。试点已完成，结果是诱导电偶极和磁偶极都为零（\S\ref{sec:L5result}）。
 
 \subsection{一阶为什么被锁定}
 \label{sec:L5why}
@@ -1289,6 +1289,78 @@ Ma_i\big|_{\rm self}=-\tfrac12q\,h^{\rm R}_{00}E_i-q\,h^{\rm R}_{ij}E_j+q\,f^{\r
 \item \textbf{检验 4}：极端情形 $q=M$ 单独分析（视界退化，正则条件改变）。
 \end{enumerate}
 所需工具：现有的 \texttt{trunc.py} 和 \texttt{level4\_l1.py} 可以给出逐阶展开，用于检验 2；精确解需要另写一个常微分方程的求解脚本。
+
+\subsection{结果：诱导偶极为零}
+\label{sec:L5result}
+
+试点已完成。结论是：带电黑洞在均匀外场中的诱导电偶极和诱导磁偶极都严格为零，即 $\alpha=\chi=0$。这一结论对 $M$、$q$ 精确（$q\leq M$），与规范和原点选取无关。
+
+\paragraph{扰动的设定。}背景取 Schwarzschild 型坐标中的 RN 解，$f=1-2M/r+q^2/r^2$，$A=-(q/r)\dd t$。静态、$m=0$ 的 $\ell=1$ 扰动写成：
+\begin{itemize}
+\item 偶宇称：$h_{tt}=fH_0\cos\theta$，$h_{rr}=H_2\cos\theta/f$，$h_{AB}=r^2K\cos\theta\,\Omega_{AB}$，$h_{r\theta}=-h_1\sin\theta$，$\delta A_t=a\cos\theta$；
+\item 奇宇称：$h_{t\phi}=h_0\sin^2\theta$，$\delta A_\phi=w\sin^2\theta$。
+\end{itemize}
+其中 $H_0,\dots,w$ 都是 $r$ 的函数。线性化的 Einstein--Maxwell 方程由 \texttt{l1\_response.py} 精确算出（不对 $M$、$q$ 展开）。偶宇称中 $\delta A_r$、$\delta A_\theta$ 的部分由 Maxwell 方程的 $r$ 分量约束为纯规范，已去掉。
+
+\paragraph{奇宇称（磁）。}方程为
+\begin{gather*}
+r^2h_0''-2h_0+4q\,w'=0,\\
+r\,D\,w''+2(Mr-q^2)\,w'-2r\,w+q\,(r\,h_0'-2h_0)=0,\qquad D\equiv r^2-2Mr+q^2 .
+\end{gather*}
+在 Laurent 多项式中求通解（\texttt{l1\_solve.py}），只得到三个自由参数：
+\begin{itemize}
+\item 外场：$w=\tfrac B2(r^2-3q^2)$，$h_0=2qB\,r$。这是有限项多项式，视界处正则，没有 $1/r$ 型的偶极项。
+\item $h_0\propto r^2$：转动坐标系 $\phi\to\phi+\Omega t$，是规范。
+\item $w=\mu/r$，$h_0=-\tfrac{2M}{q}\,\tfrac\mu r+\tfrac{q\mu}{r^2}$：这是 Kerr--Newman 解对自旋的线性化，自旋 $J=M\mu/q$，满足 $\mu=qJ/M$（$g=2$）。它是物体自身的自旋，是自由参数，不是外场诱导出来的。
+\end{itemize}
+其余解含对数，在视界处奇异。所以外场 $B$ 不诱导出 $\mu-\tfrac qMJ$，诱导磁化率为零。这与 \citet{PereniguezCardoso2022} 在 $\ell\geq2$ 的结论一致，并把它延伸到 $\ell=1$。
+
+\paragraph{偶宇称（电）：规范不变量。}一般规范下的 Laurent 多项式通解有 13 个自由参数，其中大部分是规范自由度。静态 $\ell=1$ 的规范矢量为 $\xi^r=X(r)\cos\theta$，$\xi^\theta=-Y(r)\sin\theta/r^2$。直接计算 $\mathcal L_\xi$（\texttt{l1\_gauge.py}）给出
+\begin{gather*}
+\delta H_0=\frac{2(q^2-Mr)}{rD}\,X,\qquad
+\delta H_2=2X'+\frac{2(q^2-Mr)}{rD}\,X,\qquad
+\delta K=\frac{2(rX-Y)}{r^2},\\
+\delta h_1=\frac{r^3X+(rY'-2Y)D}{rD},\qquad
+\delta a=\frac{q}{r^2}\,X .
+\end{gather*}
+$q\neq0$ 时，用 $a$ 吸收 $X$，用 $K$ 吸收 $Y$：令 $X_{\rm e}=r^2a/q$，$Y_{\rm e}=rX_{\rm e}-\tfrac12r^2K$，则
+\begin{gather*}
+I_1=H_0-\frac{2(q^2-Mr)}{rD}X_{\rm e},\qquad
+I_2=H_2-2X_{\rm e}'-\frac{2(q^2-Mr)}{rD}X_{\rm e},\\
+I_3=h_1-\frac{r^3X_{\rm e}+(rY_{\rm e}'-2Y_{\rm e})D}{rD}
+\end{gather*}
+是规范不变量，它们就是"$a=K=0$ 规范"中的 $H_0$、$H_2$、$h_1$。$X_{\rm e}$ 正是把电偶极移到原点的平移，所以这些不变量自动扣除了平移自由度，相当于相对质心定义偶极。
+
+\paragraph{偶宇称：结果。}把 13 参数的通解代入，$I_1,I_2,I_3$ 只依赖一个组合 $\kappa$（外场的幅度）：
+\begin{gather*}
+I_1=\tfrac23\kappa\,(q^2-M^2)\,r,\qquad
+I_2=-\tfrac23\kappa\,(5M^2r-3Mq^2-3Mr^2+q^2r),\\
+I_3=-\tfrac13\kappa\,r^2(2M^2-3Mr+q^2),
+\end{gather*}
+其中 $\kappa=(qK_2-3a_1)/(Mq)$，$a_1$、$K_2$ 是通解中 $a\supset a_1r$、$K\supset K_2r^2$ 的系数。三个不变量都是有限项多项式，没有 $1/r^k$ 项，所以"外加场"和"响应"可以无歧义地分开。只剩一个物理幅度也说明：加速度和电场不是独立的，与 $Ma=qE$ 一致。
+
+\paragraph{偶宇称：衰减解在视界奇异。}还要说明另一个物理解被视界正则性排除。在 $a=K=0$ 规范中，Einstein 方程的一个分量只含 $H_0$（\texttt{l1\_decaying.py}）：
+\begin{equation}
+r^2D\,H_0''+2r(r^2-q^2)\,H_0'-2(r^2-q^2)\,H_0=0 .
+\label{eq:H0ode}
+\end{equation}
+$H_0=r$ 是一个解，即上面的 $I_1$。令 $H_0=r\,v(r)$ 降阶：
+\begin{equation*}
+\frac{v''}{v'}=-\frac2r-\frac{2(r^2-q^2)}{rD}.
+\end{equation*}
+用 $D=(r-r_+)(r-r_-)$、$r_+r_-=q^2$ 作部分分式，$\frac{r^2-q^2}{rD}=-\frac1r+\frac1{r-r_+}+\frac1{r-r_-}$，于是 $v'=1/D^2$，第二个解为
+\begin{equation*}
+H_0=r\int\frac{\dd r}{D^2}.
+\end{equation*}
+大 $r$ 处 $H_0\sim-\tfrac1{3r^2}$，正是偶极型的衰减解；在视界处，非极端时 $H_0\sim1/(r-r_+)$ 加对数，极端时 $H_0\sim(r-M)^{-3}$，都发散。所以视界正则性排除了这个解，诱导电偶极 $\alpha=0$。
+
+\paragraph{检验。}
+\begin{itemize}
+\item $q=0$ 时，$\alpha=0$ 与 Schwarzschild 中的解 $A_t=-E(r_s-2M)\cos\theta$ 一致。
+\item 奇宇称中 Kerr--Newman 模式的 $g=2$ 关系自动出现，是方程正确性的一个检验。
+\item 一般规范中只剩一个物理参数，与第 6 节中力平衡 $Ma=qE$ 作为可解条件一致。
+\end{itemize}
+尚未做的检验：把 Ernst 解按 $E$ 线性化、对 $M,q$ 精确，与这里的正则解逐项比较。这需要先取得 Ernst 原文中的公式。
 
 \subsection{判据与后续}
 
@@ -1369,7 +1441,7 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \item 正则场局部项的系数（如 $\tfrac53$、$11-2q^2/M^2$）取自 \citet{ZimmermanPoisson2014}，没有独立推导。可行的独立检验是 Ernst 精确解按 $M$、$q$ 的展开。
 \item 时间反演为奇的一块和磁宇称部分没有分析。它们不含 $\ddot\zeta$，与自旋的演化有关。
 \item 情形 4 的推导依赖论文第 2 节的解族假设和 (H)，以及近区零阶为 Reissner--Nordstr\"om 解。
-\item 二阶的关键问题（带电黑洞的诱导偶极）见第~\ref{sec:L5} 节的框架，尚未计算。
+\item 二阶的关键问题已有答案：带电黑洞在均匀外场中的诱导电偶极和磁偶极都为零（\S\ref{sec:L5result}），所以二阶中没有诱导偶极力，二阶大概率仍是 Detweiler--Whiting 形式；下一步待定。
 \item 论文正文尚未按本节结果更新。
 \end{itemize}
 
@@ -1410,6 +1482,10 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \texttt{level4\_gauge\_l1.py} & 一阶场 $1/r$ 部分的规范项不影响结果 & 约 4 秒\\
 \texttt{level4\_monopole.py} & 单极修正 $\delta M$、$\delta q$ 的贡献 & 约 3 秒\\
 \texttt{level4\_gauge.py} & \eqref{eq:eom4} 在远区规范变换下协变 & 约 2 秒\\
+\texttt{l1\_response.py} & 情形 5：RN 上静态 $\ell=1$ 两种宇称的精确线性化方程 & 约 40 秒\\
+\texttt{l1\_solve.py} & 情形 5：Laurent 多项式通解 & 约 3 分钟\\
+\texttt{l1\_gauge.py} & 情形 5：$\ell=1$ 规范变换与规范不变量 & 约 1 秒\\
+\texttt{l1\_decaying.py} & 情形 5：化成 \eqref{eq:H0ode} & 约 1 秒\\
 \texttt{level3\_detail.py} & 情形 3：验证 \eqref{eq:A1near} 满足 Maxwell 方程、其 $O(M)$ 项与 \eqref{eq:aS3} 一致、$T^{(2)}$ 的 $EE/BB/EB$ 结构与宇称，并给出 \eqref{eq:T2blockII} & 约 3 秒\\
 \hline
 \end{tabular}
