@@ -1430,13 +1430,9 @@ H_0=r\int\frac{\dd r}{D^2}.
 \begin{equation*}
 (c_2,c_3)=(2,-\tfrac32),\quad(d_2,d_3)=(\tfrac23,-\tfrac16),\quad(e_1,e_2,e_3)=(-1,-4,-5),\quad(f_2,f_3)=(2,4).
 \end{equation*}
-与 \citet{Gralla2012} 式 (11)--(13) 比较：$M^0$、$M^1$ 各项和 $\bar g_{i0}$ 全部一致；$c_3$ 和 $f_3$ 的符号相反（该文为 $+\tfrac32$ 和 $-4$）。\textbf{这一差异记为待核。}
-\begin{itemize}
-\item 规范：该文在式 (11) 前写明解取 Regge--Wheeler 规范（"in Regge-Wheeler gauge"）。$\ell\geq2$ 的 Regge--Wheeler 规范是完全固定的，在背景径向坐标的重新参数化下也不变，所以按该文的说明，$M^2$ 系数不应依赖规范选择。但该文是先在 Schwarzschild 坐标中求解再换到各向同性坐标，换算过程中是否保持了这一规范，需要核实。
-\item 勘误：检索未找到该文的勘误（期刊版 Phys.\ Rev.\ D 85, 124011）。
-\item 独立核对：凭记忆写出的 Schwarzschild 坐标静态潮汐解 $h_{tt}=-\mathcal E_{ij}n^in^j\,r_s^2f^2$、$H_0=H_2$，换到各向同性坐标后与我们一致（$h_{00}=\mathcal E_{ij}n^in^j(-\bar r^2+2M\bar r-\tfrac32M^2)+\dots$）。这一公式的出处尚未核实。
-\end{itemize}
-在确认规范和出处之前，不把它称为该文的错误。
+与 \citet{Gralla2012} 式 (11)--(13) 比较：$M^0$、$M^1$ 各项和 $\bar g_{i0}$ 全部一致；$c_3$ 和 $f_3$ 的符号相反（该文为 $+\tfrac32$ 和 $-4$）。
+
+为判断这一差异是否来自规范，我们直接把该文印出的 (11)--(13) 原样代入 Schwarzschild 上的线性化真空方程（\texttt{ckpt1\_a22.py}）。任何规范下的度规扰动都必须满足这个方程，所以这一检验与规范选择无关。约定由 $M^0$、$M^1$ 项固定：这些项与我们逐项一致，说明 $\mathcal E_{ij}$ 的符号、各向同性坐标和背景 $M^{(n)}$ 都对得上。结果是：\textbf{印出的形式不满足方程}，我们的形式满足。因此这是印出的式子本身的问题，而不是规范的差别。该文的运动方程不是由这两个系数推出的（见下面关于 $\delta\mathcal E_{ij}$ 的讨论），所以这不影响其主要结论。勘误检索未找到（期刊版 Phys.\ Rev.\ D 85, 124011）。
 
 \paragraph{检查点 1：P 规范中的 $a_{21}$（已完成）。}该文用一阶规范变换（其式 (28)--(29)）把 RW 规范的一阶远区场变到 Lorenz 型的 P 规范。取 $v_i=M\,r^2\big(2\mathcal E_{ij}n^j-n_i\mathcal E_{jk}n^jn^k\big)$，由上面的 RW 解，$M\bar r$ 项给出 RW 规范中的 $(a_{ij})_{21}=M\mathcal E_{kl}n^kn^l(-4\delta_{ij}+2n_in_j)$；而
 \begin{equation*}
@@ -1444,7 +1440,51 @@ H_0=r\int\frac{\dd r}{D^2}.
 \end{equation*}
 于是 $h^{\rm P}=h_{\rm RW}-\mathcal L_v\eta$ 给出 $(a_{ij})_{21}=-2M(\delta_{ij}\mathcal E_{kl}n^kn^l+2\mathcal E_{ij})$，$(a_{00})_{21}=2M\mathcal E_{ij}n^in^j$，$(a_{i0})_{21}=\tfrac23M\epsilon_{ijk}n^j\mathcal B^k{}_ln^l$，与该文式 (31)--(33) 一致。注意该文式 (29) 印出的 $v_i$ 中没有因子 $M$；按量纲（$\xi$ 是长度）和上面的比较，$v$ 应正比于 $M$。
 
-\paragraph{检查点 1：$a_{22}$（进行中）。}$a_{22}$ 是远区二阶场的 $r^0$ 项，由近区 RW 解的 $M^2\bar r^0$ 项加上规范变换的二阶效应 $-\mathcal L_vh+\tfrac12\mathcal L_v\mathcal L_v g$ 组成。$-\mathcal L_v$ 作用在 $2M\eta_{00}$-型的 $M^{(1)}/r$ 上，给出 $(j^{\rm P}-j_{\rm RW})_{00}=2M^2\mathcal E_{ij}n^in^j$。要得到该文式 (46) 的 $(a_{00})_{22}=-3M^2\mathcal E_{ij}n^in^j$，RW 解中的 $M^2$ 系数应为 $-5$；而我们的解为 $-\tfrac32$，该文式 (11) 印出的为 $+\tfrac32$，都不吻合。说明还有未计入的贡献（或该文 P 规范在二阶另有成分），正在逐项检查。
+\paragraph{检查点 1：P 规范中的 $a_{22}$（已完成）。}$a_{22}$ 是远区二阶场的 $r^0$ 项。按标度 $x=\lambda\bar x$，远区第 $n$ 阶中 $r^{m-n}$ 的系数 $a_{mn}$ 进入近区第 $m$ 阶，所以 $a_{20}\bar r^2+a_{21}\bar r+a_{22}$ 正是近区二阶场 $\bar g^{(2)}$ 的静态 $\ell=2$ 部分。由于近区一阶场为零，$\bar g^{(2)}$ 满足 Schwarzschild 上的线性化真空方程，而且对 $M$ 逐阶成立。这给出 $a_{22}$ 的一个完全确定的条件，不需要知道该文构造 P 规范的细节。
+
+\emph{从方程直接求。}取 $M^0$、$M^1$ 项为上面已核对的 P 规范值，$M^2$ 项取最一般的静态 $\ell=2$ 形式
+\begin{gather*}
+(a_{00})_{22}=c\,M^2\mathcal E_{kl}n^kn^l,\qquad (a_{i0})_{22}=d\,M^2\epsilon_{ijk}n^j\mathcal B^k{}_ln^l,\\
+(a_{ij})_{22}=M^2\big[e\,\delta_{ij}\mathcal E_{kl}n^kn^l+f\,n_in_j\mathcal E_{kl}n^kn^l+g\,\mathcal E_{ij}+k\,n_{(i}\mathcal E_{j)l}n^l\big].
+\end{gather*}
+解线性化方程得
+\begin{equation*}
+c=\tfrac12,\qquad d=-\tfrac16,\qquad e=1+\tfrac k2,\qquad f=-k,\qquad g,\ k\ \text{任意}.
+\end{equation*}
+剩下的两个自由参数正是这一阶允许的规范自由度：$g$ 对应光滑规范矢量 $\Xi_i\propto M^2\mathcal E_{ij}x^j$（$\mathcal L_\Xi\eta\propto M^2\mathcal E_{ij}$），$k$ 对应 $\Xi_i\propto M^2 r\,n_i\mathcal E_{kl}n^kn^l$。$00$ 和 $i0$ 两个分量不受这些规范矢量影响，被方程唯一确定。
+
+\emph{从规范变换求。}近区里，远区一阶规范矢量 $\lambda v(x)$ 变成 $\bar x\to\bar x+\lambda^2\zeta(\bar x)$，$\zeta_i=M\bar r^2(2\mathcal E_{ij}n^j-n_i\mathcal E_{jk}n^jn^k)$，即近区的二阶规范变换。于是
+\begin{equation*}
+\bar g^{(2)}_{\rm P}=\bar g^{(2)}_{\rm RW}-\mathcal L_\zeta\bar g^{(0)},
+\end{equation*}
+其中 $\bar g^{(0)}$ 是 Schwarzschild 度规，取到 $O(M)$ 就足够：$\mathcal L_\zeta\eta$ 给出 $M\bar r$ 项（即上面的 $a_{21}$），$\mathcal L_\zeta(M^{(1)}/\bar r)$ 给出 $M^2\bar r^0$ 项，$\mathcal L_\zeta(M^{(2)}/\bar r^2)$ 已是 $M^3$。由 RW 解算出
+\begin{gather*}
+(a_{00})_{22}=\tfrac12M^2\mathcal E_{kl}n^kn^l,\qquad(a_{i0})_{22}=-\tfrac16M^2\epsilon_{ijk}n^j\mathcal B^k{}_ln^l,\\
+(a_{ij})_{22}=M^2\big[-3\,\delta_{ij}\mathcal E_{kl}n^kn^l+8\,n_in_j\mathcal E_{kl}n^kn^l-8\,n_{(i}\mathcal E_{j)l}n^l\big],
+\end{gather*}
+即 $k=-8$、$g=0$ 的那个解，它满足方程。两种求法一致。
+
+\emph{与该文式 (46)--(48) 比较。}该文印出 $c=-3$、$d=\tfrac{10}{3}$、$(e,f,g,k)=(-6,-1,8,0)$。代入方程不成立：$c$、$d$ 与唯一允许的值不同，$(e,f)$ 也不满足 $e=1+k/2$、$f=-k$。$i0$ 分量还有一个不依赖我们解的内部矛盾：该文的规范矢量 (28)--(29) 没有静态的磁宇称部分，$\mathcal L_\zeta$ 不改变 $(a_{i0})_{22}$，所以它应等于 RW 解 (12) 中的 $M^2$ 系数 $-\tfrac16$，而 (47) 印的是 $\tfrac{10}{3}$。因此 (46)--(48) 也是印出的式子本身的问题。$a_{22}$ 只进入二阶奇异场的 $r^0$ 项，不进入下面的运动方程论证。
+
+\paragraph{检查点 1：二阶运动方程中的 $\delta\mathcal E_{ij}Z^{(1)j}$（已完成）。}二阶运动由一个规范论证得到，不需要解 $\Xi$。在 P 规范中运动定义为零，即物体沿背景度规 $g$ 的测地线运动。换到光滑相关的规范（$h=h^{\rm P}-\mathcal L_\xi g$，$j=j^{\rm P}-\mathcal L_\xi h^{\rm P}+\tfrac12(\mathcal L_\xi\mathcal L_\xi g-\mathcal L_\Xi g)$），整个描述被同一个微分同胚拉回。所以运动是度规
+\begin{equation*}
+g^{\rm BG}(\lambda)=g-\lambda\mathcal L_\xi g+\tfrac12\lambda^2(\mathcal L_\xi\mathcal L_\xi g-\mathcal L_\Xi g)+O(\lambda^3)
+\end{equation*}
+的测地线，$Z^{(1)}=\xi|_\gamma$，$Z^{(2)}=(\Xi+\xi\cdot\partial\xi)|_\gamma$。这一步是精确的：测地线在微分同胚下映成测地线。
+
+实际计算中出现的不是 $h^{\rm BG}$，而是正则场 $h^{\rm R}$。两者之差是 P 规范场中光滑的部分 $h^{\rm H}$，它从 $r^2$ 开始，$00$ 分量为 $h^{\rm H}_{00}=-\delta\mathcal E_{ij}x^ix^j+O(r^3)$。这里 $\delta\mathcal E_{ij}$ 就是 $h^{\rm H}$ 的潮汐场：静态、只有 $h_{00}$ 时线性化 Riemann 张量为 $R^{(1)}_{0i0j}=-\tfrac12\partial_i\partial_jh_{00}=\delta\mathcal E_{ij}$。一阶运动只用到场的一阶导数，$h^{\rm H}=O(r^2)$ 不起作用。二阶就不同了。把 $x^i=\lambda Z^{(1)i}+\lambda^2Z^{(2)i}$ 代入测地线方程，静态 $h_{00}$ 给出 $\ddot x^i=\tfrac12\lambda\partial_ih_{00}(x)+\dots$；把 $\partial_ih_{00}$ 在 $x=0$ 处展开，$\lambda^2$ 阶得到
+\begin{equation*}
+\ddot Z^{(2)i}\supset\tfrac12Z^{(1)j}\partial_j\partial_ih_{00}\big|_\gamma ,
+\end{equation*}
+这里用到场的二阶导数。把 $h^{\rm BG}_{00}=h^{\rm R}_{00}-h^{\rm H}_{00}=h^{\rm R}_{00}+\delta\mathcal E_{kl}x^kx^l$ 代入，多出的一项是 $\tfrac12Z^{(1)j}\partial_j\partial_i(\delta\mathcal E_{kl}x^kx^l)=\delta\mathcal E_{ij}Z^{(1)j}$，与该文式 (104) 中的修正项一致，系数和符号都对。同一个式子用于背景的 $g_{00}\supset-\mathcal E_{kl}x^kx^l$，给出 (104) 中的 $-\mathcal E_{ij}Z^{(2)j}$，符号约定也一致。$j^{\rm R}$ 和 $j^{\rm BG}$ 相差 $O(r^2)$，而方程只用到 $j$ 的一阶导数，所以二阶场没有类似的修正。
+
+\paragraph{检查点 1 的结论。}
+\begin{enumerate}
+\item 工具与约定得到验证：近区二阶 $\ell=2$ 解、P 规范的 $a_{21}$、$a_{22}$ 都由线性化方程独立确定，与该文的方法（RW 解加规范变换）给出相同结果。
+\item 该文式 (11)、(13) 中两个 $M^2$ 系数，以及式 (46)--(48) 中的 $a_{22}$，代入方程不成立，是印出的式子的问题；式 (29) 中 $v$ 缺因子 $M$。这些都不进入其运动方程。
+\item 二阶运动方程\emph{仍是测地线形式}，但要用对场：在 $g^{\rm BG}=g+\lambda h^{\rm BG}+\lambda^2j^{\rm BG}$ 中它精确地是二阶扰动测地线方程。换成正则场 $(h^{\rm R},j^{\rm R})$ 后，多出且只多出一项 $+\delta\mathcal E_{ij}Z^{(1)j}$。原因是 $h^{\rm R}$ 与 $h^{\rm BG}$ 差一个 $O(r^2)$ 的光滑潮汐项，而二阶方程用到 $h_{00}$ 的二阶导数。这一项的出现取决于正则场在 $r^2$ 阶的取法，不是新的局部力。
+\end{enumerate}
+对后面检查点的含义：只要把"正则场"在 $r^2$ 阶的取法固定为与 $h^{\rm BG}$ 一致，或者显式扣除 $h^{\rm H}$，二阶方程就是 BG 场中的测地线（带电时是 Lorentz 力）方程。所以检查点 1.5 和 2 中真正要判断的是：电磁部分是否也有同样的结构，即带电物体在 BG 场（含 $A^{\rm BG}$）中的二阶扰动 Lorentz 力方程，加上由 $h^{\rm H}$、$A^{\rm H}$ 带来的、类似 $\delta\mathcal E_{ij}Z^{(1)j}$ 的修正。
 
 \paragraph{检查点 1.5（真空背景、带电黑洞）。}背景 $F=0$、$R_{ab}=0$，物体是 RN 黑洞（$M$、$q$）。这是物体自身电荷与质量的直接耦合（$q^2M$、$qM^2$ 型）第一次进入运动的最干净的情形，没有背景场混入。近区零阶为 RN，一阶为零（纯规范），二阶是 RN 上的 $\ell=2$ 静态潮汐解（引力潮汐 $\mathcal E_{ij},\mathcal B_{ij}$ 与 Coulomb 场耦合），三阶含 $\ell=2,3$ 和二阶一阶场的电磁尾巴部分。按 (1)--(8) 推出二阶运动方程，并回答同样的问题。
 
@@ -1514,7 +1554,7 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \item 近区一阶方程的 $\ell=1$ 部分与近区二阶的系数矩阵相同，零阶 Lorentz 力就是它的可解条件（\S\ref{sec:L4first}）。由此得到的近区解在 Lorenz 规范下与远区奇异场逐项一致，这是近区与远区之间的一个独立检验。
 \item 微分同胚恒等式 \eqref{eq:Qident} 把一阶场之间的二次项化成线性算子的列，二次项因此可以手算（\S\ref{sec:L4second}）。
 \item 量纲与宇称论证表明，近区方程在决定运动的那一块中没有不含远区数据的项。由此可知，ZP 结果中的 $\tfrac53$、$11-2q^2/M^2$ 等局部系数全部来自正则场的远区展开。
-\item 情形 1 的矩阵订正了 \citet{GrallaWald2008} 式 (106) 中的两行；情形 6 的检查点 1 中，\citet{Gralla2012} 式 (11)、(13) 有两个 $M^2$ 系数与我们的解符号相反（待核）。
+\item 情形 1 的矩阵订正了 \citet{GrallaWald2008} 式 (106) 中的两行；情形 6 的检查点 1 中，\citet{Gralla2012} 式 (11)、(13) 的两个 $M^2$ 系数和式 (46)--(48) 的 $a_{22}$ 代入线性化方程不成立，正确的值由方程唯一确定（规范自由度除外）。
 \end{enumerate}
 
 \subsection{尚未完成的部分}
@@ -1567,6 +1607,8 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \texttt{l1\_solve.py} & 情形 5：Laurent 多项式通解 & 约 3 分钟\\
 \texttt{l1\_gauge.py} & 情形 5：$\ell=1$ 规范变换与规范不变量 & 约 1 秒\\
 \texttt{l1\_decaying.py} & 情形 5：化成 \eqref{eq:H0ode} & 约 1 秒\\
+\texttt{ckpt1\_l2.py} & 情形 6 检查点 1：RW 规范的近区二阶 $\ell=2$ 静态解 & 约 5 秒\\
+\texttt{ckpt1\_a22.py} & 情形 6 检查点 1：P 规范 $a_{22}$ 的一般解、印出式的检验、规范变换构造 & 约 7 秒\\
 \texttt{level3\_detail.py} & 情形 3：验证 \eqref{eq:A1near} 满足 Maxwell 方程、其 $O(M)$ 项与 \eqref{eq:aS3} 一致、$T^{(2)}$ 的 $EE/BB/EB$ 结构与宇称，并给出 \eqref{eq:T2blockII} & 约 3 秒\\
 \hline
 \end{tabular}
