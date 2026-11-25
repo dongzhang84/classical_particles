@@ -1218,117 +1218,86 @@ Ma_i\big|_{\rm self}=-\tfrac12q\,h^{\rm R}_{00}E_i-q\,h^{\rm R}_{ij}E_j+q\,f^{\r
 \end{itemize}
 
 %======================================================================
-\section[情形 5：静止平衡与精确解检验]{情形 5：静止平衡与精确解检验（框架）}
+\section[情形 5：二阶的关键问题：带电黑洞的诱导偶极]{情形 5：二阶的关键问题：带电黑洞的诱导偶极（框架）}
 \label{sec:L5}
 %======================================================================
 
-本节给出情形 5 的框架：目标、设定、要算的量、参数定义、检验和文献检查清单。计算尚未开始。
+本节是框架，计算尚未开始。它回答两个问题：为什么一阶的结果被"锁定"为 Detweiler--Whiting 形式；到二阶，什么地方可能打破这一形式。后一个问题归结为一个可以在几天内算完的试点：带电黑洞在均匀外场中的诱导偶极。
 
-\subsection{目标}
+\subsection{一阶为什么被锁定}
+\label{sec:L5why}
 
-第 6 节确定了一阶运动方程 \eqref{eq:eom4} 的\textbf{形式}，但其中正则场的局部系数取自 \citet{ZimmermanPoisson2014}，没有独立检验。本节用一个有精确解的物理情形来检验\textbf{具体数值}：一个小的带电黑洞静止在 Reissner--Nordstr\"om 黑洞外，引力与电斥力平衡。这一构型有两黑洞平衡的精确解（Alekseev--Belinski），也有线性化 Einstein--Maxwell 的闭式解（Bini--Geralico--Ruffini）。把精确的平衡条件展开到小物体的一阶，与 \eqref{eq:eom4} 加正则场给出的结果比较，就检验了整个耦合自力，包括局部项和尾巴项。
-
-这一构型是情形 4 的特例：零阶世界线是静止观者的世界线，零阶的力平衡就是 \eqref{eq:balance}，不需要新的近区分析。
-
-\subsection{背景与零阶平衡}
-
-背景取 Reissner--Nordstr\"om 解，质量 $M_{\rm B}$，电荷 $Q_{\rm B}$。在 Schwarzschild 坐标中，
-\begin{equation}
-\dd s^2=-f\,\dd t^2+f^{-1}\dd r^2+r^2\dd\Omega^2,\qquad f=1-\frac{2M_{\rm B}}r+\frac{Q_{\rm B}^2}{r^2},\qquad A=-\frac{Q_{\rm B}}r\,\dd t ,
-\end{equation}
-这是 \eqref{eq:RN} 在另一种径向坐标下的形式。$r=r_0$ 处的静止观者，$u=f^{-1/2}\partial_t$，其加速度沿径向向外，大小为 $a=f'/(2\sqrt f)$。在它的正交标架中，径向电场为 $E=Q_{\rm B}/r_0^2$。代入 \eqref{eq:balance}，$Ma=qE$，即
-\begin{equation}
-M\Big(M_{\rm B}-\frac{Q_{\rm B}^2}{r_0}\Big)=q\,Q_{\rm B}\sqrt{f(r_0)} .
-\label{eq:balance5}
-\end{equation}
-这是零阶平衡条件：给定 $M_{\rm B},Q_{\rm B}$ 和荷质比 $q/M$，它确定平衡半径 $r_0$。
-
-\paragraph{极端特例。}$Q_{\rm B}=M_{\rm B}$ 时 $\sqrt f=1-M_{\rm B}/r$，\eqref{eq:balance5} 化为 $M M_{\rm B}(1-M_{\rm B}/r_0)=qM_{\rm B}(1-M_{\rm B}/r_0)$。所以 $q=M$ 时在任意 $r_0$ 都平衡，这正是 Majumdar--Papapetrou 解的零阶形式。
-
-\subsection{一阶：平衡位置的移动}
-
-在一阶上，小物体仍可静止，但平衡位置可能偏离 $r_0$。在 \eqref{eq:eom4} 中令 $\zeta$ 为常数（只有径向分量 $\zeta^r$），得到
-\begin{equation}
-0=-K\,\zeta^r+\mathcal F_r,\qquad
-K\equiv MR_{0r0r}-q\,\partial_rF_{r0},
-\label{eq:shift5}
-\end{equation}
-其中 $\mathcal F_r$ 是自力 \eqref{eq:eom4} 的后四项在静态时的值：
-\begin{equation}
-\mathcal F_r=q\,f^{\rm R}_{r0}-\tfrac12q\,h^{\rm R}_{00}E+\tfrac12M\,h^{\rm R}_{00,r}
-\label{eq:Fself5}
-\end{equation}
-（静态时 $h^{\rm R}_{r0,0}=0$；分量都在静止观者的 Fermi 标架中取）。$K$ 是零阶净力对位移的"刚度"，可以由 \eqref{eq:balance5} 对 $r_0$ 求导得到。于是平衡位置在一阶上移动 $\zeta^r=\mathcal F_r/K$。
-
-\paragraph{极端特例的检验。}$q=M$、$Q_{\rm B}=M_{\rm B}$ 时，零阶在任意 $r_0$ 都平衡，所以 $K=0$。Majumdar--Papapetrou 解要求一阶上仍在任意位置平衡，因此必须有
-\begin{equation}
-\mathcal F_r=0\qquad(q=M,\ Q_{\rm B}=M_{\rm B},\ \text{任意 }r_0).
-\label{eq:MPtest}
-\end{equation}
-这是一个不涉及参数对应的检验。注意它不是平凡的：静态 RN 中 $B=0$，$\tfrac53M^2FF$ 项为零；但沿静止世界线 $u^\mu\nabla_\mu F\neq0$，$11-2q^2/M^2$ 项仍然存在，必须与尾巴项相消。
-
-\paragraph{一般情形。}$q\neq M$ 或 $Q_{\rm B}\neq M_{\rm B}$ 时，把精确平衡条件按小物体展开到一阶，得到平衡位置（或参数之间关系）的一阶修正，与 $\zeta^r=\mathcal F_r/K$ 比较。这一比较检验 $q^2/M^2$ 的完整依赖。
-
-\subsection{正则场的计算}
-
-静态问题的尾巴项不需要做 Green 函数积分。
+第 6 节的结果是：一阶运动方程就是检验体的 Lorentz 力方程把场换成正则场。耦合没有带来新的项。从推导过程看，原因是下面三点同时成立。
 \begin{enumerate}
-\item \textbf{推迟场。}静态点源的推迟解就是静态线性扰动。RN 上静止带电质点的线性化 Einstein--Maxwell 解有闭式（Bini--Geralico--Ruffini）。电磁部分在不计引力耦合时已知（Copson、Linet 型解，以及 L\'eaut\'e--Linet 在 RN 上的推广）。
-\item \textbf{奇异场。}取 \citet{ZimmermanPoisson2014} 的协变展开 \eqref{eq:Sexp}，在静止观者的 Fermi 坐标中写到 $O(r)$；它的 $r^0$ 项在 \S\ref{sec:L4far} 已写出。
-\item \textbf{正则场。}$\psi^{\rm R}=\psi-\psi^{\rm S}$，在粒子处取 $h^{\rm R}_{00}$、$h^{\rm R}_{00,r}$、$f^{\rm R}_{r0}$，代入 \eqref{eq:Fself5}。
+\item \textbf{局部数据几乎没有规范不变的内容。}远区数据是正则场在 $\gamma$ 上的值和一阶导数。度规的值和一阶导数总可以用坐标变换消去（这是等效原理）；势的值和对称导数可以用电磁规范变换消去，只剩场强 $f^{\rm R}_{ab}$。所以力只能以协变的方式依赖这些数据，系数由规范协变决定。\S\ref{sec:L4gauge} 的检验表明，$-\tfrac12qh_{00}E_i$ 的系数和 $h_{ij}E_j$ 项的缺席都是规范协变所要求的。
+\item \textbf{物体只由单极刻画。}在一阶上，近区零阶解是 RN 解，只有 $M$、$q$ 两个参数。近区一阶的外场响应（\S\ref{sec:L4first}）都是 $r^0$ 项，没有 $1/r^2$ 的诱导偶极，所以物体对外场的反应不引入新的参数。
+\item \textbf{近区方程不产生不含数据的项。}由量纲和宇称（\S\ref{sec:L4second}），决定运动的那一块中没有 $(M,q)^2F^2$ 或 $(M,q)^2\partial F$ 型的项。一阶场之间的二次项只有"常数度规场 $\times$ 外场"一类，而常数度规场是纯规范，由微分同胚恒等式 \eqref{eq:Qident} 化成已知矩阵的列。
 \end{enumerate}
+所以一阶的耦合项要么是规范的影子，要么阶次不够。这也解释了 \citet{LinzFriedmanWiseman2014b} 所说的引力与电磁"不混合"的相消。这里是从推导中归纳出的论证，不是定理；把它写成一般协变场论中的定理是另一个可能的方向，本节不展开。
 
-\paragraph{规范问题。}这是本节最主要的技术难点。闭式解通常不在 Lorenz 规范（例如 Weyl 型或 Regge--Wheeler 型规范），而 \eqref{eq:Sexp} 是 Lorenz 规范下的展开。有三条可能的处理办法：
+\subsection{二阶会怎样}
+
+二阶是物体自身的非线性结构第一次进入运动的阶次：Coulomb 场能量的引力（RN 中的 $q^2/r^2$ 项）、极端程度 $q/M$、物体对外场的响应。但这不意味着二阶一定出现新项。纯引力情形，二阶的运动仍可写成有效度规中的测地线（Pound 等人的工作，出处待核），即 Detweiler--Whiting 形式在二阶仍然成立；\citet{HarteBlancoFlanagan2025} 的框架也预期这种形式普遍成立。所以耦合情形的二阶最可能仍是 Detweiler--Whiting 形式，只能按"检验它是否成立"来立项。
+
+按 \S\ref{sec:L5why} 的三个条件，二阶唯一有具体理由打破这一形式的地方是第 2 条：\textbf{物体在外场中的诱导多极矩}。
 \begin{itemize}
-\item 在粒子附近把闭式解变换到 Lorenz 规范，至少到 $O(r)$；
-\item 利用 \eqref{eq:eom4} 的规范协变性（\S\ref{sec:L4gauge}）：只要规范矢量在粒子附近光滑，$\mathcal F_r$ 的变化与 $\zeta^r$ 的变化恰好抵消，比较的是规范无关的平衡条件；
-\item 若闭式解的规范矢量在粒子处奇异（例如 Weyl 规范中的 $\log$ 项），必须先确定奇异部分，不能直接相减。
+\item \textbf{诱导电偶极。}若物体在均匀电场中获得偶极 $p_i=\alpha E_i$，它受力 $\tfrac12\alpha\,\partial_i(E^2)$。数阶次：近区中 $\alpha\sim L^3$，所以远区中 $\alpha\propto\lambda^3$；零阶力 $qE\propto\lambda$，一阶自力 $\propto\lambda^2$，于是 $\alpha\nabla E^2\propto\lambda^3$，正好是二阶。检验体方程中没有这一项，它不能由换成正则场得到。
+\item \textbf{诱导磁偶极和自旋。}同理，诱导磁矩 $\mu_i=\chi B_i$ 受力 $\partial_i(\mu\cdot B)$；外场若诱导出自旋，还有自旋–曲率力。这些也在二阶进入。
 \end{itemize}
+所以二阶是否出现非 Detweiler--Whiting 的力，首先取决于带电黑洞的 $\alpha$、$\chi$ 是否为零。这一问题只涉及近区一阶，计算量小，而且答案直接决定二阶是否值得做。
 
-\subsection{参数的定义}
-
-一阶比较中，精确解的参数与 \eqref{eq:eom4} 中的量在一阶上不一定相同。第 6 节已经指出，单极修正 $\delta M$、$\delta q$ 恰好是一阶量，会修正零阶力。所以每个量都要用规范无关的方式定义：
-\begin{itemize}
-\item \textbf{电荷}：包围小物体的 Gauss 积分，没有歧义。
-\item \textbf{质量}：\eqref{eq:eom4} 中的 $M$ 是近区 RN 解的参数（\S\ref{sec:L4second} 约定 $\delta M=0$）；精确解中常用的是视界上的 Komar 质量或 Smarr 型的质量。两者在一阶上可能相差一个相互作用能，必须证明相等或算出差值。
-\item \textbf{距离}：用背景中的规范无关量，例如到大黑洞视界的固有距离，或静止观者的红移因子 $\sqrt{f(r_0)}$。精确解中的坐标距离要换算成这些量。
-\item \textbf{背景参数}：精确解中大黑洞的 $M_{\rm B},Q_{\rm B}$ 也受小物体影响，在一阶上要与背景参数对应清楚。
-\end{itemize}
-
-\subsection{其他检验}
+\subsection{文献现状}
 
 \begin{itemize}
-\item \textbf{只有电荷的极限。}$M\to0$ 且不计电磁场对度规的扰动时，自力应退化为静止电荷在 Schwarzschild（或 RN）中的已知自力（Smith--Will、Zel'nikov--Frolov 型结果）。
-\item \textbf{远距离极限。}$r_0\gg M_{\rm B}$ 时，平衡条件应退化为牛顿–库仑平衡加后牛顿修正，可与 Weyl 类静态解的展开比较。
-\item \textbf{规范协变。}换用不同规范的闭式解，平衡位置的规范无关描述（固有距离或红移）不变。
+\item \citet{PereniguezCardoso2022} 研究了带电黑洞的静态响应，矢量扇区中引力与电磁扰动耦合。四维中，他们的结论是："Love numbers and magnetic susceptibilities vanish for all values of the charge that respect the extremality bound." 但有两个缺口：
+\begin{itemize}
+\item 标量扇区（偶宇称）没有做："A more thorough analysis including the scalar sector will be considered elsewhere." 带电黑洞在外电场中的诱导电偶极属于这一扇区，而且引力与电磁耦合。
+\item $\ell=1$ 作为特殊谐波处理（矢量扇区中对应小转动），不是均匀外场中的偶极响应。
+\end{itemize}
+\item \citet{CardosoEtAl2017} 讨论了 Einstein--Maxwell 中的潮汐 Love 数，看来针对 $\ell\geq2$；它是否处理了 $\ell=1$ 的耦合电响应，待读原文核实。
+\item 不带电时，Schwarzschild 黑洞在均匀电场中的解 $A_t=-E(r_s-2M)\cos\theta$ 没有偶极项（\S\ref{sec:L3near}），即 $\alpha=0$。
+\end{itemize}
+所以：磁的一侧，$\ell\geq2$ 已知为零，$\ell=1$ 很可能也为零，需要确认；电的一侧，带电黑洞在均匀电场中的耦合偶极响应，文献中没有现成答案。
+
+\subsection{试点：问题的精确表述}
+
+近区一阶问题，精确到 $M$、$q$ 的所有阶（第 6 节只到一次）：
+\begin{itemize}
+\item \textbf{背景}：RN 解，质量 $M$，电荷 $q$，$q\leq M$。
+\item \textbf{外场}：大 $r$ 处趋于均匀电场 $E$ 和均匀磁场 $B$；电场部分同时有加速度 $a$（\S\ref{sec:L4first}）。均匀场的能量引起的曲率 $\sim E^2$ 是近区二阶的量，在一阶不出现，所以这里不需要 Melvin 背景。
+\item \textbf{扰动}：静态、$\ell=1$，两种宇称都要算：
+\begin{itemize}
+\item 偶宇称：$h_{tt}$、$h_{rr}$、角向部分、$A_t$，由 $E$ 和 $a$ 驱动；
+\item 奇宇称：$h_{t\phi}$、$A_\phi$，由 $B$ 驱动。
+\end{itemize}
+\item \textbf{条件}：视界处正则；大 $r$ 处增长部分由 $E$、$B$、$a$ 固定。
+\item \textbf{要读出的量}：大 $r$ 展开中 $1/r^2$ 的 $\ell=1$ 项，即诱导电偶极 $p$、诱导磁偶极 $\mu$，以及 $h_{t\phi}$ 中的 $1/r^2$ 项（诱导自旋）。
 \end{itemize}
 
-\subsection{文献检查清单}
+\paragraph{偶极的定义。}这是最需要小心的地方。平移原点 $x\to x+\delta$ 时，Coulomb 势产生电偶极项 $q\,\delta\cdot n/r^2$，质量项产生质量偶极 $M\delta$。所以电偶极本身依赖于原点，与平移的规范自由度混在一起。规范无关的量是相对质心的电偶极：先用平移令质量偶极为零（这正是 $\zeta$ 的定义，\S\ref{sec:expansions}），再读出电偶极；等价地，取组合 $p-\tfrac qM\,d$，$d$ 为质量偶极。此外，静态 $\ell=1$ 的规范矢量 $\xi\sim1/r$ 也会产生 $1/r^2$ 项，所以要用规范不变的变量（如 Kodama--Ishibashi 或 Moncrief 型的组合）读出响应，或者在固定的规范中同时消去这些自由度。
 
-开始计算前先查：
+\paragraph{加速度的作用。}带电黑洞在电场中必须加速（$Ma=qE$），否则一阶方程无解（\S\ref{sec:L4first}）。所以电的一侧是"加速的带电黑洞"，加速度项 $-2a\cdot x$ 也是驱动项。这与 Ernst 解的物理一致。
+
+\subsection{方法与检验}
+
 \begin{enumerate}
-\item 有没有人用 \citet{ZimmermanPoisson2014} 或 \citet{LinzFriedmanWiseman2014b} 的 Detweiler--Whiting 自力（局部项加尾巴）重新得到静止带电质点在 RN 中的平衡条件。
-\item Bini--Geralico--Ruffini 的平衡条件与 Alekseev--Belinski 精确解的后续比较。
-\item LaHaye--Poisson 用锥奇异性（支撑杆）求静态自力的系列工作，是否已推广到带电、引力电磁耦合的情形。
-\item 静止电荷在 RN 中的电磁自力（L\'eaut\'e--Linet 等）。
+\item 在 RN 的 Schwarzschild 型坐标中，写出静态 $\ell=1$ 两种宇称的扰动方程（常微分方程组）。
+\item 求视界正则的解析解，预期是多项式或超几何函数；按大 $r$ 展开，读出 $1/r^2$ 项。
+\item \textbf{检验 1}：$q=0$ 时回到 $A_t=-E(r_s-2M)\cos\theta$，偶极为零。
+\item \textbf{检验 2}：按 $M$、$q$ 展开到一次，回到 \S\ref{sec:L4first} 的解（\eqref{eq:S4r0}）。
+\item \textbf{检验 3}：磁的一侧与 \citet{PereniguezCardoso2022} 的结论对照（$\ell\geq2$ 为零的结论能否延伸到 $\ell=1$）。
+\item \textbf{检验 4}：极端情形 $q=M$ 单独分析（视界退化，正则条件改变）。
 \end{enumerate}
-判据：
+所需工具：现有的 \texttt{trunc.py} 和 \texttt{level4\_l1.py} 可以给出逐阶展开，用于检验 2；精确解需要另写一个常微分方程的求解脚本。
+
+\subsection{判据与后续}
+
 \begin{itemize}
-\item 若没有人做过，按本节框架计算，与第 6 节合成一篇完整的论文；
-\item 若只做过纯电磁部分，补全耦合部分，仍然是新的；
-\item 若已有人用锥奇异性法完整算过带电静态自力，新意减弱为"Detweiler--Whiting 处方与锥奇异性法在耦合情形下一致"；
-\item 若已有人完整做过与 Detweiler--Whiting 自力的比较，再讨论方向。
+\item \textbf{$\alpha\neq0$ 或 $\chi\neq0$}：二阶一定出现非 Detweiler--Whiting 的力 $\tfrac12\alpha\nabla E^2$ 或 $\nabla(\chi B^2)/2$，这是新物理，值得投入二阶的完整推导（以 Gralla 的二阶工作为模板，出处待核）。Ernst 解在 Melvin 背景中给出带电黑洞在外场中的精确加速度，可以展开到二阶检验。
+\item \textbf{$\alpha=\chi=0$}：二阶大概率仍是 Detweiler--Whiting 形式。是否投入几个月去证明这一点，再讨论；也可以转向把 \S\ref{sec:L5why} 的论证写成一般协变理论中的定理。
 \end{itemize}
 
-\subsection{步骤}
-\begin{enumerate}
-\item 文献检查（上一小节）。
-\item 写出静止观者的 Fermi 坐标展开（\eqref{eq:fermiacc} 中的 $a$、$R_{0r0r}$、$\partial_rF_{r0}$），算出 $K$。
-\item 写出闭式静态解，确定其规范；在粒子附近展开到 $O(r)$。
-\item 减去奇异场，得到 $h^{\rm R}_{00}$、$h^{\rm R}_{00,r}$、$f^{\rm R}_{r0}$，算出 $\mathcal F_r$。
-\item 极端检验 \eqref{eq:MPtest}。
-\item 一般情形：精确平衡条件按小物体展开到一阶，理清参数对应，与 $\zeta^r=\mathcal F_r/K$ 比较。
-\end{enumerate}
+\paragraph{注：静止平衡解。}两黑洞静止平衡的精确解（Alekseev--Belinski、Majumdar--Papapetrou）和 RN 上静止带电质点的线性解（Bini--Geralico--Ruffini）可以用来检验一阶正则场局部系数的数值。它们是运动方程的特例，不产生新的运动方程，所以只作附带检验，不作为主线。
 
 %======================================================================
 \section{总结与文献定位}
@@ -1400,7 +1369,7 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \item 正则场局部项的系数（如 $\tfrac53$、$11-2q^2/M^2$）取自 \citet{ZimmermanPoisson2014}，没有独立推导。可行的独立检验是 Ernst 精确解按 $M$、$q$ 的展开。
 \item 时间反演为奇的一块和磁宇称部分没有分析。它们不含 $\ddot\zeta$，与自旋的演化有关。
 \item 情形 4 的推导依赖论文第 2 节的解族假设和 (H)，以及近区零阶为 Reissner--Nordstr\"om 解。
-\item 局部系数的独立检验见第~\ref{sec:L5} 节的框架（静止平衡与精确解），尚未计算。
+\item 二阶的关键问题（带电黑洞的诱导偶极）见第~\ref{sec:L5} 节的框架，尚未计算。
 \item 论文正文尚未按本节结果更新。
 \end{itemize}
 
