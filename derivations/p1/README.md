@@ -25,6 +25,7 @@ ZP 2014 已经给出耦合推迟 Green 函数的 Hadamard 展开、奇异场和�
 | 2 | q ≠ 0，F = 0 | MiSaTaQuWa + DeWitt–Brehme 尾巴 | 通过（2026-11-24）。运动方程恰好多出 q f^tail_{i0}，4 个规范模式全部通过 |
 | 3 | q = 0，F ≠ 0 | ZP 取 q → 0：(5/3)M²FF 局部项 + 耦合尾巴 | 完成（2026-11-25）。决定运动的块 I 与第 1 级相同，运动由正则场梯度决定；代入 ZP 的正则场局部项得 (5/3)M²(E×B)。块 II 的自洽性和局部项的独立推导未做 |
 | 4 | 完整 | ZP 式 (8.2) 的线性化 | 完成（2026-11-25）。近区推出的运动方程 = Lorentz 力线性化 + 正则场的 Detweiler–Whiting 自力，即 ZP 式 (8.2) 线性化；Ma = qE 是近区一阶的可解条件；七个检验脚本全部通过。局部项系数仍取自 ZP |
+| 5 | 静止平衡（q, M 在 RN 外） | Alekseev–Belinski 精确解；Bini–Geralico–Ruffini；极端时 Majumdar–Papapetrou | 框架已写（calc.tex 第 7 节），待文献检查后计算 |
 
 ## 约定
 
