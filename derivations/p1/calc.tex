@@ -1436,7 +1436,15 @@ H_0=r\int\frac{\dd r}{D^2}.
 \item 勘误：检索未找到该文的勘误（期刊版 Phys.\ Rev.\ D 85, 124011）。
 \item 独立核对：凭记忆写出的 Schwarzschild 坐标静态潮汐解 $h_{tt}=-\mathcal E_{ij}n^in^j\,r_s^2f^2$、$H_0=H_2$，换到各向同性坐标后与我们一致（$h_{00}=\mathcal E_{ij}n^in^j(-\bar r^2+2M\bar r-\tfrac32M^2)+\dots$）。这一公式的出处尚未核实。
 \end{itemize}
-在确认规范和出处之前，不把它称为该文的错误。下一步：检验 P 规范中的 $a_{21}$、$a_{22}$（该文式 (31)--(33)、(46)--(48)）和二阶运动方程中的修正项。
+在确认规范和出处之前，不把它称为该文的错误。
+
+\paragraph{检查点 1：P 规范中的 $a_{21}$（已完成）。}该文用一阶规范变换（其式 (28)--(29)）把 RW 规范的一阶远区场变到 Lorenz 型的 P 规范。取 $v_i=M\,r^2\big(2\mathcal E_{ij}n^j-n_i\mathcal E_{jk}n^jn^k\big)$，由上面的 RW 解，$M\bar r$ 项给出 RW 规范中的 $(a_{ij})_{21}=M\mathcal E_{kl}n^kn^l(-4\delta_{ij}+2n_in_j)$；而
+\begin{equation*}
+\partial_iv_j+\partial_jv_i=M\,r\big(4\mathcal E_{ij}-2\delta_{ij}\mathcal E_{kl}n^kn^l+2n_in_j\mathcal E_{kl}n^kn^l\big),
+\end{equation*}
+于是 $h^{\rm P}=h_{\rm RW}-\mathcal L_v\eta$ 给出 $(a_{ij})_{21}=-2M(\delta_{ij}\mathcal E_{kl}n^kn^l+2\mathcal E_{ij})$，$(a_{00})_{21}=2M\mathcal E_{ij}n^in^j$，$(a_{i0})_{21}=\tfrac23M\epsilon_{ijk}n^j\mathcal B^k{}_ln^l$，与该文式 (31)--(33) 一致。注意该文式 (29) 印出的 $v_i$ 中没有因子 $M$；按量纲（$\xi$ 是长度）和上面的比较，$v$ 应正比于 $M$。
+
+\paragraph{检查点 1：$a_{22}$（进行中）。}$a_{22}$ 是远区二阶场的 $r^0$ 项，由近区 RW 解的 $M^2\bar r^0$ 项加上规范变换的二阶效应 $-\mathcal L_vh+\tfrac12\mathcal L_v\mathcal L_v g$ 组成。$-\mathcal L_v$ 作用在 $2M\eta_{00}$-型的 $M^{(1)}/r$ 上，给出 $(j^{\rm P}-j_{\rm RW})_{00}=2M^2\mathcal E_{ij}n^in^j$。要得到该文式 (46) 的 $(a_{00})_{22}=-3M^2\mathcal E_{ij}n^in^j$，RW 解中的 $M^2$ 系数应为 $-5$；而我们的解为 $-\tfrac32$，该文式 (11) 印出的为 $+\tfrac32$，都不吻合。说明还有未计入的贡献（或该文 P 规范在二阶另有成分），正在逐项检查。
 
 \paragraph{检查点 1.5（真空背景、带电黑洞）。}背景 $F=0$、$R_{ab}=0$，物体是 RN 黑洞（$M$、$q$）。这是物体自身电荷与质量的直接耦合（$q^2M$、$qM^2$ 型）第一次进入运动的最干净的情形，没有背景场混入。近区零阶为 RN，一阶为零（纯规范），二阶是 RN 上的 $\ell=2$ 静态潮汐解（引力潮汐 $\mathcal E_{ij},\mathcal B_{ij}$ 与 Coulomb 场耦合），三阶含 $\ell=2,3$ 和二阶一阶场的电磁尾巴部分。按 (1)--(8) 推出二阶运动方程，并回答同样的问题。
 
