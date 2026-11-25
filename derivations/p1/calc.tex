@@ -1488,6 +1488,81 @@ g^{\rm BG}(\lambda)=g-\lambda\mathcal L_\xi g+\tfrac12\lambda^2(\mathcal L_\xi\m
 
 \paragraph{检查点 1.5（真空背景、带电黑洞）。}背景 $F=0$、$R_{ab}=0$，物体是 RN 黑洞（$M$、$q$）。这是物体自身电荷与质量的直接耦合（$q^2M$、$qM^2$ 型）第一次进入运动的最干净的情形，没有背景场混入。近区零阶为 RN，一阶为零（纯规范），二阶是 RN 上的 $\ell=2$ 静态潮汐解（引力潮汐 $\mathcal E_{ij},\mathcal B_{ij}$ 与 Coulomb 场耦合），三阶含 $\ell=2,3$ 和二阶一阶场的电磁尾巴部分。按 (1)--(8) 推出二阶运动方程，并回答同样的问题。
 
+\subsection{检查点 1.5：真空背景中带电黑洞的二阶运动}
+\label{sec:L6ck15}
+
+\paragraph{P 规范中的近区。}背景为真空（$R_{ab}=0$，$F=0$），$\gamma$ 是背景测地线。按 Gralla 的做法，取以质心为中心的 P 规范：远区各阶场都相对 $\gamma$ 展开，物体的质量偶极和电偶极为零，偏离 $\gamma$ 的运动全部编码在场的光滑部分中（加速度势 $h_{00}\supset-2a\cdot x$ 和均匀场）。第一阶的场 $h^{\rm P}$、$A^{\rm P}$ 没有 $r^0$ 项：奇异场在真空中没有 $r^0$ 项，正则场在 $\gamma$ 上的值被规范变换（$\xi$ 和电磁规范 $\chi$）吸收。由按列的对应（远区第 $n$ 阶中 $r^{m-n}$ 的系数进入近区第 $m$ 阶），近区一阶场 $\bar g^{(1)}$、$\bar A^{(1)}$ 只剩单极修正，把它吸收进 $M$、$q$ 后为零。
+
+由此得到一个关键的简化：\emph{近区二阶和三阶的方程都是 RN 上的线性化 Einstein--Maxwell 方程}，因为二次项至少要含一个近区一阶场。时间依赖只通过 $t=t_0+\lambda\bar t$ 进入，$\bar g^{(3)}\supset\bar t\,\partial_{t_0}\bar g^{(2)}$。$\partial_{t_0}\bar g^{(2)}$ 对每个 $t_0$ 都满足静态方程，所以三阶方程中 $\bar t$ 的系数自动成立，剩下的是：静态的三阶场满足带源的静态方程，源来自时间导数作用在 $\bar t\,\partial_{t_0}\bar g^{(2)}$ 上。
+
+记数：每一项的（长度幂次）$+$（$M,q$ 的幂次）等于近区阶数，$\bar t$ 算一个长度。远区一阶场正比于 $M$、$q$，所以加速度 $a_1$、均匀场 $f$ 记为 $\varepsilon^1$。$\ell=1$ 部分（两种宇称）的拟设为：
+\begin{itemize}
+\item 二阶：数据 $h_{00}=-2a\cdot\bar x$，$A_0=\boldsymbol E\cdot\bar x$，$A_i=\tfrac12(\boldsymbol B\times\bar x)_i$（$\varepsilon^1\bar r$），加上 $\varepsilon^1\bar r$、$\varepsilon^2\bar r^0$、$\varepsilon^3\bar r^{-1}$ 上最一般的 $\ell=1$ 项（每个幂次 12 个未知矢量）；
+\item 三阶：$\bar t\,\partial_{t_0}$(二阶解)（二阶的数据和自由参数取独立的时间导数），加上 $\varepsilon^1\bar r^2$、$\varepsilon^2\bar r$、$\varepsilon^3\bar r^0$ 上最一般的 $\ell=1$ 项，其中 $\varepsilon^2\bar r$ 的 $h_{00}=-2a_2\cdot\bar x$、$A_0=\boldsymbol E_2\cdot\bar x$、$A_i=\tfrac12(\boldsymbol B_2\times\bar x)_i$ 是二阶的加速度和均匀场。
+\end{itemize}
+RN 背景（各向同性坐标）展开到 $\varepsilon^2$，完整的 Einstein--Maxwell 方程用 \texttt{trunc.py} 算到 $\varepsilon^3$，取全部分量（\texttt{ckpt15\_l1.py}、\texttt{ckpt15\_l1\_order3.py}、\texttt{ckpt15\_analyse3.py}）。求解时把数据列放在最后做行化简，主元落在数据列上的行就是对数据的约束。
+
+\paragraph{二阶：一阶运动。}唯一的约束是 $Ma_1=q\boldsymbol E$，到 $\varepsilon^3$ 没有修正；磁部分没有约束。取 $h_E=h_F=0$ 的规范，$r^0$ 项为 $h_{00}=5q\boldsymbol E\cdot n$、$a_0=-(M+\tfrac{q^2}{2M})\boldsymbol E\cdot n$、$h_{0i}=2q(\boldsymbol B\times n)_i$、$a_i=M(\boldsymbol B\times n)_i$，与情形 4 的近区一阶解（\S\ref{sec:L4first}）逐项相同，只是这里的场是物体自身的一阶正则场 $f^{\rm R}$，不是背景场。
+
+\paragraph{三阶：二阶运动。}约束为
+\begin{equation}
+6Ma_2-6q\boldsymbol E_2+6M\dot h_C+6q\,\dot a_C-(M^2-q^2)(h_E+2h_F)=0 ,
+\label{eq:ck15bal}
+\end{equation}
+其余约束只涉及规范参数的时间导数（磁宇称 $h_{ij}$ 的规范模式，可取为零），以及一阶远区场 $r^2$ 项之间由平直方程给出的关系（如 $\partial_t\boldsymbol E$ 与磁场梯度的关系）。各项的意义：
+\begin{itemize}
+\item $\dot h_C$ 是二阶场中常数 $h_{0i}$ 的时间导数，即 $D^C_2=\partial_0j_{0i}|_\gamma$；
+\item $\boldsymbol E_2-\dot a_C$ 是规范无关的二阶均匀电场 $e_2=F^{(2)}_{i0}|_\gamma$（与情形 4 中 $e=E^0-E^C$ 的合成相同）；
+\item $h_E$、$h_F$ 是一阶远区场 $h_{ij}$ 中 $\ell=1$ 的 $r^2$ 项。它们正好是平直规范矢量 $\xi_i=r^3(c_1v_i+c_2n_i\,n\cdot v)$ 生成的结构，$h_E+2h_F=6(c_1+c_2)$。同一个 $\xi$ 作用在 RN 背景上，$\xi\cdot\partial(2M/r)$ 使 $a_2$ 平移 $M(c_1+c_2)$，$\xi\cdot\partial(-q/r)$ 使 $\boldsymbol E_2$ 平移 $q(c_1+c_2)$。代入 \eqref{eq:ck15bal}，三者之和为 $6M^2-6q^2-6(M^2-q^2)=0$，正好抵消。所以这一项只表示 $a_2$、$\boldsymbol E_2$ 的规范依赖，在 $a_{31}$ 不含这类项的规范中（Gralla 的 P 规范即如此）它为零。
+\end{itemize}
+于是
+\begin{equation}
+Ma_2=q\,e_2-M\,D^C_2 .
+\label{eq:ck15a2}
+\end{equation}
+这与一阶的平衡条件形式完全相同，只是数据换成了二阶的。特别是，\emph{近区没有产生任何局部项}：没有 $\dot{\boldsymbol E}$、$\dot a_1$ 的项，没有 $q^2/M$、$qM$ 型的自耦合修正。二阶近区场对一阶数据的依赖（$5q\boldsymbol E\cdot n$ 等）经过时间导数进入三阶，但在可解条件中全部消掉。
+
+\paragraph{$\ell=2$：RN 的潮汐响应。}同样的方法用于二阶的静态 $\ell=2$ 部分（\texttt{ckpt15\_l2.py}）：数据为真空潮汐场（$\bar r^2$），未知量为 $\varepsilon\bar r$、$\varepsilon^2\bar r^0$ 上最一般的 $\ell=2$ 度规和势。方程没有约束。在 RW 型规范中，
+\begin{gather*}
+\bar g^{(2)}_{00}\supset\mathcal E_{nn}\big(2M\bar r-\tfrac32(M^2+q^2)\big),\qquad
+\bar g^{(2)}_{i0}\supset\epsilon_{ijk}n^j\mathcal B^k{}_ln^l\big(\tfrac23M\bar r-\tfrac16(M^2-q^2)\big),\\
+\bar A^{(2)}_0=q\,\mathcal E_{nn}\big(-\tfrac12\bar r+\tfrac12M\big),\qquad
+\bar A^{(2)}_i=q\,\epsilon_{ijk}n^j\mathcal B^k{}_ln^l\big(\tfrac16\bar r+\tfrac13M\big),
+\end{gather*}
+$h_{ij}$ 与 $q=0$ 时相同（$-4M\bar r-5M^2$、$2M\bar r+4M^2$）。$q=0$ 时回到检查点 1 的解。潮汐场在 Coulomb 场上感应出 $\ell=2$ 的电磁场，这些是二阶奇异场的一部分。
+
+\paragraph{从 P 规范到一般规范：运动方程。}在 P 规范中 $\gamma$ 就是运动，$h^{\rm H}(\gamma)=0$，$A^{\rm H}(\gamma)$ 为纯规范。检验体的二阶微扰 Lorentz 力方程在 $Z=0$ 处只剩 $0=-a_2-D^C_2+\tfrac qMe_2$：所有二次项都含 $h^{\rm H}(\gamma)$ 或速度，为零。\eqref{eq:ck15a2} 正是这个条件。所以，\emph{在 P 规范中，$Z=0$ 是 H 场（$g+\lambda h^{\rm H}+\lambda^2j^{\rm H}$，$\lambda A^{\rm H}+\lambda^2A^{(2){\rm H}}$）中二阶微扰 Lorentz 力方程的解}。
+
+Lorentz 力方程在微分同胚和电磁规范变换下协变。用 $(\xi,\Xi,\chi)$ 变到光滑相关的规范，运动变为 $Z^{(1)}=\xi|_\gamma$、$Z^{(2)}=(\Xi+\xi\cdot\partial\xi)|_\gamma$，H 场变为
+\begin{gather*}
+h^{\rm H}-\mathcal L_\xi g=h-h^{\rm S},\qquad
+j^{\rm H}-\mathcal L_\xi h^{\rm H}+\tfrac12(\mathcal L_\xi\mathcal L_\xi g-\mathcal L_\Xi g)=j-(j^{\rm S}-\mathcal L_\xi h^{\rm S}),\\
+A^{(1){\rm H}}+\dd\chi_1=A^{(1)}-A^{(1){\rm S}},\qquad
+A^{(2){\rm H}}-\mathcal L_\xi A^{(1){\rm H}}+\dd\chi_2=A^{(2)}-(A^{(2){\rm S}}-\mathcal L_\xi A^{(1){\rm S}}).
+\end{gather*}
+右边正是总场减去随世界线移动后的奇异场（$j^{\rm S}-\mathcal L_\xi h^{\rm S}$ 是 P 规范的二阶奇异场被位移 $\xi$ 拖动后的形式）。所以：
+\begin{equation}
+\text{二阶运动}=\text{检验体在正则场 }(h^{\rm R},j^{\rm R},A^{\rm R})\text{ 中的二阶微扰 Lorentz 力方程，}
+\label{eq:ck15eom}
+\end{equation}
+其中正则场定义为总场减去随世界线移动的奇异场。这一步是精确的，不需要再解 $\Xi$。
+
+与检查点 1 的关系：Gralla 取的是 $j^{\rm R}=j-(j^{\rm P}-\mathcal L_\xi h^{\rm P})$，即把 $-\mathcal L_\xi h^{\rm H}$ 也算进奇异场，所以多出 $\delta\mathcal E_{ij}Z^{(1)j}$。两种定义相差 $j^{\rm H}-\mathcal L_\xi h^{\rm H}$。在 \eqref{eq:ck15eom} 的定义下，这一项就包含在正则场里：$(-\mathcal L_\xi h^{\rm H})_{00}\supset-\xi^k\partial_k(-\delta\mathcal E_{lm}x^lx^m)=2\delta\mathcal E_{kl}\xi^kx^l$，代入方程中的 $\tfrac12\partial_ij_{00}$ 正好给出 $\delta\mathcal E_{ij}\xi^j=\delta\mathcal E_{ij}Z^{(1)j}$。所以 Gralla 的修正项是两种正则场定义之差，两种说法等价。
+
+\paragraph{清单 (7)、(8)。}
+\begin{itemize}
+\item $M$ 与 $q$：P 规范中近区一阶场为零，$M$、$q$ 就是近区 RN 的参数。若 $M$ 在一阶有时间依赖，它会以 $\bar t\,\delta\dot M/\bar r$ 出现在 $\bar g^{(2)}$ 中，而这一项等于 $\bar t\,\partial_{t_0}\bar g^{(1)}=0$。所以到二阶运动所需的阶数 $M$ 不变；$q$ 由 Gauss 定律守恒。
+\item 自旋：近区 $m$ 阶的 Kerr--Newman 自旋模式 $h_{0i}\propto(\boldsymbol J\times n)_i/\bar r^2$ 通过自旋-曲率力和自旋-磁场力进入 $m+1$ 阶运动。二阶运动需要近区一阶的自旋，它为零（近区一阶场为零）。所以外场诱导的自旋不进入二阶运动。磁偶极矩同样为零（\S\ref{sec:L5result}，$\chi=0$）。二阶、三阶的磁宇称方程到 $\varepsilon^3$ 也没有对 $\boldsymbol B$、$\boldsymbol B_2$ 的约束。
+\end{itemize}
+
+\paragraph{检查点 1.5 的结论。}背景为真空时，带电黑洞的二阶运动方程是检验体在正则场中的二阶微扰 Lorentz 力方程 \eqref{eq:ck15eom}，没有多出的项：
+\begin{enumerate}
+\item 近区（RN 到 $\varepsilon^2$，方程到 $\varepsilon^3$）不产生局部力；$q^2M$、$qM^2$ 型的自耦合只进入奇异场（如上面 $\ell=2$ 的 $q$ 修正），不进入可解条件；
+\item 诱导偶极和诱导自旋在这一阶不出现；$M$、$q$ 不随时间变化；
+\item 若按 Gralla 的方式定义二阶正则场，则多出 $\delta\mathcal E_{ij}Z^{(1)j}$；它来自正则场的定义，不是新的力。
+\end{enumerate}
+局部项（如 ALD 型的 $\tfrac23\tfrac{q^2}{M}\dot a$）若存在，都在正则场中，与一阶时的情况（\S\ref{sec:L4second}）相同。要得到显式的力，还需要二阶奇异场 $j^{\rm S}$、$A^{(2){\rm S}}$ 的完整表达式，这属于应用，不改变方程的形式。
+
 \paragraph{检查点 2（完整耦合，一般电真空，最后做）。}背景为一般电真空，按 (1)--(8) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
 
 \paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
@@ -1609,6 +1684,10 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \texttt{l1\_decaying.py} & 情形 5：化成 \eqref{eq:H0ode} & 约 1 秒\\
 \texttt{ckpt1\_l2.py} & 情形 6 检查点 1：RW 规范的近区二阶 $\ell=2$ 静态解 & 约 5 秒\\
 \texttt{ckpt1\_a22.py} & 情形 6 检查点 1：P 规范 $a_{22}$ 的一般解、印出式的检验、规范变换构造 & 约 7 秒\\
+\texttt{ckpt15\_l1.py} & 检查点 1.5：近区二阶 $\ell=1$（RN 到 $\varepsilon^2$），平衡条件 $Ma_1=qE$ & 约 25 秒\\
+\texttt{ckpt15\_l1\_order3.py} & 检查点 1.5：近区三阶 $\ell=1$ 方程 & 约 75 秒\\
+\texttt{ckpt15\_analyse3.py} & 检查点 1.5：三阶可解条件 \eqref{eq:ck15bal} & 约 10 秒\\
+\texttt{ckpt15\_l2.py} & 检查点 1.5：RN 上的 $\ell=2$ 潮汐响应 & 约 10 秒\\
 \texttt{level3\_detail.py} & 情形 3：验证 \eqref{eq:A1near} 满足 Maxwell 方程、其 $O(M)$ 项与 \eqref{eq:aS3} 一致、$T^{(2)}$ 的 $EE/BB/EB$ 结构与宇称，并给出 \eqref{eq:T2blockII} & 约 3 秒\\
 \hline
 \end{tabular}
