@@ -19,7 +19,7 @@
 \maketitle
 
 \begin{abstract}
-本文给出论文第 4 节所述一阶运动的近区推导。推导按复杂程度分四种情形进行：真空背景上的不带电物体；真空背景上的带电物体；电真空背景上的不带电物体；一般情形。前两种情形已完成。第一种情形重新得到 MiSaTaQuWa 方程，第二种情形在其上恰好多出电磁尾巴场的洛伦兹力，即背景不带电时一阶运动只由正则场驱动。第三种情形给出了问题的结构分析和计算步骤，计算尚未完成。所有系数都由符号计算得到，实现与检验见附录~\ref{app:code}。
+本文给出论文第 4 节所述一阶运动的近区推导。推导按复杂程度分四种情形进行：真空背景上的不带电物体；真空背景上的带电物体；电真空背景上的不带电物体；一般情形。前三种情形已完成。第一种情形重新得到 MiSaTaQuWa 方程，第二种情形在其上恰好多出电磁尾巴场的洛伦兹力，即背景不带电时一阶运动只由正则场驱动。第三种情形中，近区方程决定运动的部分与第一种情形相同，运动由推迟场光滑部分的梯度决定，即 Detweiler--Whiting 正则场；代入 Zimmerman 和 Poisson 给出的正则场局部项，得到他们 $q\to0$ 时的 $\tfrac53M^2(\boldsymbol E\times\boldsymbol B)$ 局部力。所有系数都由符号计算得到，实现与检验见附录~\ref{app:code}。
 \end{abstract}
 
 \tableofcontents
@@ -700,46 +700,202 @@ M\ddot\zeta_i=M\big(-R_{0i0j}\zeta^j-h^{\rm tail}_{i0,0}+\tfrac12h^{\rm tail}_{0
 于是，在背景不带电的情形，由 Einstein--Maxwell 场方程推出：带电小物体的一阶运动只由正则场驱动，引力和电磁两部分解耦。据我们所知，这一情形此前没有在 \citet{GrallaWald2008} 的框架下推出过；\citet{FutamaseHoganItoh2008} 的结果在这一情形只剩 Abraham--Lorentz--Dirac 项，没有尾巴项。
 
 %======================================================================
-\section[情形 3：电真空背景，不带电物体]{情形 3：电真空背景，不带电物体（结构分析）}
+\section{情形 3：电真空背景，不带电物体}
 \label{sec:L3}
 %======================================================================
 
-本节给出情形 3 的结构分析和计算步骤，计算尚未完成。
-
-\subsection{目标}
-
-\citet{ZimmermanPoisson2014} 的运动方程取 $q=0$ 后为
+本节背景带电磁场，$F_{ab}\neq0$，物体不带电，$q=0$。背景满足 Einstein--Maxwell 方程
 \begin{equation}
-M a^\mu=\tfrac53M^2(g^{\mu\nu}+u^\mu u^\nu)F_{\nu\lambda}F^{\lambda\rho}u_\rho+(\text{耦合 Green 函数给出的引力尾巴}).
-\label{eq:target3}
+R_{ab}=8\pi T_{ab}=2F_{ac}F_b{}^c-\tfrac12g_{ab}F_{cd}F^{cd},\qquad \nabla_bF^{ab}=0,
+\label{eq:bgEM}
 \end{equation}
-在 $\gamma$ 的静止系中，$F_{i\lambda}F^{\lambda}{}_{0}$ 正比于坡印廷矢量 $(\boldsymbol E\times\boldsymbol B)_i$，局部项沿背景场的能流方向。
+其中用了电磁应力无迹，约定与 \citet{ZimmermanPoisson2014} 相同。在 $\gamma$ 上记
+\begin{equation}
+E_i\equiv F_{i0},\qquad F_{ij}\equiv\epsilon_{ijk}B_k ,
+\end{equation}
+于是 $R_{0i}=2F_{0j}F_{ij}=-2(\boldsymbol E\times\boldsymbol B)_i$，$F_{ij}F_{j0}=(\boldsymbol E\times\boldsymbol B)_i$。不带电的物体在零阶上沿测地线运动，Fermi 坐标与 \eqref{eq:fermi} 相同，只是 Riemann 张量现在有 Ricci 部分。
 
-\subsection{与前两种情形的不同}
+与前两种情形相比，新出现的是背景场：它在远区与质量扰动耦合，在近区一阶就出现，并通过电磁应力进入近区二阶的 Einstein 方程。本节要回答的问题与第 4 节相同：这些新出现的项是否改变运动方程的形式。结论是不改变：运动仍由推迟场光滑部分的 $\ell=1$ 梯度决定，只是这一光滑部分现在含有正比于 $MF^2$ 的局部项。代入 \citet{ZimmermanPoisson2014} 给出的这些局部项，就得到他们的 $q\to0$ 结果。
 
-\paragraph{时间反演不再分块。}前两种情形只取时间反演为偶的部分，这在背景时间反演不变时成立。现在背景电场为偶、磁场为奇，坡印廷矢量为奇。背景场与扰动的乘积会把两种宇称的扰动混在一起，所以必须同时保留两种宇称的 $\ell=1$ 扰动，提取全部 $R_{00}$、$R_{0i}$、$R_{ij}$ 在 $1/\bar r^2$ 和 $\bar t/\bar r^3$ 两阶的系数。未知齐次项的数目约为前两种情形的两倍。
+\subsection{远区展开}
+\label{sec:L3far}
 
-\paragraph{远区一阶场有确定的 $\ell=1$ 局部项。}前两种情形中，\eqref{eq:hfar}、\eqref{eq:afar} 里除了奇异部分和尾巴，只有 $M\mathcal R$、$q\mathcal S$ 这类曲率修正，它们没有 $\ell=1$ 部分。现在扰动方程是耦合的：
+\paragraph{背景势。}在 Fermi 坐标中取
+\begin{equation}
+A_0=F_{j0}x^j,\qquad A_i=\tfrac12F_{ji}x^j,
+\label{eq:Abg}
+\end{equation}
+误差为 $O(x^2)$。直接求导可验证：$\partial_iA_0-\partial_0A_i=F_{i0}$，$\partial_iA_j-\partial_jA_i=\tfrac12F_{ij}-\tfrac12F_{ji}=F_{ij}$。
+
+\paragraph{一阶扰动。}$F\neq0$ 时度规扰动和电磁扰动在线性化方程中耦合：线性化电磁应力含 $F\cdot f$ 和 $hFF$ 型的项，线性化 Maxwell 方程含 $hF$ 型的项。两种扰动都取 Lorenz 规范，推迟解仍写成点源对推迟 Green 函数的积分，只是 Green 函数现在是耦合的 \citep{ZimmermanPoisson2014}。下面只用推迟解在 $\gamma$ 附近的结构。按 \citet{DetweilerWhiting2003}，把推迟场分成奇异场和正则场，$\psi=\psi^{\rm S}+\psi^{\rm R}$，其中 $\psi$ 代表 $(h_{ab},a_a)$。正则场 $\psi^{\rm R}$ 在 $\gamma$ 上光滑，可以 Taylor 展开。
+
+奇异场在 $\gamma$ 附近的展开由 Hadamard 系数给出。在与 $x$ 同时的世界线点上（$\hat r=0$），$\gamma$ 为测地线时，\citet{ZimmermanPoisson2014} 的协变展开化为
+\begin{equation}
+\psi^{\rm S}=\frac1s\Big[\gamma_1\,U(t)+\tfrac12s^2\,\ddot U(t)-s^2\,V(t)\Big]+O(s^2),\qquad
+U(t)=q+qU_{|\mu}\sigma^\mu+\tfrac12qU_{|\mu\nu}\sigma^\mu\sigma^\nu+O(s^3).
+\label{eq:Sexp}
+\end{equation}
+这里 $q$ 代表源（对度规为 $4Mu^\alpha u^\beta$，对势为电荷，现在为零），$U_{|\mu}$、$U_{|\mu\nu}$ 是 Hadamard 系数在重合点的展开系数，$\gamma_1=1-\tfrac16R_{0a0b}x^ax^b/s^2+O(s)$。Fermi 坐标中 $\sigma^\mu=(0,-x^a)$，$s=r$。由此读出奇异场在 $O(r)$ 以内的形式：
 \begin{itemize}
-\item $h\sim2M/r$ 通过 \eqref{eq:Y} 中的 $hF$ 项诱导出电磁扰动 $a\sim M\,F\,n$（量级 $r^0$，$\ell=1$）。在近区里，这就是 Schwarzschild 黑洞在均匀外场中的一阶响应。
-\item 这一电磁扰动与背景场的交叉应力，加上背景 Ricci 张量（$\propto F^2$）与 $M/r$ 的乘积，在度规中产生 $h\sim MF^2r$ 型的项，其中含 $\ell=1$ 部分，形如 $M(\boldsymbol E\times\boldsymbol B)\cdot\boldsymbol x$。
-\end{itemize}
-这些项会进入 $D^A$、$D^C$ 等系数，从而给出正比于 $MF^2$ 的局部力；\eqref{eq:target3} 中的 $\tfrac53M^2FF$ 应当从这里来。
-
-\paragraph{局部项与尾巴项的分离。}上述 $O(r)$ 的 $\ell=1$ 项对 $x$ 线性且光滑，与 \eqref{eq:hfar} 中的尾巴项 $h^{\rm tail}_{\alpha\beta\gamma}x^\gamma$ 形式相同。只解 $\gamma$ 附近的局部方程，只能确定两者之和，不能确定哪部分属于局部、哪部分属于尾巴。这一分法由推迟 Green 函数的 Hadamard 分解给出：直接部分给出局部项，尾巴部分沿过去世界线的积分给出尾巴。所以展开 \eqref{eq:hfar}、\eqref{eq:afar} 在 $F\neq0$ 时要由耦合 Hadamard 系数构造。这一构造本身是严格的，本文要检验的是“运动只由正则场驱动”这一步，而不是 Green 函数。\citet{ZimmermanPoisson2014} 第 VIII 节已在 Fermi 坐标中给出正则势展开到一阶的形式，其中有所需的局部项，例如
+\item \textbf{度规}：引力–引力耦合没有一阶系数 $U_{|\mu}$（Lorenz 规范下它为零），电荷源为零，所以
 \begin{equation}
-h^{\rm R}_{ta}\supset m\big(2R_{atct}+F_{at}F_{ct}-F_{ae}F^e{}_c-\delta_{ac}F_{et}F^{et}\big)x^c,\qquad b^{\rm R}_a\supset-mF_{at},
+h^{\rm S}_{\alpha\beta}=\frac{2M}r\,\delta_{\alpha\beta}+\frac{C_{\alpha\beta ij}x^ix^j}{r}+C'_{\alpha\beta}\,r+O(r^2),
+\label{eq:hS3}
 \end{equation}
-后者就是 $a\sim MF$ 的 $r^0$ 项。
+$C$、$C'$ 是常系数，含 Riemann 张量和 $FF$。关键是：没有 $r^0$ 项，$O(r)$ 项都是 $x$ 的偶函数。
+\item \textbf{势}：电磁–引力耦合的一阶系数为 $U^\alpha{}_{|\beta\gamma\mu}=\tfrac12\delta^\alpha{}_{(\beta}F_{\gamma)\mu}-\tfrac14g_{\beta\gamma}F^\alpha{}_\mu$ \citep{ZimmermanPoisson2014}。乘以源 $4Mu^\beta u^\gamma$（$u=\partial_t$）：$4MU^t{}_{|tt\mu}=MF_{t\mu}$，$4MU^a{}_{|tt\mu}=MF^a{}_\mu$。再乘 $\sigma^\mu/s=-n^\mu$，
+\begin{equation}
+a^{{\rm S}\,0}=-M\,F_{0c}n^c,\qquad a^{{\rm S}\,i}=-M\,F_{ic}n^c,
+\qquad\text{即}\quad a^{\rm S}_0=-M\,\boldsymbol E\!\cdot\!n,\quad a^{\rm S}_i=M(\boldsymbol B\times n)_i ,
+\label{eq:aS3}
+\end{equation}
+这是 $r^0$、$\ell=1$ 的项，量级 $MF$。其余项为 $O(r)$。
+\end{itemize}
+于是推迟场在 $\gamma$ 附近为
+\begin{align}
+h_{\alpha\beta}&=\frac{2M}r\,\delta_{\alpha\beta}+h^{\rm R}_{\alpha\beta}+h^{\rm R}_{\alpha\beta,\gamma}x^\gamma+\frac{C_{\alpha\beta ij}x^ix^j}{r}+C'_{\alpha\beta}\,r+O(r^2),
+\label{eq:hfar3}\\
+a_\alpha&=a^{\rm S}_\alpha+a^{\rm R}_\alpha+a^{\rm R}_{\alpha,\gamma}x^\gamma+O(r),
+\label{eq:afar3}
+\end{align}
+其中 $h^{\rm R}_{\alpha\beta}$ 等在 $\gamma$ 上取值。它与 \eqref{eq:hfar} 的区别有两点：一是尾巴项换成了正则场，正则场除了尾巴积分还含有正比于 $MF^2$ 的局部项（\S\ref{sec:L3ZP}）；二是 $O(r)$ 的奇异项现在含 $FF$。$\gamma$ 是测地线时 Fermi 坐标的 Christoffel 符号在 $\gamma$ 上为零，所以 $h^{\rm R}_{\alpha\beta,\gamma}$ 就是协变导数。
 
-\subsection{计算步骤}
-\begin{enumerate}
-\item 由耦合 Hadamard 系数写出 $F\neq0$ 时 \eqref{eq:hfar}、\eqref{eq:afar} 的推广，$h$ 和 $a$ 都到 $O(r)$，取 $e=0$。导入的展开必须满足远区一阶方程，这是第一项检验；$a$ 的 $r^0$ 项还应与 Schwarzschild 黑洞在均匀场中的一阶解在远处的展开一致。
-\item 平移到质心，写出近区到 $O(\lambda^2)$ 的度规和势，包括两种时间宇称的 $\ell=1$ 未知齐次项，以及平移在背景势上产生的 $\zeta^cF_{ca}$ 项。
-\item 计算完整 Einstein--Maxwell 方程在 $\lambda^2$ 阶的系数，不再逐项挑选进入的乘积，以免遗漏。为控制表达式大小，背景场取特定方向（例如 $\boldsymbol E\parallel x$、$\boldsymbol B\parallel y$），再取另一组方向复算，检验结果的协变性。
-\item 消去未知项，得到 $\ddot\zeta^i$ 中的局部力，与 \eqref{eq:target3} 的局部项对照；尾巴部分与耦合 Green 函数的尾巴对照。
-\item 规范检验：微分同胚同时作用在度规、背景势和一阶势上，必须落在零空间里。
-\end{enumerate}
+\subsection{近区展开}
+\label{sec:L3near}
+
+标度和平移与 \S\ref{sec:expansions} 相同，本节同样省略近区量上的横线。
+
+\paragraph{背景势的标度。}由 \eqref{eq:Abg} 和 $x^i=\lambda(\bar x^i+\zeta^i)$，$\bar A_\mu=A_\mu(x)$ 中背景势的贡献为
+\begin{equation*}
+\bar A_0=\lambda\,F_{j0}(\bar x^j+\zeta^j),\qquad \bar A_i=\tfrac\lambda2F_{ji}(\bar x^j+\zeta^j),
+\end{equation*}
+所以背景场在近区\textbf{一阶}出现，是均匀场。含 $\zeta$ 的项在 $\lambda$ 阶是常数势，不产生场；$\zeta$ 随时间变化，$\zeta(t)=\zeta(t_0)+\lambda\bar t\dot\zeta+\dots$，在 $\lambda^2$ 阶给出 $\bar A_i\supset\tfrac12\bar t\,\dot\zeta^jF_{ji}$，即一个均匀电场 $\tfrac12\dot\zeta^jF_{ij}$（运动物体看到的 $\boldsymbol v\times\boldsymbol B$ 型电场）。它只进入近区二阶的 Maxwell 方程。
+
+\paragraph{近区零阶与一阶。}零阶是 Schwarzschild 解，在各向同性坐标中
+\begin{equation}
+\dd s^2=-\alpha^2\dd t^2+\psi^4\dd x^i\dd x^i,\qquad \psi=1+\frac M{2r},\qquad \alpha=\frac{1-M/2r}{1+M/2r}.
+\end{equation}
+一阶度规满足近区 Einstein 方程在 $\lambda$ 阶的线性化。电磁应力的 $\lambda$ 阶部分 $\propto F^{(0)}F^{(1)}$，而 $q=0$ 时 $F^{(0)}=0$，所以一阶度规与情形 1 相同。一阶势 $A^{(1)}$ 满足 Schwarzschild 上的 Maxwell 方程，在大 $r$ 处趋于均匀场 $E$、$B$。静态解为
+\begin{equation}
+A^{(1)}_0=\Big(1-\frac M{2r}\Big)^2\,\boldsymbol E\!\cdot\!x,\qquad
+A^{(1)}_i=\tfrac12\,\psi^4\,(\boldsymbol B\times x)_i .
+\label{eq:A1near}
+\end{equation}
+\begin{itemize}
+\item \textbf{电场部分。}静态时 Maxwell 方程的 $0$ 分量是 $\partial_i\big(\sqrt{-g}\,g^{00}g^{ij}\partial_jA_0\big)=-\partial_i\big[(\psi^2/\alpha)\,\partial_iA_0\big]=0$。记 $u=1-M/2r$，则 $\psi^2/\alpha=\psi^3/u$，$u'=M/2r^2$，$\psi'=-M/2r^2$。对 $A_0=u^2\,\boldsymbol E\!\cdot\!x$，
+\begin{equation*}
+\frac{\psi^2}\alpha\,\partial_iA_0=\psi^3u\,E_i+\frac{M\psi^3}{r}\,n_i\,(\boldsymbol E\!\cdot\!n).
+\end{equation*}
+用 $n_i\partial_i(\boldsymbol E\!\cdot\!n)=0$ 和 $\partial_i\big(G(r)n_i\big)=r^{-2}(r^2G)'$，散度为
+\begin{equation*}
+\boldsymbol E\!\cdot\!n\,\Big[(\psi^3u)'+\frac{(Mr\psi^3)'}{r^2}\Big]
+=\boldsymbol E\!\cdot\!n\,\frac{M\psi^2}{2r^2}\Big[-3u+3\psi-\frac{3M}{r}\Big]=0 .
+\end{equation*}
+在 Schwarzschild 坐标中这就是熟知的解 $A_t=-E(r_s-2M)\cos\theta$，因为 $r_s-2M=r(1-M/2r)^2$。
+\item \textbf{磁场部分。}真空背景中 Killing 矢量 $\xi$ 给出 Maxwell 方程的解 $A=\tfrac12B\,\xi$ \citep{Wald1974}。取轴向 Killing 矢量，$A_\phi=\tfrac12B\,g_{\phi\phi}=\tfrac12B\psi^4r^2\sin^2\theta$，写成 Cartesian 分量就是 \eqref{eq:A1near} 的第二式。
+\end{itemize}
+Maxwell 方程的其他 $\ell=1$ 静态解在大 $r$ 处衰减为 $1/r^2$（电偶极、磁偶极）。电偶极已由质心条件消去（\S\ref{sec:expansions}）；磁偶极与均匀场的交叉应力为 $O(1/r^3)$，不进入下面提取的阶次。
+
+\paragraph{匹配检验。}\eqref{eq:A1near} 按 $M$ 展开：
+\begin{equation*}
+A^{(1)}_0=\boldsymbol E\!\cdot\!x-M\,\boldsymbol E\!\cdot\!n+\frac{M^2}{4r}\,\boldsymbol E\!\cdot\!n,\qquad
+A^{(1)}_i=\tfrac12(\boldsymbol B\times x)_i+M(\boldsymbol B\times n)_i+O\Big(\frac{M^2}r\Big).
+\end{equation*}
+$O(M)$ 项与远区奇异场的 $r^0$ 项 \eqref{eq:aS3} 完全一致。前者由近区的 Maxwell 方程求出，后者由远区的耦合 Hadamard 系数求出，两者独立。
+
+\paragraph{近区二阶度规。}形式与 \eqref{eq:g2} 相同。由 \eqref{eq:hfar3}，远区数据现在由正则场合成：
+\begin{equation}
+D_{\alpha\beta0}=h^{\rm R}_{\alpha\beta,0}+2\zeta_{(\alpha,\beta)0},\qquad
+D_{\alpha\beta i}=h^{\rm R}_{\alpha\beta,i}+2\zeta_{(\alpha,\beta)i}+2B_{\alpha i\beta j}\zeta^j ,
+\label{eq:Ddef3}
+\end{equation}
+\eqref{eq:g2} 中的 $M\mathcal R_{\alpha\beta}$ 换成 \eqref{eq:hS3} 的 $O(r)$ 项。平移作用在这些 $O(r)$ 项上产生的 $r^0$ 项并入 $H$。
+
+\subsection{近区二阶方程}
+\label{sec:L3eq}
+
+\paragraph{Einstein 方程。}在 $\lambda^2$ 阶，
+\begin{equation}
+R^{(1)}[\bar g^{(2)}]-8\pi\,T^{(2)}=\mathcal S^{\rm E},\qquad
+8\pi\,T^{(2)}_{ab}=2F^{(1)}_{ac}F^{(1)}{}_b{}^c-\tfrac12g^{(0)}_{ab}F^{(1)}_{cd}F^{(1)cd},
+\label{eq:L3second}
+\end{equation}
+其中 $F^{(1)}=\dd A^{(1)}$，指标用 Schwarzschild 度规升降；电磁应力无迹，所以用 Ricci 张量。与情形 2 不同，线性化应力 \eqref{eq:dT2} 正比于 $F^{(0)}$，现在为零，所以 $\bar g^{(2)}$、$\bar A^{(2)}$ 都不进入电磁应力。左边的算子就是情形 1 的 Schwarzschild 线性化 Ricci 算子，$\mathcal S^{\rm E}$ 也与情形 1 相同（$\bar g^{(1)}$ 与 $F^{(1)}F^{(1)}$ 的乘积是 $\lambda^3$ 阶）。新出现的只有已知的源 $T^{(2)}$。
+
+\paragraph{Maxwell 方程。}在 $\lambda^2$ 阶，Maxwell 方程含 $\bar A^{(2)}$ 在 Schwarzschild 上的散度，以及 $\bar g^{(1)}$ 与 $F^{(1)}$ 的乘积。$\bar g^{(2)}$ 只以 $\delta(\sqrt{-g}g\,g)F^{(0)}$ 的形式进入，现在为零。所以 Maxwell 方程不含 $\bar g^{(2)}$，也就不含 $\ddot\zeta$，与运动无关。
+
+\subsection{时间反演分块}
+\label{sec:L3blocks}
+
+把扰动分成两块：
+\begin{itemize}
+\item \textbf{块 I}：$h_{00}$、$h_{ij}$ 是 $t$ 的偶函数，$h_{0i}$ 是 $t$ 的奇函数。情形 1、2 的全部输入都在这一块。
+\item \textbf{块 II}：反过来，即静态的 $h_{0i}$，以及正比于 $t$ 的 $h_{00}$、$h_{ij}$。
+\end{itemize}
+Schwarzschild 度规静态且 $g_{0i}=0$，所以线性化 Ricci 算子不混合两块：$R_{00}$、$R_{ij}$ 中来自 $h_{0i}$ 的每一项都带奇数个 $\partial_0$，$R_{0i}$ 中来自 $h_{00}$、$h_{ij}$ 的项也是如此。前两种情形不需要块 II，因为背景时间反演不变时它与块 I 无关。现在背景磁场在时间反演下为奇，必须检查背景场是否把块 II 的源送进块 I。下面逐项检查块 I 中 $\ell=1$ 电宇称、$1/r^2$ 和 $t/r^3$ 两阶的内容。
+
+\paragraph{用到的宇称。}在 $x\to-x$ 下，$\ell=1$ 电宇称的 $Q_{00}$、$Q_{ij}$ 是奇函数，$Q_{0i}$ 是偶函数（见 \eqref{eq:harm}）。Schwarzschild 度规在 $x\to-x$ 下不变，所以线性化算子保持每个分量的函数宇称。
+
+\paragraph{(a) 奇异场的 $O(r)$ 项。}由 \eqref{eq:hS3}，这些项在 $h_{00}$、$h_{ij}$ 中是偶函数，没有块 I 的 $\ell=1$ 部分。块 I 中 $h_{0i}$ 的 $\ell=1$ 部分正比于 $t$，需要 $h^{\rm S}_{0i}$ 有 $r^0$ 项，而 \eqref{eq:hS3} 没有。这些项经 $O(M)$ 算子给出 $M^2/r^2$ 的偶函数，也不进入。背景的 $B_{\alpha i\beta j}x^ix^j$ 同样如此。所以块 I 的远区数据只来自正则场，由 \eqref{eq:Ddef3}，
+\begin{equation}
+D^A_i=h^{\rm R}_{00,i}+2B_{0i0j}\zeta^j,\qquad D^C_i=h^{\rm R}_{i0,0}+\ddot\zeta_i .
+\label{eq:DAC3}
+\end{equation}
+
+\paragraph{(b) 电磁源 $T^{(2)}$。}记 $\mathcal E_i\equiv\partial_iA^{(1)}_0=F^{(1)}_{i0}$，$\mathcal F_{ij}\equiv F^{(1)}_{ij}$。由 \eqref{eq:A1near}，$\mathcal E$ 只由 $E$ 决定，$\mathcal F$ 只由 $B$ 决定。用 $g^{00}=-\alpha^{-2}$、$g^{ij}=\psi^{-4}\delta^{ij}$，$F^{(1)}_{cd}F^{(1)cd}=-2\alpha^{-2}\psi^{-4}\mathcal E^2+\psi^{-8}\mathcal F_{ij}\mathcal F_{ij}$，代入 \eqref{eq:L3second}：
+\begin{align}
+8\pi T^{(2)}_{00}&=\psi^{-4}\,\mathcal E^2+\tfrac12\alpha^2\psi^{-8}\,\mathcal F_{ij}\mathcal F_{ij},\nonumber\\
+8\pi T^{(2)}_{0i}&=-2\psi^{-4}\,\mathcal E_j\mathcal F_{ij},\label{eq:T2comp}\\
+8\pi T^{(2)}_{ij}&=-2\alpha^{-2}\,\mathcal E_i\mathcal E_j+2\psi^{-4}\,\mathcal F_{ik}\mathcal F_{jk}-\tfrac12\psi^4\delta_{ij}\,F^{(1)}_{cd}F^{(1)cd}.\nonumber
+\end{align}
+$T^{(2)}_{00}$、$T^{(2)}_{ij}$ 只含 $EE$ 和 $BB$，$T^{(2)}_{0i}$ 只含 $EB$。$\mathcal E_i=\partial_i\big(u^2\,\boldsymbol E\!\cdot\!x\big)$ 是奇函数的梯度，为偶函数；$\mathcal F_{ij}$ 同理为偶函数。所以 $T^{(2)}$ 的所有分量都是偶函数，$T^{(2)}_{00}$、$T^{(2)}_{ij}$ 在任何 $M$ 阶上都没有 $\ell=1$ 电宇称部分。$T^{(2)}$ 是静态的，不含 $t/r^3$ 项。所以 $T^{(2)}$ 只进入块 II。
+
+\paragraph{块 I 的方程与运动方程。}由 (a)、(b)，块 I 中 $\ell=1$ 电宇称的方程与情形 1 的 (A)--(F) 完全相同，只是远区数据由 \eqref{eq:DAC3} 给出。消元也相同，非平凡关系仍是 $-MD^A_i+2MD^C_i=0$。代入 \eqref{eq:DAC3}：
+\begin{equation}
+M\ddot\zeta_i=M\Big(-R_{0i0j}\zeta^j-h^{\rm R}_{i0,0}+\tfrac12h^{\rm R}_{00,i}\Big).
+\label{eq:eom3}
+\end{equation}
+这就是情形 1 的 \eqref{eq:eom1}，只是尾巴场换成了正则场。背景场只以两种方式出现：一是 $R_{0i0j}$ 中的 Ricci 部分；二是正则场中的局部项。近区方程本身没有给出额外的力。
+
+\paragraph{块 II。}$T^{(2)}_{0i}$ 的 $\ell=1$ 部分按 $M$ 展开为（附录~\ref{app:code} 中的 \texttt{level3\_detail.py}）
+\begin{equation}
+\begin{split}
+8\pi T^{(2)}_{0i}\Big|_{\ell=1}={}&-2(\boldsymbol E\times\boldsymbol B)_i
++\frac{2M}{r}\Big[(\boldsymbol E\times\boldsymbol B)\!\cdot\!n\,n_i+(\boldsymbol E\times\boldsymbol B)_i\Big]\\
+&-\frac{M^2}{r^2}\Big[3(\boldsymbol E\times\boldsymbol B)\!\cdot\!n\,n_i+\tfrac12(\boldsymbol E\times\boldsymbol B)_i\Big]+O\Big(\frac{M^3}{r^3}\Big).
+\end{split}
+\label{eq:T2blockII}
+\end{equation}
+$r^0$ 项就是背景的 $R_{0i}=-2(\boldsymbol E\times\boldsymbol B)_i$，由 $B_{0jik}x^jx^k$ 的 Ricci 张量平衡；$M/r$ 项由奇异场 $h^{\rm S}_{0i}$ 的 $O(r)$ 项平衡，这是远区一阶方程在 $\gamma$ 附近的内容。$M^2/r^2$ 项进入块 II 在 $1/r^2$ 阶的方程。块 II 中没有 $\zeta$：常梯度 $h^{\rm R}_{0i,j}x^j$ 只有 $\ell=0$、磁宇称 $\ell=1$ 和 $\ell=2$ 部分，没有电宇称 $\ell=1$ 部分；正比于 $t$ 的 $h^{\rm R}_{00,0}$、$h^{\rm R}_{ij,0}$ 只有 $\ell=0,2$ 部分；平移项 $2\zeta_{(i,j)0}=0$。块 II 也不含其他远区数据。所以块 II 不影响运动。它在 $1/r^2$ 阶是否自洽，是对奇异场 $O(M^2)$ 结构的一个检验，本文没有做。
+
+\subsection{与 Zimmerman--Poisson 的比较}
+\label{sec:L3ZP}
+
+\citet{ZimmermanPoisson2014} 假设运动由 Detweiler--Whiting 正则场驱动。在 Fermi 坐标中、$q=0$ 时，他们的运动方程就是 \eqref{eq:eom3} 的形式。所以 \eqref{eq:eom3} 在这一情形从场方程推出了他们的假设。
+
+运动方程的具体形式还需要正则场在 $\gamma$ 上的梯度。\citet{ZimmermanPoisson2014} 由耦合 Hadamard 系数算出，$\gamma$ 为测地线、$q=0$ 时为
+\begin{equation}
+h^{\rm R}_{00,i}=\tfrac13M\,R_{0i}+h_{00i}[\text{tail}],\qquad
+h^{\rm R}_{i0,0}=4M\,\bar V_{i0|00}+h_{i00}[\text{tail}],\qquad
+\bar V_{i0|00}=\tfrac12F_{ic}F_{0c},
+\label{eq:hR3}
+\end{equation}
+其中 $[\text{tail}]$ 是耦合 Green 函数沿过去世界线的积分，$\bar V$ 是 Hadamard 系数 $V$ 在重合点的值（经迹反转）。第二式中的局部项来自尾巴积分上限随 $t$ 移动的边界项，所以局部与尾巴的划分取决于约定，两者之和是唯一的。代入 \eqref{eq:eom3}，用 $R_{0i}=2F_{0c}F_{ic}$，
+\begin{align}
+M\ddot\zeta_i&=M\Big(-R_{0i0j}\zeta^j-h_{i00}[\text{tail}]+\tfrac12h_{00i}[\text{tail}]\Big)+M^2\Big(-2F_{ic}F_{0c}+\tfrac13F_{0c}F_{ic}\Big)\nonumber\\
+&=M\Big(-R_{0i0j}\zeta^j-h_{i00}[\text{tail}]+\tfrac12h_{00i}[\text{tail}]\Big)+\tfrac53M^2F_{ij}F_{j0},
+\label{eq:eom3ZP}
+\end{align}
+即局部力为 $\tfrac53M^2(\boldsymbol E\times\boldsymbol B)_i$，沿背景场的能流方向。这与 \citet{ZimmermanPoisson2014} 的运动方程取 $q\to0$ 一致：他们的局部项是 $-\tfrac13q^2\big(4-2q^2/M^2-5M^2/q^2\big)F_{ac}F^c{}_t$，$q\to0$ 时只剩 $\tfrac53M^2F_{ac}F^c{}_t$，而 $F_{ac}F^c{}_t=F_{ij}F_{j0}$；其余局部项都正比于 $q$。两部分的来源分开：$\tfrac53$ 中的 $2$ 来自 $h^{\rm R}_{i0,0}$，$-\tfrac13$ 来自 $h^{\rm R}_{00,i}$。
+
+\paragraph{结论。}$q=0$ 时，背景电磁场不改变近区二阶 Einstein 方程中决定运动的那一块，原因是：
+\begin{itemize}
+\item 物体不带电，近区零阶没有电磁场，线性化电磁应力为零；
+\item 近区一阶场的应力 $T^{(2)}$ 只进入块 II；
+\item 奇异场的 $O(r)$ 项没有块 I 的 $\ell=1$ 部分。
+\end{itemize}
+所以运动由推迟场光滑部分的梯度决定，这一部分就是 Detweiler--Whiting 正则场。$\tfrac53M^2$ 的局部力完全来自远区的耦合 Hadamard 展开 \eqref{eq:hR3}，近区推导只确定它进入运动方程的方式。\eqref{eq:hR3} 本文直接取自 \citet{ZimmermanPoisson2014}，没有独立推导。
+
 
 %======================================================================
 \appendix
@@ -769,6 +925,7 @@ h^{\rm R}_{ta}\supset m\big(2R_{atct}+F_{at}F_{ct}-F_{ae}F^e{}_c-\delta_{ac}F_{e
 \texttt{level2.py} & 不经分解，直接计算，生成 \eqref{eq:L2matrix}，写入 \texttt{level2\_matrix.txt} & 约 19 分钟\\
 \texttt{level2\_detail.py} & 直接展开 $(-g)^{1/2}g^{ac}g^{bd}F_{cd}$ 和应力张量，逐列核对第 4 节的手算 & 约 5 秒\\
 \texttt{gauge\_test2.py} & 情形 2 的规范检验 & 数秒\\
+\texttt{level3\_detail.py} & 情形 3：验证 \eqref{eq:A1near} 满足 Maxwell 方程、其 $O(M)$ 项与 \eqref{eq:aS3} 一致、$T^{(2)}$ 的 $EE/BB/EB$ 结构与宇称，并给出 \eqref{eq:T2blockII} & 约 3 秒\\
 \hline
 \end{tabular}
 \end{center}
