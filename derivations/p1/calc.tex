@@ -19,7 +19,7 @@
 \maketitle
 
 \begin{abstract}
-本文给出论文第 4 节所述一阶运动的近区推导。推导按复杂程度分四种情形进行：真空背景上的不带电物体；真空背景上的带电物体；电真空背景上的不带电物体；一般情形。前三种情形已完成。第一种情形重新得到 MiSaTaQuWa 方程，第二种情形在其上恰好多出电磁尾巴场的洛伦兹力，即背景不带电时一阶运动只由正则场驱动。第三种情形中，近区方程决定运动的部分与第一种情形相同，运动由推迟场光滑部分的梯度决定，即 Detweiler--Whiting 正则场；代入 Zimmerman 和 Poisson 给出的正则场局部项，得到他们 $q\to0$ 时的 $\tfrac53M^2(\boldsymbol E\times\boldsymbol B)$ 局部力。所有系数都由符号计算得到，实现与检验见附录~\ref{app:code}。
+本文给出论文第 4 节所述一阶运动的近区推导。推导按复杂程度分四种情形进行：真空背景上的不带电物体；真空背景上的带电物体；电真空背景上的不带电物体；一般情形。四种情形都已完成。第一种情形重新得到 MiSaTaQuWa 方程；第二种情形在其上恰好多出电磁尾巴场的洛伦兹力；第三种情形中，近区方程决定运动的部分与第一种情形相同。第四种情形是一般情形：零阶世界线满足 Lorentz 力方程，它作为近区一阶方程的可解条件出现；近区二阶方程推出的一阶运动方程，恰好是 Lorentz 力方程的线性化加上由 Detweiler--Whiting 正则场给出的自力，即 Zimmerman 和 Poisson 作为假设采用的形式。所以在一阶上，驱动带电小黑洞的只是正则场。所有系数都由符号计算得到，实现与检验见附录~\ref{app:code}。
 \end{abstract}
 
 \tableofcontents
@@ -54,7 +54,7 @@
 
 \subsection{远区展开}
 
-考虑满足论文第 2 节假设的单参数解族 $(g_{ab}(\lambda),A_a(\lambda))$，并设 $\lambda\to0$ 的普通极限 $(g_{ab},A_a)$ 和零阶世界线 $\gamma$ 已经确定。本节先处理背景场 $F=0$ 的情形（情形 1、2）；$F\neq0$ 时需要补充的项在第~\ref{sec:L3} 节讨论。
+考虑满足论文第 2 节假设的单参数解族 $(g_{ab}(\lambda),A_a(\lambda))$，并设 $\lambda\to0$ 的普通极限 $(g_{ab},A_a)$ 和零阶世界线 $\gamma$ 已经确定。本节先处理背景场 $F=0$ 的情形（情形 1、2）；$F\neq0$ 时需要补充的项在第~\ref{sec:L3}、\ref{sec:L4} 节讨论。
 
 \paragraph{背景度规。}沿测地线 $\gamma$ 取不转动的 Fermi 坐标 $(t,x^i)$：$t$ 是 $\gamma$ 上的固有时，$x^i$ 是从 $\gamma$ 出发、与 $\gamma$ 正交的测地线的仿射参数乘以平行移动的正交标架。在 $\gamma$ 附近，背景度规为 \citep{ManasseMisner1963}
 \begin{equation}
@@ -898,12 +898,334 @@ M\ddot\zeta_i&=M\Big(-R_{0i0j}\zeta^j-h_{i00}[\text{tail}]+\tfrac12h_{00i}[\text
 
 
 %======================================================================
+\section{情形 4：电真空背景，带电物体}
+\label{sec:L4}
+%======================================================================
+
+本节是一般情形：背景是电真空解 \eqref{eq:bgEM}，物体带质量 $M$ 和电荷 $q$。与前三种情形相比，新出现的结构有三处：
+\begin{itemize}
+\item 零阶世界线不再是测地线，而是满足 Lorentz 力方程，要用带加速度的 Fermi 坐标；
+\item 近区一阶场不再只是常数加 $1/r$ 项，还包含带电黑洞在均匀外场中的响应，它在近区二阶方程中产生新的二次项；
+\item 平移同时作用在背景度规和背景势上，产生 $\zeta^cF_{ca}$ 型的项。
+\end{itemize}
+本节的结论是：近区方程推出的运动方程，恰好是 Lorentz 力方程沿 $\gamma$ 的线性化，加上由正则场按 Detweiler--Whiting 形式给出的自力。这正是 \citet{ZimmermanPoisson2014} 假设的形式。代入他们算出的正则场局部项，就得到他们的运动方程。
+
+本节仍省略近区量上的横线。记号与第 5 节相同：在 $\gamma$ 上 $E_i\equiv F_{i0}$，$F_{ij}\equiv\epsilon_{ijk}B_k$。
+
+\subsection{零阶运动与 Fermi 坐标}
+\label{sec:L4zeroth}
+
+零阶世界线 $\gamma$ 满足 Lorentz 力方程 $Mu^b\nabla_bu^a=qF^a{}_bu^b$（论文第 4 节）。在 $\gamma$ 的瞬时静止系中，$u=\partial_t$，加速度为
+\begin{equation}
+a_i=\frac qM\,F_{i0}=\frac qM\,E_i .
+\label{eq:balance}
+\end{equation}
+这一关系在下面会作为近区一阶方程的可解条件重新出现（\S\ref{sec:L4first}）。
+
+沿加速世界线取不转动的 Fermi 坐标（空间标架 Fermi--Walker 移动），度规为 \citep{PoissonPoundVega2011}
+\begin{equation}
+g_{00}=-(1+a_ix^i)^2-R_{0i0j}x^ix^j,\qquad g_{0i}=-\tfrac23R_{0jik}x^jx^k,\qquad g_{ij}=\delta_{ij}-\tfrac13R_{ikjl}x^kx^l ,
+\label{eq:fermiacc}
+\end{equation}
+误差为 $O(x^3)$，$a_i$、$R_{\alpha\beta\gamma\delta}$ 在 $\gamma$ 上取值。$\gamma$ 上的 Christoffel 符号只有 $\Gamma^i_{00}=\Gamma^0_{0i}=a_i$ 不为零。背景势取
+\begin{equation}
+A_0=E_jx^j+O(x^2),\qquad A_i=\tfrac12(\boldsymbol B\times x)_i+O(x^2),
+\label{eq:Abg4}
+\end{equation}
+即 \eqref{eq:Abg}；$O(x^2)$ 项含 $\partial_kF_{\alpha\beta}$，在 $\gamma$ 上的散度由 Maxwell 方程和加速度决定，下面只用到它们给出的场 $F_{\alpha\beta}(x)=F_{\alpha\beta}+\partial_kF_{\alpha\beta}\,x^k+\dots$。
+
+\paragraph{Lorentz 力的线性化。}后面要与之比较，先写出 Lorentz 力方程在 $\gamma$ 附近对位移 $x^i=\lambda\zeta^i(t)$ 的线性化。以坐标时 $t$ 为参数，$v^i=\dd x^i/\dd t$，$u^0=\dd t/\dd\tau$。方程的空间分量为
+\begin{equation*}
+\frac{\dd u^i}{\dd\tau}+\Gamma^i_{\alpha\beta}u^\alpha u^\beta=\frac qM\,F^i{}_\nu u^\nu .
+\end{equation*}
+到 $x$、$v$ 的一次：$\dd u^i/\dd\tau=(u^0)^2\dot v^i+O(xv,v^2)$；$\Gamma^i_{00}=-\tfrac12\partial_ig_{00}=(1+a\cdot x)a_i+R_{0i0j}x^j$；$\Gamma^i_{0j}=O(x)$，乘 $v$ 后是二次；$u^0=(1+a\cdot x)^{-1}$；$F^i{}_0=F_{i0}(x)$，$F^i{}_j=F_{ij}$。除以 $(u^0)^2$：
+\begin{equation*}
+\dot v^i=-(1+a\cdot x)a_i-R_{0i0j}x^j+\frac qM\Big[\big(E_i+x^k\partial_kF_{i0}\big)(1+a\cdot x)+F_{ij}v^j\Big].
+\end{equation*}
+零阶就是 \eqref{eq:balance}。一阶中，$-(a\cdot x)a_i$ 与 $\tfrac qM(a\cdot x)E_i$ 由 \eqref{eq:balance} 相消，于是
+\begin{equation}
+\ddot\zeta_i=-R_{0i0j}\zeta^j+\frac qM\Big(\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j\Big)+\frac1M\,\mathcal F_i ,
+\label{eq:lorentzlin}
+\end{equation}
+其中 $\mathcal F_i$ 代表一阶的自力。下面的任务是从场方程求出 $\mathcal F_i$。
+
+\subsection{远区展开}
+\label{sec:L4far}
+
+一阶扰动是点源（质量 $M$、电荷 $q$）沿 $\gamma$ 的推迟解，两种扰动都取 Lorenz 规范，Green 函数是耦合的 \citep{ZimmermanPoisson2014}。仍按 \citet{DetweilerWhiting2003} 分成奇异场和正则场。正则场光滑。奇异场由 \eqref{eq:Sexp} 给出，现在 $\gamma$ 有加速度，还要用到三个因子在 $\gamma$ 附近的展开：$\gamma_1=1-\tfrac12a\cdot x+O(s^2)$，平行移动子 $g^t{}_{\bar t}=1-a\cdot x+O(s^2)$、$g^i{}_{\bar j}=\delta_{ij}+O(s^2)$ \citep{ZimmermanPoisson2014}，以及 Hadamard 系数的一阶项。
+
+\paragraph{奇异场的 $r^0$ 项。}它们来自三处：$\gamma_1$ 和平行移动子中的 $a\cdot x$ 乘 $1/s$；电荷源对度规的一阶耦合 $U^{\alpha\beta}{}_{|\gamma\mu}=8\delta^{(\alpha}{}_{[\mu}F^{\beta)}{}_{\gamma]}-2g^{\alpha\beta}F_{\mu\gamma}$；质量源对势的一阶耦合 $U^\alpha{}_{|\beta\gamma\mu}$（\S\ref{sec:L3far}）。逐项代入：
+\begin{itemize}
+\item 迹反转度规 $\gamma_{\alpha\beta}$ 的上指标分量：$\gamma^{tt}=\frac{4M}s(1-a\cdot x)^2(1-\tfrac12a\cdot x)+2q\,\boldsymbol E\cdot n$，$\gamma^{ti}=-2q(\boldsymbol B\times n)_i$，$\gamma^{ij}=q\big[-2(n_iE_j+n_jE_i)+2\delta_{ij}\boldsymbol E\cdot n\big]$，到 $r^0$。
+\item 用 \eqref{eq:fermiacc} 降指标（$g_{tt}^2=1+4a\cdot x+\dots$），求迹 $\gamma=g^{\alpha\beta}\gamma_{\alpha\beta}$，再作迹反转 $h=\gamma-\tfrac12g\gamma$，并用 \eqref{eq:balance}。
+\end{itemize}
+结果是
+\begin{gather}
+h^{\rm S}_{00}\supset5q\,\boldsymbol E\cdot n,\qquad
+h^{\rm S}_{0i}\supset2q(\boldsymbol B\times n)_i,\qquad
+h^{\rm S}_{ij}\supset q\big(-4E_{(i}n_{j)}+\delta_{ij}\boldsymbol E\cdot n\big),\nonumber\\
+a^{\rm S}_0\supset-\Big(M+\frac{q^2}{2M}\Big)\boldsymbol E\cdot n,\qquad
+a^{\rm S}_i\supset M(\boldsymbol B\times n)_i .
+\label{eq:S4r0}
+\end{gather}
+$a^{\rm S}_0$ 中的 $-\tfrac{q^2}{2M}\boldsymbol E\cdot n=-\tfrac12q\,a\cdot n$ 来自 Coulomb 势乘 $\gamma_1g^t{}_{\bar t}g_{tt}$ 的 $a\cdot x$ 项。
+
+\paragraph{奇异场的 $O(r)$ 项。}由 \eqref{eq:Sexp} 的结构，它们是 $x^ix^j/s$ 型或 $s$ 乘常数型。所以在 $h_{00}$、$h_{ij}$、$a_0$ 中是 $x$ 的偶函数；在 $h_{0i}$、$a_i$ 中是静态的。下面会看到，这两类都不进入决定运动的那一块。
+
+\subsection{近区展开}
+\label{sec:L4near}
+
+标度与平移同前：$t-t_0=\lambda\bar t$，$x^i=\lambda(\bar x^i+\zeta^i(t))$。与前几种情形不同的是，背景度规和背景势在近区一阶就出现。平移是坐标变换，$\dd x^i=\lambda(\dd\bar x^i+\dot\zeta^i\dd t)$，所以 $\dd t$ 分量也会改变。
+
+\paragraph{背景的贡献。}把 $x^i=\lambda(\bar x^i+\zeta^i)$ 代入 \eqref{eq:fermiacc}、\eqref{eq:Abg4}，并计入 $\dd x^i$ 中的 $\dot\zeta^i\dd t$，按 $\lambda$ 整理：
+\begin{itemize}
+\item $g_{00}$：$\lambda$ 阶为 $-2a\cdot\bar x-2a\cdot\zeta$；$\lambda^2$ 阶含 $-2(a\cdot\bar x)(a\cdot\zeta)-2R_{0i0j}\bar x^i\zeta^j$，以及 $\bar x$ 的二次式和常数。
+\item $g_{0i}$：$\lambda$ 阶为 $g_{ij}\dot\zeta^j=\dot\zeta_i$；$\lambda^2$ 阶为 $\bar t\,\ddot\zeta_i$，以及静态的 $O(\bar x)$ 项。
+\item $A_0$：$\lambda$ 阶为 $\boldsymbol E\cdot\bar x$ 加常数；$\lambda^2$ 阶含 $\bar x^k\zeta^j\partial_{(k}F_{j)0}$ 型的项，以及来自 $A_i\dot\zeta^i$ 的 $\tfrac12F_{ji}\bar x^j\dot\zeta^i$。
+\item $A_i$：$\lambda$ 阶为 $\tfrac12(\boldsymbol B\times\bar x)_i$ 加常数；$\lambda^2$ 阶含 $\tfrac12\bar t\,F_{ji}\dot\zeta^j$。
+\end{itemize}
+
+\paragraph{近区一阶场。}它由以下几部分组成：
+\begin{enumerate}
+\item 常数度规 $c_{\alpha\beta}$，即正则场在 $\gamma$ 上的值加平移项：
+\begin{equation}
+c_{00}=h^{\rm R}_{00}-2a\cdot\zeta,\qquad c_{0i}=h^{\rm R}_{0i}+\dot\zeta_i,\qquad c_{ij}=h^{\rm R}_{ij} ;
+\label{eq:c4}
+\end{equation}
+\item 均匀场与加速度：$h_{00}=-2a\cdot x$，$A_0=\boldsymbol E\cdot x$，$A_i=\tfrac12(\boldsymbol B\times x)_i$，以及它们在 RN 背景中的 $r^0$ 响应（即 \eqref{eq:S4r0}）；
+\item 常数势，是纯规范，不产生场；
+\item $1/r$ 项：$c_{\alpha\beta}$ 在 RN 背景中的响应，以及单极修正 $\delta M/r$、$\delta q/r$。
+\end{enumerate}
+物体的偶极由平移消去，对下面的阶次也没有贡献：偶极场 $\sim1/r^3$，与 $O(r)$ 的一阶场相乘再求两次导数后，最多是 $O(1/r^3)$。
+
+\paragraph{近区二阶数据。}与 \eqref{eq:Ddef3} 对应，决定运动的那一块中的远区数据现在是
+\begin{align}
+D^A_i&=h^{\rm R}_{00,i}-2a_i(a\cdot\zeta)-2R_{0i0j}\zeta^j,\qquad D^C_i=h^{\rm R}_{i0,0}+\ddot\zeta_i,\label{eq:DAC4}\\
+e_i\equiv E^0_i-E^C_i&=f^{\rm R}_{i0}+\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j .\label{eq:e4}
+\end{align}
+\begin{itemize}
+\item $D^A$ 中的 $-2a_i(a\cdot\zeta)$ 来自 $-(1+a\cdot x)^2$ 的平移。
+\item $e$ 中的 $F_{ij}\dot\zeta^j$ 由两部分合成：$A_0$ 中的 $\tfrac12F_{ji}\bar x^j\dot\zeta^i$ 给出 $E^0_k\supset\tfrac12F_{ki}\dot\zeta^i$；$A_i$ 中的 $\tfrac12\bar tF_{ji}\dot\zeta^j$ 给出 $E^C_i\supset-\tfrac12F_{ij}\dot\zeta^j$。两半相加，才是规范无关的 $F_{ij}\dot\zeta^j$，即运动物体看到的电场 $\boldsymbol v\times\boldsymbol B$。
+\end{itemize}
+$e$ 是近区二阶的均匀电场，规范无关；近区方程中 $E^0$、$E^C$ 也只以 $e$ 的形式出现。由 \S\ref{sec:L4far}，奇异场在 $h_{00}$、$h_{ij}$ 中没有 $r^1$、$\ell=1$ 项，在 $h_{0i}$ 中没有 $r^0$ 的电宇称项（\eqref{eq:S4r0} 中 $h^{\rm S}_{0i}$ 只有磁宇称项），所以 \eqref{eq:DAC4} 中只出现正则场。
+
+\subsection{近区一阶方程：带电黑洞在均匀场中}
+\label{sec:L4first}
+
+近区一阶方程是 Einstein--Maxwell 方程在 RN 背景附近的线性化，作用在一阶场上。它的 $\ell=1$ 部分在 $1/r^2$ 阶的系数，与情形 2 的矩阵 \eqref{eq:L2matrix} 完全相同：算子都是 RN 背景（到 $O(M,q)$）上的线性化算子，输入的结构也相同。现在：
+\begin{itemize}
+\item $h_{00}=-2a\cdot x$ 是 $D^A$ 型的列，$D^A=-2a$；
+\item $A_0=\boldsymbol E\cdot x$ 是 $E^0$ 型的列，$e=\boldsymbol E$；
+\item $r^0$ 的响应是 $H$ 型的列，未知；
+\item 没有含 $t$ 的项。
+\end{itemize}
+所以只需 (A)、(D)、(E)、(F)、(X) 五行，(B)、(C)、(Y)、(Z) 自动为零。
+
+\paragraph{可解条件就是零阶运动方程。}非平凡组合 $-\tfrac23$(B)$+\tfrac23$(D)$+$(E) 消去所有未知列，给出 $2MD^A-4MD^C+4q\,e=0$。代入得 $-4Ma+4q\boldsymbol E=0$，即 \eqref{eq:balance}。所以 Lorentz 力方程是近区一阶方程有解的条件，与 \citet{GrallaWald2008} 中测地线方程的地位相同。
+
+\paragraph{电场部分的解。}其余各行确定未知项：
+\begin{itemize}
+\item (A)：$\tfrac32M(-2a)+H^A-2q\boldsymbol E=0$，得 $H^A=3Ma+2q\boldsymbol E=5q\boldsymbol E$。
+\item (D)：$3M(-2a)+\tfrac32(H^A-S)=0$，得 $S\equiv H^D+H^F=H^A-4Ma=q\boldsymbol E$。
+\item (E)：$-H^A+S+4q\boldsymbol E=0$，自动成立。
+\item (F)：$-\tfrac32M(-2a)-\tfrac12H^A+\tfrac32S-2q\boldsymbol E=3Ma-3q\boldsymbol E=0$，自动成立。
+\item (X)：$\tfrac q2(-2a)-2M\boldsymbol E-2H'=0$，得 $H'=-M\boldsymbol E-\tfrac12q\,a$。
+\end{itemize}
+$H^E$ 和 $H^D-H^F$ 不确定，它们是平直时空中的规范自由度。取 $H^D=0$、$H^E=-4q\boldsymbol E$，$H^F=q\boldsymbol E$，就与远区奇异场在 Lorenz 规范下的 $r^0$ 项 \eqref{eq:S4r0} 逐项一致：$h_{00}=5q\boldsymbol E\cdot n$，$h_{ij}=q(-4E_{(i}n_{j)}+\delta_{ij}\boldsymbol E\cdot n)$，$a_0=-(M+\tfrac{q^2}{2M})\boldsymbol E\cdot n$。前者由近区方程求出，后者由远区 Hadamard 展开求出，两者独立。
+
+\paragraph{磁场部分的解。}$A_i=\tfrac12(\boldsymbol B\times x)_i$ 属于磁宇称，与上面不混合。
+\begin{itemize}
+\item 势的 $O(M)$ 响应与情形 3 相同，$a_i=M(\boldsymbol B\times n)_i$（\S\ref{sec:L3near}）。
+\item 度规的响应来自 Coulomb 场与 $\boldsymbol B$ 的交叉应力：$8\pi T_{0i}=2F^{(0)}_{0j}F_{ij}=2q(\boldsymbol B\times n)_i/r^2$。对 $h_{0i}=W(\boldsymbol B\times n)_i$，$\partial_k(\boldsymbol B\times n)_k=0$，$\nabla^2(\boldsymbol B\times n)=-2(\boldsymbol B\times n)/r^2$，所以平直算子给出 $R_{0i}=-\tfrac12\nabla^2h_{0i}=W(\boldsymbol B\times n)_i/r^2$。令其等于 $8\pi T_{0i}$，得 $W=2q$，即 \eqref{eq:S4r0} 中的 $h^{\rm S}_{0i}$。
+\end{itemize}
+这是带电黑洞在磁场中获得的场角动量引起的拖曳。
+
+以上各式由 \texttt{level4\_l1.py} 独立求出：在 $r^0$ 写出最一般的 $\ell=1$ 拟设（两种宇称，12 个未知矢量），把加速度也当作未知量，直接解完整的线性化方程。结果给出 $a=q\boldsymbol E/M$，以及与上面相同的解和规范自由度。
+
+\subsection{近区二阶方程}
+\label{sec:L4second}
+
+近区 $\lambda^2$ 阶的方程是
+\begin{equation}
+\mathcal E^{(1)}[\bar g^{(2)},\bar A^{(2)}]+\mathcal Q\big[(\bar g^{(1)},\bar A^{(1)}),(\bar g^{(1)},\bar A^{(1)})\big]=0 ,
+\label{eq:L4second}
+\end{equation}
+$\mathcal E$ 代表 Einstein 方程 $R_{ab}-8\pi T_{ab}$ 与 Maxwell 方程 $\partial_b(\sqrt{-g}F^{ab})$ 合在一起；$\mathcal E^{(1)}$ 是在 RN 背景附近的线性化，$\mathcal Q$ 是二次项。
+
+\paragraph{线性部分。}$\mathcal E^{(1)}$ 作用在 $\bar g^{(2)}$、$\bar A^{(2)}$ 上，就是情形 2 的矩阵 \eqref{eq:L2matrix}：加速度和背景场是 $\lambda$ 阶的，它们与 $\lambda^2$ 阶输入的乘积是 $\lambda^3$ 阶。
+
+\paragraph{二次项：哪些进入。}情形 1--3 中二次项都不进入 $1/r^2$ 阶；现在一阶场有 $O(r)$ 的部分，乘积可以进入。先用两条论证缩小范围。
+\begin{enumerate}
+\item \textbf{量纲。}$1/r^2$ 阶的系数无量纲。远区数据 $D$、$e$ 的量纲为 $1/L$，$c$ 无量纲，$F$、$a$ 为 $1/L$，$M$、$q$ 为 $L$。所以二次项中线性依赖数据的部分只能是（数据）$\times(M\text{ 或 }q)$，即到 $M$、$q$ 的一次就够了。不含数据的部分只能是 $(M,q)^2F^2$ 或 $(M,q)^2\partial F$ 型。
+\item \textbf{宇称与时间指标。}决定运动的那一块是 $R_{00}$、$R_{ij}$、$\mathcal M^0$ 的静态 $1/r^2$ 项，以及 $R_{0i}$、$\mathcal M^i$ 的 $t/r^3$ 项。一阶场都是静态的，所以二次项不进入后两者。电宇称 $\ell=1$ 的 $Q_{00}$、$Q_{ij}$、$\mathcal M^0$ 在 $x\to-x$ 下为奇，近区算子保持这一宇称。一阶场分两类：
+\begin{itemize}
+\item 电型：$h_{00}$、$h_{ij}$、$A_0$ 中由 $a$、$\boldsymbol E$ 引起的部分，在 $x\to-x$ 下为奇；
+\item 磁型：$h_{0i}$、$A_i$ 中由 $\boldsymbol B$ 引起的部分，宇称为偶（计入指标变号）。
+\end{itemize}
+常数 $c_{\alpha\beta}$ 为偶。$R_{00}$、$R_{ij}$、$\mathcal M^0$ 中，两个因子的时间指标数之和必须为偶。由此：
+\begin{itemize}
+\item 电型 $\times$ 电型、磁型 $\times$ 磁型，宇称为偶，不进入；
+\item 电型 $\times$ 磁型，时间指标数为奇，不进入；
+\item 剩下的只有 $c_{00},c_{ij}\times$ 电型，以及 $c_{0i}\times$ 磁型。
+\end{itemize}
+不含数据的 $(M,q)^2\partial F$ 项来自 $x$ 的二次式（偶函数），也不进入。
+\end{enumerate}
+所以决定运动的那一块中，二次项只有一类：常数 $c$ 的一阶场与外场型一阶场的乘积，且只需保留到 $M$、$q$ 的一次。
+
+\paragraph{用微分同胚算出这一类乘积。}$c$ 的一阶场是 RN 背景的规范变换：取
+\begin{equation}
+\xi^0=-c_{0i}x^i-\tfrac12c_{00}\,t,\qquad \xi^i=\tfrac12c_{ij}x^j ,
+\label{eq:xic}
+\end{equation}
+则 $\mathcal L_\xi\eta=c$。$\mathcal L_\xi$ 作用在 RN 的 $O(M,q)$ 部分上，给出 $c$ 在近区的 $1/r$ 响应，这是近区一阶方程的一个解。物体保持静止，没有随时间增长的偶极。
+
+记 $G_0$ 为 RN 背景，$G_2$ 为外场型一阶场（满足一阶方程 $\mathcal E^{(1)}[G_2]=0$）。场方程在微分同胚下协变，$\mathcal E[\phi^*G]=\phi^*\mathcal E[G]$。取 $G=G_0+\mu_2G_2$，$\phi$ 为 $\xi$ 生成的流（参数 $\mu_1$），则
+\begin{equation*}
+\phi^*G=G_0+\mu_1\mathcal L_\xi G_0+\mu_2G_2+\mu_1\mu_2\,\mathcal L_\xi G_2+O(\mu_1^2).
+\end{equation*}
+右边 $\phi^*\mathcal E[G]$ 在 $\mu_1\mu_2$ 阶为 $\mathcal L_\xi$ 作用在 $\mathcal E[G]$ 的 $\mu_2$ 阶上，而 $\mathcal E[G]$ 的 $\mu_2$ 阶就是 $\mathcal E^{(1)}[G_2]=0$。左边在 $\mu_1\mu_2$ 阶等于 $\mathcal Q[\mathcal L_\xi G_0,G_2]+\mathcal E^{(1)}[\mathcal L_\xi G_2]$。所以
+\begin{equation}
+\mathcal Q\big[\mathcal L_\xi G_0,\,G_2\big]=-\,\mathcal E^{(1)}\big[\mathcal L_\xi G_2\big].
+\label{eq:Qident}
+\end{equation}
+二次项化成了线性算子作用在 $\mathcal L_\xi G_2$ 上，后者可以直接算出，再读出它在矩阵 \eqref{eq:L2matrix} 中对应哪些列。
+
+\paragraph{$\mathcal L_\xi G_2$ 的各项。}由 \eqref{eq:xic}，$\partial_0\xi^0=-\tfrac12c_{00}$，$\partial_i\xi^0=-c_{0i}$，$\partial_j\xi^i=\tfrac12c_{ij}$，$\partial_0\xi^i=0$。$G_2$ 是静态的，所以 $\xi^0\partial_0$ 不起作用。用 $(\mathcal L_\xi h)_{\mu\nu}=\xi^\rho\partial_\rho h_{\mu\nu}+h_{\rho\nu}\partial_\mu\xi^\rho+h_{\mu\rho}\partial_\nu\xi^\rho$ 和 $(\mathcal L_\xi A)_\nu=\xi^\rho\partial_\rho A_\nu+A_\rho\partial_\nu\xi^\rho$：
+\begin{itemize}
+\item 对 $h_{00}=-2a\cdot x$：$(\mathcal L_\xi h)_{00}=\tfrac12c_{kl}x^l\partial_kh_{00}+2h_{00}\partial_0\xi^0=-(c\,a)\cdot x+2c_{00}\,a\cdot x$。这是 $D^A$ 型的列，$D^A{}'=2c_{00}a-c\,a$，其中 $(c\,a)_i=c_{ij}a_j$。
+\item 对 $A_0=\boldsymbol E\cdot x$：$(\mathcal L_\xi A)_0=\tfrac12c_{kl}x^lE_k+A_0\partial_0\xi^0=\tfrac12(c\boldsymbol E)\cdot x-\tfrac12c_{00}\boldsymbol E\cdot x$。这是 $E^0$ 型的列，$e'=\tfrac12c\boldsymbol E-\tfrac12c_{00}\boldsymbol E$。
+\item 对 $h_{00}=-2a\cdot x$：$(\mathcal L_\xi h)_{0i}=h_{00}\partial_i\xi^0=2c_{0i}\,a\cdot x$，是静态的 $h_{0i}$，属于另一块。对 $A_0$：$(\mathcal L_\xi A)_i=A_0\partial_i\xi^0=-c_{0i}\boldsymbol E\cdot x$，是静态的 $A_i$，也属于另一块。
+\item 对 \eqref{eq:S4r0} 中的 $r^0$ 响应（$O(M,q)$）：$\mathcal L_\xi$ 给出 $O(M,q)\,r^0$ 的项，是 $H$、$H'$ 型的列。磁型场的乘积也是这样：例如 $(\mathcal L_\xi h)_{ij}=h_{0j}\partial_i\xi^0+h_{i0}\partial_j\xi^0=-2q\big(c_{0i}(\boldsymbol B\times n)_j+c_{0j}(\boldsymbol B\times n)_i\big)$，是 $H$ 型的列。
+\end{itemize}
+没有 $t$ 的线性项（$G_2$ 静态），也没有 $D^E$、$D^F$ 型的项（$G_2$ 的 $h_{ij}$ 在 $O(M^0,q^0)$ 为零）。
+
+\paragraph{代入决定运动的组合。}$-\tfrac23$(B)$+\tfrac23$(D)$+$(E) 消去所有 $H$、$\dot K$ 列，作用在数据列上为 $2MD^A-4MD^C+4q\,e$（\S\ref{sec:L2}）。所以二次项在这一组合中的贡献是
+\begin{equation*}
+W\cdot\mathcal Q=-\big(2M\,D^A{}'+4q\,e'\big)
+=-\big(4Mc_{00}\,a-2M\,c\,a+2q\,c\boldsymbol E-2q\,c_{00}\boldsymbol E\big).
+\end{equation*}
+用 \eqref{eq:balance}，$Ma=q\boldsymbol E$，$c\,a$ 与 $c\boldsymbol E$ 两项相消，得
+\begin{equation}
+W\cdot\mathcal Q=-2q\,c_{00}\,\boldsymbol E .
+\label{eq:WQ}
+\end{equation}
+$c_{ij}$ 的贡献消去了，$c_{0i}$ 也不出现。同样，恒等组合 $-$(A)$-\tfrac23$(B)$+$(D)$+$(F) 也消去所有 $H$ 列，作用在 $D^A{}'$、$e'$ 上为零（情形 2 中它对数据列是恒等式），所以它在二次项上也自动成立。
+
+\paragraph{直接计算的核对。}\texttt{level4\_Q.py} 不用 \eqref{eq:Qident}，直接计算度规 $\eta+Mb+\mu_1h_c+\mu_2h_2$ 和势的完整 Einstein--Maxwell 方程，取 $\mu_1\mu_2$ 阶、$M,q$ 的一次、$1/r^2$ 阶，再投影到 $\ell=1$ 电宇称。结果（$x$ 分量，其余轮换）为
+\begin{align*}
+Q^A&=\tfrac q2\big(2c_{00}E_x+3c_{11}E_x+c_{22}E_x+c_{33}E_x+2c_{12}E_y+2c_{13}E_z\big),\\
+Q^D&=\tfrac{3q}{10}\big(10B_yc_{03}-10B_zc_{02}+5c_{00}E_x+7c_{11}E_x+4c_{22}E_x+4c_{33}E_x+3c_{12}E_y+3c_{13}E_z\big),\\
+Q^E&=-\tfrac q5\big(10B_yc_{03}-10B_zc_{02}+15c_{00}E_x+7c_{11}E_x+4c_{22}E_x+4c_{33}E_x+3c_{12}E_y+3c_{13}E_z\big),\\
+Q^F&=-\tfrac q{10}\big(30B_yc_{03}-30B_zc_{02}+5c_{00}E_x+6c_{11}E_x+7c_{22}E_x+7c_{33}E_x-c_{12}E_y-c_{13}E_z\big),
+\end{align*}
+$t/r^3$ 各行为零。由此：
+\begin{itemize}
+\item $\tfrac23Q^D+Q^E=-2qc_{00}E_x$，与 \eqref{eq:WQ} 一致：$c_{0i}\boldsymbol B$ 项和 $c_{ij}$ 项都在组合中消去；
+\item $-Q^A+Q^D+Q^F=0$，恒等组合成立；
+\item 结果不含 \S\ref{sec:L4first} 中的规范参数 $H^E$、$H^D-H^F$ 等；
+\item 电型 $\times$ 电型、电型 $\times$ 磁型、磁型 $\times$ 磁型的乘积在这一块中全为零（\texttt{level4\_checks.py}），与上面的宇称论证一致。
+\end{itemize}
+此外，\texttt{level4\_gauge\_l1.py} 检验了另一点：在一阶场的 $1/r$ 部分加上任意规范项（$\xi\sim O(M)\,r^0$，$\ell=0,1,2$），这两个组合都不变。
+
+\paragraph{单极修正。}若近区一阶场含 $\delta M/r$、$\delta q/r$，直接计算给出 $W\cdot\mathcal Q\supset4(\delta q\,\boldsymbol E-\delta M\,a)$（\texttt{level4\_monopole.py}）。这只是把零阶力 $q\boldsymbol E-Ma$ 中的 $M$、$q$ 换成 $M+\lambda\delta M$、$q+\lambda\delta q$。下面约定 $M$、$q$ 是物体的全部质量和电荷，$\delta M=\delta q=0$。
+
+\subsection{消元与运动方程}
+\label{sec:L4eom}
+
+\paragraph{Maxwell 方程。}与情形 2 相同。(X) 含 $H'$，只用来确定 $H'$；(Y)$+3$(Z) 是恒等式，二次项在这两行中为零（一阶场静态）。所以 Maxwell 方程对远区数据没有约束。
+
+\paragraph{Einstein 方程。}恒等组合 $-$(A)$-\tfrac23$(B)$+$(D)$+$(F) 和 (B)$+3$(C) 对数据和二次项都自动成立。非平凡组合给出
+\begin{equation}
+2MD^A_i-4MD^C_i+4q\,e_i-2q\,c_{00}E_i=0 .
+\label{eq:rel4}
+\end{equation}
+
+\paragraph{运动方程。}代入 \eqref{eq:DAC4}、\eqref{eq:e4}、\eqref{eq:c4}：
+\begin{equation*}
+\begin{split}
+4M\big(h^{\rm R}_{i0,0}+\ddot\zeta_i\big)={}&2M\big(h^{\rm R}_{00,i}-2a_i(a\cdot\zeta)-2R_{0i0j}\zeta^j\big)\\
+&+4q\big(f^{\rm R}_{i0}+\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j\big)-2q\big(h^{\rm R}_{00}-2a\cdot\zeta\big)E_i .
+\end{split}
+\end{equation*}
+含 $a\cdot\zeta$ 的两项为 $-4Ma_i(a\cdot\zeta)+4q(a\cdot\zeta)E_i$，由 \eqref{eq:balance} 相消。整理得
+\begin{equation}
+\boxed{\;
+M\ddot\zeta_i=-MR_{0i0j}\zeta^j+q\big(\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j\big)
++q\,f^{\rm R}_{i0}-\tfrac12q\,h^{\rm R}_{00}E_i-M\,h^{\rm R}_{i0,0}+\tfrac12M\,h^{\rm R}_{00,i}\;}
+\label{eq:eom4}
+\end{equation}
+\begin{itemize}
+\item 前三项正是 Lorentz 力方程的线性化 \eqref{eq:lorentzlin}：测地偏离、场梯度和 $\boldsymbol v\times\boldsymbol B$ 力。
+\item 后四项是自力 $\mathcal F_i$。它只依赖推迟场光滑部分在 $\gamma$ 上的值和一阶导数，即正则场。
+\end{itemize}
+令 $F=0$（从而 $a=0$）回到情形 2 的 \eqref{eq:eom2}；令 $q=0$ 回到情形 3 的 \eqref{eq:eom3}。
+
+\subsection{检验：远区规范变换}
+\label{sec:L4gauge}
+
+远区的规范变换 $\xi^\mu(t,x)$ 同时改变扰动和世界线的坐标描述：
+\begin{equation*}
+h\to h+\mathcal L_\xi g,\qquad f\to f+\mathcal L_\xi F,\qquad \zeta^i\to\zeta^i-\xi^i(t,0).
+\end{equation*}
+\eqref{eq:eom4} 必须在这一变换下不变。取 $\xi^\mu$ 为 $x$ 的任意二次多项式，系数是 $t$ 的任意函数；背景取 \eqref{eq:fermiacc}，$\boldsymbol E(t)$ 随时间任意变化，$F_{ij}$、$\partial_kF_{\alpha\beta}$ 和 Riemann 分量取一般值。\texttt{level4\_gauge.py} 验证：
+\begin{itemize}
+\item \eqref{eq:eom4} 两边的变化恒等相等，唯一用到的背景条件是 \eqref{eq:balance}；
+\item 这一检验能识别系数：把 $-\tfrac12qh_{00}E_i$ 的系数改成 $-\tfrac13$，或加上一项 $-qh_{ij}E_j$，不变性都被破坏。
+\end{itemize}
+所以 $-\tfrac12qh^{\rm R}_{00}E_i$ 这一项是规范协变所必需的。近区推导独立给出了同一系数。
+
+\subsection{与 Zimmerman--Poisson 的比较}
+\label{sec:L4ZP}
+
+\citet{ZimmermanPoisson2014} 的出发点是：粒子的运动由正则场按 Lorentz 力方程线性化的形式驱动（他们的式 (8.2)）。在 Fermi 坐标中它写成
+\begin{equation}
+Ma_i\big|_{\rm self}=-\tfrac12q\,h^{\rm R}_{00}E_i-q\,h^{\rm R}_{ij}E_j+q\,f^{\rm R}_{i0}-\tfrac12M\big(2\nabla_th^{\rm R}_{0i}-\nabla_ih^{\rm R}_{00}\big).
+\label{eq:ZP83}
+\end{equation}
+在加速的 Fermi 坐标中，$\gamma$ 上 $\Gamma^i_{00}=\Gamma^0_{0i}=a_i$，所以
+\begin{equation*}
+\nabla_th_{0i}=\partial_th_{0i}-a_jh_{ji}-a_ih_{00},\qquad \nabla_ih_{00}=\partial_ih_{00}-2a_ih_{00}.
+\end{equation*}
+于是
+\begin{equation*}
+-\tfrac12M\big(2\nabla_th_{0i}-\nabla_ih_{00}\big)=-M\partial_th_{0i}+\tfrac12M\partial_ih_{00}+Ma_jh_{ij}.
+\end{equation*}
+由 \eqref{eq:balance}，最后一项等于 $qh_{ij}E_j$，正好与 \eqref{eq:ZP83} 中的 $-qh_{ij}E_j$ 相消。剩下的就是 \eqref{eq:eom4} 中的自力 $\mathcal F_i$。
+
+所以 \eqref{eq:eom4} 就是 \citet{ZimmermanPoisson2014} 的式 (8.2) 沿 $\gamma$ 的线性化。他们把"运动由正则场驱动"作为 Detweiler--Whiting 处方采用；\citet{LinzFriedmanWiseman2014b} 用另一种假设（角平均加质量重整化）得到了同样的结果。这里从 Einstein--Maxwell 场方程的近区展开推出了它，所需的假设是论文第 2 节的单参数解族假设和 (H)。
+
+\paragraph{代入正则场的局部项。}要得到显式的运动方程，还需要正则场在 $\gamma$ 上的值和导数。\citet{ZimmermanPoisson2014} 由耦合 Hadamard 展开给出了它们：局部项来自 \eqref{eq:hR3} 和对势的类似表达式，其余为尾巴积分。代入后，他们的结果（式 (8.15)）在 $\gamma$ 的静止系中为
+\begin{equation*}
+\mathcal F_i=-\tfrac13qM\Big(11-\frac{2q^2}{M^2}\Big)\dot E_i-\tfrac13q^2\Big(4-\frac{2q^2}{M^2}-\frac{5M^2}{q^2}\Big)F_{ij}F_{j0}+(\text{尾巴项}),
+\end{equation*}
+其中 $\dot E_i=u^\mu\nabla_\mu F_{i0}$，$F_{ij}F_{j0}=(\boldsymbol E\times\boldsymbol B)_i$。$q\to0$ 时只剩 $\tfrac53M^2(\boldsymbol E\times\boldsymbol B)_i$，即情形 3 的 \eqref{eq:eom3ZP}。这些局部项的系数本文没有独立推导；近区推导确定的是它们进入运动方程的方式，即 \eqref{eq:eom4}。
+
+\paragraph{近区方程本身没有给出局部力。}由 \S\ref{sec:L4second} 的量纲与宇称论证，决定运动的那一块中没有不含远区数据的项。所以 \eqref{eq:eom4} 中除 Lorentz 力外，所有的力都通过正则场进入，包括 $\tfrac53$、$11-2q^2/M^2$ 这些局部系数。近区唯一新出现的耦合是 $-\tfrac12qh^{\rm R}_{00}E_i$：它来自 $c_{00}$ 的一阶场与均匀场的乘积，物理上是红移对 Lorentz 力的修正。
+
+\subsection{小结}
+
+情形 4 的推导由三步组成，每一步都有独立的检验：
+\begin{enumerate}
+\item \textbf{近区一阶。}方程的 $\ell=1$ 部分与情形 2 的矩阵相同，可解条件就是零阶 Lorentz 力方程。它的解在 Lorenz 规范下与远区奇异场的 $r^0$ 项逐项一致。
+\item \textbf{近区二阶。}线性部分是情形 2 的矩阵。二次项中只有 $c\times$ 外场一类进入决定运动的那一块，由微分同胚恒等式 \eqref{eq:Qident} 化成矩阵的列，结果 \eqref{eq:WQ} 与直接计算一致。
+\item \textbf{消元。}运动方程 \eqref{eq:eom4} 是 Lorentz 力的线性化加正则场的 Detweiler--Whiting 自力，在远区规范变换下协变。
+\end{enumerate}
+没有做的有三件：
+\begin{itemize}
+\item 另一块（时间反演为奇）以及磁宇称部分的分析。它们不含 $\ddot\zeta$，与自旋的演化有关。
+\item 正则场局部项的独立推导，现在取自 \citet{ZimmermanPoisson2014}。
+\item Ernst 精确解的展开检验（README 中的 C3）。
+\end{itemize}
+
+%======================================================================
 \appendix
 \section{计算的实现}
 \label{app:code}
 %======================================================================
 
 代码在 \texttt{derivations/p1/code/}，用项目内的 \texttt{.venv}（sympy 1.14）运行，全部为精确有理数运算。
+
+\paragraph{截断级数（\texttt{trunc.py}）。}情形 4 的计算用多元截断级数：每个量是按 $(M,q)$、$\mu_1$、$\mu_2$ 的幂次分组的字典，乘法时舍去超出阶次的项；$|x|$ 用独立符号 $R$ 表示，求导用链式法则；Einstein--Maxwell 方程完整计算（逆度规用 Neumann 级数，$\sqrt{-g}$ 用对数展开）；$\ell=1$ 投影用单位球面上单项式的精确平均。
 
 \paragraph{共用工具（\texttt{series.py}）。}
 \begin{enumerate}
@@ -925,6 +1247,13 @@ M\ddot\zeta_i&=M\Big(-R_{0i0j}\zeta^j-h_{i00}[\text{tail}]+\tfrac12h_{00i}[\text
 \texttt{level2.py} & 不经分解，直接计算，生成 \eqref{eq:L2matrix}，写入 \texttt{level2\_matrix.txt} & 约 19 分钟\\
 \texttt{level2\_detail.py} & 直接展开 $(-g)^{1/2}g^{ac}g^{bd}F_{cd}$ 和应力张量，逐列核对第 4 节的手算 & 约 5 秒\\
 \texttt{gauge\_test2.py} & 情形 2 的规范检验 & 数秒\\
+\texttt{level4\_l1.py} & 情形 4 近区一阶：一般 $\ell=1$ 拟设，解出响应和 $a=q\boldsymbol E/M$ & 约 2 秒\\
+\texttt{level4\_Q.py} & 情形 4 近区二阶的二次项，直接计算并投影到 $\ell=1$ & 约 10 秒\\
+\texttt{level4\_checks.py} & 一阶残差为零；电型、磁型之间的乘积不进入 & 约 8 秒\\
+\texttt{level4\_regress.py} & 用新代码重算情形 2 矩阵的若干列，核对符号约定 & 约 1 秒\\
+\texttt{level4\_gauge\_l1.py} & 一阶场 $1/r$ 部分的规范项不影响结果 & 约 4 秒\\
+\texttt{level4\_monopole.py} & 单极修正 $\delta M$、$\delta q$ 的贡献 & 约 3 秒\\
+\texttt{level4\_gauge.py} & \eqref{eq:eom4} 在远区规范变换下协变 & 约 2 秒\\
 \texttt{level3\_detail.py} & 情形 3：验证 \eqref{eq:A1near} 满足 Maxwell 方程、其 $O(M)$ 项与 \eqref{eq:aS3} 一致、$T^{(2)}$ 的 $EE/BB/EB$ 结构与宇称，并给出 \eqref{eq:T2blockII} & 约 3 秒\\
 \hline
 \end{tabular}
