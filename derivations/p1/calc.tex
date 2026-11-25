@@ -1412,6 +1412,10 @@ H_0=r\int\frac{\dd r}{D^2}.
 
 \paragraph{(6) 奇异场与正则场。}一阶：$h^{\rm S}$、$a^{\rm S}$ 到 $O(r^2)$，含耦合项（\S\ref{sec:L4far} 已有 $r^0$ 项）。二阶：$j^{\rm S}$、$b^{\rm S}$，含 RN 的 $q^2/r^2$、$qM/r^2$ 及与外场的交叉项；未知量 $\{\delta\mathcal E_{ij},\delta\mathcal B_{ij},\dots,\xi,\chi\}$ 由正则场确定（Gralla 式 (68)--(84) 的推广）。
 
+\paragraph{(7) 二阶中 $M$ 与 $q$ 的定义。}$q$ 由包围物体的 Gauss 积分定义，由电荷守恒，在各阶都不随时间变化。$M$ 的定义要单独处理：近区一阶的单极修正 $\delta M/r$ 在第 6 节被吸收进 $M$（\S\ref{sec:L4second} 末），二阶中要确认 $\delta M$ 是否随时间变化（在 \citet{GrallaWald2008} 的真空情形中不变），并给出 $M$ 的规范无关定义（例如近区的 Komar 型积分）。外场对物体做功或物体吸收场能量时，$M$ 可能在二阶随时间变化，这一项要明确算出或排除。
+
+\paragraph{(8) 磁宇称与时间反演为奇的一块。}一阶中这两部分不含 $\ddot\zeta$，被略去（\S\ref{sec:L4second}）。二阶中要确认外场不会诱导出自旋：若诱导出自旋，它会通过自旋–曲率力和自旋–磁场耦合在二阶进入运动。\S\ref{sec:L5result} 已证明，在近区一阶，均匀磁场不诱导出 $\mu-\tfrac qMJ$，而 Kerr--Newman 的自旋模式是自由参数；还要确认二阶的力矩方程使初始为零的自旋保持为零（到所需的阶），或者算出它的增长。
+
 \subsection{检查点}
 
 \paragraph{检查点 1（$q=0$、真空）。}用我们的工具复现 \citet{Gralla2012} 的关键系数：近区二阶 $\ell=2$ 静态解（其式 (11)--(13)）、P 规范中的 $a_{21}$、$a_{22}$（其式 (31)--(33)、(46)--(48)），以及二阶运动方程 (104) 中的修正项 $\delta\mathcal E_{ij}Z^{(1)j}$。目的是验证工具和约定。
@@ -1426,9 +1430,17 @@ H_0=r\int\frac{\dd r}{D^2}.
 \begin{equation*}
 (c_2,c_3)=(2,-\tfrac32),\quad(d_2,d_3)=(\tfrac23,-\tfrac16),\quad(e_1,e_2,e_3)=(-1,-4,-5),\quad(f_2,f_3)=(2,4).
 \end{equation*}
-与 \citet{Gralla2012} 式 (11)--(13) 比较：$M^0$、$M^1$ 各项和 $\bar g_{i0}$ 全部一致；但 $c_3$ 和 $f_3$ 的符号相反（该文为 $+\tfrac32$ 和 $-4$）。独立核对：Schwarzschild 坐标中的静态潮汐解 $h_{tt}=-\mathcal E_{ij}n^in^j\,r_s^2f^2$，换到各向同性坐标 $r_s-2M=\bar r(1-M/2\bar r)^2$，得 $h_{00}=-\mathcal E_{ij}n^in^j\,\bar r^2(1-M/2\bar r)^4=\mathcal E_{ij}n^in^j(-\bar r^2+2M\bar r-\tfrac32M^2)+\dots$，与我们的 $c_3=-\tfrac32$ 一致；我们的 $e_1+f$ 合起来是 $h_{\bar r\bar r}\propto-(\bar r+M)^2$，变换回 Schwarzschild 坐标与 $H_0=H_2$ 一致，而该文的值给出 $-(\bar r^2+2M\bar r+9M^2)$，不一致。所以该文式 (11)、(13) 中的两个 $M^2$ 系数应为排印错误。下一步：检验 P 规范中的 $a_{21}$、$a_{22}$（该文式 (31)--(33)、(46)--(48)）和二阶运动方程中的修正项。
+与 \citet{Gralla2012} 式 (11)--(13) 比较：$M^0$、$M^1$ 各项和 $\bar g_{i0}$ 全部一致；$c_3$ 和 $f_3$ 的符号相反（该文为 $+\tfrac32$ 和 $-4$）。\textbf{这一差异记为待核。}
+\begin{itemize}
+\item 规范：该文在式 (11) 前写明解取 Regge--Wheeler 规范（"in Regge-Wheeler gauge"）。$\ell\geq2$ 的 Regge--Wheeler 规范是完全固定的，在背景径向坐标的重新参数化下也不变，所以按该文的说明，$M^2$ 系数不应依赖规范选择。但该文是先在 Schwarzschild 坐标中求解再换到各向同性坐标，换算过程中是否保持了这一规范，需要核实。
+\item 勘误：检索未找到该文的勘误（期刊版 Phys.\ Rev.\ D 85, 124011）。
+\item 独立核对：凭记忆写出的 Schwarzschild 坐标静态潮汐解 $h_{tt}=-\mathcal E_{ij}n^in^j\,r_s^2f^2$、$H_0=H_2$，换到各向同性坐标后与我们一致（$h_{00}=\mathcal E_{ij}n^in^j(-\bar r^2+2M\bar r-\tfrac32M^2)+\dots$）。这一公式的出处尚未核实。
+\end{itemize}
+在确认规范和出处之前，不把它称为该文的错误。下一步：检验 P 规范中的 $a_{21}$、$a_{22}$（该文式 (31)--(33)、(46)--(48)）和二阶运动方程中的修正项。
 
-\paragraph{检查点 2（完整耦合）。}背景为一般电真空，按 (1)--(6) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
+\paragraph{检查点 1.5（真空背景、带电黑洞）。}背景 $F=0$、$R_{ab}=0$，物体是 RN 黑洞（$M$、$q$）。这是物体自身电荷与质量的直接耦合（$q^2M$、$qM^2$ 型）第一次进入运动的最干净的情形，没有背景场混入。近区零阶为 RN，一阶为零（纯规范），二阶是 RN 上的 $\ell=2$ 静态潮汐解（引力潮汐 $\mathcal E_{ij},\mathcal B_{ij}$ 与 Coulomb 场耦合），三阶含 $\ell=2,3$ 和二阶一阶场的电磁尾巴部分。按 (1)--(8) 推出二阶运动方程，并回答同样的问题。
+
+\paragraph{检查点 2（完整耦合，一般电真空，最后做）。}背景为一般电真空，按 (1)--(8) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
 
 \paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
 
@@ -1494,7 +1506,7 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \item 近区一阶方程的 $\ell=1$ 部分与近区二阶的系数矩阵相同，零阶 Lorentz 力就是它的可解条件（\S\ref{sec:L4first}）。由此得到的近区解在 Lorenz 规范下与远区奇异场逐项一致，这是近区与远区之间的一个独立检验。
 \item 微分同胚恒等式 \eqref{eq:Qident} 把一阶场之间的二次项化成线性算子的列，二次项因此可以手算（\S\ref{sec:L4second}）。
 \item 量纲与宇称论证表明，近区方程在决定运动的那一块中没有不含远区数据的项。由此可知，ZP 结果中的 $\tfrac53$、$11-2q^2/M^2$ 等局部系数全部来自正则场的远区展开。
-\item 情形 1 的矩阵订正了 \citet{GrallaWald2008} 式 (106) 中的两行；情形 6 的检查点 1 发现 \citet{Gralla2012} 式 (11)、(13) 中两个 $M^2$ 系数的符号错误。
+\item 情形 1 的矩阵订正了 \citet{GrallaWald2008} 式 (106) 中的两行；情形 6 的检查点 1 中，\citet{Gralla2012} 式 (11)、(13) 有两个 $M^2$ 系数与我们的解符号相反（待核）。
 \end{enumerate}
 
 \subsection{尚未完成的部分}
