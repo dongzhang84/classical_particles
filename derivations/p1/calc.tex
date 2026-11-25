@@ -1218,6 +1218,79 @@ Ma_i\big|_{\rm self}=-\tfrac12q\,h^{\rm R}_{00}E_i-q\,h^{\rm R}_{ij}E_j+q\,f^{\r
 \end{itemize}
 
 %======================================================================
+\section{总结与文献定位}
+\label{sec:summary}
+%======================================================================
+
+\subsection{结果}
+
+四种情形用同一套近区方法推出。每一步只比前一步多一类项，每一种情形都与已知答案对照：
+\begin{center}\small
+\begin{tabular}{cp{0.2\textwidth}p{0.58\textwidth}}
+\hline
+情形 & 参数 & 近区推出的一阶运动\\
+\hline
+1 & $q=0$，$F=0$ & MiSaTaQuWa 方程 \eqref{eq:eom1}；同时发现 \citet{GrallaWald2008} 式 (106) 两行的排印错误\\
+2 & $q\neq0$，$F=0$ & 再加电磁尾巴场的洛伦兹力 $qf^{\rm tail}_{i0}$ \eqref{eq:eom2}，系数来自交叉 Maxwell 应力\\
+3 & $q=0$，$F\neq0$ & 形式与情形 1 相同，尾巴场换成正则场 \eqref{eq:eom3}；代入 ZP 的局部项得 $\tfrac53M^2(\boldsymbol E\times\boldsymbol B)$\\
+4 & 一般 & Lorentz 力的线性化加正则场的 Detweiler--Whiting 自力 \eqref{eq:eom4}；零阶 Lorentz 力是近区一阶的可解条件\\
+\hline
+\end{tabular}
+\end{center}
+情形 4 的结论可以概括为：在一阶上，带电小黑洞在电真空背景中的运动方程，就是检验粒子的 Lorentz 力方程把场换成 Detweiler--Whiting 正则场。近区方程本身不产生任何局部力。所有局部项都通过正则场进入，近区唯一新出现的耦合 $-\tfrac12qh^{\rm R}_{00}E_i$ 由规范协变完全确定。
+
+\subsection{与已有工作的关系}
+
+按处理的范围和方法，已有工作可以分为以下几类。
+\begin{itemize}
+\item \textbf{从解族推出运动方程。}
+  \begin{itemize}
+  \item \citet{GrallaWald2008}：真空中的引力自力。
+  \item \citet{GrallaHarteWald2009}：平直时空中的电磁自力，物体自身的引力不计。
+  \item \citet{Gralla2010,Gralla2013}：把方法推广到一般的协变场论，包括 Einstein--Maxwell，但只到零阶，即得到 Lorentz 力方程。
+  \end{itemize}
+  耦合的 Einstein--Maxwell 系统在一阶上没有人用这类方法处理过。
+\item \textbf{耦合情形的一阶结果。}
+  \begin{itemize}
+  \item \citet{ZimmermanPoisson2014} 由耦合 Hadamard 展开算出正则场，运动方程则作为 Detweiler--Whiting 处方采用。
+  \item \citet{LinzFriedmanWiseman2014b} 假设重整化由角平均加质量重整化构成，得到相同的结果。
+  \item \citet{Zimmerman2015} 用点粒子有效场论重新得到这一结果，出发点是点粒子作用量和相应的正规化，不是物体的解族。
+  \end{itemize}
+\item \textbf{有效场的一般框架。}
+  \begin{itemize}
+  \item \citet{Harte2009} 处理了固定度规中的电磁情形。
+  \item \citet{HarteBlancoFlanagan2025} 给出非线性场论中推出 Detweiler--Whiting 处方的一般框架。其中引力情形只作了说明，而且不计其他场，具体应用留待以后。
+  \end{itemize}
+\item \textbf{其他方法。}\citet{FutamaseHoganItoh2008} 用另一种近似方法讨论了小带电黑洞的运动，在背景不带电时只得到 Abraham--Lorentz--Dirac 项，没有尾巴项。
+\end{itemize}
+
+\citet{LinzFriedmanWiseman2014b} 在结论中明确指出了这一缺口：
+\begin{quote}\small
+What has not yet been done is to extend to the coupled fields we consider here the underlying justification based on variants of matched asymptotic expansion for electromagnetic or gravitational interactions alone.
+\end{quote}
+他们的意思是：引力或电磁单独存在时已有匹配渐近展开的论证，耦合情形还没有；三种处方结果一致，只是让人相信不会出意外。第 6 节做的正是这件事：在 \citet{GrallaWald2008} 的解族框架中，用近区方程推出耦合情形的一阶运动方程，从而把 \citet{ZimmermanPoisson2014} 和 \citet{LinzFriedmanWiseman2014b} 的出发点从假设变成结论。
+
+截至 2026 年 11 月，我们对 arXiv 和期刊的检索（关键词：Einstein--Maxwell、electrovac、charged、self-force、matched asymptotic expansion、one-parameter family；作者 Gralla、Harte、Pound、Zimmerman、Poisson、Flanagan）没有找到完成这一推导的工作。
+
+\subsection{推导中的新内容}
+
+除了结论本身，推导中有几处是前人工作中没有的：
+\begin{enumerate}
+\item 近区一阶方程的 $\ell=1$ 部分与近区二阶的系数矩阵相同，零阶 Lorentz 力就是它的可解条件（\S\ref{sec:L4first}）。由此得到的近区解在 Lorenz 规范下与远区奇异场逐项一致，这是近区与远区之间的一个独立检验。
+\item 微分同胚恒等式 \eqref{eq:Qident} 把一阶场之间的二次项化成线性算子的列，二次项因此可以手算（\S\ref{sec:L4second}）。
+\item 量纲与宇称论证表明，近区方程在决定运动的那一块中没有不含远区数据的项。由此可知，ZP 结果中的 $\tfrac53$、$11-2q^2/M^2$ 等局部系数全部来自正则场的远区展开。
+\item 情形 1 的矩阵订正了 \citet{GrallaWald2008} 式 (106) 中的两行。
+\end{enumerate}
+
+\subsection{尚未完成的部分}
+\begin{itemize}
+\item 正则场局部项的系数（如 $\tfrac53$、$11-2q^2/M^2$）取自 \citet{ZimmermanPoisson2014}，没有独立推导。可行的独立检验是 Ernst 精确解按 $M$、$q$ 的展开。
+\item 时间反演为奇的一块和磁宇称部分没有分析。它们不含 $\ddot\zeta$，与自旋的演化有关。
+\item 情形 4 的推导依赖论文第 2 节的解族假设和 (H)，以及近区零阶为 Reissner--Nordstr\"om 解。
+\item 论文正文尚未按本节结果更新。
+\end{itemize}
+
+%======================================================================
 \appendix
 \section{计算的实现}
 \label{app:code}
