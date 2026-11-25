@@ -1372,6 +1372,55 @@ H_0=r\int\frac{\dd r}{D^2}.
 \paragraph{注：静止平衡解。}两黑洞静止平衡的精确解（Alekseev--Belinski、Majumdar--Papapetrou）和 RN 上静止带电质点的线性解（Bini--Geralico--Ruffini）可以用来检验一阶正则场局部系数的数值。它们是运动方程的特例，不产生新的运动方程，所以只作附带检验，不作为主线。
 
 %======================================================================
+\section[情形 6：二阶运动方程]{情形 6：二阶运动方程（推导清单）}
+\label{sec:L6}
+%======================================================================
+
+目标：在单参数解族框架下推出带电小黑洞在 $O(\lambda^2)$ 的运动方程，含电磁、引力及两者的耦合。本节先列出方法和需要的全部量（第一步），然后是两个检查点。每完成一个检查点，结果写入本节。
+
+\subsection{模板：Gralla 的二阶方法}
+\label{sec:L6template}
+
+模板是 \citet{Gralla2012}（真空、纯引力）。其结构如下，式号指该文。
+\begin{enumerate}
+\item \textbf{远区与近区级数。}远区各阶的形式（其式 (2)）：$g^{(0)}=\eta+a_{20}r^2+a_{30}r^3$，$g^{(1)}=a_{01}r^{-1}+a_{11}+a_{21}r+a_{31}r^2$，$g^{(2)}=a_{02}r^{-2}+a_{12}r^{-1}+a_{22}+a_{32}r$，$g^{(3)}=a_{03}r^{-3}+\dots$，系数是 $t$ 和方向的光滑函数。按 \eqref{eq:g2} 同样的标度，近区各阶由远区的"列"组成（其式 (3)），近区要用到 $\lambda^3$。
+\item \textbf{P 规范（质心规范）。}构造一个规范，使近区到一阶（$\bar g^{(0)}+\lambda\bar g^{(1)}$）静态、渐近为 Minkowski 且质量偶极为零。在真空中，近区零阶为 Schwarzschild，一阶取为零（纯规范），二阶是 $\ell=2$ 的静态解（由潮汐张量 $\mathcal E_{ij}$、$\mathcal B_{ij}$ 刻画，其式 (11)--(13)），三阶是 $\ell=2,3$ 的解（再加 $\delta\mathcal E_{ij}$、$\delta\mathcal B_{ij}$、$\mathcal E_{ijk}$、$\mathcal B_{ijk}$，其式 (14)--(16)）。由近区解重建远区的 $h^{\rm P}$、$j^{\rm P}$，并作一次一阶规范变换使 $h^{\rm P}$ 满足 Lorenz 条件（其式 (28)--(29)）。
+\item \textbf{奇异/正则划分。}一阶 $h^{\rm P}=h^{\rm S}+h^{\rm H}$，$h^{\rm S}$ 只含背景曲率，$h^{\rm H}=O(r^2)$ 含未知的 $\delta\mathcal E_{ij},\delta\mathcal B_{ij}$。二阶的划分更复杂：未知量出现在奇异项中（$r\,a_{32}$），且光滑规范变换在二阶产生奇异项 $\mathcal L_\xi h^{\rm P}$，所以要先由正则场确定 $\{\delta\mathcal E_{ij},\delta\mathcal B_{ij},\xi\}$（其式 (68)--(84)），再定义 $j^{\rm S}$、$j^{\rm R}$ 和有效源。
+\item \textbf{运动。}P 规范中运动为零。在与之光滑相关的规范 $h=h^{\rm P}-\mathcal L_\xi g$、$j=j^{\rm P}-\mathcal L_\xi h^{\rm P}+\tfrac12(\mathcal L_\xi\mathcal L_\xi g-\mathcal L_\Xi g)$ 中，$Z^{(1)}=\xi|_\gamma$，$Z^{(2)}=(\Xi+\xi\cdot\partial\xi)|_\gamma$（其式 (92)--(95)）。由于 P 规范中运动是背景测地线，在光滑相关的规范中运动就是"BG 场"$g^{\rm BG}(\lambda)=g-\lambda\mathcal L_\xi g+\tfrac12\lambda^2(\mathcal L_\xi\mathcal L_\xi g-\mathcal L_\Xi g)$ 中的测地线（其式 (96)--(98)）。
+\item \textbf{换成正则场。}$h^{\rm R}=h^{\rm BG}+h^{\rm H}$，$h^{\rm H}=O(r^2)$；二阶测地方程只含 $j$ 的一阶导数，但含 $h$ 的二阶导数，所以结果是"正则场中的二阶测地方程"加一项修正 $\delta\mathcal E_{ij}Z^{(1)j}$（其式 (104)）。
+\end{enumerate}
+该文的结论：二阶运动是正则场中的测地运动，只差 $\delta\mathcal E_{ij}$ 这一项（来自 $h^{\rm H}$）。该文未检查其奇异场是否与 Detweiler--Whiting 奇异场一致。
+
+\subsection{推广到 Einstein--Maxwell：需要的全部量}
+\label{sec:L6list}
+
+\paragraph{(1) 背景与远区级数。}背景 $(g,A)$ 是电真空解。零阶世界线满足 Lorentz 力方程，有加速度，Fermi 坐标中 $g^{(0)}=\eta+O(r)$（\eqref{eq:fermiacc}），不是 $\eta+O(r^2)$。背景势 $A^{(0)}=O(r)$。远区各阶的形式同上，并增加势的级数 $A^{(n)}$。背景的 $E^2$ 曲率（Ricci 张量 $\sim F^2$）按阶次系统保留：它在 $g^{(0)}$ 的 $r^2$ 项中，近区 $\lambda^2$ 阶出现。
+
+\paragraph{(2) 近区各阶。}
+\begin{itemize}
+\item $\lambda^0$：RN 解（$M$、$q$）。
+\item $\lambda^1$：带电黑洞在均匀场 $E$、$B$ 中、以 $a=qE/M$ 加速的静态解，对 $M,q$ 精确（\S\ref{sec:L5result}，再加 $c_{\alpha\beta}$ 的规范部分）。\S\ref{sec:L5result} 证明了它在视界正则条件下唯一（除规范和 Kerr--Newman 自旋模式），没有诱导偶极。这正是定义 P 规范所需的"一阶质心"性质。与真空不同，近区一阶不为零，且不是渐近 Minkowski（有 $-2a\cdot x$、$E\cdot x$），所以 Gralla 的"质心"条件要改成：近区到一阶等于这一静态解，质量偶极和电偶极都为零。
+\item $\lambda^2$：RN 上的线性化 Einstein--Maxwell 方程，源是 $\lambda^1$ 场的二次项（现在不为零）。需要 $\ell=0,1,2$ 的静态解：背景的潮汐场 $\mathcal E_{ij},\mathcal B_{ij}$、场梯度 $\partial_kF_{\alpha\beta}$、$F^2$ 曲率，以及 $\lambda^1$ 场相乘产生的项。$\ell=1$ 部分已在第 6 节处理（一阶运动方程），$\ell=0,2$ 部分是新的。
+\item $\lambda^3$：同上，$\ell$ 到 3，源含 $\lambda^1\times\lambda^2$ 和 $\lambda^1\times\lambda^1\times\lambda^1$ 项。只需要提取运动所需的部分（下面第 (5) 条）。
+\end{itemize}
+
+\paragraph{(3) 规范。}微分同胚 $\xi$（一阶）、$\Xi$（二阶）和电磁规范 $\chi$、$\psi$。P 规范中 $h^{\rm P}$、$a^{\rm P}$ 取 Lorenz 规范（便于与 ZP 比较）。二阶不强加 Lorenz 条件（Gralla 指出会引入 $r\log r$）。
+
+\paragraph{(4) 二阶位置。}$Z^{(1)}=\xi|_\gamma$，$Z^{(2)}=(\Xi+\xi\cdot\partial\xi)|_\gamma$，由"近区到一阶质心"定义。需要确认：在 (H) 下，二阶的质量偶极和电偶极可以同时消去。由 \S\ref{sec:L5result}，一阶近区解的电偶极相对质心为零，所以这一点在一阶近区上成立；二阶近区的偶极要在 $\lambda^2$ 的 $\ell=1$ 解中检查。
+
+\paragraph{(5) 运动。}推广 Gralla 的论证：P 规范中运动是背景 Lorentz 力方程的解 $\gamma$；Lorentz 力方程在微分同胚和电磁规范变换下协变，所以在光滑相关的规范中，运动是 BG 场 $(g^{\rm BG}(\lambda),A^{\rm BG}(\lambda))$ 中 Lorentz 力方程的二阶微扰。这一步要验证的前提是 P 规范存在：近区到一阶是 \S\ref{sec:L5result} 的静态解且偶极为零。然后把 BG 场换成正则场，修正项来自 $h^{\rm H}$、$a^{\rm H}$ 的 $O(r^2)$ 部分（真空中是 $\delta\mathcal E_{ij}Z^{(1)j}$，现在还有电磁的对应项）。
+
+\paragraph{(6) 奇异场与正则场。}一阶：$h^{\rm S}$、$a^{\rm S}$ 到 $O(r^2)$，含耦合项（\S\ref{sec:L4far} 已有 $r^0$ 项）。二阶：$j^{\rm S}$、$b^{\rm S}$，含 RN 的 $q^2/r^2$、$qM/r^2$ 及与外场的交叉项；未知量 $\{\delta\mathcal E_{ij},\delta\mathcal B_{ij},\dots,\xi,\chi\}$ 由正则场确定（Gralla 式 (68)--(84) 的推广）。
+
+\subsection{检查点}
+
+\paragraph{检查点 1（$q=0$、真空）。}用我们的工具复现 \citet{Gralla2012} 的关键系数：近区二阶 $\ell=2$ 静态解（其式 (11)--(13)）、P 规范中的 $a_{21}$、$a_{22}$（其式 (31)--(33)、(46)--(48)），以及二阶运动方程 (104) 中的修正项 $\delta\mathcal E_{ij}Z^{(1)j}$。目的是验证工具和约定。
+
+\paragraph{检查点 2（完整耦合）。}背景为一般电真空，按 (1)--(6) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
+
+\paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
+
+%======================================================================
 \section{总结与文献定位}
 \label{sec:summary}
 %======================================================================
