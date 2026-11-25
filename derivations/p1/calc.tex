@@ -479,37 +479,139 @@ $\xi_i=r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc$\\
 \label{sec:L2}
 %======================================================================
 
-背景仍是真空解（$F=0$，$R_{ab}=0$），物体带质量 $M$ 和电荷 $q$。近区零阶背景是 \eqref{eq:RN}，近区二阶扰动包括 \eqref{eq:A2} 中的势。要回答的问题是：近区二阶方程中第一次出现的电磁项，是否恰好给出电磁尾巴场的洛伦兹力，而不带来别的项。
+背景仍是真空解（$F=0$，$R_{ab}=0$），物体带质量 $M$ 和电荷 $q$。与情形 1 相比，近区零阶背景从 Schwarzschild 解换成 Reissner--Nordstr\"om 解 \eqref{eq:RN}，近区二阶扰动多出 \eqref{eq:A2} 中的势，场方程多出 Maxwell 方程，Einstein 方程多出电磁源。要回答的问题是：这些新出现的项是否恰好给出电磁尾巴场的洛伦兹力，而不带来别的项。与第 3 节一样，本节省略近区量上的横线。
 
-\subsection{进入 $1/\bar r^2$ 阶的项}
+\subsection{近区二阶方程}
+\label{sec:L2eq}
 
-二阶方程现在是 Einstein 方程 $R_{ab}-8\pi T_{ab}=0$ 和 Maxwell 方程 $\nabla_bF^{ab}=0$ 在 $\lambda^2$ 阶的部分。逐项估计 $\bar r\to\infty$ 时的阶次，只看 $\ell=1$：
-\begin{enumerate}
-\item Einstein 方程的电磁源是场的二次式。Coulomb 场（$\sim q/\bar r^2$）与 \eqref{eq:Eharm} 中常数尾巴场的交叉项 $\sim q/\bar r^2$，为 $\ell=1$，进入。Coulomb 场与 $H'$（场 $\sim1/\bar r$）、$\dot K'$（场 $\sim\bar t/\bar r^2$）的交叉项是 $1/\bar r^3$ 及更高阶；度规扰动乘 Coulomb 场的平方是 $q^2/\bar r^3$。这两类都不进入。
-\item Maxwell 方程线性化后为 $\nabla_bY^{ab}=0$（论文第 3 节，推导见其附录 A），其中
+近区展开代入 Einstein--Maxwell 方程，$\lambda^2$ 阶给出
 \begin{equation}
-Y^{ab}=f^{ab}+\tfrac12h\,F^{ab}-h^{ac}F_c{}^b-h^{bd}F^a{}_d ,
+G^{(1)}[\bar g^{(2)}]-8\pi\,T^{(1)}[\bar g^{(2)},\bar A^{(2)}]=\mathcal S^{\rm E},\qquad
+\mathcal M^{(1)}[\bar g^{(2)},\bar A^{(2)}]=\mathcal S^{\rm M},
+\label{eq:L2second}
+\end{equation}
+左边是 Einstein 方程和 Maxwell 方程 $\nabla_bF^{ab}=0$ 在近区背景 $(g^{(0)},A^{(0)})$ 附近的线性化，右边 $\mathcal S^{\rm E}$、$\mathcal S^{\rm M}$ 是一阶近区场 $(\bar g^{(1)},\bar A^{(1)})$ 的二次式。
+
+\paragraph{一阶近区场。}由 \S\ref{sec:expansions}，$\bar g^{(1)}=c_{ab}+K_{ab}/r+\dots$，$\bar A^{(1)}=a^{\rm tail}_a+K'_a/r+\dots$。常数 $a^{\rm tail}_a$ 不产生场，所以一阶近区电磁场 $F^{(1)}=O(1/r^2)$。
+
+\paragraph{右边。}$\mathcal S^{\rm E}$ 除了情形 1 中已估计过的 $G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$，还有电磁应力的二次项：$F^{(1)}F^{(1)}=O(1/r^4)$；$F^{(0)}F^{(1)}\bar g^{(1)}$，其中 Coulomb 场 $F^{(0)}=O(q/r^2)$，合计 $O(1/r^4)$；$F^{(0)}F^{(0)}\bar g^{(1)}\bar g^{(1)}=O(q^2/r^4)$。$\mathcal S^{\rm M}$ 是 $\partial\big[\bar g^{(1)}F^{(1)}\big]$、$\partial\big[\bar g^{(1)}\bar g^{(1)}F^{(0)}\big]$ 型的项，其中最大的是常数 $c_{ab}$ 乘 $F^{(0)}$ 再求导，$O(q/r^3)$。所以右边对 $1/r^2$、$t/r^3$ 两阶都没有贡献，\eqref{eq:L2second} 在这两阶上是齐次的。
+
+\paragraph{左边：新出现的项。}背景按 \eqref{eq:RN} 展开，$g^{(0)}=\eta+Mb+O\big((M^2+q^2)/r^2\big)$，$A^{(0)}=-(q/r)\dd t+O(qM/r^2)$。线性化算子相应地按 $M$、$q$ 展开。逐项估计 $\ell=1$ 输入经各阶算子给出的阶次：
+\begin{enumerate}
+\item \textbf{Einstein 方程的度规部分}：与情形 1 相同（\S\ref{sec:L1eq}）。背景中新增的 $q^2/r^2$ 项与 $M^2/r^2$ 项同阶，只影响 $1/r^3$ 阶。
+\item \textbf{Einstein 方程的电磁源}：$8\pi T_{ab}$ 对 $(\bar g^{(2)},\bar A^{(2)})$ 线性化，形如 $F^{(0)}f$ 和 $hF^{(0)}F^{(0)}$，$f=\dd\bar A^{(2)}$。后者是 $O(q^2)$，乘 $h\sim r$ 得 $O(q^2/r^3)$，不进入。前者中，尾巴场 $E^0$、$E^C$ 给出常数 $f$，乘 Coulomb 场得 $O(q/r^2)$，\textbf{进入}；$H'$ 给出 $f\sim1/r$，$\dot K'$ 给出 $f\sim1/r$、$t/r^2$，乘 Coulomb 场都在 $1/r^3$ 以下，不进入。
+\item \textbf{Maxwell 方程}：线性化算子作用在 $f$ 和 $h$ 上，按背景的阶次分三部分。
+\begin{itemize}
+\item 平直部分 $\partial_bf^{ab}$：尾巴场是常数，散度为零；$H'$、$\dot K'$ 给出 $O(1/r^2)$、$O(t/r^3)$，\textbf{进入}。
+\item $O(M)$ 部分：$f$ 在背景 $Mb$ 中的散度。尾巴场给出 $M\,\partial(1/r)\cdot{\rm const}=O(M/r^2)$，\textbf{进入}；$H'$、$\dot K'$ 给出 $O(M/r^3)$，不进入。
+\item $O(q)$ 部分：度规扰动 $h$ 作用在 Coulomb 场上。$D$ 项（$h\sim r$）乘 $F^{(0)}\sim q/r^2$ 得 $q/r$，求导后 $O(q/r^2)$，\textbf{进入}；$H$（$h\sim r^0$）、$\dot K$（$h\sim t/r$）给出 $O(q/r^3)$、$O(qt/r^4)$，不进入。$O(qM)$ 及更高阶的项都在 $1/r^3$ 以下。
+\end{itemize}
+\item 背景场只需保留到 \eqref{eq:bg1} 和 $A^{(0)}=-(q/r)\dd t$。$B_{aibj}x^ix^j$、$\mathcal R$、$\mathcal S$ 没有 $\ell=1$ 部分，与情形 1 一样不进入。
+\end{enumerate}
+
+\paragraph{输入与输出。}度规输入与 \eqref{eq:L1input} 相同。势的 $\ell=1$、电宇称、时间反演为偶的部分（$a_0$ 为偶，$a_i$ 为奇；$a_i$ 的磁宇称部分 $\epsilon_{ijk}V_jn_k$ 不进入）为
+\begin{equation}
+a_0=r\,E^0\!\cdot n+H'\!\cdot n,\qquad
+a_i=t\,E^C_i+\frac tr\big(\dot K'^B\!\cdot n\,n_i+\dot K'^C_i\big),
+\label{eq:L2input}
+\end{equation}
+其中 $E^0$、$E^C$ 由 \eqref{eq:Eharm} 定义，$H'$、$\dot K'^B$、$\dot K'^C$ 是未知齐次项。Einstein 方程的输出仍按 \eqref{eq:Rharm} 取 $R_{ab}-8\pi T_{ab}$ 的系数，记为 $R^A,\dots,R^F$。Maxwell 方程记 $\mathcal M^a\equiv\nabla_bF^{ab}$ 的线性化部分（指标在上），$\mathcal M^0$ 在时间反演下为偶，$\mathcal M^i$ 为奇，取
+\begin{equation}
+\mathcal M^0\big|_{1/r^2}=\frac1{r^2}R^X_in^i,\qquad
+\mathcal M^i\big|_{t/r^3}=\frac{t}{r^3}\big(R^Y_jn^jn^i+R^Z_i\big).
+\label{eq:Mharm}
+\end{equation}
+
+\subsection{需要的公式}
+
+Coulomb 场 $A^{(0)}_0=-q/r$ 给出
+\begin{equation}
+F^{(0)}_{i0}=\partial_iA^{(0)}_0=\frac{q\,n_i}{r^2}\equiv\mathcal E_i,\qquad F^{(0)}_{ij}=0 ,
+\end{equation}
+指标用 $\eta$ 升降：$F^{(0)0i}=\mathcal E_i$，$F^{(0)}{}_0{}^i=-\mathcal E_i$，$F^{(0)}{}_i{}^0=-\mathcal E_i$，$F^{(0)0}{}_i=\mathcal E_i$，$F^{(0)i}{}_0=\mathcal E_i$。
+
+\paragraph{电磁源。}Maxwell 应力 $8\pi T_{ab}=2F_{ac}F_b{}^c-\tfrac12g_{ab}F_{cd}F^{cd}$ 对 $F\to F^{(0)}+f$ 线性化，$O(q)$ 部分为
+\begin{equation}
+8\pi\,\delta T_{ab}=2\big(F^{(0)}_{ac}f_b{}^c+f_{ac}F^{(0)}{}_b{}^c\big)-\eta_{ab}F^{(0)}_{cd}f^{cd}.
+\label{eq:dT2}
+\end{equation}
+当 $f$ 也是纯电场 $f_{i0}=e_i$、$f_{ij}=0$ 时，$F^{(0)}_{cd}f^{cd}=-2\,\mathcal E\!\cdot e$，代入得
+\begin{equation}
+8\pi\,\delta T_{00}=2\,\mathcal E\!\cdot e,\qquad 8\pi\,\delta T_{0i}=0,\qquad
+8\pi\,\delta T_{ij}=-2\big(\mathcal E_ie_j+e_i\mathcal E_j\big)+2\delta_{ij}\,\mathcal E\!\cdot e,
+\label{eq:dT2E}
+\end{equation}
+即两个电场的交叉能量密度和交叉 Maxwell 应力。
+
+\paragraph{Maxwell 算子。}$\nabla_bF^{ab}=(-g)^{-1/2}\partial_b\big[(-g)^{1/2}g^{ac}g^{bd}F_{cd}\big]$。前面的因子 $(-g)^{-1/2}$ 的 $O(M)$、$O(\epsilon)$ 部分乘在 $\partial_b F^{ab}$ 的零阶或一阶上；零阶 $\partial_bF^{(0)ab}=0$（$r\neq0$），一阶在下面都已是 $O(1/r^2)$，乘 $M/r$ 后不进入。所以只需 $\partial_b\big[(-g)^{1/2}g^{ac}g^{bd}F_{cd}\big]$ 的线性化，分三部分：
+\begin{itemize}
+\item \textbf{平直部分}：$\partial_bf^{ab}$，即
+\begin{equation}
+\mathcal M^0_{\rm flat}=\partial_if_{i0},\qquad \mathcal M^i_{\rm flat}=-\partial_0f_{i0}+\partial_jf_{ij}.
+\label{eq:Mflat}
+\end{equation}
+\item \textbf{$O(M)$ 部分}：背景 $g=\eta+2M\Phi\delta$ 中，$(-g)^{1/2}=1+2M\Phi$，$g^{00}=-(1+2M\Phi)$，$g^{ij}=(1-2M\Phi)\delta^{ij}$，于是 $(-g)^{1/2}g^{00}g^{ij}f_{0j}=-(1+2M\Phi)f_{0i}$，$(-g)^{1/2}g^{ik}g^{jl}f_{kl}=(1-2M\Phi)f_{ij}$，到 $O(M)$。所以
+\begin{equation}
+\mathcal M^0_{(M)}=2\,\partial_i\big(\Phi f_{i0}\big),\qquad \mathcal M^i_{(M)}=-2\Phi\,\partial_0f_{i0}-2\,\partial_j\big(\Phi f_{ij}\big).
+\label{eq:MM}
+\end{equation}
+\item \textbf{$O(q)$ 部分}：度规扰动 $h$ 作用在 Coulomb 场上，$\mathcal M^a_{(q)}=\partial_bY^{ab}$，
+\begin{equation}
+Y^{ab}=\tfrac12h\,F^{(0)ab}-h^{ac}F^{(0)}{}_c{}^b-h^{bd}F^{(0)a}{}_d ,
 \label{eq:Y}
 \end{equation}
-$f=\dd a$，$F$ 是近区背景场。度规的 $D$ 项（$\sim\bar r$）乘 Coulomb 场（$\sim q/\bar r^2$）得 $q/\bar r$，求散度后为 $q/\bar r^2$，进入。常数尾巴场在背景 $M/\bar r$ 修正下的散度 $\sim M/\bar r^2$，进入。$H'$、$\dot K'$ 在平直背景中的散度，进入。
-\item 一阶近区场的二次项：一阶近区度规是常数加 $K/\bar r$，一阶近区电磁场在 $F=0$ 时只有 $1/\bar r^2$ 的齐次部分，乘积都在 $1/\bar r^3$ 以下，不进入。这与情形 1 中 $G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$ 不进入的理由相同。
-\end{enumerate}
-所以在 $1/\bar r^2$、$\bar t/\bar r^3$ 阶上，需要的近区背景只是 \eqref{eq:bg1} 加上 $\bar A^{(0)}=-(q/\bar r)\dd\bar t$。Einstein 方程中，把论文第 3 节的 $\delta(4\pi T_{ab})$ 用于近区，背景场取 Coulomb 场；含 $hFF$ 的项是 $O(q^2)$，在 $1/\bar r^3$ 阶，略去，保留 $O(q)$ 的项：
+这是 $\delta\big[(-g)^{1/2}g^{ac}g^{bd}\big]F^{(0)}_{cd}$，与论文第 3 节的线性化 Maxwell 方程一致（推导见论文附录 A）。用上面列出的 $F^{(0)}$ 各分量，
 \begin{equation}
-8\pi\,\delta T_{ab}=2\big(F_{ac}f_b{}^c+f_{ac}F_b{}^c-\tfrac12\eta_{ab}F_{cd}f^{cd}\big).
+Y^{0i}=\tfrac12\big(h_{00}+h_{kk}\big)\mathcal E_i-h_{ik}\mathcal E_k,\qquad
+Y^{ij}=h_{j0}\mathcal E_i-h_{i0}\mathcal E_j,\qquad Y^{i0}=-Y^{0i}.
+\label{eq:Ycomp}
 \end{equation}
-Maxwell 方程中保留 $O(1)$、$O(M)$、$O(q)$ 的项；$O(qM)$ 及更高阶的项进入 $1/\bar r^3$ 阶。Maxwell 方程的 $\ell=1$ 部分按
-\begin{equation}
-\mathcal M^0\big|_{1/\bar r^2}=\frac1{\bar r^2}R^X_in^i,\qquad
-\mathcal M^i\big|_{\bar t/\bar r^3}=\frac{\bar t}{\bar r^3}\big(R^Y_jn^jn^i+R^Z_i\big)
-\end{equation}
-提取：$\mathcal M^0$ 在时间反演下为偶，$\mathcal M^i$ 为奇，后者取 $\bar t$ 的奇次项。
+于是 $\mathcal M^0_{(q)}=\partial_iY^{0i}$，$\mathcal M^i_{(q)}=-\partial_0Y^{0i}+\partial_jY^{ij}$。
+\end{itemize}
 
-\paragraph{预期。}如果一阶运动只由正则场驱动，消去全部未知项后应得到 \eqref{eq:rel1} 加一个尾巴电场项，$-MD^A_i+2MD^C_i+\kappa\,q\,(E^C_i-E^0_i)=0$。由 \eqref{eq:DAC}，它给出 $M\ddot\zeta_i=(\text{情形 1 的各项})+\tfrac\kappa2\,q\,f^{\rm tail}_{i0}$。洛伦兹力 $M\ddot\zeta_i=q\,f^{\rm tail}_{i0}$ 要求 $\kappa=2$。
+\subsection{各列的计算}
+
+由 \S\ref{sec:L2eq}，各列进入的部分为：度规各列的 $R_{ab}$ 与情形 1 相同，另外 $D$ 各列进入 Maxwell 方程的 $O(q)$ 部分；$E^0$、$E^C$ 两列进入 Einstein 方程的电磁源和 Maxwell 方程的 $O(M)$ 部分；$H'$、$\dot K'$ 各列只进入 Maxwell 方程的平直部分。$H$、$\dot K$ 各列不进入任何新的项。
+
+\paragraph{$E^0$、$E^C$ 列：均匀尾巴电场。}$a_0=E^0\!\cdot x$、$a_i=tE^C_i$ 给出
+\begin{equation}
+f_{i0}=\partial_ia_0-\partial_0a_i=E^0_i-E^C_i\equiv e_i,\qquad f_{ij}=0 ,
+\end{equation}
+即一个均匀电场 $e$。两列只通过 $e$ 进入，所以系数必然大小相等、符号相反。
+\begin{itemize}
+\item Einstein 方程：由 \eqref{eq:dT2E}，$\mathcal E=qn/r^2$，
+\begin{equation*}
+-8\pi\delta T_{00}=-\frac{2q\,e\!\cdot n}{r^2},\qquad
+-8\pi\delta T_{ij}=\frac{q}{r^2}\big(4\,e_{(i}n_{j)}-2\delta_{ij}\,e\!\cdot n\big),\qquad -8\pi\delta T_{0i}=0 .
+\end{equation*}
+所以 $E^0$ 列在 $R^A,R^E,R^F$ 中为 $-2q,\,4q,\,-2q$，$E^C$ 列为其相反数，$R^B,R^C,R^D$ 中为零。
+\item Maxwell 方程：平直部分为零（$f$ 是常数）。$O(q)$ 部分不涉及 $a$。$O(M)$ 部分由 \eqref{eq:MM}，$\mathcal M^0_{(M)}=2e_i\partial_i\Phi=-2\,e\!\cdot n/r^2$，$\mathcal M^i_{(M)}=0$。所以 $E^0$ 列在 $R^X$ 中为 $-2M$，$E^C$ 列为 $2M$。
+\end{itemize}
+
+\paragraph{$D$ 各列在 Maxwell 方程中的 $O(q)$ 部分。}由 \eqref{eq:Ycomp}：
+\begin{itemize}
+\item $D^A$（$h_{00}=V\!\cdot x$）：$Y^{0i}=\tfrac12(V\!\cdot x)\mathcal E_i=\tfrac q2(V\!\cdot n)n_i/r$，$Y^{ij}=0$。由 \eqref{eq:id-div}，$\mathcal M^0_{(q)}=\tfrac q2V\!\cdot n/r^2$。
+\item $D^F$（$h_{ij}=\delta_{ij}V\!\cdot x$）：$h_{kk}=3V\!\cdot x$，$h_{ik}\mathcal E_k=(V\!\cdot x)\mathcal E_i$，$Y^{0i}=\tfrac12(V\!\cdot x)\mathcal E_i$，与 $D^A$ 相同，$\mathcal M^0_{(q)}=\tfrac q2V\!\cdot n/r^2$。
+\item $D^E$（$h_{ij}=\tfrac12(V_ix_j+V_jx_i)$）：$h_{kk}=V\!\cdot x$，$h_{ik}\mathcal E_k=\tfrac q{2r}\big(V_i+(V\!\cdot n)n_i\big)$，所以 $Y^{0i}=-\tfrac q2V_i/r$，$\mathcal M^0_{(q)}=-\tfrac q2\partial_i(V_i/r)=\tfrac q2V\!\cdot n/r^2$。
+\item $D^C$（$h_{i0}=tV_i$）：$Y^{0i}=0$，$Y^{ij}=t(V_j\mathcal E_i-V_i\mathcal E_j)=qt(V_jx_i-V_ix_j)/r^3$。$\partial_j(V_jx_i/r^3)=(V_i-3V\!\cdot n\,n_i)/r^3$，$\partial_j(V_ix_j/r^3)=0$，所以
+\begin{equation*}
+\mathcal M^i_{(q)}=\frac{qt}{r^3}\big(V_i-3V\!\cdot n\,n_i\big),\qquad \mathcal M^0_{(q)}=0 .
+\end{equation*}
+即 $D^C$ 列在 $R^Y$、$R^Z$ 中为 $-3q$、$q$。
+\end{itemize}
+三个静态的 $D$ 列在 $R^X$ 中都是 $\tfrac q2$。这些项的来源是：远区一阶场在 $\gamma$ 处的梯度（$D$）使近区度规偏离平直，Coulomb 场在这个度规中不再满足平直的 Maxwell 方程。
+
+\paragraph{$H'$ 列：$a_0=V\!\cdot n$。}$f_{i0}=\partial_i(V\!\cdot n)$，$f_{ij}=0$。由 \eqref{eq:Mflat} 和 \eqref{eq:id-lap}，$\mathcal M^0=\nabla^2(V\!\cdot n)=-2V\!\cdot n/r^2$，$\mathcal M^i=0$。
+
+\paragraph{$\dot K'^C$ 列：$a_i=tV_i/r$。}$f_{i0}=-V_i/r$，$f_{ij}=t\big(V_j\partial_i-V_i\partial_j\big)(1/r)=-t(V_jn_i-V_in_j)/r^2$。由 \eqref{eq:Mflat}：$\mathcal M^0=-\partial_i(V_i/r)=V\!\cdot n/r^2$；$\mathcal M^i=\partial_jf_{ij}=-t\,\partial_j\big[(V_jx_i-V_ix_j)/r^3\big]=t(3V\!\cdot n\,n_i-V_i)/r^3$。
+
+\paragraph{$\dot K'^B$ 列：$a_i=t(V\!\cdot n)n_i/r$。}$f_{i0}=-(V\!\cdot n)n_i/r$；由 \eqref{eq:id-div}，$f_{ij}=t\big[\partial_i\big((V\!\cdot n)n_j/r\big)-\partial_j\big((V\!\cdot n)n_i/r\big)\big]=t(V_in_j-V_jn_i)/r^2$。于是 $\mathcal M^0=-\partial_i\big((V\!\cdot n)n_i/r\big)=-V\!\cdot n/r^2$；$\mathcal M^i=t\,\partial_j\big[(V_ix_j-V_jx_i)/r^3\big]=t(3V\!\cdot n\,n_i-V_i)/r^3$。两个 $\dot K'$ 列的 $\mathcal M^i$ 相同，所以 $R^Y$、$R^Z$ 只依赖 $\dot K'^B+\dot K'^C$。
+
+\paragraph{$H$、$\dot K$ 各列。}由阶次分析，它们在 Einstein 方程中的贡献与情形 1 相同，在 Maxwell 方程和电磁源中的贡献都在 $1/r^3$ 以下。
 
 \subsection{系数矩阵}
 
-直接计算给出下表。竖线左边的 6 列是远区数据，右边的 9 列是未知齐次项；前 6 行是 Einstein 方程，后 3 行是 Maxwell 方程。Einstein 各行的归一化与 \eqref{eq:L1matrix} 相同。
+把各列结果合起来。竖线左边的 6 列是远区数据，右边的 9 列是未知齐次项；前 6 行是 Einstein 方程，度规各列与 \eqref{eq:L1matrix} 相同，后 3 行是 Maxwell 方程。
 {\small\setlength{\arraycolsep}{3pt}
 \begin{equation}
 \begin{array}{c|rrrrrr|rrrrrrrrr}
@@ -526,38 +628,74 @@ R^Z & 0 & q & 0&0&0&0& 0&0&0&0&0&0&0&-1&-1
 \end{array}
 \label{eq:L2matrix}
 \end{equation}}
-有三点可以直接看出。第一，Einstein 各行的度规系数与 \eqref{eq:L1matrix} 逐项相同，即度规部分的推导不受电荷影响。第二，电磁源只通过 $E^C-E^0$ 进入，不单独依赖 $E^0$ 或 $E^C$，这是电磁规范不变性的要求。第三，Maxwell 行中出现 $q\,D$ 项（度规扰动作用在 Coulomb 场上）和 $M(E^C-E^0)$ 项（尾巴场在背景度规中的散度），与上一小节的估计一致。
+上面每一项都由独立的符号计算核对（附录~\ref{app:code} 中的 \texttt{level2\_detail.py}，它直接展开 $(-g)^{1/2}g^{ac}g^{bd}F_{cd}$ 和完整的应力张量，不用 \eqref{eq:dT2}--\eqref{eq:Ycomp}）；整个矩阵又与不经分解的直接计算（\texttt{level2.py}）一致。
 
 \subsection{检验：纯规范扰动}
 
-微分同胚 $\xi$ 同时改变度规和 Coulomb 势，$\delta\bar A=\mathcal L_\xi(-q\,\dd\bar t/\bar r)$；电磁规范变换 $\psi$ 只改变势。这些纯规范扰动都必须落在 \eqref{eq:L2matrix} 的零空间里：
+近区背景 $(g^{(0)},A^{(0)})$ 在所保留的阶次上满足 Einstein--Maxwell 方程，所以两类纯规范扰动必须落在 \eqref{eq:L2matrix} 的零空间里：微分同胚 $\xi$ 同时改变度规和势，$h=\mathcal L_\xi g^{(0)}$，$a=\mathcal L_\xi A^{(0)}$；电磁规范变换 $\psi$ 只改变势，$a=\dd\psi$。对 $A^{(0)}=-(q/r)\dd t$，$(\mathcal L_\xi A^{(0)})_a=\xi^b\partial_bA^{(0)}_a+A^{(0)}_0\partial_a\xi^0$。
+\begin{itemize}
+\item $\xi_0=t\,(c\cdot x)$：$\xi^0=-t\,c\cdot x$（到 $O(M^0)$），$a_a=(q/r)\partial_a(t\,c\cdot x)$，即 $a_0=q\,c\cdot n$，$a_i=(t/r)\,q\,c_i$，给出 $H'=qc$、$\dot K'^C=qc$；度规部分与情形 1 相同。
+\item $\xi_i=(c\cdot x)x_i$ 和 $\xi_i=r^2c_i$：$\xi^0=0$，$a_0=\xi^k\partial_k(-q/r)=q\,\xi^kn_k/r^2$，两者都给出 $a_0=q\,c\cdot n$，即 $H'=qc$；$a_i=0$。
+\item $\psi=t\,(c\cdot x)$：$a_0=c\cdot x$，$a_i=tc_i$，即 $E^0=E^C=c$。
+\end{itemize}
 \begin{center}\small
 \begin{tabular}{p{0.22\textwidth}p{0.6\textwidth}}
 \hline
 规范变换 & 产生的非零系数\\
 \hline
-$\xi_0=\bar t\,(c\cdot\bar x)$ & $D^A=2c,\ D^C=c,\ \dot K^B=-2Mc,\ H'=qc,\ \dot K'^C=qc$\\
-$\xi_i=(c\cdot\bar x)\,\bar x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc,\ H'=qc$\\
-$\xi_i=\bar r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc,\ H'=qc$\\
-$\psi=\bar t\,(c\cdot\bar x)$ & $E^0=E^C=c$\\
+$\xi_0=t\,(c\cdot x)$ & $D^A=2c,\ D^C=c,\ \dot K^B=-2Mc,\ H'=qc,\ \dot K'^C=qc$\\
+$\xi_i=(c\cdot x)\,x_i$ & $D^E=D^F=2c,\ H^A=-2Mc,\ H^D=4Mc,\ H^F=-2Mc,\ H'=qc$\\
+$\xi_i=r^2c_i$ & $D^E=4c,\ H^A=-2Mc,\ H^E=4Mc,\ H^F=-2Mc,\ H'=qc$\\
+$\psi=t\,(c\cdot x)$ & $E^0=E^C=c$\\
 \hline
 \end{tabular}
 \end{center}
-四者都在零空间中。前三个同时检验了 Maxwell 行中的 $q\,D$ 耦合项和 $H'$、$\dot K'$ 列。
+Einstein 各行：三个微分同胚不产生 $E^0$、$E^C$，度规部分已在情形 1 中检验；电磁规范变换只产生 $E^0=E^C$，Einstein 行只含 $E^0-E^C$，为零。Maxwell 各行逐个代入：
+\begin{itemize}
+\item $\xi_0=t(c\cdot x)$：$R^X=\tfrac q2\cdot2c-2\cdot qc+qc=0$；$R^Y=-3q\cdot c+3\cdot qc=0$；$R^Z=q\cdot c-qc=0$。
+\item $\xi_i=(c\cdot x)x_i$：$R^X=\tfrac q2(2c+2c)-2qc=0$；$R^Y=R^Z=0$。
+\item $\xi_i=r^2c_i$：$R^X=\tfrac q2\cdot4c-2qc=0$；$R^Y=R^Z=0$。
+\item $\psi=t(c\cdot x)$：$R^X=-2Mc+2Mc=0$。
+\end{itemize}
+全部为零。微分同胚的检验同时检验了 Maxwell 行中的 $qD$ 耦合项和 $H'$、$\dot K'$ 列：例如在 $\xi_0=t(c\cdot x)$ 中，$D^A$ 列的 $\tfrac q2$ 恰好与势的变化 $H'$、$\dot K'^C$ 抵消。
 
-\subsection{运动方程}
+\subsection{消元与运动方程}
 
-消去全部 9 个未知列，只剩一个非平凡组合，仍是 $-\tfrac23R^B+\tfrac23R^D+R^E$，Maxwell 行不参与：
+写成方程。Einstein 方程是情形 1 的 (A)--(F) 加上电磁源，记 $e=E^0-E^C$：
+\begin{align}
+0&=(\text{A})-2q\,e,\qquad 0=(\text{B}),\qquad 0=(\text{C}),\qquad 0=(\text{D}),\nonumber\\
+0&=(\text{E})+4q\,e,\qquad 0=(\text{F})-2q\,e,\label{eq:L2E}
+\end{align}
+这里 (A)--(F) 指第 3 节中这些方程的右边。Maxwell 方程是
+\begin{align}
+0&=\tfrac q2\big(D^A+D^E+D^F\big)-2M\,e-2H'-\dot K'^B+\dot K'^C,\tag{X}\\
+0&=-3qD^C+3\big(\dot K'^B+\dot K'^C\big),\tag{Y}\\
+0&=qD^C-\big(\dot K'^B+\dot K'^C\big).\tag{Z}
+\end{align}
+
+\paragraph{Maxwell 方程不给出关系。}(Y) $=-3\times$(Z)。(Z) 确定 $\dot K'^B+\dot K'^C=qD^C$；(X) 含 $H'$，$H'$ 不出现在任何其他方程中，所以 (X) 只确定 $H'$。未知量 $H'$、$\dot K'^B$、$\dot K'^C$ 又不出现在 Einstein 方程中。所以 Maxwell 方程对远区数据没有约束，消元只在 Einstein 方程中进行。
+
+\paragraph{Einstein 方程。}未知项与情形 1 完全相同，所以左零空间也相同。非平凡组合仍是 $-\tfrac23$(B)$+\tfrac23$(D)$+$(E)，现在多出 (E) 中的电磁源 $4q\,e$：
+\begin{equation*}
+0=2MD^A-4MD^C+4q\,e ,
+\end{equation*}
+即
 \begin{equation}
--MD^A_i+2MD^C_i+2q\,\big(E^C_i-E^0_i\big)=0 ,
+-MD^A_i+2MD^C_i+2q\,\big(E^C_i-E^0_i\big)=0 .
 \label{eq:rel2}
 \end{equation}
-即 $\kappa=2$。代入 \eqref{eq:DAC}，
+情形 1 的恒等组合 $-$(A)$-\tfrac23$(B)$+$(D)$+$(F) 中，电磁源为 $-(-2q\,e)+(-2q\,e)=0$，仍是恒等式；(B)$+3$(C) 不含电磁源。所以电荷没有带来新的关系，只修改了原有的那一个。
+
+\paragraph{运动方程。}由 \eqref{eq:DAC}，$E^C_i-E^0_i=a^{\rm tail}_{i,0}-a^{\rm tail}_{0,i}=-f^{\rm tail}_{i0}$。代入 \eqref{eq:rel2}，与情形 1 一样整理：
 \begin{equation}
 M\ddot\zeta_i=M\big(-R_{0i0j}\zeta^j-h^{\rm tail}_{i0,0}+\tfrac12h^{\rm tail}_{00,i}\big)+q\,f^{\rm tail}_{i0}.
 \label{eq:eom2}
 \end{equation}
-新增的一项正是尾巴电场对电荷的洛伦兹力，系数为 1，没有别的项。背景是真空、零阶运动是测地线时，DeWitt--Brehme 力中的局部项为零，电磁正则场就是尾巴场。所以 \eqref{eq:eom2} 就是 MiSaTaQuWa 力与 DeWitt--Brehme 尾巴力 \citep{DeWittBrehme1960,Hobbs1968} 之和沿 $\gamma$ 的线性化。
+新增的一项正是尾巴电场对电荷的洛伦兹力（$u=\partial_t$ 时 $qF_{ib}u^b=qF_{i0}$），系数为 1，没有别的项。
+
+这个系数来自 \eqref{eq:dT2E}：Coulomb 场与均匀尾巴场的交叉 Maxwell 应力 $-2(\mathcal E_ie_j+e_i\mathcal E_j)+2\delta_{ij}\mathcal E\!\cdot e$ 进入 (E) 行，系数 $4q$，再经 $-\tfrac23$(B)$+\tfrac23$(D)$+$(E) 的组合，与 $2MD^C$ 中的 $2M\ddot\zeta_i$ 相比，给出 $q\,e/M$。物理上，这是电磁动量守恒的近区形式：物体周围的场动量流 $T_{ij}$ 对包围物体的大球面积分，正是尾巴场施加的力。
+
+背景是真空、零阶运动是测地线时，DeWitt--Brehme 力中的局部项（含 $\dot a$ 和背景 Ricci 张量的项）为零，电磁正则场就是尾巴场。所以 \eqref{eq:eom2} 就是 MiSaTaQuWa 力与 DeWitt--Brehme 尾巴力 \citep{DeWittBrehme1960,Hobbs1968} 之和沿 $\gamma$ 的线性化。
 
 于是，在背景不带电的情形，由 Einstein--Maxwell 场方程推出：带电小物体的一阶运动只由正则场驱动，引力和电磁两部分解耦。据我们所知，这一情形此前没有在 \citet{GrallaWald2008} 的框架下推出过；\citet{FutamaseHoganItoh2008} 的结果在这一情形只剩 Abraham--Lorentz--Dirac 项，没有尾巴项。
 
@@ -628,7 +766,8 @@ h^{\rm R}_{ta}\supset m\big(2R_{atct}+F_{at}F_{ct}-F_{ae}F^e{}_c-\delta_{ac}F_{e
 \texttt{level1\_detail.py} & 按 \eqref{eq:R0}--\eqref{eq:R1b} 逐列、逐部分计算，核对 \S\ref{sec:Hcols}、\S\ref{sec:Dcols} 的手算 & 约 15 秒\\
 \texttt{check\_dc.py} & 对 $h_{i0}=\bar t\,C_i$ 作不截断的 Ricci 计算，核对第一行 $D^C$ 列 & 数秒\\
 \texttt{gauge\_test.py} & 情形 1 的规范检验 & 数秒\\
-\texttt{level2.py} & 生成 \eqref{eq:L2matrix}，写入 \texttt{level2\_matrix.txt} & 约 19 分钟\\
+\texttt{level2.py} & 不经分解，直接计算，生成 \eqref{eq:L2matrix}，写入 \texttt{level2\_matrix.txt} & 约 19 分钟\\
+\texttt{level2\_detail.py} & 直接展开 $(-g)^{1/2}g^{ac}g^{bd}F_{cd}$ 和应力张量，逐列核对第 4 节的手算 & 约 5 秒\\
 \texttt{gauge\_test2.py} & 情形 2 的规范检验 & 数秒\\
 \hline
 \end{tabular}
