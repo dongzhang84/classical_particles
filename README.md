@@ -9,6 +9,7 @@
 | 文件 | 说明 |
 |---|---|
 | [`paper/paper.pdf`](paper/paper.pdf) | 论文草稿（中文，xelatex）。主结果（一阶运动方程）尚未证明，首页列出全部待办 |
+| [`paper/outline.pdf`](paper/outline.pdf) | 合并后单篇论文的提纲草稿（一阶推导 + 二阶结构 + 精确解检验），逐节注明状态 |
 | [`derivations/p1/calc.pdf`](derivations/p1/calc.pdf) | 验证计算工作文档：分四级逐步推进，记录每一步的中间式子和检验 |
 | [`derivations/p1/`](derivations/p1/) | 推导草稿（C0、C1）和计算代码 |
 | [`docs/problem.md`](docs/problem.md) | 问题陈述与新颖性核查 |

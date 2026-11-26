@@ -1,0 +1,198 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[authoryear,round]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+\newcommand{\dd}{\mathrm d}
+\newcommand{\status}[1]{\hfill{\small\color{blue!50!black}[#1]}}
+
+\title{论文提纲草稿\\[4pt]\large 带电小黑洞在电真空中的运动：一阶推导、二阶结构与精确解检验}
+\author{（作者待填）}
+\date{提纲草稿 \quad 2026 年 11 月 26 日}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{\small
+\textbf{说明。}本提纲按 \texttt{derivations/p1/calc.tex} 第 9 章“工作总览”的合并方案写成，把原定的两篇（一阶推导；二阶结构与精确解检验）合为一篇。每节列出：要写的内容、主要结果、在 calc.tex 中的位置、完成状态。旧稿 \texttt{paper/paper.tex}（2026 年 11 月 24 日，只到一阶）中可以沿用的部分逐节注明。状态标记：[完成] 结果已有、只需改写；[部分] 有结果但需补充或核对；[待做] 尚未完成。
+}}
+\end{center}
+
+\tableofcontents
+
+%======================================================================
+\section*{题目与摘要（草稿）}
+\addcontentsline{toc}{section}{题目与摘要（草稿）}
+%======================================================================
+
+\paragraph{题目。}\emph{Motion of a small charged black hole in electrovacuum from matched asymptotic expansions: first-order derivation, second-order structure, and an exact-solution test.}
+
+\paragraph{摘要要点。}
+\begin{enumerate}[nosep]
+\item 问题：小带电黑洞在电真空背景中运动，电磁与引力辐射反作用同时出现并耦合；ZP、LFW 的一阶方程以“运动由正则场驱动”为假设，LFW 明确指出耦合情形缺少匹配渐近展开的论证。
+\item 方法：Gralla--Wald 单参数解族与近区/远区匹配，从 Einstein--Maxwell 方程出发，不引入点粒子与正规化。
+\item 一阶结果：推出 ZP 方程（线性化形式）；零阶 Lorentz 力是近区一阶方程的可解条件；近区本身不产生局部力，ZP 中的局部系数全部来自正则场。
+\item 二阶结果：RN 在均匀场中的诱导偶极为零；把 Gralla 的二阶规范论证推广到 Einstein--Maxwell，二阶方程是检验体在“随世界线移动的正则场”中的形式；近区计算表明背景场与一阶正则场之间没有额外耦合；只含背景的局部项的归属依赖二阶奇异场的约定。
+\item 精确解检验：用 Alekseev--Belinski 两 RN 源平衡解，给出规范无关的平衡修正 $B_1$ 的闭式，作为“由正则场驱动”的独立旁证；二阶在 MP 线性变量中闭合。
+\item 结论：在已检验的范围内，电磁--引力耦合不改变运动方程的形式。
+\end{enumerate}
+\emph{摘要的措辞必须与第 6、7 节实际完成的验证范围一致；有效质量效应不写进摘要。}
+
+%======================================================================
+\section{引言}\label{sec:o-intro}
+\status{部分：旧稿引言大部分可沿用}
+%======================================================================
+\begin{itemize}[nosep]
+\item 沿用旧稿 \S1 的四段：自力背景与耦合问题的提出；带电小黑洞是自然对象（$\xi=q/m\le1$，两种自力相当）；ZP、LFW 的结果与其假设；GW 方法及其推广；Futamase--Hogan--Itoh 2008 等相关工作。
+\item 需要改写或补充：
+  \begin{itemize}[nosep]
+  \item 加入 LFW 2014 结论中关于缺口的原话（calc.tex \S summary 已引）。
+  \item 加入二阶部分的动机：一阶被“锁定”为 DW 形式（calc.tex \S7 开头），问题是二阶是否仍然如此。
+  \item 加入精确解检验的动机：二阶“多出的项”依赖正则场的约定，需要规范无关的量（AB 平衡条件）。
+  \item 旧稿中关于 Futamase--Hogan--Itoh 与 ZP 逐项对照的待核项仍需处理。
+  \end{itemize}
+\item 本文的贡献与局限（照 calc.tex 第 9 章“哪些不是新的”的立场写）：方程形式不是新结论；新在推导本身、近区不产生局部力的论证、二阶的近区验证与精确解检验。
+\end{itemize}
+
+%======================================================================
+\section{解族假设与展开}\label{sec:o-assump}
+\status{部分：旧稿 \S2 可沿用}
+%======================================================================
+\begin{itemize}[nosep]
+\item 沿用旧稿 \S2：三条极限假设的 Einstein--Maxwell 形式、电磁规范的光滑性、零磁荷、近区零阶为次极端 RN（或 KN）的假设 (H)。
+\item 远区/近区展开的约定与标度（calc.tex \S2）：$x=\lambda(\bar x+\zeta)$；远区第 $n$ 阶 $r^{m-n}$ 系数进入近区第 $m$ 阶；“slot”计数（长度幂次 $+$ $(M,q)$ 幂次 $=$ 近区阶数）。
+\item P 规范的定义（以质心为中心，一阶场 Lorenz 规范，$h^{\rm H}(\gamma)=0$）。
+\item 审稿人可能的问题：解族假设对带电黑洞是否合理；近区零阶为 RN；电荷守恒；视界正则性。这一节要专门回答。
+\end{itemize}
+
+%======================================================================
+\section{近区方程的结构}\label{sec:o-structure}
+\status{完成}
+%======================================================================
+\begin{itemize}[nosep]
+\item $\ell=1$ 电宇称、时间反演为偶的部分的系数矩阵（calc.tex 情形 1、2 的矩阵）；左零组合给出运动方程，恒等组合不约束运动。
+\item 纯规范扰动检验：规范扰动的系数必须落在矩阵的零空间中（calc.tex \S3“检验：纯规范扰动”）。
+\item 微分同胚恒等式 $Q[\mathcal L_\xi G_0,G_2]=-\mathcal E^{(1)}[\mathcal L_\xi G_2]$，把一阶场之间的二次项化成线性算子的列（calc.tex \S6）。
+\item 量纲与宇称论证：决定运动的那一块中没有不含远区数据的项。
+\end{itemize}
+
+%======================================================================
+\section{一阶运动}\label{sec:o-first}
+\status{完成：论文主体，calc.tex \S6}
+%======================================================================
+\begin{itemize}[nosep]
+\item 零阶：Lorentz 力 $Ma=qE$ 是近区一阶 $\ell=1$ 方程的可解条件；近区一阶解在 Lorenz 规范下与远区奇异场的 $r^0$ 项逐项一致（独立检验）。
+\item 一阶：近区二阶方程，二次项由微分同胚恒等式计算；单极修正吸收进 $M,q$。
+\item 结果：ZP 方程 (8.2) 的线性化形式 \texttt{eq:eom4}；唯一新出现的近区耦合 $-\tfrac12qh^{\rm R}_{00}E_i$ 由规范协变完全确定。
+\item 检验：远区规范变换下的协变性；四种情形（真空/电真空，带电/不带电）逐级对照已知结果。
+\item 与 ZP 的比较：$\tfrac53M^2\boldsymbol E\times\boldsymbol B$、$11-2q^2/M^2$ 等局部系数来自正则场的远区展开，不来自近区。
+\item 待补：正则场局部系数的独立检验（例如 Ernst 解按 $M,q$ 展开），或明确声明取自 ZP；时间反演为奇的一块与磁宇称部分。
+\end{itemize}
+
+%======================================================================
+\section{二阶的预备：诱导偶极为零}\label{sec:o-dipole}
+\status{完成：calc.tex \S7}
+%======================================================================
+\begin{itemize}[nosep]
+\item RN 在均匀电场、磁场中的静态 $\ell=1$ 响应：规范不变量 $I_1,I_2,I_3$；化成单个常微分方程；衰减解在视界奇异。
+\item 结果：诱导电偶极与磁偶极为零（$\alpha=\chi=0$），对 $M,q$ 精确；Kerr--Newman 自旋模式满足 $\mu=qJ/M$。
+\item 与已知的 RN Love 数为零（Cardoso 等 2017，Pere\~niguez--Cardoso 2022）的关系；我们的版本包括加速度，并处理偶极相对质心的定义。新意有限，作为预备结果。
+\end{itemize}
+
+%======================================================================
+\section{二阶运动}\label{sec:o-second}
+\status{部分：calc.tex \S8}
+%======================================================================
+\begin{itemize}[nosep]
+\item \textbf{方法。}Gralla 2012 的二阶模板；检查点 1（$q=0$）复现其系数，$a_{22}$ 由线性化方程确定。
+\item \textbf{真空带电（检查点 1.5）。}P 规范中近区二阶、三阶都是 RN 上的线性问题；三阶可解条件 $Ma_2=qe_2-MD^C_2$；近区不产生局部项；RN 上 $\ell=2$ 潮汐响应的 $q$ 修正。
+\item \textbf{规范协变论证。}二阶运动是检验体在正则场中的二阶微扰 Lorentz 力方程，正则场 $=$ 总场 $-$ 随世界线移动的 P 规范奇异场；Gralla 的 $\delta\mathcal E_{ij}Z^{(1)j}$ 是两种正则场定义之差。
+\item \textbf{电真空的修正项对照。}换成 Gralla 型正则场时多出 $\delta\mathcal E_{ik}Z^k+a_{1i}\dot Z^0-a_{0i}(a_1\cdot Z)-\tfrac qM[Z^k\partial_kf^{\rm H}_{i0}+f^{\rm H}_{ik}\dot Z^k]$（规范数据全部消去，已核对）。
+\item \textbf{电真空的近区验证（检查点 2）。}
+  \begin{itemize}[nosep]
+  \item 背景场 $\times$ 一阶正则场的交叉项为零，包括磁场与加速度；时间导数的交叉项不进入二阶。
+  \item 只含背景的局部项（$E^3$、$E\,\partial E$、$E\times$ 曲率）出现在平衡关系中；未定组合是背景坐标在 $x^4$ 阶的规范；12 个规范生成元下的不变性检验通过。
+  \item MP 检验：朴素约定下 $X\neq0$，而精确解处处平衡，所以这些项的归属依赖二阶奇异场的约定；MP 适配的约定在一般背景下无法由近区规范实现。
+  \end{itemize}
+\item \textbf{结论写法。}没有与约定无关的新耦合力；“多出哪些局部项”必须连同所用约定一起陈述；与 DW 型正则场的比较需要二阶奇异场的协变定义，超出本文。
+\item 待做：Pound 等人二阶工作与带电情形的关系（文献核查）；二阶奇异场的协变定义（若要给出确定的局部项）。
+\end{itemize}
+
+%======================================================================
+\section{精确解检验}\label{sec:o-exact}
+\status{部分：calc.tex \S8 AB 部分}
+%======================================================================
+\begin{itemize}[nosep]
+\item Alekseev--Belinski 平衡条件；两非极端黑洞不能平衡，构型取小带电黑洞加大 RN 裸奇点。
+\item 不变量：视界面积、电荷、表面引力给出局部质量 $\mu$ 与红移 $N$；大源用总质量与总电荷；检验体极限精确回到 Bonnor 条件。
+\item $B_1=e\,m_2R^2(e_2^2-m_2^2)(R-m_2)/[e_2(e_2^2-m_2R)^3]$（闭式）；$B_2$ 可精确求值。
+\item 一阶检验：精确解满足“检验体在正则场中静止”，误差 $O(\varepsilon^2)$。定位：正则场直接取自精确解，检验的是“由正则场驱动”这条规则，不检验 ZP 的局部系数，是独立旁证。
+\item 二阶：在 $H$ 上切分的朴素规则在 MP 极限下失效；在 MP 线性变量 $1/\sqrt H$、$\Phi/\sqrt H$ 上切分后 MP 严格闭合；非极端剩余 $\lim R^3\Delta'=(e_2^2-m_2^2)^2/5$，结构上为有效质量 $m_{\rm eff}\approx\mu[1-\tfrac1{20}(\mu^2-e^2)(E^2-a^2)]$ 的梯度力，作为待确认结果提出。
+\item 待做：Bini--Geralico--Ruffini 2007 是否已做过一阶平衡与 AB 的对照（文献核查，决定“新颖性”的写法）；有效质量系数需近区二阶 $\ell=0$ 响应独立确认；$E^2-a^2$ 组合的 $O(m_2/R)$ 修正。
+\end{itemize}
+
+%======================================================================
+\section{近极端极限}\label{sec:o-extremal}
+\status{部分：calc.tex \S8 路线 2}
+%======================================================================
+\begin{itemize}[nosep]
+\item 检验体在近 MP 背景中的慢速运动：模空间度规 $\tfrac m2U^3v^2$ 加正比于 $(\eta,\delta)$ 的势力。
+\item AB：静态自力在 MP 点线性消失（$B_1\propto(Q^2-M^2)$，$B_2\propto(Q-M)$）。
+\item 结论限定为“在静态与检验体近似下，没有新的主导阶结构”。
+\item 开放问题：越接近极端，视界弛豫越慢，GW 的准静态假设可能失效；这可能产生记忆项或与视界动力学耦合的项。只作为开放问题提出。
+\end{itemize}
+
+%======================================================================
+\section{讨论}\label{sec:o-disc}
+\status{待写}
+%======================================================================
+\begin{itemize}[nosep]
+\item 总结：一阶推导完成了 LFW 指出的缺口；二阶仍是检验体形式；耦合在已检验范围内不改变方程形式。
+\item 哪些不是新的（照 calc.tex 第 9 章写）：方程形式、ZP 的局部系数、模空间动力学。
+\item 否定性结论的价值：诱导偶极、诱导自旋不进入二阶；背景与正则场无额外耦合。
+\item 开放问题：二阶奇异场的协变定义与 DW 型比较；有效质量效应的确认；近极端弛豫；长时间自洽演化。
+\end{itemize}
+
+%======================================================================
+\section*{附录}
+\addcontentsline{toc}{section}{附录}
+%======================================================================
+\begin{enumerate}[label=\Alph*.,nosep]
+\item 系数矩阵与恒等式（旧稿附录“恒等式的推导”可沿用）。\status{完成}
+\item Gralla 2012 的订正：式 (11)、(13) 的两个 $M^2$ 系数，式 (46)--(48) 的 $a_{22}$，式 (47) 与 (12) 的矛盾，式 (29) 缺因子 $M$；均已代入线性化方程核对。\status{完成}
+\item Gralla--Wald 2008 式 (106) 的订正：纯规范扰动代入其第一行与关系式 (107) 不成立，我们的矩阵成立；核对针对 arXiv v5。\status{部分：待确认 2011 年勘误 CQG 28, 159501 的内容}
+\item 计算的实现与复现：\texttt{trunc.py} 等脚本、核对方式（包括 $\sqrt{-g}$ 截断错误的发现与修正）。\status{部分}
+\end{enumerate}
+
+%======================================================================
+\section*{图表计划}
+\addcontentsline{toc}{section}{图表计划}
+%======================================================================
+\begin{itemize}[nosep]
+\item 表 1：四种一阶情形的逐级对照（calc.tex 总结表）。
+\item 表 2：二阶各类项的归属（交叉项为零；只含背景的项依赖约定；时间导数交叉项不进入）。
+\item 图 1：AB 构型示意（小黑洞与 RN 裸奇点、Weyl 棒）。
+\item 图 2：$B_1$、$B_2$ 随距离与荷质比的变化；可加“只用 ZP / 精确解”的对照（需先写清“只用 ZP”的定义）。
+\item 图 3（可选）：MP 检验中各约定下的剩余量对比。
+\end{itemize}
+
+%======================================================================
+\section*{投稿前必须完成的事项}
+\addcontentsline{toc}{section}{投稿前必须完成的事项}
+%======================================================================
+\begin{enumerate}[nosep]
+\item 旧稿待核清单中的各项（引理 B 的出处、唯一性定理条件、多极矩、电磁规范光滑性、Futamase--Hogan--Itoh 对照、$G\to0$ 极限的约定）。
+\item 正则场局部系数的独立检验，或明确声明取自 ZP。
+\item 文献核查：Bini--Geralico--Ruffini 2007；Pound 等人的二阶工作与带电情形。
+\item 确认 Gralla--Wald 2008 的 2011 年勘误内容（必要时去信作者，由作者本人决定）。
+\item 摘要、引言、结论的措辞与第 6、7 节的验证范围严格一致。
+\item 把本提纲逐节扩写成正文（\texttt{paper.tex} 的新版）。
+\end{enumerate}
+
+\end{document}
