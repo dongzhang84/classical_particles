@@ -6,6 +6,11 @@
 
 ## 2026-11-26
 
+### §9 论文方案：论文 I 与 II 合为一篇
+- 题目草案：Motion of a small charged black hole in electrovacuum from matched asymptotic expansions: first-order derivation, second-order structure, and an exact-solution test。
+- 十部分结构：引言、解族假设、近区方程结构、一阶运动、诱导偶极、二阶运动（含 (ii) 类近区验证）、精确解检验、近极端极限、讨论、附录（含 Gralla 2012 与 GW 2008 的订正）。
+- 第 1–5 部分已完整；第 6–7 部分的表述须与已完成的验证范围一致（(iii) 类与时间依赖部分在进行中）。
+
 ### (a) Gralla–Wald 2008 式 (106)：规范无关核对完成
 - 原文数值：arXiv v5（2011-04，最后一版）第 38 页渲染成图像读取，确认第一行 D^C 列为 0、最后一行为 (2, 0, 3M, −3M, 9M, …)。
 - 变量定义（其式 98–105）与我们相同；其余 55 个系数乘 −1/2 后逐一相同。
