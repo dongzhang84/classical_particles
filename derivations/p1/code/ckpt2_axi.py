@@ -27,7 +27,8 @@ xs = (x, y, z)
 zh = (0, 0, 1)
 LMAX = 6
 LMAX_ORDER = {1: 4, 2: 6, 3: 8}
-EPS = 3
+import os
+EPS = int(os.environ.get('CK2_EPS', '3'))
 USELOG = '--log' in sys.argv
 RADIAL = '--radial' in sys.argv
 KEEPALL = '--keepall' in sys.argv
@@ -373,4 +374,6 @@ if __name__ == '__main__':
         data_syms += newfree
         log[m] = dict(sol=sol, cond=cond, free=newfree)
         pickle.dump({'log': log, 'F': F}, open('ckpt2_axi.pkl', 'wb'))
-        pickle.dump({'log': log, 'F': F}, open(f'ckpt2_axi_o{m}.pkl', 'wb'))
+        pickle.dump({'log': log, 'F': F}, open(f'ckpt2_axi_o{m}{"_eps" + str(EPS) if EPS != 3 else ""}.pkl', 'wb'))
+        if m == 2 and '--stop2' in sys.argv:
+            break
