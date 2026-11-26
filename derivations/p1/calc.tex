@@ -1767,6 +1767,23 @@ Ma_2=q\,e_2-M D^C_2+X ,
 
 \paragraph{时间估计。}工具与回归检验约 1 天；规范固定与 (ii) 约 1 天；(iii) 与判断约 1 天。
 
+\subsection{检查点 2 的近区验证：(ii) 类交叉项}
+\label{sec:L6ck2ii}
+
+\paragraph{设定。}\texttt{ck2nz.py}、\texttt{ck2nz\_analyse.py}。$\ell=1$ 部分对数据是多项式的，所以可以只取"背景均匀场 $\times$ 一阶数据"的双线性部分：
+\begin{itemize}
+\item 近区一阶场 $U_b$：RN 在背景均匀场 $(\boldsymbol E_b,\boldsymbol B_b)$ 加加速度中的 $\ell=1$ 解，数据在 slot 0，响应到 slot 3；可解条件给出 $Ma_0=q\boldsymbol E_b$；
+\item 近区二阶中线性于一阶数据 $(\boldsymbol f,\boldsymbol b)$ 的部分 $U_1$：与背景无关，就是检查点 1.5 的二阶解，可解条件给出 $Ma_1=q\boldsymbol f$；
+\item 两者的自由参数（规范与齐次模式）取零（P 规范）。三阶取最一般的 $\ell=1$ 拟设（两种宇称，slot 1、2、3），二阶数据 $a_2,e_2,\boldsymbol B_2$ 放在 slot 2。
+\end{itemize}
+用 \texttt{trunc.py} 的两个标记槽分别记背景次数和一阶数据次数，完整计算 Einstein--Maxwell 方程，取双线性的部分（$\varepsilon$ 到 3 阶），把每个分量投影到 $\ell=1$（电、磁两种宇称），再以 slot 1 的系数和二阶数据为数据列做行化简。
+
+\paragraph{结果。}$a_2$ 的关系为
+\begin{equation*}
+6Ma_2-6q\,e_2-(M^2-q^2)(h_E+2h_F)=0 ,
+\end{equation*}
+与检查点 1.5 的式 \eqref{eq:ck15bal}（静态部分）完全相同，\emph{不含任何双线性源项}。双线性项只出现在 slot 1 的关系中，例如 $2a_B-4a_C=q(\boldsymbol B_b\times\boldsymbol f-\boldsymbol E_b\times\boldsymbol b)/M$ 和 $h_B-2h_C=2(\boldsymbol B_b\times\boldsymbol f-\boldsymbol E_b\times\boldsymbol b)$：它们是远区一阶场的 $r^2$ 项在背景中必须满足的场方程，不进入 $a_2$。$(M^2-q^2)(h_E+2h_F)$ 一项是 1.5 中已识别的规范依赖。所以在与 1.5 相同的规范（$h_E=h_F=0$）下，$X_{\rm(ii)}=0$：背景均匀电场、磁场和加速度与一阶正则场之间，没有检验体方程以外的局部耦合力。这一类不含 $\bar t$ 项（双线性部分在三阶没有时间导数源），磁场部分已包括。
+
 %======================================================================
 \section{工作总览：结果、创新点与论文组织}
 \label{sec:overview}
