@@ -1584,6 +1584,22 @@ A^{(2){\rm H}}-\mathcal L_\xi A^{(1){\rm H}}+\dd\chi_2=A^{(2)}-(A^{(2){\rm S}}-\
 \item 近极端标度极限：在 $1-q/M\sim\lambda$ 的标度下重排阶次。零阶的引力与电力几乎抵消时，原来的一阶、二阶项进入主导阶，主导阶方程的形式与"零阶力加小修正"不同。这一步依赖第 1 步的二阶系数。
 \end{enumerate}
 
+\paragraph{第 1 步进展：Alekseev--Belinski 平衡条件的规范无关表述。}\citet{AlekseevBelinski2007} 给出两个 RN 源静止平衡的精确解，平衡条件为 $m_1m_2=(e_1-\gamma)(e_2+\gamma)$，$\gamma=(m_2e_1-m_1e_2)/(\ell+m_1+m_2)$，$\ell$ 是 Weyl 坐标中两源中心的距离。该文证明两个非极端黑洞不能平衡；平衡只发生在一个黑洞与一个裸奇点之间，或两个极端源之间（Majumdar--Papapetrou）。所以对照构型是：小的带电黑洞（$\sigma_1^2>0$）位于大的 RN 裸奇点（$e_2>m_2$）外。
+
+$m_1$、$\ell$ 依赖坐标，要换成不变量。小黑洞的视界在 Weyl 坐标中是轴上的棒；由 $\kappa^2=\lim_{\rho\to0}H/(\rho^2f)$（在 Schwarzschild 上核对过）和 $\kappa A=4\pi\sigma$，在视界中点得到闭式
+\begin{equation*}
+r_+^2=\frac{A_1}{4\pi}=\frac{D^2}{\ell^2-\sigma_2^2+\gamma^2},\qquad D=(m_1+\sigma_1)(m_2+\ell)-e_1(e_2+\gamma),
+\end{equation*}
+并验证了 $\kappa_1$ 沿整个视界为常数。由面积和电荷定义小黑洞的局部质量 $\mu=(r_+^2+e_1^2)/2r_+$，由表面引力定义它所在处的红移 $N=\kappa_1/\kappa_{\rm loc}(\mu,e_1)=2\sigma_1r_+/(r_+^2-e_1^2)$；大源用总质量 $M_{\rm tot}=m_1+m_2$、总电荷 $Q_{\rm tot}=e_1+e_2$。检验体（Bonnor）平衡在 RN$(M_{\rm tot},Q_{\rm tot})$ 中、红移为 $N$ 的半径 $R$ 处给出 $e/\mu=(M_{\rm tot}R-Q_{\rm tot}^2)/(Q_{\rm tot}RN)$。记精确解与它之比为
+\begin{equation*}
+B=1+B_1\varepsilon+B_2\varepsilon^2+\dots\qquad(e_1=\varepsilon e),
+\end{equation*}
+$B_1$ 对应一阶自力（ZP 的范围），$B_2$ 对应二阶，超出 ZP。
+
+数值结果（\texttt{ab\_numeric.py}，60 位精度，对精确解求根后按 $\varepsilon$ 拟合）：$B_0=1$（Bonnor 条件精确复现，说明不变量的定义正确）；例如 $(e,m_2,e_2,\ell)=(0.5,1,1.5,10)$ 时 $B_1=-0.7526$，$B_2=1.1055$；$\ell=20$ 时 $B_1=-0.5575$，$B_2=0.5817$。$B_1$、$B_2$ 的解析形式正在由 \texttt{ab\_closed.py} 展开。
+
+要说明的是：$B_2$ 是已知精确解的展开，本身不是新结果。它的用处是作为规范无关的对照：要说明我们的二阶方程与前人不同或正确，需要用二阶方程在同一构型中算出 $B_2$，与之比较。这一步需要 RN 背景中静止带电质量的二阶正则场，是一项独立的大计算。
+
 \paragraph{检查点 2（完整耦合，一般电真空，最后做）。}背景为一般电真空，按 (1)--(8) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
 
 \paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
