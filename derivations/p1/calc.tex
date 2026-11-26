@@ -1671,6 +1671,22 @@ $e_2$ & $R=11$ & $R=21$ & $R=41$\\
 
 \paragraph{修正后的规则 3$'$（计算前写定，只用 MP 标定）。}静态 Einstein--Maxwell 方程中，MP 扇区的线性变量是 $\psi_1=1/\sqrt H$、$\psi_2=\Phi/\sqrt H$（极端 RN 中 $\sqrt H+\Phi=1$，于是 $\psi_1=U$、$\psi_2=U-1$，都是调和函数的线性叠加）。规则 3$'$：在 $\psi_1,\psi_2$ 的各阶展开上取光滑部分（$r^0$ 的 $\ell=0$、$r^1$ 的 $\ell=1$）作为正则部分，再由 $\sqrt{H^{\rm R}}=1/\psi_1^{\rm R}$、$\Phi^{\rm R}=\psi_2^{\rm R}/\psi_1^{\rm R}$ 重建正则场；规则 1、2（位置、质量）不变。这条规则只依据 MP 的线性结构，不参考非极端 AB 的平衡结果，所以在非极端构型上的 $T$ 仍是检验。
 
+\paragraph{规则 3$'$ 的结果（AB 收尾）。}\texttt{ab\_rule3p.py}、\texttt{ab\_rule3p\_asym.py}、\texttt{ab\_massfunc.py}（$m_2=e=1$）：
+\begin{enumerate}
+\item \emph{MP 极限严格通过}：$e_2=1.0001,1.001,1.01$（$R=11$）时 $\Delta'=7.8\times10^{-12},\,7.8\times10^{-10},\,7.9\times10^{-8}$，按 $(e_2-m_2)^2$ 趋于零。
+\item \emph{非极端时剩余量大幅缩小但不为零}：$e_2=1.5$、$R=11$ 时 $\Delta'=4.56\times10^{-4}$（规则 3 下为 $0.0110$）。大距离首项为精确有理数：
+\begin{equation*}
+\lim_{R\to\infty}R^3\Delta'=\frac{(e_2^2-m_2^2)^2}{5}\qquad(e_2=1.2,\,1.5,\,2\ \text{均精确}).
+\end{equation*}
+\item \emph{结构}：用平衡关系 $e\,e_2=\mu m_2$ 改写，绝对力可写成物体参数与局部场的多项式 $\delta F\propto\mu(\mu^2-e^2)\,\nabla(E^2-g^2)$。这正是"随局部场变化的有效质量"所产生的梯度力：静止物体的能量为 $m(x)\sqrt H+e\Phi$，若 $m$ 依赖位置，平衡条件多出 $\sqrt H\,\partial\ln m/\partial\sqrt H$。用局部场 $E_{\rm loc}=e_2/r^2$ 和静态观者加速度 $a_{\rm loc}$ 构造 $\delta m/\mu=\kappa(\mu^2-e^2)(E_{\rm loc}^2-a_{\rm loc}^2)$，所有 $(e_2,R)$ 给出几乎相同的 $\kappa$：$-0.0466$（$R=11$）到 $-0.0491$（$R=41$），对 $e_2$ 几乎不依赖，随 $R$ 的漂移为 $\kappa\approx-\tfrac1{20}+0.037/R$。
+\end{enumerate}
+
+\paragraph{收尾结论。}在 MP 标定的规则 3$'$ 下，二阶检验体方程在 MP 中严格闭合；非极端时剩下的部分，主导项可由有效质量
+\begin{equation*}
+m_{\rm eff}\approx\mu\Big[1-\tfrac1{20}(\mu^2-e^2)(E^2-a^2)+\dots\Big]
+\end{equation*}
+的梯度解释，即物体在固定视界面积下的能量依赖于局部的 $E^2-a^2$。它对应清单 (7) 的二阶质量定义：检验体方程中应使用的质量与面积质量 $\mu$ 在二阶相差一个依赖局部场的项。所以方程形式仍是检验体形式，差别在质量的定义上；物理上它表现为一种类似极化能的二阶有限尺度效应。有两点尚未定：(a) $E^2-a^2$ 这一组合还缺 $O(m_2/R)$ 的相对论修正（$\kappa$ 的 $1/R$ 漂移）；(b) 规则 3$'$ 只用 MP 标定，非极端时场分割本身是否还有 $O\big((\mu^2-e^2)(e_2^2-m_2^2)\big)$ 的约定性残余，与有效质量的效应无法单靠静态数据区分。要区分，需要直接算近区二阶 $\ell=0$ 响应（RN 在均匀场加加速度中的质量修正），看它是否给出 $\kappa=-\tfrac1{20}$。
+
 \subsection{路线 2：近极端标度极限（验证量级判断）}
 \label{sec:L6route2}
 
@@ -1844,6 +1860,7 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \texttt{ckpt2\_tb.py}、\texttt{ckpt2\_obstruct.py}、\texttt{ckpt2\_rankcheck.py} & 检查点 2：检验体对照、阻碍定位、秩检验（阻碍后来查明是 \texttt{trunc.py} 中 $\sqrt{-g}$ 的截断错误，已修正） & 约 10 分钟\\
 \texttt{ck2\_corrections.py} & 检查点 2：两种二阶正则场定义之差 \eqref{eq:ck2C} & 约 5 秒\\
 \texttt{ab\_*.py} & AB 精确解：不变量、$B_1$、$B_2$、一阶与二阶检验、MP 极限 & 数秒到半小时\\
+\texttt{ab\_rule3p*.py}、\texttt{ab\_massfunc.py} & AB 收尾：规则 3$'$、MP 检验、有效质量拟合 & 约 1 分钟\\
 \texttt{r2\_testbody.py} & 路线 2：近 MP 背景中检验体的慢速运动 & 约 2 秒\\
 \texttt{level3\_detail.py} & 情形 3：验证 \eqref{eq:A1near} 满足 Maxwell 方程、其 $O(M)$ 项与 \eqref{eq:aS3} 一致、$T^{(2)}$ 的 $EE/BB/EB$ 结构与宇称，并给出 \eqref{eq:T2blockII} & 约 3 秒\\
 \hline
