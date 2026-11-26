@@ -56,3 +56,5 @@ cd derivations/p1/code
 ```
 
 工作文档用 xelatex 编译：`cd derivations/p1 && latexmk calc`。
+
+`calc.tex` 的"工作总览"一章（sec:overview）汇总了全部结果、创新点分类和论文组织方案。

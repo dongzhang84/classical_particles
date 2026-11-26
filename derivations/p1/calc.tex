@@ -1736,6 +1736,131 @@ P 规范中一阶 H 场在 $\gamma$ 附近为 $h^{\rm H}_{00}=-2a_1\cdot x-\delt
 \paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
 
 %======================================================================
+\section{工作总览：结果、创新点与论文组织}
+\label{sec:overview}
+%======================================================================
+
+本章汇总第 2--8 节做了什么、哪些是新的、哪些不是，并给出把它们组织成论文的方案。判断"是否新"的依据是截至 2026 年 11 月的文献检索（\S\ref{sec:summary}），以及我们实际推导和核对过的内容；凡是只做了一部分或依赖外部结果的地方，都单独注明。
+
+\subsection{一句话概括}
+
+我们用 Gralla--Wald 单参数解族和匹配渐近展开，从 Einstein--Maxwell 场方程出发，推出了带电小黑洞在电真空背景中的运动方程：一阶为检验体 Lorentz 力方程中的场换成 Detweiler--Whiting 正则场；二阶仍是检验体在正则场中的形式，前提是正则场取"总场减去随世界线移动的奇异场"。我们还用 Alekseev--Belinski 两 RN 源平衡的精确解，对一阶和二阶做了规范无关的检验。电磁--引力耦合在各阶都没有改变方程的形式；它在二阶留下的可观测效应，是一个依赖局部场的有效质量。
+
+\subsection{问题与方法}
+
+小物体是质量 $M$、电荷 $q$ 的黑洞，两者都随参数 $\lambda$ 线性趋于零；背景是任意电真空解。远区按 $\lambda$ 展开，近区在 $x=\lambda\bar x$ 的尺度上展开，近区零阶是 Reissner--Nordstr\"om 解。运动由近区 $\ell=1$ 方程的可解条件决定：一阶来自近区二阶，二阶来自近区三阶。整个推导不引入点粒子、不做正规化，奇异场和正则场的划分由近区解本身给出。
+
+\subsection{结果清单}
+
+\paragraph{一阶（第 3--6 节）。}四种情形依次加入一类项：真空不带电得到 MiSaTaQuWa 方程；真空带电再加电磁尾巴场的 Lorentz 力；电真空不带电时尾巴场换成正则场；一般情形（\S\ref{sec:L4}）得到 Zimmerman--Poisson 方程的线性化 \eqref{eq:eom4}。几个具体结论：
+\begin{itemize}
+\item 零阶 Lorentz 力方程是近区一阶 $\ell=1$ 方程的可解条件，地位与 Gralla--Wald 中的测地线方程相同（\S\ref{sec:L4first}）；
+\item 近区一阶解在 Lorenz 规范下与远区奇异场的 $r^0$ 项逐项一致，这是近区与远区之间的独立检验；
+\item 近区方程本身不产生局部力：ZP 结果中的 $\tfrac53M^2\boldsymbol E\times\boldsymbol B$、$11-2q^2/M^2$ 等局部系数全部来自正则场；近区唯一新出现的耦合 $-\tfrac12qh^{\rm R}_{00}E_i$ 由规范协变完全确定。
+\end{itemize}
+
+\paragraph{二阶的关键问题：诱导偶极（第 7 节）。}RN 黑洞在均匀电场和均匀磁场中的静态 $\ell=1$ 响应，在 $M$、$q$ 上精确地给出诱导电偶极与磁偶极为零（$\alpha=\chi=0$）；另一个衰减解在视界奇异，被正则性排除。所以二阶中没有诱导偶极力。
+
+\paragraph{二阶运动方程（第 8 节）。}
+\begin{itemize}
+\item \emph{检查点 1}（$q=0$，真空）：复现 Gralla 2012 的近区 $\ell=2$ 解、$a_{21}$、$a_{22}$ 和二阶方程中的 $\delta\mathcal E_{ij}Z^{(1)j}$ 项；$a_{22}$ 直接由线性化方程确定。
+\item \emph{检查点 1.5}（真空，带电，\S\ref{sec:L6ck15}）：P 规范中近区一阶场为零，近区二阶、三阶都是 RN 上的线性问题；三阶可解条件为 $Ma_2=q\,e_2-MD^C_2$，与检验体条件相同，近区不产生局部项。把 Gralla 的规范论证推广到 Einstein--Maxwell 后，二阶运动就是正则场中的二阶微扰 Lorentz 力方程 \eqref{eq:ck15eom}；Gralla 的 $\delta\mathcal E$ 项只是两种正则场定义之差。RN 上 $\ell=2$ 潮汐响应的 $q$ 修正也一并求出。
+\item \emph{检查点 2}（一般电真空，\S\ref{sec:L6ck2concl}）：协变论证照样成立；若改用 Gralla 型正则场，多出的项为 \eqref{eq:ck2C}，即 $\delta\mathcal E_{ik}Z^k$、一阶正则电磁场在位移处的取值与偏离速度上的磁力，以及带电物体在电真空中特有的 $a_{1i}\dot Z^0$、$-a_{0i}(a_1\cdot Z)$。这些项中规范矢量的导数全部消去（已对任意线性规范矢量核对）。
+\end{itemize}
+
+\paragraph{精确解检验（第 8 节，AB 部分）。}
+\begin{itemize}
+\item 把 Alekseev--Belinski 平衡条件改写成规范无关的形式：小黑洞用视界面积、电荷与表面引力（给出局部质量 $\mu$ 和所在处的红移 $N$），大源用总质量与总电荷。检验体极限精确回到 Bonnor 条件。
+\item 一阶修正的闭式 \eqref{eq:ABB1}：$B_1=e\,m_2R^2(e_2^2-m_2^2)(R-m_2)/[e_2(e_2^2-m_2R)^3]$，只正比于小黑洞的电荷，大源取极端时为零。
+\item 一阶检验：精确解满足"检验体在正则场中静止"，误差 $O(\varepsilon^2)$，即从精确解证实了一阶方程（静态部分）。
+\item 二阶检验：在 $H$ 上切分的朴素规则在 MP 极限下失效；改在 MP 线性变量 $1/\sqrt H$、$\Phi/\sqrt H$ 上切分后，MP 极限严格闭合。非极端时的剩余量大距离首项为精确的 $(e_2^2-m_2^2)^2/5R^3$，其结构等于有效质量 $m_{\rm eff}\approx\mu[1-\tfrac1{20}(\mu^2-e^2)(E^2-a^2)]$ 的梯度力。
+\end{itemize}
+
+\paragraph{近极端标度极限（\S\ref{sec:L6route2}）。}近 MP 背景中检验体的慢速运动是模空间度规 $\tfrac m2U^3v^2$ 加上正比于非极端程度的势力 \eqref{eq:r2L}；AB 精确解表明静态自力在 MP 点线性消失。所以无论怎样取标度，自力与耦合都进不了主导阶。
+
+\paragraph{文献订正。}
+\begin{itemize}
+\item Gralla--Wald 2008 式 (106) 两行的排印错误（情形 1 的矩阵）；
+\item Gralla 2012 式 (11)、(13) 的两个 $M^2$ 系数和式 (46)--(48) 的 $a_{22}$ 代入线性化方程不成立，式 (47) 与式 (12) 在 $i0$ 分量上自相矛盾，式 (29) 的规范矢量缺因子 $M$。这些都不进入其运动方程。
+\end{itemize}
+
+\subsection{创新点：分类与强弱}
+
+\paragraph{A. 新结果（据检索，前人没有）。}
+\begin{enumerate}
+\item \emph{耦合情形一阶运动方程的推导。}Linz--Friedman--Wiseman 2014 明确列为未完成：把匹配渐近展开的论证推广到引力与电磁耦合的情形。我们在 Gralla--Wald 框架中完成了这一推导，把 ZP 和 LFW 的出发点（Detweiler--Whiting 处方）从假设变成结论。这是全部工作中最扎实、最可发表的一项。强度：高。保留：依赖解族假设与近区零阶为 RN；正则场局部系数取自 ZP，未独立推导。
+\item \emph{二阶运动方程的形式（带电，电真空）。}把 Gralla 的二阶规范论证推广到 Einstein--Maxwell，给出"检验体在随世界线移动的正则场中"的形式，以及与 Gralla 型定义之间的完整修正项 \eqref{eq:ck2C}。真空带电情形由近区计算直接验证。强度：中。保留：电真空中含时间依赖与磁场时，P 规范二阶平衡关系没有直接近区验证；二阶奇异场的显式内容未给出。需要补查 Pound 等人的二阶工作是否已覆盖带电情形。
+\item \emph{用精确解做规范无关的自力检验。}AB 平衡条件的不变量形式、$B_1$ 的闭式、一阶检验通过、二阶在 MP 线性变量中闭合。用两体精确平衡解检验耦合自力，据我们所知前人没有做过。强度：中。保留：只覆盖静态；二阶闭合依赖奇异场的切分规则（只用 MP 标定）。
+\item \emph{二阶有效质量效应。}固定视界面积时，带电黑洞的能量依赖局部场组合 $E^2-a^2$，系数约 $-\tfrac1{20}(\mu^2-e^2)\mu$。这是唯一像"新物理"的结果，类似一种极化能。强度：低到中，尚未确认。保留：$\kappa$ 有 $1/R$ 漂移；规则 3$'$ 在非极端时的约定性残余无法排除；需要由近区二阶 $\ell=0$ 响应独立给出 $\kappa=-\tfrac1{20}$ 才能成立。
+\end{enumerate}
+
+\paragraph{B. 已知结果的新推导或推广。}
+\begin{enumerate}
+\item 情形 1--3 的方程是已知结果（MiSaTaQuWa、DeWitt--Brehme/Hobbs、ZP 的特例），我们的推导是统一方法下的复现。
+\item 诱导偶极为零与已知的 RN Love 数为零（Cardoso 等 2017、Pere\~niguez--Cardoso 2022）一致；我们的版本包含均匀场与加速度的耦合，并处理了偶极相对质心的定义。新意有限。
+\item 检查点 1 是 Gralla 2012 的复现。
+\item 近极端的模空间结构是 Ferrell--Eardley 结果的检验体极限；新的只是"静态自力在 MP 点线性消失"这一由精确解给出的说明。
+\end{enumerate}
+
+\paragraph{C. 文献订正。}见上面两条。它们可靠、可独立核对，适合放在附录。
+
+\paragraph{D. 否定性结论（同样有价值）。}
+\begin{enumerate}
+\item 电磁--引力耦合在一阶、二阶都不改变运动方程的形式；近区不产生局部力。
+\item 诱导偶极、诱导自旋都不进入二阶运动；$M$、$q$ 在所需阶数内不变。
+\item 近极端标度极限给不出新的主导阶结构。
+\item 二阶的"多余项"出现与否取决于正则场的定义；我们给出了两种定义之间的完整对应关系。
+\end{enumerate}
+
+\subsection{哪些不是新的}
+
+方程形式本身（检验体在正则场中）不是新结论：一阶早已作为 Detweiler--Whiting 处方被采用，二阶在真空中由 Pound、Gralla 给出。我们没有得到形式上不同于前人的运动方程。正则场中局部项的系数（$\tfrac53$、$11-2q^2/M^2$ 等）全部取自 ZP。近极端的模空间动力学是已知结构。投稿时必须如实这样写。
+
+\subsection{论文组织方案}
+
+建议拆成两篇，主次分明。
+
+\paragraph{论文 I（主文）：耦合一阶方程的推导。}题目草案：\emph{Self-force on a small charged black hole in electrovacuum from matched asymptotic expansions}。结构：
+\begin{enumerate}
+\item 引言：DW 处方在耦合情形中的地位，LFW 指出的缺口；
+\item 解族假设与远区/近区展开（第 2 节）；
+\item 近区方程的结构：系数矩阵、左零组合、微分同胚恒等式（第 3、4、6 节的方法部分）；
+\item 一般情形的推导（第 6 节）：零阶 Lorentz 力作为可解条件，一阶方程，远区规范变换下的协变性；
+\item 与 ZP 的比较，以及"近区不产生局部力"的量纲与宇称论证；
+\item 讨论：诱导偶极为零（第 7 节，作为二阶的预备）；
+\item 附录：系数矩阵、Gralla--Wald 2008 式 (106) 的订正、代码说明。
+\end{enumerate}
+投稿目标：Phys.\ Rev.\ D。这篇的主要结论已经完整，主要工作是把第 6 节改写成论文正文。
+
+\paragraph{论文 II：二阶结构与精确解检验。}题目草案：\emph{Second-order motion of a charged black hole and an exact-solution test of the coupled self-force}。结构：
+\begin{enumerate}
+\item 二阶规范论证推广到 Einstein--Maxwell；真空带电情形的近区验证（检查点 1.5）；
+\item 电真空中两种正则场定义的对应 \eqref{eq:ck2C}；
+\item AB 精确解的不变量表述、$B_1$ 闭式、一阶与二阶检验，MP 线性变量中的奇异场切分；
+\item 二阶有效质量效应（若近区 $\ell=0$ 计算确认 $\kappa=-\tfrac1{20}$）；
+\item 近极端极限；
+\item 附录：Gralla 2012 的订正。
+\end{enumerate}
+这篇是否成立，取决于下面的补充工作。
+
+\subsection{投稿前必须补的工作}
+
+\begin{enumerate}
+\item 论文 I：正则场局部系数的独立检验（例如 Ernst 解按 $M,q$ 展开），或明确声明取自 ZP；时间反演为奇的一块与磁宇称部分的分析；把 \texttt{paper/paper.tex} 按第 6 节重写。
+\item 论文 II：近区二阶 $\ell=0$ 响应（RN 在均匀场加加速度中的质量修正），独立给出 $\kappa$；电真空中含时间依赖与磁场时 P 规范二阶平衡的直接近区验证；二阶奇异场的显式定义（在 MP 线性变量之外的推广）；补查 Pound 等人的二阶工作与带电情形的关系。
+\item 两篇共同：文献检索更新；数值与符号结果的复现脚本整理（附录 \ref{app:code}）。
+\end{enumerate}
+
+\subsection{审稿人可能提的问题}
+
+\begin{itemize}
+\item 与 ZP、LFW 的结果相同，新意在哪里？答：在于推导本身（LFW 明确列为缺口），以及近区不产生局部力的论证。
+\item 解族假设对带电黑洞是否合理（例如近区零阶为 RN、电荷守恒、视界正则性）？需要在论文 I 第 2 节专门讨论。
+\item 二阶正则场的定义是否唯一？答：不唯一；我们给出了不同定义之间的完整修正项，并用精确解检验了一种在 MP 中严格成立的定义。
+\item 有效质量效应是物理的还是约定的？在近区 $\ell=0$ 计算完成之前，只能作为待确认结果提出。
+\end{itemize}
+
+%======================================================================
 \section{总结与文献定位}
 \label{sec:summary}
 %======================================================================
@@ -1805,8 +1930,8 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \item 正则场局部项的系数（如 $\tfrac53$、$11-2q^2/M^2$）取自 \citet{ZimmermanPoisson2014}，没有独立推导。可行的独立检验是 Ernst 精确解按 $M$、$q$ 的展开。
 \item 时间反演为奇的一块和磁宇称部分没有分析。它们不含 $\ddot\zeta$，与自旋的演化有关。
 \item 情形 4 的推导依赖论文第 2 节的解族假设和 (H)，以及近区零阶为 Reissner--Nordstr\"om 解。
-\item 二阶的关键问题已有答案：带电黑洞在均匀外场中的诱导电偶极和磁偶极都为零（\S\ref{sec:L5result}），所以二阶中没有诱导偶极力，二阶大概率仍是 Detweiler--Whiting 形式；下一步待定。
-\item 论文正文尚未按本节结果更新。
+\item 二阶的结果见第 8 节和总览（\S\ref{sec:overview}）：诱导偶极为零（\S\ref{sec:L5result}），二阶仍是检验体在正则场中的形式；AB 精确解检验见第 8 节。
+\item 论文正文尚未按本节结果更新；组织方案见 \S\ref{sec:overview}。
 \end{itemize}
 
 %======================================================================
