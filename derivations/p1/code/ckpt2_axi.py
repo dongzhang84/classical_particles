@@ -21,15 +21,21 @@ import trunc as T
 from trunc import t, x, y, z, R
 
 M, q = sp.symbols('M q', positive=True)
+if '--q0' in sys.argv:
+    q = sp.Integer(0)
 xs = (x, y, z)
 zh = (0, 0, 1)
 LMAX = 6
-LMAX_ORDER = {1: 4, 2: 6, 3: 12}
+LMAX_ORDER = {1: 4, 2: 6, 3: 8}
 EPS = 3
 USELOG = '--log' in sys.argv
 RADIAL = '--radial' in sys.argv
 KEEPALL = '--keepall' in sys.argv
 TIME = '--time' in sys.argv
+DIPOLE = '--dipole' in sys.argv
+LORENZ = '--lorenz' in sys.argv
+LIGHT = '--light' in sys.argv
+d1free = []
 
 
 def rn_background(order):
@@ -174,6 +180,48 @@ def equations(field, m, tagged=False):
     return (eqs, tags) if tagged else eqs
 
 
+def slot_of_g(s):
+    return int(str(s).rsplit('_', 1)[0].split('s')[-1].split('t')[0].rstrip('L'))
+
+
+def lorenz_eqs(field, m):
+    """Lorenz conditions on the far-zone FIRST-order fields (slot 1) about the
+    far-zone background (slot 0), at near-zone order m:
+        g^{ac} nabla_c (h_ab - g_ab h/2) = 0,   g^{ab} nabla_a A_b = 0 ."""
+    g00, gss, A0 = rn_background(1)
+    # background: eta + slot-0 parts ; first-order field: slot-1 parts (incl. RN eps^1)
+    keep = lambda dct, k: {kk: v for kk, v in dct.items() if kk[0] == k}
+    gb = T.mat(lambda a_, b: T.add(T.const(T.eta[a_, b]), keep(field.h[a_][b], 0)))
+    h1 = T.mat(lambda a_, b: T.add(keep(g00 if a_ == b == 0 else (gss if a_ == b else {}), 1),
+                                   keep(field.h[a_][b], 1)))
+    A1 = [T.add(keep(A0, 1) if a_ == 0 else {}, keep(field.A[a_], 1)) for a_ in range(4)]
+    gi = T.inverse(gb)
+    G = T.christoffel(gb, gi)
+    tr = T.add(*[T.mul(gi[c][d], h1[c][d]) for c in range(4) for d in range(4)])
+    hb = T.mat(lambda a_, b: T.add(h1[a_][b], T.scal(-sp.Rational(1, 2), T.mul(gb[a_][b], tr))))
+    out = []
+    for b in range(4):
+        terms = []
+        for a_ in range(4):
+            for c in range(4):
+                cov = T.add(T.d(hb[a_][b], c),
+                            T.scal(-1, T.add(*[T.mul(G[d][c][a_], hb[d][b]) for d in range(4)])),
+                            T.scal(-1, T.add(*[T.mul(G[d][c][b], hb[a_][d]) for d in range(4)])))
+                terms.append(T.mul(gi[a_][c], cov))
+        out.append(T.add(*terms).get((1, m, 0), 0))
+    div = []
+    for a_ in range(4):
+        for b in range(4):
+            div.append(T.mul(gi[a_][b], T.add(T.d(A1[b], a_),
+                                              T.scal(-1, T.add(*[T.mul(G[c][a_][b], A1[c]) for c in range(4)])))))
+    out.append(T.add(*div).get((1, m, 0), 0))
+    eqs = []
+    for e_ in out:
+        if e_ != 0:
+            eqs += reduce_eq(e_)
+    return eqs
+
+
 def solve_ordered(eqs, responses, data):
     from sympy.polys.matrices import DomainMatrix
     one = sp.Symbol('ONE')
@@ -233,7 +281,7 @@ if __name__ == '__main__':
                     ht, At, st = ansatz_t(m, k, d_)
                     F.add((k, m, 0), ht, At)
                     unk_resp.extend(st)
-            if m == 3 and k >= 2 and USELOG:
+            if m == 3 and k >= 1 and USELOG:
                 hL, AL, symsL = ansatz(m, k, withlog=True)
                 F.add((k, m, 0), hL, AL)
                 unk_resp.extend(symsL)
@@ -246,19 +294,26 @@ if __name__ == '__main__':
         T.set_limits(EPS, m, 0)
         eqs, tags = equations(F, m, tagged=True)
         eqs += gauge_eqs; tags += [('radial', -1)] * len(gauge_eqs)
+        if LORENZ:
+            le = lorenz_eqs(F, m)
+            print(f'   Lorenz conditions: {len(le)} equations', flush=True)
+            eqs += le; tags += [('lorenz', -1)] * len(le)
         print(f'order {m}: {len(eqs)} equations, {len(unk_resp)+len(unk_data)} unknowns, '
               f'{time.time()-t0:.0f}s', flush=True)
         dcols = data_syms if m == 1 else (log[2]['free'] if m == 3 else [])
-        if m == 3:
+        if DIPOLE and m == 3:
+            dcols = list(d1free)
+        if m == 3 and not DIPOLE:
             a2s, e2s = sp.Symbol('ho3s2_1'), sp.Symbol('Ao3s2_1')
-            unk_resp = [u for u in unk_resp if u not in (a2s, e2s)]
-            dcols = list(dcols) + [e2s, a2s]
+            v1 = [] if LORENZ else [u for u in unk_resp if slot_of_g(u) == 1]
+            unk_resp = [u for u in unk_resp if u not in (a2s, e2s) and (LORENZ or slot_of_g(u) != 1)]
+            dcols = list(dcols) + v1 + [e2s, a2s]
         allsym = set().union(*[sp.sympify(e_).free_symbols for e_ in eqs])
         extra = allsym - set(unk_resp + unk_data + list(dcols)) - {M, q, E}
         print('   symbols outside the column list:', sorted(extra, key=str), flush=True)
         sol, cond, free = solve_ordered(eqs, unk_resp + unk_data, dcols)
         print(f'order {m} conditions on data:', cond, flush=True)
-        if m == 1 and E == 0:
+        if m == 1 and (E == 0 or q == 0):
             cond = [a]
         if cond and m == 1:
             assert len(cond) == 1, cond
@@ -276,14 +331,27 @@ if __name__ == '__main__':
             mm = int(name.split('o')[1].split('s')[0]); kk = slot_of(s_)
             b = mm - kk - off - int(a_)
             return kk <= mm and b >= 0 and b % 2 == 0
-        if m == 1:
+        if m == 1 and DIPOLE:
+            zero = {s_: 0 for s_ in free if slot_of(s_) <= 2}   # h^H(gamma) = 0, monopoles 0; keep dipoles
+            d1free = [s_ for s_ in free if slot_of(s_) >= 3]
+            print('   kept order-1 parameters:', d1free, flush=True)
+        elif m == 1:
             zero = {s_: 0 for s_ in free}          # P gauge: h^H(gamma) = 0, no monopole/dipole change
+        elif m == 2 and DIPOLE:
+            import random
+            random.seed(1)
+            zero = {s_: sp.Rational(random.randint(-9, 9), random.randint(1, 9)) for s_ in free}
+        elif m == 2 and LIGHT:
+            # P gauge: j(gamma) = 0, no second-order monopole corrections, residual gauge = 0;
+            # keep only the background data (slot 0) and the first-order uniform field f1
+            zero = {s_: 0 for s_ in free if slot_of(s_) != 0 and str(s_) != 'Ao2s1_1'}
+            print('   order-2 parameters kept:', [s_ for s_ in free if s_ not in zero], flush=True)
         else:
             # keep the order-2 free parameters symbolic, except pure high-degree gauge modes
             zero = {} if KEEPALL else {s_: 0 for s_ in free if int(str(s_).rsplit('_', 1)[1]) >= 4}
         sol = {k: sp.factor(sp.sympify(v).subs(zero)) for k, v in sol.items()}
         sol.update(zero)
-        if cond and m > 1:
+        if cond and m > 1 and not DIPOLE:
             zz = {s_: 0 for s_ in free}
             zz.update({s_: 0 for s_ in dcols})
             full = {k: sp.sympify(v).subs(zz) for k, v in sol.items()}

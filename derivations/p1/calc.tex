@@ -1572,9 +1572,11 @@ A^{(2){\rm H}}-\mathcal L_\xi A^{(1){\rm H}}+\dd\chi_2=A^{(2)}-(A^{(2){\rm S}}-\
 \begin{itemize}
 \item 一阶：唯一约束 $Ma=qE$，到 $\varepsilon^3$ 精确。
 \item 二阶（一阶运动）：在 P 规范（$h^{\rm H}(\gamma)=0$）中 $l_1=-2qf_1/M$，与检验体条件完全一致。若保留常数 $h^{\rm R}(\gamma)$ 而把自由单极置零，会多出 $-(qE/M)(c_{00}+2c_{ij}\text{的迹部分})$，这来自 $M$、$q$ 定义随常数度规的变化，与情形 4 的约定一致。
-\item 三阶：在 $E=0$（真空极限）时方程相容，与检查点 1.5 一致。$E\neq0$ 时方程组无解（数值秩检验：rank $A=115$，rank $[A|b]=116$）。把 $a_2$、$e_2$ 移到数据列后阻碍仍在，所以它不是力的平衡条件，而是另一类相容性条件。已排除的原因：角向截断（三阶 LMAX 提到 12）、$\bar r\log\bar r$ 与 $\log\bar r$ 项、背景的径向（Fermi）规范、二阶规范参数的取值（全部保留为数据列）、$\bar t$ 与 $\bar t^2$ 项。阻碍首先在 $\varepsilon^2$（$N=2$）层与 $\varepsilon^3$ 层之间出现。
+\item 三阶：最初得到的"无解"来自 \texttt{trunc.py} 的一个截断错误。$\sqrt{-g}$ 原来只展开到 $\delta^3$，而本情形中一阶数据 $-2az$、$Ez$ 和二阶背景曲率都是 $\varepsilon^0$，Maxwell 方程在 $\varepsilon^3\lambda^3$ 阶需要到 $\delta^6$ 的项。修正为展开到截断阶数之和（已用对角度规的精确展开核对）以后，三阶方程相容。$E=0$ 或 $q=0$ 时本来就不需要这些项，所以那两个极限之前也相容。情形 4（截断阶数之和为 3）和检查点 1.5（数据至少为 $\varepsilon^1$）不受影响，1.5 正在用修正后的代码重算确认。
+\item 修正后，一阶（$Ma=qE$）和二阶（一阶运动与检验体一致）的结论不变。
+\item 三阶的平衡关系：单独的 $a_2$（二阶场中光滑 $\ell=1$ $r^1$ 项）不是规范不变量。一阶的光滑三次规范矢量 $\xi=O(x^3)$（P-光滑，不移动世界线）通过 $-\mathcal L_\xi(M/r)$ 平移 $a_2$，同时平移一阶场的 $r^2$ 项，与 1.5 中 $(M^2-q^2)(h_E+2h_F)$ 一项的机制相同。这正是协变论证中"随世界线移动的奇异场"里的 $-\mathcal L_\xi h^{\rm S}$。对一阶场加 Lorenz 条件以后，这类规范仍有残余。要读出规范无关的二阶平衡，需要在一阶场的 $r^2$ 项上把规范完全固定（相当于 1.5 中取 $h_E=h_F=0$）。
 \end{itemize}
-在定位这一阻碍之前，不对电真空中的二阶运动下结论。下一步：用左零向量把阻碍投影到具体的谐波和分量上，检查是否需要远区数据中目前没有的结构（例如背景在 $O(r^3)$ 的非静态部分，或 $\gamma$ 本身不是静态轨道时的项）；然后加入时间依赖和磁场部分。
+下一步：在 Lorenz 条件之外，把一阶 $r^2$ 项的 $\ell=1$ 部分按 1.5 的约定固定，读出 $Ma_2-qe_2$ 的完整关系，并与检验体条件 $Ma_2=qe_2-\tfrac12qE\,j_{00}(\gamma)$ 对照；然后加入时间依赖和磁场部分。
 
 \paragraph{检查点 2（完整耦合，一般电真空，最后做）。}背景为一般电真空，按 (1)--(8) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
 
@@ -1702,7 +1704,7 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \texttt{ckpt15\_analyse3.py} & 检查点 1.5：三阶可解条件 \eqref{eq:ck15bal} & 约 10 秒\\
 \texttt{ckpt15\_l2.py} & 检查点 1.5：RN 上的 $\ell=2$ 潮汐响应 & 约 10 秒\\
 \texttt{ckpt2\_axi.py} & 检查点 2：静态轴对称电真空中的近区（到 $\lambda^3$） & 约 5 分钟\\
-\texttt{ckpt2\_tb.py}、\texttt{ckpt2\_obstruct.py}、\texttt{ckpt2\_rankcheck.py} & 检查点 2：检验体对照、阻碍定位、秩检验 & 约 10 分钟\\
+\texttt{ckpt2\_tb.py}、\texttt{ckpt2\_obstruct.py}、\texttt{ckpt2\_rankcheck.py} & 检查点 2：检验体对照、阻碍定位、秩检验（阻碍后来查明是 \texttt{trunc.py} 中 $\sqrt{-g}$ 的截断错误，已修正） & 约 10 分钟\\
 \texttt{level3\_detail.py} & 情形 3：验证 \eqref{eq:A1near} 满足 Maxwell 方程、其 $O(M)$ 项与 \eqref{eq:aS3} 一致、$T^{(2)}$ 的 $EE/BB/EB$ 结构与宇称，并给出 \eqref{eq:T2blockII} & 约 3 秒\\
 \hline
 \end{tabular}

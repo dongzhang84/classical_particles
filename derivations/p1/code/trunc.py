@@ -90,21 +90,29 @@ def inverse(g):
 
 
 def sqrt_minus_det(g, ginv_unused=None):
-    """sqrt(-det g) for g = eta + delta, to second order in delta."""
+    """sqrt(-det g) for g = eta + delta, to order sum(LIM) in delta.
+
+    log det(1 + eta delta) = sum_n (-1)^(n+1) tr((eta delta)^n) / n ;
+    sqrt = exp(L / 2).  (Earlier versions stopped at delta^3, which is enough
+    only when every factor of delta carries at least one power of a small
+    parameter beyond the third; see calc.tex, checkpoint 2.)"""
+    K = sum(LIM)
     delta = mat(lambda a, b: add(g[a][b], const(-eta[a, b])))
     et = mat(lambda a, b: const(eta[a, b]))
     ed = matmul(et, delta)
-    tr1 = add(*[ed[a][a] for a in range(4)])
-    ed2 = matmul(ed, ed)
-    tr2 = add(*[ed2[a][a] for a in range(4)])
-    ed3 = matmul(ed2, ed)
-    tr3 = add(*[ed3[a][a] for a in range(4)])
-    # log det = tr1 - tr2/2 + tr3/3 ; sqrt = exp(L/2)
-    L = add(tr1, scal(-sp.Rational(1, 2), tr2), scal(sp.Rational(1, 3), tr3))
+    L = {}
+    pw = ed
+    for n_ in range(1, K + 1):
+        tr = add(*[pw[a][a] for a in range(4)])
+        L = add(L, scal(sp.Rational((-1)**(n_ + 1), n_), tr))
+        if n_ < K:
+            pw = matmul(pw, ed)
     h = scal(sp.Rational(1, 2), L)
-    h2 = mul(h, h)
-    h3 = mul(h2, h)
-    return add(const(1), h, scal(sp.Rational(1, 2), h2), scal(sp.Rational(1, 6), h3))
+    out, term = const(1), const(1)
+    for n_ in range(1, K + 1):
+        term = scal(sp.Rational(1, n_), mul(term, h))
+        out = add(out, term)
+    return out
 
 
 def christoffel(g, ginv):
