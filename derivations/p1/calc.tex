@@ -1685,6 +1685,34 @@ $\eta=\delta=0$ 时势能为常数 $m$，即 MP 平衡；动能项 $\tfrac m2U^3
 
 \paragraph{结论。}量级判断得到验证：近极端标度极限的主导阶方程是检验体在模空间度规中的慢速运动，加上正比于 $(\eta,\delta)$ 的势力 \eqref{eq:r2L}；自力和电磁--引力耦合项只在下一阶作为修正出现。这一路线不给出形式上的新方程。
 
+\subsection{检查点 2 的结论：一般电真空}
+\label{sec:L6ck2concl}
+
+\paragraph{形式。}\S\ref{sec:L6ck15} 的规范协变论证不依赖背景是真空，也不依赖静态或磁场为零。前提有两个：P 规范存在；在 P 规范中 $Z=0$ 满足 H 场中的二阶微扰 Lorentz 力方程。第一个前提要求近区三阶 $\ell=1$ 的可解条件对 $a_2$ 线性且系数为 $M\ne0$，这与情形 2、4 的矩阵相同，总能满足。第二个前提在真空中（检查点 1.5）由近区计算直接验证；在电真空中，静态轴对称情形修正 \texttt{trunc.py} 后三阶方程相容，但因 P 规范在二阶未完全固定，没有单独读出平衡关系。在这两个前提下，带电黑洞在一般电真空中的二阶运动方程是检验体在正则场中的二阶微扰 Lorentz 力方程，正则场 $=$ 总场 $-$ 随世界线移动的 P 规范奇异场。
+
+\paragraph{换成 Gralla 型正则场时多出的项（$\delta\mathcal E_{ij}$ 的推广）。}若按 Gralla 的方式定义二阶正则场（$j^{\rm R}_{\rm G}=j-(j^{\rm P}-\mathcal L_\xi h^{\rm P})$，电磁同理），两种定义之差为 $\delta j=-\mathcal L_\xi h^{\rm H}$、$\delta A=-\mathcal L_\xi A^{\rm H(1)}$。它们线性地进入二阶微扰 Lorentz 力方程。在 $\gamma$ 上，利用零阶平衡 $a_0=qE_0/M$，$\delta j_{ik}$ 的两项相消，剩下
+\begin{equation*}
+\delta\ddot Z_i=\tfrac12\partial_i\delta j_{00}-\partial_0\delta j_{0i}-\tfrac12a_{0i}\,\delta j_{00}+\tfrac qM\,\delta F_{i0}.
+\end{equation*}
+P 规范中一阶 H 场在 $\gamma$ 附近为 $h^{\rm H}_{00}=-2a_1\cdot x-\delta\mathcal E_{kl}x^kx^l$，$h^{\rm H}_{0i},h^{\rm H}_{ij}=O(x^2)$，$A^{\rm H}_0=f\cdot x+\tfrac12\partial_lf_kx^kx^l$，$A^{\rm H}_i=\tfrac12(\boldsymbol b\times x)_i$，一阶平衡为 $Ma_1=qf$。代入后，规范矢量的导数 $\partial\xi$ 全部消去（\texttt{ck2\_corrections.py} 对任意线性 $\xi$ 逐项核对），只依赖位移 $Z=\xi|_\gamma$：
+\begin{equation}
+\ddot Z^{(2)}_i\Big|_{\rm Gralla}-\ddot Z^{(2)}_i\Big|_{\rm ours}
+=\delta\mathcal E_{ik}Z^k+a_{1i}\,\dot Z^0-a_{0i}\,(a_1\cdot Z)-\frac qM\Big[Z^k\partial_kf^{\rm H}_{i0}+f^{\rm H}_{ik}\dot Z^k\Big].
+\label{eq:ck2C}
+\end{equation}
+\begin{itemize}
+\item $q=0$、真空时只剩 $\delta\mathcal E_{ik}Z^k$，回到检查点 1（Gralla 式 (104)）。
+\item 方括号中是一阶正则电磁场的"位移处取值"和"偏离速度上的磁力"。在我们的定义下，它们本来就包含在正则场中的检验体方程里；在 Gralla 型定义下要显式加回。
+\item $a_{1i}\dot Z^0$ 和 $-a_{0i}(a_1\cdot Z)$ 只在带电（$a_1\neq0$）时出现，后者还需要背景场使零阶世界线加速（$a_0\neq0$）。它们是电真空中带电物体特有的修正项。
+\end{itemize}
+
+\paragraph{结论。}
+\begin{enumerate}
+\item 二阶方程仍是检验体在正则场中运动的形式；在我们的正则场定义下不多出任何项。
+\item 若用 Gralla 型定义，多出的是 \eqref{eq:ck2C}：引力的 $\delta\mathcal E_{ik}Z^k$，电磁的对应项（位移处取值与磁力），以及带电时特有的 $a_1\dot Z^0$、$-a_0(a_1\cdot Z)$。它们都来自正则场定义的差，不是新的力。
+\item 尚未完成：(a) 电真空中、含时间依赖和磁场时，P 规范二阶平衡关系的直接近区验证；(b) 二阶奇异场的显式内容。AB 检验表明，"光滑项全归正则场"的朴素规则在 MP 极限下失效，正确的奇异场必须包含"奇异场 $\times$ 背景 Taylor 项"的乘积。这影响正则场的数值，不影响方程的形式。
+\end{enumerate}
+
 \paragraph{检查点 2（完整耦合，一般电真空，最后做）。}背景为一般电真空，按 (1)--(8) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
 
 \paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
@@ -1812,6 +1840,9 @@ What has not yet been done is to extend to the coupled fields we consider here t
 \texttt{ckpt15\_l2.py} & 检查点 1.5：RN 上的 $\ell=2$ 潮汐响应 & 约 10 秒\\
 \texttt{ckpt2\_axi.py} & 检查点 2：静态轴对称电真空中的近区（到 $\lambda^3$） & 约 5 分钟\\
 \texttt{ckpt2\_tb.py}、\texttt{ckpt2\_obstruct.py}、\texttt{ckpt2\_rankcheck.py} & 检查点 2：检验体对照、阻碍定位、秩检验（阻碍后来查明是 \texttt{trunc.py} 中 $\sqrt{-g}$ 的截断错误，已修正） & 约 10 分钟\\
+\texttt{ck2\_corrections.py} & 检查点 2：两种二阶正则场定义之差 \eqref{eq:ck2C} & 约 5 秒\\
+\texttt{ab\_*.py} & AB 精确解：不变量、$B_1$、$B_2$、一阶与二阶检验、MP 极限 & 数秒到半小时\\
+\texttt{r2\_testbody.py} & 路线 2：近 MP 背景中检验体的慢速运动 & 约 2 秒\\
 \texttt{level3\_detail.py} & 情形 3：验证 \eqref{eq:A1near} 满足 Maxwell 方程、其 $O(M)$ 项与 \eqref{eq:aS3} 一致、$T^{(2)}$ 的 $EE/BB/EB$ 结构与宇称，并给出 \eqref{eq:T2blockII} & 约 3 秒\\
 \hline
 \end{tabular}
