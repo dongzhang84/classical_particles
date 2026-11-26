@@ -9,6 +9,7 @@
 - calc.tex 标题由“一阶运动的近区推导”改为“带电小黑洞在电真空中的运动：一阶与二阶的近区推导及精确解检验”（内容已包括二阶与 AB 检验）。
 
 ### 论文引言
+- 引言：ZP 介绍两句从第 2 段移到第 4 段开头，使第 3 段“这样的物体”紧接“同时带有质量和电荷”；措辞不变。
 - 引言第 2 段：MiSaTaQuWa 句加极端质量比旋近的动机；耦合机制改写；单独两句介绍 ZP（多分量场、Hadamard Green 函数、局部项与尾巴积分、qm 混合项）；第 4 段删去与之重复的 ZP 描述。
 - 引言：DeWitt–Brehme 句改写（尾巴项的含义；只考虑电荷、不含自身引力场；Hobbs 补上 Ricci 项，已对照 Poisson–Pound–Vega 2011 原文），并从“物体自身的引力”起另起一段。
 - 引言第 1 段：保留开头两句，补一两句历史（Abraham、Lorentz、Dirac 1938、Eliezer 1943），经 DeWitt–Brehme/Hobbs 过渡到 MiSaTaQuWa；新增 4 条文献（Dirac、Eliezer 已用 Crossref 核对）。
