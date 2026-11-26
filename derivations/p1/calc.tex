@@ -1653,6 +1653,14 @@ $e_2$ & $R=11$ & $R=21$ & $R=41$\\
 
 \emph{这一项的含义尚未确定，有两种可能。}(i) 规则造成：二阶近区解中由 $M,q$ 和背景数据决定的光滑项（例如 $\mu^2\times$ 曲率的常数项、$\mu e\,\partial E$ 的梯度项）按规则 3 被归入正则场；如果这些项本应属于奇异场，$\Delta$ 就由它们解释。(ii) 真正多出的二阶力：大距离标度 $\delta F\sim\Delta\cdot eQ/R^2\sim e^3Q^2/R^5$，形式上像一个 $\propto(M,q)^3$ 的感应偶极与 $E\,\partial E$ 的耦合。区分两者的办法：用我们自己的近区解（不参考 AB）算出二阶近区中被强制出现的光滑项，看它们能否给出 $\Delta$。
 
+\paragraph{$\Delta$ 的定位：标度论证。}局部量随距离的衰减是确定的：$E$、$a\sim1/R^2$，潮汐场与 $\partial E\sim1/R^3$，局部标量 $E^2,a^2,a\cdot E\sim1/R^4$（大源量 $m_2,e_2$ 固定）。
+\begin{enumerate}
+\item \emph{中心定义：排除。}消去 $\Delta$ 所需的参考点偏移为 $\delta z_{\rm req}=-\Delta\varepsilon^2/(\dd\ln{\rm pred}/\dd z)$。数值上 $\delta z_{\rm req}R$ 收敛到常数（$e_2=1.5$ 时 $\approx12$，\texttt{ab\_shift\_req.py}），即 $\delta z_{\rm req}\propto1/R$。由近区决定的局部偏移只能是物体参数乘局部场，例如 $(\mu,e)^2E$、$(\mu,e)^2a$，最慢 $\propto1/R^2$，造不出 $1/R$。
+\item \emph{质量定义：排除。}质量的局部修正是标量，最慢 $\propto1/R^4$，而 $\Delta\propto1/R^3$。
+\item \emph{剩下的是二阶局部力。}$\Delta\propto1/R^3$ 与"物体参数的平方乘潮汐场乘电场"或"乘场梯度乘电场"的力一致，例如 $\mu^2\mathcal E_{ij}E^j$、$e^2E^j\partial_jE_i$，其相对大小 $\sim1/R^3$。这类耦合项在 ZP 的一阶方程中没有。
+\end{enumerate}
+保留：这类力也可以通过改变奇异场光滑部分的约定并入正则场的定义。所以准确的表述是：\emph{在事先写定、与一阶相同的正则场约定下，二阶运动方程多出一个局部耦合力；它不是中心或质量定义的假象，但其归属依赖正则场的约定。}下一步确定它的张量结构和系数。
+
 \paragraph{检查点 2（完整耦合，一般电真空，最后做）。}背景为一般电真空，按 (1)--(8) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
 
 \paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
