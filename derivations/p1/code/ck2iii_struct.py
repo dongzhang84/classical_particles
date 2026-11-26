@@ -13,7 +13,13 @@ import trunc as T
 from trunc import t, x, y, z, R
 from ckpt15_l1 import l1_form, NAMES, half, solve_ordered
 from ck2nz import projected_equations
-dd = pickle.load(open('ckpt2_axi_o2.pkl' if C.EPS == 3 else f'ckpt2_axi_o2_eps{C.EPS}.pkl', 'rb'))
+RAD = '--radial' in sys.argv
+ISO = '--iso' in sys.argv
+CONF = '--conf' in sys.argv
+ISOALL = '--isoall' in sys.argv
+fn = 'ckpt2_axi_o2' + (f'_eps{C.EPS}' if C.EPS != 3 else '') + ('_radial' if RAD else '') + ('_iso' if ISO else '') + ('_conf' if CONF else '') + ('_isoall' if ISOALL else '') + '.pkl'
+dd = pickle.load(open(fn, 'rb'))
+print('lower orders from', fn)
 F = dd['F'].subs({sp.Symbol('Ao2s1_1'): 0})
 print('order-2 symbols kept:', sorted(set().union(*[sp.sympify(v).free_symbols for row in F.h for c in row for v in c.values()]) - {C.M, C.q, R, x, y, z}, key=str))
 zv = lambda name: [0, 0, sp.Symbol(name)]
@@ -37,6 +43,14 @@ eqs, tags = [], []
 for N in range(C.EPS + 1):
     e_, t_ = projected_equations(Ein, Mx, (N, 3, 0), range(-8, 3))
     eqs += e_; tags += t_
+if RAD:   # background (slot 0) in radial (Fermi) gauge: x^j h_ij = 0  <=>  hE0 = 0, hD0 + hF0 = 0
+    eqs += [V[0]['hE'][2], V[0]['hD'][2] + V[0]['hF'][2]]
+if ISO:   # conformally flat background at r^3: only the delta_ij structure (hF) in slot-0 h_ij
+    eqs += [V[0]['hD'][2], V[0]['hE'][2]]
+if ISOALL:
+    for kk in V:
+        if kk != 0:
+            eqs += [V[kk]['hD'][2], V[kk]['hE'][2], V[kk]['hMij'][2]]
 print(len(eqs), 'projected equations', flush=True)
 k1 = [V[1][nm][2] for nm in NAMES]
 data = [s for s in k1 if isinstance(s, sp.Symbol)] + [e2, a2]
@@ -45,4 +59,4 @@ sol, cond, free = solve_ordered(eqs, resp, data)
 print('conditions (slot-1 coefficients, e2, a2):')
 for c in cond:
     print('   ', c)
-pickle.dump({'cond': cond}, open('ck2iii_struct.pkl', 'wb'))
+pickle.dump({'cond': cond, 'sol': sol, 'free': free, 'F': F, 'data': data}, open('ck2iii_struct' + ('_radial' if RAD else '') + ('_iso' if ISO else '') + ('_conf' if CONF else '') + ('_isoall' if ISOALL else '') + '.pkl', 'wb'))

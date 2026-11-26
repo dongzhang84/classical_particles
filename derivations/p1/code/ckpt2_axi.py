@@ -31,6 +31,9 @@ import os
 EPS = int(os.environ.get('CK2_EPS', '3'))
 USELOG = '--log' in sys.argv
 RADIAL = '--radial' in sys.argv
+ISO = '--iso' in sys.argv
+ISOALL = '--isoall' in sys.argv   # isotropic (conformally flat) spatial metric in ALL slots
+CONF = '--conf' in sys.argv     # conformastatic background coordinates: order-1 h_ij = -2 a z delta_ij
 KEEPALL = '--keepall' in sys.argv
 TIME = '--time' in sys.argv
 DIPOLE = '--dipole' in sys.argv
@@ -260,6 +263,9 @@ if __name__ == '__main__':
         E = sp.Integer(0)
     F = Field()
     hd = [[0] * 4 for _ in range(4)]; hd[0][0] = -2 * a * z
+    if CONF:
+        for i_ in range(1, 4):
+            hd[i_][i_] = -2 * a * z
     F.add((0, 1, 0), hd, [E * z, 0, 0, 0])
     log = {}
     data_syms = [a, E]
@@ -277,6 +283,11 @@ if __name__ == '__main__':
             h, A, syms = ansatz(m, k)
             if RADIAL and k == 0:
                 gauge_eqs.extend(sum([reduce_eq(sum(xs[j] * h[i+1][j+1] for j in range(3))) for i in range(3)], []))
+            if (ISO and k == 0) or ISOALL:      # conformally flat: traceless part of h_ij vanishes
+                trh = sum(h[i+1][i+1] for i in range(3))
+                for i in range(3):
+                    for j in range(i, 3):
+                        gauge_eqs.extend(reduce_eq(sp.expand(h[i+1][j+1] - (1 if i == j else 0) * trh / 3)))
             if m == 3 and k >= 1 and TIME:
                 for d_ in (1, 2):
                     ht, At, st = ansatz_t(m, k, d_)
@@ -374,6 +385,7 @@ if __name__ == '__main__':
         data_syms += newfree
         log[m] = dict(sol=sol, cond=cond, free=newfree)
         pickle.dump({'log': log, 'F': F}, open('ckpt2_axi.pkl', 'wb'))
-        pickle.dump({'log': log, 'F': F}, open(f'ckpt2_axi_o{m}{"_eps" + str(EPS) if EPS != 3 else ""}.pkl', 'wb'))
+        tag_ = ("_eps" + str(EPS) if EPS != 3 else "") + ("_radial" if RADIAL else "") + ("_iso" if ISO else "") + ("_conf" if CONF else "") + ("_isoall" if ISOALL else "")
+        pickle.dump({'log': log, 'F': F}, open(f'ckpt2_axi_o{m}{tag_}.pkl', 'wb'))
         if m == 2 and '--stop2' in sys.argv:
             break
