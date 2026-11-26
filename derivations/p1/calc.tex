@@ -1618,6 +1618,20 @@ B_1=\frac{e\,m_2R^2\,(e_2^2-m_2^2)(R-m_2)}{e_2\,(e_2^2-m_2R)^3},\qquad R=\ell+m_
 \item 之后做近极端标度极限（路线 2），用第 5 步的系数。
 \end{enumerate}
 
+\paragraph{一阶检验（第 4 步在一阶上的预演）。}静态时，检验体平衡只涉及两个标量：静态 Killing 矢量的模方 $H=-g(\xi,\xi)$ 和 $\Phi=A\cdot\xi$，它们不依赖空间坐标的选取。检验体在场 $(H,\Phi)$ 中静止的条件为 $e\,\partial_z\Phi=-\mu\,\partial_z\sqrt H$（AB 的号差为 $(+,-,-,-)$）。把 AB 的 $H$、$\Phi$ 按 $\varepsilon$ 展开，在小黑洞附近（Weyl 棒的中点为原点）写成 $r$ 的 Laurent 级数：一阶正则场在 $\gamma$ 上的值取 $r^0$ 系数的 $\ell=0$ 部分，梯度取 $r^1$ 系数的 $\ell=1$ 部分（一阶奇异场没有光滑的 $\ell=1$ $r^1$ 项）。定义
+\begin{equation*}
+T\equiv\frac{e/\mu}{-\partial_z\sqrt{H^{\rm R}}/\partial_z\Phi^{\rm R}}-1 .
+\end{equation*}
+数值结果（\texttt{ab\_first\_num.py}，$m_2=1$、$e_2=1.5$、$\ell=10$）：只用背景场时 $T/\varepsilon=0.14633$，即一阶自力；用一阶正则场时 $T/\varepsilon^2=-0.05977$，与 $\varepsilon$ 无关。所以一阶时，AB 精确解满足"检验体在正则场中静止"，误差为 $O(\varepsilon^2)$。
+
+\paragraph{二阶检验之前写定的规则（不参考平衡结果）。}
+\begin{enumerate}
+\item \emph{位置}：$\gamma$ 取小黑洞视界棒的中点，各阶相同。近区领头阶是以棒中点为中心的 RN，质量偶极为零；静态平衡中物体不移动，所以随世界线移动的修正 $-\mathcal L_\xi S$ 中 $\xi=0$。
+\item \emph{质量}：检验体方程中的质量取视界面积与电荷定义的 $\mu=(r_+^2+e^2)/2r_+$，$r_+^2=A/4\pi$，它是规范无关的。
+\item \emph{二阶奇异部分}：$H_2$、$\Phi_2$ 在 $\gamma$ 附近 Laurent 展开中的所有非光滑项（$r^{-2}$、$r^{-1}$、$r^0$ 的 $\ell\ge1$ 部分、$r^1$ 的 $\ell\ne1$ 部分）。光滑部分（$r^0$ 的 $\ell=0$、$r^1$ 的 $\ell=1$）全部归正则场，与一阶的规则相同。
+\end{enumerate}
+在这组规则下，若 $T=O(\varepsilon^3)$，二阶运动就是检验体在正则场中的形式，没有多出的项；若 $T/\varepsilon^2$ 剩下不为零的部分，它就是在这组规则下多出的二阶项，再按其对 $\mu,e$ 和大源参数的依赖分析。
+
 \paragraph{检查点 2（完整耦合，一般电真空，最后做）。}背景为一般电真空，按 (1)--(8) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
 
 \paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
