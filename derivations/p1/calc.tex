@@ -1669,6 +1669,22 @@ $e_2$ & $R=11$ & $R=21$ & $R=41$\\
 
 \emph{更正。}上一段把 $\Delta$ 判为二阶局部耦合力是错的。标度论证排除了中心定义和质量定义，但没有排除这种"奇异场与背景 Taylor 项的乘积"（它们同样 $\propto1/R^3$），而 MP 检验表明 $\Delta$ 正是来自这里。所以这一检验没有给出新的二阶项。正确的二阶奇异场必须包含这些乘积；在 MP 中它对应"在线性势 $U$ 中分离奇异部分"。下一步：给出一条在 MP 中严格通过的奇异场规则（在近区解中定义，不参考平衡条件），先在 MP 上标定，再用于非极端的 AB 构型。
 
+\subsection{路线 2：近极端标度极限（验证量级判断）}
+\label{sec:L6route2}
+
+\paragraph{检验体部分。}大源 RN$(M,Q)$，$Q=M(1+\eta)$；小物体 $q=m(1-\delta)$。慢速展开 $L=-m\sqrt{f-\dot r^2/f-r^2\Omega^2}+\dots$，同号电荷的势能为 $V=m\sqrt f+qQ/r$。到 $(\eta,\delta)$ 的一阶、$v^2$ 阶（\texttt{r2\_testbody.py}），在各向同性半径 $\rho=r-M$ 中
+\begin{equation}
+L=\frac m2\,U^3\,\delta_{ij}v^iv^j-\frac{mM\,[\eta M+(\eta-\delta)\rho]}{\rho(\rho+M)},\qquad U=1+\frac M\rho .
+\label{eq:r2L}
+\end{equation}
+$\eta=\delta=0$ 时势能为常数 $m$，即 MP 平衡；动能项 $\tfrac m2U^3v^2$ 是极端检验体的模空间度规。所以在标度 $\delta\sim\eta\sim v^2\sim\lambda$ 下，检验体运动是慢速的模空间运动加上 $O(\lambda)$ 的势力。
+
+\paragraph{静态自力：在 MP 点线性消失。}由 AB 精确解（\S\ref{sec:L6ck2} 中的不变量）：$B_1\propto(Q^2-M^2)$ 精确成立；$B_2$ 在 $Q\to M$ 时线性趋于零（$R=11$、$Q=1.001,1.0001$ 时 $B_2/(Q-M)=2.909,\,2.9045$）。因此在 MP 点附近，一阶、二阶自力对静态平衡的修正都正比于 $\eta$，相对量级分别为 $\eta\varepsilon$、$\eta\varepsilon^2$，总比检验体项 $O(\eta,\delta)$ 高一阶。无论 $\eta,\delta$ 与 $\varepsilon$ 取何种标度关系，自力都进不了主导阶。
+
+\paragraph{运动部分。}两个极端黑洞的慢速运动由 Ferrell--Eardley 模空间度规描述，它对两个质量是解析的；小质量极限必须回到检验体的 $\tfrac m2U^3v^2$，所以含 $m^2$ 的项相对 $O(m/M)$。荷质比都为 1 时电偶极辐射与引力偶极辐射相消，辐射反作用更高阶。（这一段依据文献中模空间度规对质量解析这一性质，未独立重推。）
+
+\paragraph{结论。}量级判断得到验证：近极端标度极限的主导阶方程是检验体在模空间度规中的慢速运动，加上正比于 $(\eta,\delta)$ 的势力 \eqref{eq:r2L}；自力和电磁--引力耦合项只在下一阶作为修正出现。这一路线不给出形式上的新方程。
+
 \paragraph{检查点 2（完整耦合，一般电真空，最后做）。}背景为一般电真空，按 (1)--(8) 推出二阶运动方程。结论要回答：二阶方程是否仍是检验体在正则场中运动的形式（加上类似 $\delta\mathcal E_{ij}$ 的修正）；如果不是，多出了哪些项。
 
 \paragraph{计算量估计。}近区 $\lambda^2$、$\lambda^3$ 要在 RN 上解 $\ell\leq3$ 的耦合静态方程，偶宇称每个 $\ell$ 的结构与 \S\ref{sec:L5result} 类似（规范不变量、单个常微分方程）；源项用 \texttt{trunc.py} 型的截断级数计算。主要工作量在 $\lambda^3$ 的源和二阶奇异场的确定。
