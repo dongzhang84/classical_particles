@@ -6,6 +6,12 @@
 
 ## 2026-11-26
 
+### 检查点 2 近区验证，(iii) 类（静态轴对称纯电）：条件已算出，X 未读出
+- `ckpt2_axi.py --light`：29 个三阶条件；含 a2 的条件中有 E³、E×∂E、E×曲率等只含背景的项和许多 slot-1 系数。
+- `ck2iii_gauge.py`：12 个三阶 slot-1 规范生成元下所有 a2 条件严格不变（通过）；只有 g0、f1（即 1.5 的 r³ 规范）平移 a2、e2。
+- `ck2iii_X.py`：加 1.5 约定的规范条件、用 ℓ=1 投影定义 a2、e2 后，仍有 22 个自由参数可吸收 a2，关系未读出。下一步改用 (ii) 类那种结构化 ℓ=1 拟设。
+- 时间依赖部分未算。
+
 ### §9 论文方案：论文 I 与 II 合为一篇
 - 题目草案：Motion of a small charged black hole in electrovacuum from matched asymptotic expansions: first-order derivation, second-order structure, and an exact-solution test。
 - 十部分结构：引言、解族假设、近区方程结构、一阶运动、诱导偶极、二阶运动（含 (ii) 类近区验证）、精确解检验、近极端极限、讨论、附录（含 Gralla 2012 与 GW 2008 的订正）。

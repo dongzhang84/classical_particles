@@ -305,9 +305,11 @@ if __name__ == '__main__':
             dcols = list(d1free)
         if m == 3 and not DIPOLE:
             a2s, e2s = sp.Symbol('ho3s2_1'), sp.Symbol('Ao3s2_1')
-            v1 = [] if LORENZ else [u for u in unk_resp if slot_of_g(u) == 1]
-            unk_resp = [u for u in unk_resp if u not in (a2s, e2s) and (LORENZ or slot_of_g(u) != 1)]
+            v1 = [] if (LORENZ and not LIGHT) else [u for u in unk_resp if slot_of_g(u) == 1]
+            unk_resp = [u for u in unk_resp if u not in (a2s, e2s) and u not in v1]
             dcols = list(dcols) + v1 + [e2s, a2s]
+            if LIGHT:
+                dcols = v1 + [e2s, a2s]
         allsym = set().union(*[sp.sympify(e_).free_symbols for e_ in eqs])
         extra = allsym - set(unk_resp + unk_data + list(dcols)) - {M, q, E}
         print('   symbols outside the column list:', sorted(extra, key=str), flush=True)
