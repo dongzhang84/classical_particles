@@ -6,411 +6,193 @@
 \usepackage[authoryear,round]{natbib}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \usepackage{xcolor}
+\usepackage{enumitem}
 
-\numberwithin{equation}{section}
-\newtheorem{proposition}{命题}[section]
-
-\newcommand{\M}{\mathcal M}
 \newcommand{\dd}{\mathrm d}
+\newcommand{\status}[1]{\hfill{\small\color{blue!50!black}[#1]}}
 
-\title{带电小黑洞的一阶运动：\\从 Einstein--Maxwell 方程推导电磁与引力自力}
+\title{带电小黑洞在电真空中的运动：\\一阶推导、二阶结构与精确解检验}
 \author{（作者待填）}
-\date{草稿 \quad 2026 年 11 月 24 日}
+\date{草稿（提纲阶段） \quad 2026 年 11 月 26 日}
 
 \begin{document}
 \maketitle
 
 \begin{center}
 \fbox{\parbox{0.92\textwidth}{\small
-\textbf{草稿状态。}本稿中下列各处尚未完成或尚未核实，定稿前必须逐条处理：
-\begin{enumerate}
-\setlength{\itemsep}{0pt}
-\item \S\ref{sec:retarded}：引理~B 给出了证明概要，所引奇异性传播定理（对角主部方程组的情形）的确切出处和条件待核；化到 Lorenz 规范这一步的光滑性也待核。
-\item \S\ref{sec:firstorder}：主结果（命题~\ref{prop:main}）在 $F=0$ 时已由计算机代数推出（\S\ref{sec:F0done}）；$F\neq0$ 的情形尚未完成。摘要和结论中关于主结果的表述，要等这一步完成后再写定。
-\item \S\ref{sec:H}：唯一性定理的条件，目前依据 Lopes Costa (2010) 的摘要和 Chru\'sciel 等 (2012) 的综述概括，没有逐条对照定理原文。
-\item \S\ref{sec:dipoles}：电真空稳态解多极矩在坐标变换下的行为（偶极层只差平移和转动）需要对照 Simon (1984) 原文核实。
-\item \S\ref{sec:conditions}：电磁规范变换的光滑性要求是我们补的，是否够用要在一阶计算中检验。
-\item \S\ref{sec:intro}：Futamase--Hogan--Itoh (2008) 的结果（其式 (3.73)、(3.74)）与 ZP 方程在统一约定下的逐项对照待做；引言中对其结果的概括（尤其“没有引力自力项”）需在对照后确认。
-\item \S\ref{sec:checks}：$G\to0$ 极限中各项的归属，以及 ZP 与本文符号、归一化约定的逐项对照，待核。
-\end{enumerate}
+\textbf{草稿状态。}本稿目前是提纲，按 \texttt{derivations/p1/calc.tex} 第 9 章“工作总览”的合并方案写成，把原定的两篇（一阶推导；二阶结构与精确解检验）合为一篇。每节列出：要写的内容、主要结果、在 calc.tex 中的位置、完成状态。旧稿 \texttt{paper/archive/paper\_2026-11-24.tex}（只到一阶）中可以沿用的部分逐节注明。状态标记：[完成] 结果已有、只需改写；[部分] 有结果但需补充或核对；[待做] 尚未完成。
 }}
 \end{center}
-
-\begin{abstract}
-小物体在带电背景中运动时，电磁辐射反作用和引力辐射反作用同时出现，并且相互耦合。描述这种运动的一阶方程已由 Zimmerman 和 Poisson、Linz、Friedman 和 Wiseman 从点粒子模型写出，但其中“驱动运动的只是正则场”这一步是作为假设引入的。本文用 Gralla 和 Wald 的“一族精确解”方法，从 Einstein--Maxwell 场方程出发研究带电小黑洞的运动。我们把三条极限假设写成 Einstein--Maxwell 的形式，补上电磁规范的光滑性要求和零磁荷条件，并加入近区背景是严格次极端 Kerr--Newman 解的假设。由这些假设，我们推出零阶的洛伦兹力，得到一阶远区的耦合分布方程组，并论证一阶远区场是推迟解：这一点在 Gralla、Harte 和 Wald 的电磁情形中是假设，在这里成为推论。我们给出一阶运动的定义，证明在黑洞假设下质心和电荷中心在这一阶重合，并把一阶运动方程表述为一个与 Zimmerman--Poisson 方程等价的命题。在背景不带电的情形，我们用计算机代数完成了所需的近区二阶计算，证明了这一命题：运动方程在 Gralla--Wald 的结果之外恰好多出尾巴电场的洛伦兹力；计算中还发现 Gralla--Wald 文中一个矩阵有两行笔误，但不影响其运动方程。背景带电的情形，我们给出了计算的步骤和新的困难。
-\end{abstract}
 
 \tableofcontents
 
 %======================================================================
-\section{引言}\label{sec:intro}
+\section*{题目与摘要（草稿）}
+\addcontentsline{toc}{section}{题目与摘要（草稿）}
 %======================================================================
 
-一个小物体在弯曲时空中运动时，它自身产生的场会反过来作用于它，使轨道偏离背景中的测地线或洛伦兹力轨道。这种作用称为自力，它的耗散部分就是辐射反作用。只有质量的情形，一阶自力由 \citet{MinoSasakiTanaka1997} 和 \citet{QuinnWald1997} 给出的 MiSaTaQuWa 方程描述。只有电荷、并忽略物体自身引力的情形，由 \citet{DeWittBrehme1960} 给出、经 \citet{Hobbs1968} 修正的方程描述。当物体同时带有质量 $m$ 和电荷 $q$，并在一个本身带电的背景（电真空时空）中运动时，两种辐射同时出现，而且彼此耦合：物体的引力扰动会改变背景电磁场，物体的电磁扰动通过它的能量--动量张量又会改变背景度规 \citep{ZimmermanPoisson2014}。因此这个问题不是两个已知问题的简单叠加。
-
-这样的物体，最自然的例子是在大的带电黑洞附近运动的带电小黑洞。在只有 Einstein--Maxwell 场、不引入任何物质的理论里，描述带电孤立物体的自然对象是具有正则视界的黑洞，其荷质比 $\xi\equiv q/m$ 满足 $\xi\le1$。超极端的 Reissner--Nordstr\"om 解虽然也满足场方程，但带有裸奇点，不在本文考虑之内。对这类物体，电磁自力正比于 $q^2=\xi^2m^2$，引力自力正比于 $m^2$，耦合部分正比于 $qm$。两种自力之比是 $\xi^2$，没有一个独立的小参数能把它们分开；在 $\xi\sim1$ 时两者完全相当，没有理由只保留其中一个。此前在近极端 Reissner--Nordstr\"om 背景上的电磁自力计算 \citep{ZimmermanVegaPoissonHaas2013} 去掉了引力扰动，作者自己承认这一做法 ``cannot be so easily justified''。本文研究的正是两种辐射反作用同时存在时的运动，研究对象是带电小黑洞。
-
-描述这种运动的方程已经写出来了。\citet{ZimmermanPoisson2014}（下称 ZP）在一般电真空背景中，从点粒子模型出发，导出了包含全部耦合的一阶运动方程（arXiv 版式 (8.16)）：洛伦兹力，加上若干局部项（其中有正比于 $mq$ 的混合项），再加上由电磁--引力混合 Green 函数给出的尾巴项。方程用背景运动方程降阶，不含加速度的时间导数，因此没有 runaway 解。\citet{LinzFriedmanWiseman2014b}（下称 LFW；另见 \citealt{LinzFriedmanWiseman2014a}）从模式求和正规化的角度研究了同一问题，证明发散的质量只是 $m_{\rm GR}+m_{\rm EM}$，没有 $qm$ 的混合部分，混合只出现在有限的自力中。两篇工作的结果互相一致。但两者都不是从场方程出发的推导：ZP 的运动方程是 ``on a formal level'' 写下的，正规化沿用 \citet{DetweilerWhiting2003} 的处方；LFW 在摘要中明确说，重整化是被 ``assume'' 的。
-
-另一条研究路线是从场方程本身推出运动方程，而不预先假设一个点粒子。\citet{GrallaWald2008}（下称 GW）为此建立了一套方法：考虑场方程的一族精确解，让物体的尺寸和质量以同样的速率趋于零；要求这族解满足两个极限条件，即在远离物体处有通常的极限（“普通极限”），在以物体尺寸为单位放大的近区也有极限（“标度极限”）。在这两个条件下，物体的世界线以及它满足的运动方程都从极限中推出，而不是事先假设的。GW 用这一方法在真空中推出了 MiSaTaQuWa 方程，适用于包括黑洞在内的任意小物体。\citet{GrallaHarteWald2009}（下称 GHW）在平直时空中、忽略物体自身引力的条件下，推出了一阶的电磁自力，并论证降阶的 Lorentz--Dirac 方程是这一阶上合理的自洽运动方程。\citet{Gralla2010,Gralla2013} 把这一框架推广到包括 Einstein--Maxwell 在内的一般场论，但只做到零阶，即推出洛伦兹力。此后 \citet{Pound2010} 用自洽展开把纯引力情形推进到二阶，\citet{MoxonFlanagan2018} 把平直时空中的电磁情形推进到二阶，\citet{HarteBlancoFlanagan2025} 对固定度规上的标量场建立了一般的形式体系，引力情形只给了草图。
-
-与本文最接近的一项工作是 \citet{FutamaseHoganItoh2008}。他们同样从 Einstein--Maxwell 真空方程出发，推导外部引力场和电磁场中小带电黑洞的运动方程，推导过程中不出现发散。方法是在 Bondi 型零坐标中，把度规和势的各个函数按到世界线距离 $r$ 的幂次展开，并对展开的形式和各项的量级作出具体假设；运动方程来自“辐射波前在黑洞附近是光滑变形的球面”这一要求。作者明确说，这些假设限制了所构造的模型，其普遍性有待研究。他们的结果（其式 (3.74)）含洛伦兹力、电磁辐射反作用和一个正比于背景场平方的外场项，尾巴项中含有未定的积分函数；我们没有在其中看到与 MiSaTaQuWa 引力自力对应的项，并且背景电磁场为零时尾巴项完全消失。作者指出，与 DeWitt--Brehme 方程的直接比较“highly non-trivial”。这项工作早于 ZP，也没有与 ZP 的方程对照。本文与它的区别在于：用 GW 的一组一般假设代替对展开形式的具体假设，保留引力自力，并以 ZP 的方程为对照目标。
-
-除此之外，还有几项相关工作，方法与本文不同。Newman、Kozameh 等人从无穷远处的渐近场读出物体的运动 \citep{KozamehNewmanOrtegaSilva2009}，得到的是未降阶的方程，runaway 解仍然存在，而他们所用的 Robinson--Trautman 模型本身不适定 \citep{KozamehKreissReula2008}。在数值方面，\citet{BurtonOsburn2020} 在 Reissner--Nordstr\"om 背景上计算了带电粒子圆轨道的能流和旋近，并指出耦合自力本身还没有被算过。质量相当的带电双星的后牛顿、后闵可夫斯基和数值相对论研究，则是另一个问题，不在本文讨论范围内。
-
-把这些工作放在一起，空缺就清楚了：纯引力和纯电磁的一阶运动都已经从场方程推出，耦合情形的方程虽然已经写出，却还没有人推导过。具体地说，据我们所知，还没有人从 Einstein--Maxwell 场方程证明过：在一阶上，驱动小物体运动的只是正则场。ZP 和 LFW 都在这一步上做了假设；\citet{FutamaseHoganItoh2008} 虽然从场方程出发，但依赖对展开形式的具体假设，其结果也没有给出完整的引力自力。LFW 在结论中写道：``What has not yet been done is to extend to the coupled fields we consider here the underlying justification based on variants of matched asymptotic expansion.'' \citet{Gralla2010} 搭好了 Einstein--Maxwell 的框架，但明确说 ``I do not treat self-force corrections''。我们认为，这个空缺一直没有补上，看来不是因为它难以克服，而有两方面的原因。一方面，做这一问题的人普遍预期不会有意外，LFW 就表示有信心 ``no surprise will emerge''。另一方面，自力研究的主要驱动力是 LISA 的极端质量比旋近，而那里的黑洞不带电。从 ZP 的方程可以直接看出，在不带电的 Schwarzschild 或 Kerr 背景上，这个问题在一阶上自动解耦：扰动方程中把引力和电磁扰动联系起来的非对角系数来自背景场 $F$，所以 $F=0$ 时两种扰动各自传播；ZP 式 (8.16) 中降阶后的局部项（包括混合项）都正比于 $F$ 或 $\nabla F$，此时全部消失；尾巴项中含 $F$ 的混合部分也消失，只剩下纯引力和纯电磁两部分，各由一个不耦合的方程决定。于是两种自力只需分别计算再相加。只有在带电背景上，耦合才真正出现，而带电黑洞在通常的天体物理中并不常见。暗 $U(1)$ 电荷可以避开等离子体的中和，是一个例外 \citep{Cardoso2016}。
-
-本文用 GW 的方法来补这个空缺：从 Einstein--Maxwell 场方程的一族精确解出发，推导带电小黑洞的一阶运动方程，其中同时包含电磁自力、引力自力和两者的耦合。我们先把 GW 的假设改写成 Einstein--Maxwell 的形式，并对黑洞加一条附加假设：近区背景是严格次极端的 Kerr--Newman 解。在这些假设下，零阶推出洛伦兹力，复现 \citet{Gralla2010,Gralla2013} 的结果；一阶得到远区的耦合分布方程组。我们将说明，由这组方程可以推出一阶远区场就是推迟解。这一点在 GHW 中是假设，在这里成为推论，而且对两种场同时成立。在此基础上，我们推导一阶运动只由正则场驱动，与 ZP 的方程逐项对照。黑洞的结构在偶极这一层已经被固定：Kerr--Newman 解的磁偶极与自旋之比给出 $g=2$ \citep{Carter1968}；在 Reissner--Nordstr\"om 情形（自旋为零），偶极项全部消失。更高阶的结构是否会带来新的项，是本文要检验的问题之一。作为检验，背景不带电时，结果应分别回到 GW 和 DeWitt--Brehme--Hobbs 的结果；物体不带电而背景带电时，结果并不回到 GW，而应给出电真空背景上的引力自力，其中仍有经背景场诱导的电磁扰动的贡献（\S\ref{sec:checks}）。
-
-需要说明本文的定位。本文推出的方程预期与已知的 ZP 方程相同，并不预期新的物理效应。它的价值和 GW、GHW 一样：证明这个方程确实由场方程推出，并给出推导所依赖的完整假设清单。如果推导结果与 ZP 一致，就证明了 ZP 和 LFW 所做的假设是对的；如果不一致，或者黑洞的结构带来了额外的项，那就是新的结果。此外，本文的推导是后续工作的基础。一是长时间的自洽演化，二是近极端黑洞。在近极端情形，GW 的假设本身可能失效；要回答它在哪里失效，需要先有一个在一般 $\xi$ 下成立的推导，并且知道每一条假设用在了哪里。这些问题留给后续的论文。本文也不计算自力的数值，不讨论 $\xi>1$ 的物体和量子效应，不涉及天体物理应用和波形。
-
-本文的结构如下。第~\ref{sec:assumptions} 节列出假设，包括对黑洞的附加假设。第~\ref{sec:zeroth} 节推出零阶运动和一阶远区场。第~\ref{sec:firstorder} 节定义一阶运动，陈述要证明的命题，并给出完成证明所需的计算。第~\ref{sec:checks} 节给出极限检验。第~\ref{sec:discussion} 节讨论推导中各条假设的作用，以及它们在近极端情形可能失效的地方。耦合方程组的恒等式推导放在附录~\ref{app:identities}。
-
-%======================================================================
-\section{假设}\label{sec:assumptions}
-%======================================================================
-
-\subsection{约定与场方程}
-
-号差取 $(-,+,+,+)$，单位取 $G=c=1$，电磁量用高斯单位。电磁场 $F=\dd A$，能量--动量张量为
-\begin{equation}
-4\pi T_{ab}=F_{ac}F_b{}^c-\tfrac14g_{ab}F_{cd}F^{cd}.
-\label{eq:T}
-\end{equation}
-Einstein--Maxwell 方程记为
-\begin{equation}
-E_{ab}\equiv G_{ab}-8\pi T_{ab}=0,\qquad \M^a\equiv\nabla_bF^{ab}=0.
-\label{eq:EM}
-\end{equation}
-有源时 $\M^a=4\pi j^a$。在这一约定下，Coulomb 势 $A=-(q/r)\,\dd t$ 给出 $\M^t=4\pi q\,\delta^3$，电荷 $q$、质量 $m$ 的检验粒子满足 $m\,u^b\nabla_bu^a=q\,F^a{}_bu^b$，同号电荷相斥。
-
-\subsection{一族解与标度}
-
-我们考虑 Einstein--Maxwell 方程的一族解 $(g_{ab}(\lambda),A_a(\lambda))$，其中参数 $\lambda\ge0$ 同时控制物体的尺寸、质量和电荷：物体的质量为 $\lambda M$，电荷为 $\lambda q$，荷质比 $\xi=q/M$ 在整族解中保持不变。$\lambda\to0$ 时物体缩成一条世界线，留下的是一个不含物体的背景。
-
-确定近区的标度要用到 Einstein--Maxwell 方程的一个对称性：对任意常数 $c$，变换
-\begin{equation}
-(g_{ab},A_a)\ \to\ (c^2g_{ab},\,cA_a)
-\label{eq:scaling-sym}
-\end{equation}
-把解映为解。原因是 $G_{ab}$ 在常数共形变换下不变；$T_{ab}$（指标全在下）中的 $F_{ac}F_{bd}g^{cd}$ 和 $g_{ab}F^2$ 都不随 $c$ 改变；$\nabla_bF^{ab}$ 整体乘以 $c^{-1}$，方程本身不变。\citet{Gralla2010} 正是据此选取电磁势的标度。对每个时刻 $t_0$，定义近区坐标 $\bar t=(t-t_0)/\lambda$、$\bar x^i=x^i/\lambda$，以及近区的场
-\begin{equation}
-\bar g_{ab}=\lambda^{-2}g_{ab},\qquad \bar A_a=\lambda^{-1}A_a.
-\label{eq:scaled}
-\end{equation}
-在近区坐标里，分量之间的关系就是把 $t=t_0+\lambda\bar t$、$x^i=\lambda\bar x^i$ 直接代入：
-\begin{equation}
-\bar g_{\bar\mu\bar\nu}(\lambda;t_0;\bar t,\bar x^i)=g_{\mu\nu}(\lambda;t_0+\lambda\bar t,\lambda\bar x^i),\qquad
-\bar A_{\bar\mu}(\lambda;t_0;\bar t,\bar x^i)=A_\mu(\lambda;t_0+\lambda\bar t,\lambda\bar x^i).
-\label{eq:scaled-comp}
-\end{equation}
-由 \eqref{eq:scaling-sym}，$(\bar g,\bar A)$ 仍然是 Einstein--Maxwell 方程的解。在近区里，物体的尺寸、质量和电荷都是 $O(1)$ 的量。
-
-\subsection{三条极限假设}\label{sec:conditions}
-
-我们沿用 GW 的三条假设，按 \citet{Gralla2010} 第 IV 节的写法，把其中的度规换成一对场 $(g_{\mu\nu},A_\mu)$。记 $r=|x|$。我们要求：对每个 $\lambda\ge0$，存在坐标 $(t,x^i)$ 和一个电磁规范，使下面三条成立。
-
-\paragraph{(i) 普通极限。}存在常数 $\bar R>0$，使得在 $r\ge\lambda\bar R$ 上，$(g_{\mu\nu},A_\mu)$ 满足 \eqref{eq:EM}，并且对 $(\lambda,t,x^i)$ 联合光滑。$\lambda=0$ 时，$(g_{\mu\nu},A_\mu)$ 在包括 $r=0$ 在内的区域上处处光滑，曲线 $\gamma$：$r=0$ 是类时的。
-
-\paragraph{(ii) 标度极限。}在 $\bar r\ge\bar R$ 上，$(\bar g_{\bar\mu\bar\nu},\bar A_{\bar\mu})$ 对 $(\lambda,t_0,\bar t,\bar x^i)$ 联合光滑，包括 $\lambda=0$。
-
-\paragraph{(iii) 一致性。}记 $\alpha=r$、$\beta=\lambda/r$。在固定的 $(t,\theta,\phi)$ 下，$(g_{\mu\nu},A_\mu)$ 作为 $(\alpha,\beta)$ 的函数，在 $(\alpha,\beta)=(0,0)$ 处联合光滑。GW 后来补注说，推导实际需要的是对全部变量联合光滑，我们按这个较强的形式使用。
-
-\medskip
-对 $r<\lambda\bar R$ 的区域不做任何假设。按 GW 的说法，这一区域 ``could equally well be `filled in' with ordinary matter or a black hole''。只有到 \S\ref{sec:H} 加上附加假设 (H)，物体才被指定为黑洞。
-
-三条假设是用势 $A_\mu$ 而不是场强 $F_{\mu\nu}$ 表述的，这带来两点需要说明。第一，$A_\mu$ 的分量依赖规范，所以假设应读作“存在一个规范，使 (i)--(iii) 成立”。这和 GW 中“存在坐标”的地位相同。允许的规范变换 $A\to A+\dd\psi$ 中，$\psi(\lambda,x)$ 应满足与 GW 式 (21) 中坐标变换同类的光滑性要求，使得 (i)--(iii) 在变换下保持。\citet{Gralla2010} 没有讨论这一点，这一要求是我们补上的。第二，区域 $r\ge\lambda\bar R$ 含有包住物体的二维球面，在这样的区域上，闭形式 $F$ 能写成 $\dd A$ 的条件是 $F$ 在该球面上的积分为零，也就是物体没有磁荷。因此用势表述的假设隐含了零磁荷，我们把它明确列为假设的一部分。采用势而不是场强，是因为一阶推导中要处理两种规范的混合：无穷小微分同胚 $\zeta$ 会使 $A_a$ 改变 $\zeta^cF_{ca}$（\S\ref{sec:motion-def}），这一步离不开势。
-
-\subsection{直接推论}\label{sec:consequences}
-
-这一节的结果对任意满足 (i)--(iii) 的物体成立，是 GW 和 \citet{Gralla2010} 相应结果在 Einstein--Maxwell 下的直接推广。由 (iii)，把 $(g_{\mu\nu},A_\mu)$ 在 $\beta$ 上展开到一阶，得
-\begin{equation}
-g_{\mu\nu}=b_{\mu\nu}(t)+O(r)+\lambda\Big[\frac{c_{\mu\nu}(t,\theta,\phi)}{r}+O(1)\Big]+O(\lambda^2),
-\label{eq:beta-exp}
-\end{equation}
-$A_\mu$ 的展开形式相同，系数记为 $b^{[A]}_\mu$、$c^{[A]}_\mu$。从这个展开读出三个结果。
-
-第一，远区背景 $(g,A)|_{\lambda=0}$ 是一个在 $\gamma$ 上光滑的电真空解，其中的电磁场 $F$ 一般不为零，这就是物体所处的外场。第二，一阶远区扰动 $(h_{ab},a_a)\equiv\partial_\lambda(g_{ab},A_a)|_{\lambda=0}$ 在 $\gamma$ 附近最多像 $1/r$ 那样奇异。第三，近区背景
-\begin{equation}
-\bar g^{(0)}_{\bar\mu\bar\nu}=b_{\mu\nu}(t_0)+\frac{c_{\mu\nu}(t_0,\theta,\phi)}{\bar r}+O(\bar r^{-2}),\qquad
-\bar A^{(0)}_{\bar\mu}=b^{[A]}_\mu(t_0)+\frac{c^{[A]}_\mu(t_0,\theta,\phi)}{\bar r}+O(\bar r^{-2})
-\label{eq:nearzone-bg}
-\end{equation}
-不依赖 $\bar t$，在 $\bar r\to\infty$ 时趋于常数，并且满足 Einstein--Maxwell 方程。也就是说，近区背景是一个稳态、渐近平直的电真空解。稳态性是推出来的，不是假设的：它来自 $g_{\mu\nu}(\lambda)$ 对 $t$ 的光滑性（\citealt{Gralla2010}；GW 称之为 ``derived here rather than assumed''）。常数 $b^{[A]}_\mu(t_0)$ 是纯规范。
-
-外场在近区里出现的阶次可以直接读出。由 \eqref{eq:scaled-comp}，$\bar F_{\bar\mu\bar\nu}=\lambda F_{\mu\nu}$，所以远区背景的电磁场在近区里是一个 $O(\lambda)$ 的均匀场；它的梯度和背景曲率在近区里都是 $O(\lambda^2)$。这和 GW 中潮汐场出现在近区二阶是同样的结构。一个推论是，外场在物体上感应出的偶极大小约为 $(\lambda M)^3F$，它产生的力比洛伦兹力高 $\lambda^2$ 阶，不进入一阶运动。
-
-\subsection{黑洞的附加假设}\label{sec:H}
-
-(i)--(iii) 不要求物体是黑洞。为了让研究对象是带电黑洞，我们加一条假设：
-
-\paragraph{(H)} 近区背景 $(\bar g^{(0)},\bar A^{(0)})$ 是一个 Kerr--Newman 解，参数为质量 $M$、电荷 $q$、比角动量 $\bar a$，并且严格次极端：$\bar a^2+q^2<M^2$。
-
-\medskip
-这条假设的动机来自电真空黑洞的唯一性定理。\citet{LopesCosta2010} 证明，在稳态、解析、$\mathcal I^+$ 正则、视界连通且非简并的电真空时空中，黑洞只能是 Kerr--Newman 解；这一结果建立在 \citet{Mazur1982} 和 \citet{Bunting1983} 的工作之上，综述见 \citet{ChruscielLopesCostaHeusler2012}。\S\ref{sec:consequences} 已经推出近区背景是稳态、渐近平直的电真空解，但解析性、视界的存在和正则性、视界的连通性和非简并性，都不能从 (i)--(iii) 推出。因此 (H) 必须作为假设写出，不能说是推论。视界连通的条件不能省：Majumdar--Papapetrou 解给出了多个极端黑洞静态共存的例子。严格次极端的要求对应于视界非简并；极端情形留给后续的工作。
-
-(H) 在一阶运动中固定了什么，可以用量级来看。近区里黑洞的自旋是 $S=\lambda^2M\bar a$，电偶极和磁偶极也都是 $O(\lambda^2)$。它们产生的力（Papapetrou 自旋力，以及偶极在外场梯度中受的力）相对于洛伦兹力是 $O(\lambda)$，所以进入一阶运动。GW 式 (111) 的第一项就是 Papapetrou 自旋力，GHW 式 (134)--(136) 中出现的是电磁偶极和自旋。对一般物体，这些偶极矩是自由参数；对 Kerr--Newman 解，它们由 $(M,q,\bar a)$ 完全固定：相对于质心的电偶极为零，磁偶极为 $\mu=q\bar a$，即旋磁比 $g=2$ \citep{Carter1968}。所以在偶极这一层，带电黑洞就是偶极矩由 $g=2$ 固定的 GHW 物体。四极及更高的多极矩在近区里至少是 $O(\lambda^3)$，按同样的估计，它们的力相对于洛伦兹力至少是 $O(\lambda^2)$，不进入一阶运动；这是量级估计，不是证明。黑洞的结构是否还会通过近区的一阶响应带来别的项，要在第~\ref{sec:firstorder} 节的推导中检验。与 ZP 的无自旋点粒子对照时取 $\bar a=0$，近区背景是 Reissner--Nordstr\"om 解，所有偶极项都消失。
-
-\subsection{与已有框架的比较}
-
-和 GW 相比，这里的场从真空中的度规换成了耦合的 $(g,A)$，物体同样可以是任意的，包括黑洞，物体的自身引力同样保留。和 GHW 相比，GHW 处理的是平直时空中的物质物体，不含自身引力，并且直接假设电磁场是物体电流的推迟解加上一个随 $\lambda$ 光滑的外场；这里不做这一假设，推迟解的结构要在一阶远区里推出来（\S\ref{sec:retarded}）。和 \citet{Gralla2010} 相比，三条假设的写法相同，我们补充了三点：电磁规范变换的光滑性要求，零磁荷条件，以及指定物体为黑洞的附加假设 (H)。\citet{Gralla2010} 只推到零阶，本文要把同一组假设用到一阶。
-
-最后要指出，(i)--(iii) 是对固定的 $\xi$ 提出的。常数 $\bar R$，以及 (ii)、(iii) 中“光滑”背后隐含的导数界，都可能依赖 $\xi$。$\xi\to1$ 时它们能否一致地选取，决定了推导在近极端情形是否仍然成立，这一点在第~\ref{sec:discussion} 节讨论。
-
-%======================================================================
-\section{零阶运动与一阶远区场}\label{sec:zeroth}
-%======================================================================
-
-本节只用假设 (i)--(iii)，不用 (H)。背景记为 $(g,A,F)$；$\lambda=0$ 的量不再加下标。一阶扰动记为 $h_{ab}=\partial_\lambda g_{ab}|_{\lambda=0}$、$a_a=\partial_\lambda A_a|_{\lambda=0}$，并记 $f=\dd a$，$h=g^{ab}h_{ab}$。零阶的结果复现 \citet{Gralla2010,Gralla2013}，我们把它完整写出，是因为一阶的推导要用到同样的恒等式和同样的分布论证。
-
-\subsection{两个恒等式}
-
-对任意度规和任意 $F=\dd A$，不要求满足场方程，有
-\begin{align}
-4\pi\,\nabla^aT_{ab}&=-F_b{}^c\,\M_c,
-\qquad\text{从而}\qquad
-\nabla^aE_{ab}=2F_b{}^c\,\M_c,
-\label{eq:id1}\\
-\nabla_a\M^a&=0.
-\label{eq:id2}
-\end{align}
-第一式中 $E_{ab}$ 的散度来自 $\nabla^aG_{ab}=0$；第二式是反对称张量的散度再取一次散度。推导见附录~\ref{app:identities}。物理上，$\M=4\pi j$ 时 \eqref{eq:id1} 就是 $\nabla^aT^{\rm EM}_{ab}=-F_{bc}j^c$，即电磁场的能量--动量守恒被电流破坏，破坏的量正是洛伦兹力密度。这两式是 \citet{Gralla2010} 式 (43)、(44) 在本文归一化下的写法。
-
-\subsection{线性化}
-
-背景满足 $E_{ab}=0$、$\M^a=0$。对 $(g+\lambda h,\,A+\lambda a)$ 线性化，得
-\begin{align}
-\M^{(1)a}&\equiv\delta(\nabla_bF^{ab})=\nabla_bY^{ab},\qquad
-Y^{ab}=f^{ab}+\tfrac12hF^{ab}-2h^{c[a}F_c{}^{b]},
-\label{eq:M1}\\
-\delta(4\pi T_{ab})&=2F_{(a}{}^cf_{b)c}-h^{cd}F_{ac}F_{bd}-\tfrac14h_{ab}F^2-\tfrac12g_{ab}\big(f_{cd}F^{cd}-h^{ce}F_c{}^dF_{ed}\big),
-\label{eq:dT}\\
-E^{(1)}_{ab}&=\delta G_{ab}[h]-2\,\delta(4\pi T_{ab}).
-\label{eq:E1}
-\end{align}
-右边的指标升降和 $\nabla$ 都用背景度规。一般背景下 \eqref{eq:M1} 右边还多一项 $-\tfrac12h\,\nabla_bF^{ab}$，背景满足无源 Maxwell 方程时为零。对 \eqref{eq:id1}、\eqref{eq:id2} 线性化时，凡是乘在背景 $E_{ab}$、$\M^a$ 上的项都为零，所以
-\begin{equation}
-\nabla^aE^{(1)}_{ab}=2F_b{}^c\,\M^{(1)}_c,\qquad \nabla_a\M^{(1)a}=0.
-\label{eq:lin-id}
-\end{equation}
-这两式都是对任意 $(h,a)$ 成立的恒等式，不要求 $(h,a)$ 满足方程，因此对分布意义下的 $(h,a)$ 也成立。这一点是下面论证的关键。
-
-\subsection{分布源}\label{sec:distribution}
-
-由 \S\ref{sec:consequences}，$(h,a)$ 在 $\gamma$ 附近最多像 $1/r$ 那样奇异，在 $r>0$ 上满足 $E^{(1)}=0$、$\M^{(1)}=0$。把它们看成整个背景时空上的分布，两个算子都是二阶线性微分算子。照 \citet{Gralla2010} 附录 A 的论证，有
-\begin{equation}
-E^{(1)}_{\mu\nu}=N_{\mu\nu}(t)\,\delta^3(x^i),\qquad \M^{(1)\mu}=N^\mu(t)\,\delta^3(x^i).
-\label{eq:Nsource}
-\end{equation}
-右边只有 $\delta^3$，不出现 $\delta^3$ 的导数，因为场最多只有 $1/r$ 的奇异性。
-
-这一步不需要新的证明。\citet{Gralla2010} 附录 A 的论证对任意把张量场映为张量场的二阶线性微分算子成立：由分部积分，分布 $(\hat L\phi)[f]$ 化为半径 $\epsilon\to0$ 的小球面上的面积分，面积分中的矢量 $s^\rho$ 由 $\phi\nabla f$、$f\nabla\phi$、$\phi f$ 组成，$\phi\sim1/r$ 时只有 $f\nabla\phi$ 一类项贡献 $1/r^2$，极限只剩 $f$ 在 $\gamma$ 上的值，于是分布正比于 $\delta^3$。把 $(h,a)$ 看成一个场，$(E^{(1)},\M^{(1)})$ 就是这样一个算子，耦合只出现在低阶项里，不影响论证。事实上，\citet{Gralla2010} 第 IV 节式 (48)、(49) 正是对 Einstein--Maxwell 的耦合线性化算子写出了 \eqref{eq:Nsource}。
-
-\subsection{零阶运动}
-
-取背景度规下沿 $\gamma$ 的 Fermi 坐标。在 $\gamma$ 上，度规 $g_{\mu\nu}=\eta_{\mu\nu}$；联络只有 $\Gamma^i{}_{00}=\Gamma^0{}_{0i}=a^i$ 不为零，$a^i$ 是 $\gamma$ 的加速度；逆度规的空间一阶导数为零，所以光滑函数乘 $\partial_i\delta^3$ 时不产生额外的 $\delta^3$ 项。把 \eqref{eq:Nsource} 代入 \eqref{eq:lin-id}。
-
-Maxwell 部分给出
-\begin{equation}
-\nabla_\mu(N^\mu\delta^3)=\dot N^0\delta^3+N^i\partial_i\delta^3+a_iN^i\delta^3=0 .
-\end{equation}
-$\partial_i\delta^3$ 与 $\delta^3$ 线性无关，所以 $N^i=0$、$\dot N^0=0$。取归一化 $N^0\equiv4\pi q$，由 Coulomb 场检验。
-
-Einstein 部分：含 $\partial_i\delta^3$ 的项只有 $N_{ib}\,\partial_i\delta^3$，而 \eqref{eq:lin-id} 右边只含 $\delta^3$，所以 $N_{0i}=N_{ij}=0$。剩下 $S_{ab}=N_{00}\,\delta^3\,t_at_b$，直接计算得 $(\nabla^aS_{ab})_0=-\dot N_{00}\,\delta^3$、$(\nabla^aS_{ab})_i=a_i\,N_{00}\,\delta^3$。\eqref{eq:lin-id} 右边为 $2F_b{}^cN_c\,\delta^3$，其中 $N_c$ 只有 $N_0=-4\pi q$。$b=0$ 分量中 $F_0{}^0=0$，所以 $\dot N_{00}=0$；取归一化 $N_{00}\equiv8\pi M$，由线性化 Schwarzschild 度规 $h_{00}=2M/r$ 检验。$b=i$ 分量给出 $8\pi M\,a_i=2F_i{}^0(-4\pi q)=8\pi q\,F_{i0}$。写成协变形式：
-\begin{gather}
-E^{(1)}_{ab}=8\pi M\!\int_\gamma u_au_b\,\delta_4(x,z(\tau))\,\dd\tau,\qquad
-\M^{(1)a}=4\pi q\!\int_\gamma u^a\,\delta_4(x,z(\tau))\,\dd\tau,
-\label{eq:pointsource}\\
-M\,u^b\nabla_bu^a=q\,F^a{}_bu^b,\qquad \dot M=\dot q=0.
-\label{eq:lorentz}
-\end{gather}
-这就是 \citet{Gralla2010} 式 (52) 和 \citet{Gralla2013} 式 (224)，只是归一化不同。
-
-有两点说明。第一，$M\neq0$ 是必需的：$M=0$ 时 \eqref{eq:lorentz} 退化为约束 $qF_{ab}u^b=0$（GW 对测地线情形有同样的注记）。对满足 (H) 的黑洞，$M>|q|\ge0$，没有问题。第二，$M$ 是近区背景的 ADM 质量，$q$ 是它的 Gauss 电荷 \citep{Gralla2013}；在 (H) 下，它们就是 Kerr--Newman 解的参数。
-
-零阶的结果是复现，不是新结果。值得指出的只有一点：由 \eqref{eq:lin-id} 可以直接看出，正是耦合项 $2F_b{}^c\M^{(1)}_c$ 把“点源的能量--动量守恒”变成了洛伦兹力。没有这一项，同样的论证给出的是测地线。
-
-\subsection{一阶远区方程组}
-
-把 \eqref{eq:M1}--\eqref{eq:E1} 与 \eqref{eq:pointsource} 合起来，$(h,a)$ 在整个背景时空上，在分布意义下满足
-\begin{align}
-\delta G_{ab}[h]-2\Big[2F_{(a}{}^cf_{b)c}-h^{cd}F_{ac}F_{bd}-\tfrac14h_{ab}F^2-\tfrac12g_{ab}\big(f_{cd}F^{cd}-h^{ce}F_c{}^dF_{ed}\big)\Big]
-&=8\pi M\!\int_\gamma u_au_b\,\delta_4\,\dd\tau,
-\label{eq:far1}\\
-\nabla_b\Big[f^{ab}+\tfrac12hF^{ab}-2h^{c[a}F_c{}^{b]}\Big]&=4\pi q\!\int_\gamma u^a\,\delta_4\,\dd\tau.
-\label{eq:far2}
-\end{align}
-允许的规范变换是
-\begin{equation}
-h\to h+\mathcal L_\zeta g,\qquad a\to a+\mathcal L_\zeta A+\dd\psi,\qquad
-(\mathcal L_\zeta A)_a=\zeta^cF_{ca}+\nabla_a(\zeta^cA_c).
-\label{eq:gauge}
-\end{equation}
-背景满足场方程，所以 \eqref{eq:far1}、\eqref{eq:far2} 的左边在这些变换下不变。微分同胚 $\zeta$ 会让 $a$ 改变 $\zeta^cF_{ca}$（模去一个电磁规范变换），两种规范因此混在一起；这是一阶运动推导中的新特点（\S\ref{sec:motion-def}）。Lorenz 规范 $\nabla^b(h_{ab}-\tfrac12g_{ab}h)=0$、$\nabla^aa_a=0$ 共 5 个条件，正好对应 $\zeta$ 和 $\psi$ 的 5 个自由度。ZP 对两种场都取了 Lorenz 规范。在这一规范下，\eqref{eq:far1}、\eqref{eq:far2} 的主部是对角的波动算子 $\square$，两种场只通过低阶项耦合，这正是 ZP 式 (1.1) 的结构。
-
-\subsection{推迟解}\label{sec:retarded}
-
-\eqref{eq:far1}、\eqref{eq:far2} 的分布解可以写成推迟解加齐次解。由假设 (i)，$(h,a)$ 在 $\gamma$ 外光滑；推迟解在 $\gamma$ 外也光滑。所以两者之差在 $\gamma$ 外光滑，并且由于两者有相同的分布源 \eqref{eq:pointsource}，差值在包括 $\gamma$ 在内的整个区域上满足齐次方程。
-
-\paragraph{引理 B。}在 Lorenz 规范下，满足齐次耦合方程组、并且在 $\gamma$ 外光滑的分布，处处光滑。
-
-\paragraph{证明概要。}Lorenz 规范下，方程组的主部是 $\square\,\mathbb 1$，即主象征为 $g^{ab}k_ak_b$ 乘单位矩阵，耦合只出现在一阶和零阶项中。对这类主部为标量、实主型的方程组，波前集满足两条性质：一是椭圆正则性，波前集包含在特征集 $\{g^{ab}k_ak_b=0\}$ 中（源为零时）；二是奇异性沿零双特征线传播，即波前集在零测地线的提升下不变 \citep{Hormander1985,Dencker1982}。设差值 $u$ 的波前集含有一点 $(x,k)$，$x\in\gamma$。则 $k$ 是零余矢量，过 $(x,k)$ 的零双特征线投影为一条零测地线。$\gamma$ 是类时的，零测地线与它只在孤立点相交，所以这条零测地线上有点在 $\gamma$ 之外，那里 $u$ 光滑，与传播性矛盾。因此 $u$ 的波前集为空，$u$ 光滑。还需要说明的一点是，由 (i)--(iii) 给出的 $(h,a)$ 可以通过 \eqref{eq:gauge} 中在 $\gamma$ 外光滑的规范变换化到 Lorenz 规范；GW 在真空情形是直接这样选取坐标的。
-
-\medskip
-由引理 B，$(h,a)$ 等于推迟解加上一个光滑齐次解。后者相当于入射辐射。GW 指出，取推迟解（``corresponding to `no incoming radiation'\,''）并不是必需的，光滑齐次解可以一路带入计算；为简单起见，我们同 GW 一样把它取为零。于是，GHW 直接假设的“推迟场加外场”的结构，在这里由 (i)--(iii) 推了出来，而且对引力场和电磁场同时成立。
-
-\eqref{eq:far1}、\eqref{eq:far2} 在 Lorenz 规范下就是 ZP 的点粒子方程组。区别只在来历：ZP 把它当作点粒子模型直接写下，这里是从 (i)--(iii) 推出来的。所以，在引理 B 成立的前提下，到一阶远区为止，ZP 的出发点是对的。ZP 真正多做的假设在下一步：运动方程中只出现正则场。这是第~\ref{sec:firstorder} 节的内容。
-
-%======================================================================
-\section{一阶运动}\label{sec:firstorder}
-%======================================================================
-
-\subsection{一阶运动的定义}\label{sec:motion-def}
-
-$\lambda>0$ 时，物体所在的区域 $r<\lambda\bar R$ 不在我们考虑的时空之内，世界线并没有现成的定义。我们沿用 GW 第 V 节的做法。设有限 $\lambda$ 时物体的位置可以写成
-\begin{equation}
-x^i=z^i(\lambda,t)=\lambda Z^i(t)+O(\lambda^2),
-\end{equation}
-则一阶修正 $Z^i$ 是沿 $\gamma$ 定义的矢量场 $Z^a$ 的空间分量；取 $Z^0=0$，使 $Z^a$ 与 $\gamma$ 的切矢正交。
-
-$Z^a$ 依赖规范。在光滑坐标变换 $x^\mu\to\hat x^\mu=x^\mu-\lambda\zeta^\mu(x)+O(\lambda^2)$ 下，度规扰动变为 $h_{\mu\nu}\to h_{\mu\nu}+2\nabla_{(\mu}\zeta_{\nu)}$，世界线的一阶修正变为
-\begin{equation}
-Z^i(t)\to Z^i(t)-\zeta^i(t,x^j=0).
-\label{eq:Zshift}
-\end{equation}
-在 Einstein--Maxwell 情形，同一个坐标变换还按 \eqref{eq:gauge} 改变电磁势扰动：$a_a\to a_a+\zeta^cF_{ca}+\nabla_a(\zeta^cA_c)$。电磁规范变换 $a\to a+\dd\psi$ 则不改变 $Z^a$。所以有规范不变意义的是三元组 $(h_{ab},a_a,Z^a)$，模去 $(\zeta,\psi)$。这和 GW 中“只有 $(h_{ab},Z^a)$ 一起才有意义”是同一件事，只是 $\zeta$ 现在同时作用在两种场上。一个直接的推论是：运动方程中必须出现由 $\zeta^cF_{ca}$ 抵消的项，否则方程在 \eqref{eq:Zshift} 下不协变。洛伦兹力方程线性化后出现的 $q\,Z^c\nabla_cF^a{}_b u^b$ 一类项，正起这个作用。
-
-\subsection{质心与电荷中心}\label{sec:dipoles}
-
-和 GW 一样，我们用近区背景的多极矩定义物体的“位置”。近区背景是稳态、渐近平直的电真空解，因此有质量多极矩和电多极矩；取共形因子 $\Omega=1/\bar r^2$，相当于把原点取在 $\bar r=0$。在 \eqref{eq:nearzone-bg} 中，质量 $M$ 是 $\tfrac12\bar g_{\bar t\bar t}$ 中 $1/\bar r$ 项的 $\ell=0$ 部分（GW 的定义；$\bar g_{\bar t\bar t}=-(1-2M/\bar r)+\dots$），质量偶极 $P^i$ 是同一量中 $1/\bar r^2$ 项的 $\ell=1$ 部分；类似地，电荷 $q$ 和电偶极 $P_e^i$ 由 $-\bar A_{\bar t}$ 中 $1/\bar r$ 项的 $\ell=0$ 部分和 $1/\bar r^2$ 项的 $\ell=1$ 部分给出。
-
-坐标变换 \eqref{eq:Zshift} 在近区里相当于常数平移 $\bar x^i\to\bar x^i-\zeta^i(t_0,0)+O(\lambda)$。由
-\begin{equation}
-\frac1{|\bar{\boldsymbol x}+\boldsymbol\zeta|}=\frac1{\bar r}-\frac{\zeta_in^i}{\bar r^2}+O(\bar r^{-3}),
-\end{equation}
-平移使两个偶极分别改变
-\begin{equation}
-P^i\to P^i-M\zeta^i,\qquad P_e^i\to P_e^i-q\,\zeta^i .
-\label{eq:dipole-shift}
-\end{equation}
-对一般物体，$M\neq0$ 时总可以取 $\zeta^i=P^i/M$ 使质量偶极为零，这定义了质心；但此时电偶极变为 $P_e^i-(q/M)P^i$，一般不为零。电荷中心和质心是两个独立的点，它们的差就是 GHW 中的电偶极，会以偶极力的形式进入一阶运动。
-
-在 (H) 下情况不同。Kerr--Newman 解在其标准坐标中关于赤道面反射对称，并且轴对称。质量偶极和电偶极都是矢量，反射对称使它们沿对称轴的分量为零，轴对称使垂直分量为零。所以在以黑洞为中心的坐标中，两个偶极同时为零。由 \eqref{eq:dipole-shift}，在任一平移后的坐标中有 $P^i/M=P_e^i/q$（$q\neq0$ 时），于是同一个平移 $\zeta^i=P^i/M$ 使两个偶极同时为零：
-
-\paragraph{结论。}在 (H) 下，带电黑洞的质心和电荷中心在一阶重合，“无质量偶极”和“无电偶极”两个条件可以由同一个规范同时满足。
-
-\medskip
-这一论证用到两点：一是电真空稳态解的多极矩有与坐标无关的几何定义，偶极这一层的唯一歧义来自原点的选取，这由 Geroch--Hansen 定义在电真空中的推广给出 \citep{Simon1984}；二是近区坐标与 Kerr--Newman 标准坐标之间，在偶极这一层只差平移和转动。第二点需要对照 \citet{Simon1984} 的定义核实（见卷首的草稿状态）。
-
-于是，按 GW 的定义，我们取 $\zeta^i(t)=P^i(t)/M$，物体在原坐标中的一阶位移就是
-\begin{equation}
-Z^i(t)=\zeta^i(t,0)=P^i(t)/M .
-\end{equation}
-和 GW 一样，这一步本身没有给出关于运动的信息；运动方程来自要求 $(g(\lambda),A(\lambda))$ 在二阶上满足场方程。
-
-\subsection{要证明的命题}
-
-对照的目标是 ZP 的运动方程。ZP 先在形式上写下扰动时空中的洛伦兹力方程，线性化后得到其式 (8.2)。用本文的记号（$m\to M$，$e\to q$，ZP 的电磁势扰动 $b_\alpha$ 记为 $a_\alpha$），它是
-\begin{multline}
-M a^\mu=qF^\mu{}_\nu u^\nu-\tfrac12q\,u^\lambda u^\rho h_{\lambda\rho}F^\mu{}_\nu u^\nu
--q\,(g^{\mu\nu}+u^\mu u^\nu)h_{\nu\lambda}F^\lambda{}_\rho u^\rho
-+q\,f^\mu{}_\nu u^\nu\\
--\tfrac12M\,(g^{\mu\nu}+u^\mu u^\nu)\big(2\nabla_\rho h_{\nu\lambda}-\nabla_\nu h_{\lambda\rho}\big)u^\lambda u^\rho ,
-\label{eq:ZP82}
-\end{multline}
-其中所有量都在背景时空中取值。推迟势在世界线上发散，ZP 按 Detweiler--Whiting 处方把 \eqref{eq:ZP82} 中的 $(h,a)$ 换成正则部分 $(h^{\rm R},a^{\rm R})$（ZP 式 (8.17)），再用背景运动方程降阶，得到其式 (8.16)。
-
-\begin{proposition}[待证]\label{prop:main}
-设一族解满足 (i)--(iii) 和 (H)，且 $\bar a=0$。在 Lorenz 规范下，一阶位移 $Z^a$ 满足的方程，等于 \eqref{eq:ZP82} 在 $(h,a)\to(h^{\rm R},a^{\rm R})$ 之后关于 $\gamma$ 的线性化。
-\end{proposition}
-
-这里“关于 $\gamma$ 的线性化”指：把 \eqref{eq:ZP82} 看成对世界线 $z(\lambda)$ 的方程，在 $\lambda=0$ 附近展开，零阶给出 \eqref{eq:lorentz}，一阶给出 $Z^a$ 满足的偏离方程，其源项是 \eqref{eq:ZP82} 中含 $(h^{\rm R},a^{\rm R})$ 的各项在 $\gamma$ 上的值。这与 GW 式 (112) 的形式相同：GW 的方程中，测地偏离项和 Papapetrou 项之外，剩下的就是用尾巴场写出的自力。把偏离方程重新合成为“自洽”的运动方程，是 GW 第 VII 节和 GHW 第 V 节讨论的另一个问题，本文不重复。
-
-命题~\ref{prop:main} 如果成立，ZP 和 LFW 所假设的“只由正则场驱动”就得到了证明。如果近区的二阶计算给出 \eqref{eq:ZP82} 之外的项，那就是黑洞结构或耦合带来的新效应。两种结果都需要通过 \S\ref{sec:remaining} 的计算来确定。
-
-\subsection{完成证明所需的计算}\label{sec:remaining}
-
-GW 第 VI 节在真空情形完成了这一计算：在近区二阶方程中提取 $\ell=1$、电宇称、时间反演为偶的部分，在 $1/\bar r^2$ 和 $\bar t/\bar r^3$ 两个阶次上得到 6 个线性方程（GW 式 (106)），消去未知的齐次项后得到两个普适关系（GW 式 (107)、(108)），其中一个给出运动方程。对耦合情形，计算的步骤相同，但每一步都有新的内容：
-\begin{enumerate}
-\item \textbf{二阶远区场在 $\gamma$ 附近的结构。}写出 $(j_{ab},b_a)\equiv\tfrac12\partial^2_\lambda(g_{ab},A_a)|_{\lambda=0}$ 在 $1/r^2$ 阶的形式。特解部分来自一阶场的平方：度规中有 Reissner--Nordstr\"om 的 $q^2/r^2$ 项和 Schwarzschild 的 $M^2/r^2$ 项，势中有相应的 $Mq/r^2$ 项。齐次部分 $C_{ab}/r^2$、$C^{[A]}_a/r^2$ 由平直时空中的稳态 $\ell=1$ 解给出：除了 GW 中的质量偶极 $P_i$ 和自旋 $S_{ij}$，还有电偶极 $P_e^i$ 和磁偶极。
-\item \textbf{平移到质心。}按 \S\ref{sec:dipoles} 作平移 $\zeta^i=P^i/M$。由 \eqref{eq:gauge}，平移同时在 $a_a$ 中引入 $\zeta^cF_{ca}$ 项；在 (H) 下电偶极同时被消去。
-\item \textbf{近区展开到 $O(\lambda^2)$。}与 GW 式 (86) 相比，近区一阶扰动中多出电磁部分：背景外场在近区里的 $O(\lambda)$ 均匀场（\S\ref{sec:consequences}），电磁尾巴场在 $\gamma$ 上的值，以及平移带来的 $\zeta^cF_{ca}$；近区二阶扰动中多出外场梯度、电磁尾巴场的梯度，以及它们与平移的交叉项。
-\item \textbf{近区二阶 Einstein--Maxwell 方程。}GW 中，二阶方程的源 $G^{(2)}[\bar g^{(1)},\bar g^{(1)}]$ 在所需阶次上不出现，二阶扰动可以当作满足齐次线性方程。耦合情形中，电磁能量--动量张量是场的二次式，近区背景的 Coulomb 场与一阶扰动中的均匀场、尾巴场的交叉项，会在 $1/\bar r^2$ 阶上出现，必须逐项计算。此外还要加上 Maxwell 方程的 $\ell=1$ 部分。
-\item \textbf{普适关系。}从所得线性方程组中消去未知的齐次项（GW 中的 $H_{\alpha\beta}$、$\dot K_{\alpha\beta}$ 及其电磁对应），找出只含 $\ddot\zeta^i$、背景场、尾巴场的关系，即一阶运动方程。
-\item \textbf{对照。}把所得方程与 \eqref{eq:ZP82} 的线性化逐项比较，包括三类项：两种尾巴场各自的贡献，混合尾巴项，以及正比于 $\nabla F$、$FF$ 的局部项。
+\paragraph{题目。}\emph{Motion of a small charged black hole in electrovacuum from matched asymptotic expansions: first-order derivation, second-order structure, and an exact-solution test.}
+
+\paragraph{摘要要点。}
+\begin{enumerate}[nosep]
+\item 问题：小带电黑洞在电真空背景中运动，电磁与引力辐射反作用同时出现并耦合；ZP、LFW 的一阶方程以“运动由正则场驱动”为假设，LFW 明确指出耦合情形缺少匹配渐近展开的论证。
+\item 方法：Gralla--Wald 单参数解族与近区/远区匹配，从 Einstein--Maxwell 方程出发，不引入点粒子与正规化。
+\item 一阶结果：推出 ZP 方程（线性化形式）；零阶 Lorentz 力是近区一阶方程的可解条件；近区本身不产生局部力，ZP 中的局部系数全部来自正则场。
+\item 二阶结果：RN 在均匀场中的诱导偶极为零；把 Gralla 的二阶规范论证推广到 Einstein--Maxwell，二阶方程是检验体在“随世界线移动的正则场”中的形式；近区计算表明背景场与一阶正则场之间没有额外耦合；只含背景的局部项的归属依赖二阶奇异场的约定。
+\item 精确解检验：用 Alekseev--Belinski 两 RN 源平衡解，给出规范无关的平衡修正 $B_1$ 的闭式，作为“由正则场驱动”的独立旁证；二阶在 MP 线性变量中闭合。
+\item 结论：在已检验的范围内，电磁--引力耦合不改变运动方程的形式。
 \end{enumerate}
-第 4 步是计算量最大、也是与 GW 差别最大的地方。我们用计算机代数完成第 3--5 步，并分四级推进，每级只引入一样新东西：真空且 $q=0$；$q\neq0$、$F=0$；$q=0$、$F\neq0$；完整情形。全部中间步骤记录在项目的验证计算文档中（\texttt{derivations/p1/calc.pdf}）。
-
-\subsection{已完成的部分：背景不带电}\label{sec:F0done}
-
-\paragraph{第一级：复现 GW。}对线性化 Schwarzschild 近区背景，我们重新计算了 GW 式 (106) 的 $\ell=1$ 线性化 Ricci 矩阵。60 个系数中 55 个与 GW 相同；其余 5 个（$R^A$ 行 1 个、$R^F$ 行 4 个）不同。不截断的直接计算和三个纯规范扰动都支持我们的结果：纯规范扰动必须落在正确矩阵的零空间里，我们的矩阵满足这一点，GW 的矩阵恰好在这两行不满足。给出运动方程的关系 GW 式 (108) 只用到 $R^B$、$R^D$、$R^E$ 三行，不受影响，我们复现了它。
-
-\paragraph{第二级：物体带电，背景不带电。}取 $F=0$，近区背景为 Reissner--Nordstr\"om。近区二阶方程中第一次出现电磁项：Einstein 方程中 Coulomb 场与尾巴电场的交叉应力，Maxwell 方程中度规扰动作用在 Coulomb 场上的项，以及尾巴场在背景度规中的散度。$\ell=1$ 的方程组共 9 行（Einstein 6 行、Maxwell 3 行），含 9 个未知齐次项。消去全部未知项后，只剩一个关系：
-\begin{equation}
--MD^A_i+2MD^C_i+2q\,\big(E^C_i-E^0_i\big)=0,
-\end{equation}
-其中 $E^0_i=\partial_ia^{\rm tail}_0$、$E^C_i=\partial_0a^{\rm tail}_i$ 在 $\gamma$ 上取值。与 GW 的推导相比，运动方程恰好多出一项
-\begin{equation}
-M\ddot Z^i\supset q\,f^{\rm tail}_{i0},
-\end{equation}
-即尾巴电场对电荷的洛伦兹力，系数为 1，没有其他新项。四个纯规范变换（三个同时作用在度规和 Coulomb 势上的微分同胚，一个电磁规范变换）都落在方程组的零空间里。背景为真空、零阶运动为测地线时，正则电磁场在 $\gamma$ 上就是尾巴场，所以这一结果就是 MiSaTaQuWa 方程加 DeWitt--Brehme 的尾巴力。也就是说，\textbf{在 $F=0$ 的情形，命题~\ref{prop:main} 成立}。
-
-$F\neq0$ 的情形（第三、四级）尚未完成。与前两级相比，有两点新的困难：背景磁场在时间反演下为奇，GW 按时间宇称分块的做法不再适用；远区一阶场含有由耦合确定的 $\ell=1$ 局部项（形如 $MF\,n$ 和 $MF^2r$），需要先在 $\gamma$ 附近求出局部解。
+\emph{摘要的措辞必须与第 6、7 节实际完成的验证范围一致；有效质量效应不写进摘要。}
 
 %======================================================================
-\section{检验}\label{sec:checks}
+\section{引言}\label{sec:o-intro}
+\status{部分：旧稿引言大部分可沿用}
 %======================================================================
-
-本节列出最终结果必须满足的极限，并在目标方程 ZP (8.16) 上逐一验证。这样做有两个用途：一是给第~\ref{sec:firstorder} 节的计算提供检验；二是澄清引言中“回到 GW”的确切含义。下面用 ZP 式 (8.14)、(8.16) 的系数，记号同 \eqref{eq:ZP82}。ZP 式 (8.16) 的局部部分是
-\begin{equation}
-(g^{\mu\nu}+u^\mu u^\nu)\Big[-\tfrac13Mq\Big(11-\frac{2q^2}{M^2}\Big)u^\lambda u^\rho\nabla_\rho F_{\nu\lambda}
--\tfrac13q^2\Big(4-\frac{2q^2}{M^2}-\frac{5M^2}{q^2}\Big)F_{\nu\lambda}F^{\lambda\rho}u_\rho\Big],
-\label{eq:ZPlocal}
-\end{equation}
-其余是尾巴项。
-
-\paragraph{零阶。}\S\ref{sec:zeroth} 已经复现了 \citet{Gralla2010,Gralla2013} 的洛伦兹力，这是第一项检验。
-
-\paragraph{背景不带电，$F=0$。}此时 \eqref{eq:ZPlocal} 全部为零，尾巴项中含 $F$ 的混合项为零，耦合 Green 函数变为块对角。剩下的是纯电磁尾巴和纯引力尾巴，分别给出 DeWitt--Brehme--Hobbs 的尾巴力和 MiSaTaQuWa 的尾巴力。（这时零阶运动是测地线，背景 Ricci 张量为零，DeWitt--Brehme 的局部项也为零。）再取 $q=0$，就是 GW 式 (112) 在无自旋时的形式。所以，背景不带电时，结果应分别回到 GW 和 DeWitt--Brehme--Hobbs。
-
-\paragraph{物体不带电，背景带电，$q\to0$。}这一极限不回到 GW。在 \eqref{eq:ZPlocal} 中令 $q\to0$：第一项正比于 $Mq$，趋于零；第二项的系数
-\begin{equation}
--\tfrac13q^2\Big(4-\frac{2q^2}{M^2}-\frac{5M^2}{q^2}\Big)=-\tfrac43q^2+\tfrac23\frac{q^4}{M^2}+\tfrac53M^2\ \to\ \tfrac53M^2 .
-\end{equation}
-于是 $q=0$ 时还剩一个局部项 $\tfrac53M^2(g^{\mu\nu}+u^\mu u^\nu)F_{\nu\lambda}F^{\lambda\rho}u_\rho$。这个系数也可以从降阶前的 ZP 式 (8.14) 直接读出：其中引力局部项为 $M^2\big(-\tfrac{11}3\dot a_a+\tfrac16R_{ta}+2F_{ac}F^c{}_t\big)$，$q=0$ 时 $\dot a=0$，再用电真空背景的 $R_{ta}=-2F_{ac}F^c{}_t$，得 $M^2(-\tfrac13+2)=\tfrac53M^2$，两者一致。此外，尾巴项中引力尾巴仍由耦合 Green 函数给出：物体的引力扰动通过背景场诱导出电磁扰动，后者又反过来影响度规。所以，$q=0$ 时本文的推导给出的是电真空背景上不带电物体的引力自力。GW 只处理了真空背景，这一情形本身已经超出了 GW。
-
-\paragraph{不计自身引力，$G\to0$。}恢复 $G$ 后，正比于 $M^2$ 和 $Mq$ 的项都带有 $G$，在 $G\to0$ 时消失；背景 Ricci 张量正比于 $G$，也消失。剩下的局部项来自电磁自力 $\tfrac23q^2\dot a$，用 \eqref{eq:lorentz} 降阶后就是弯曲背景上 Landau--Lifshitz 形式的辐射反作用力，再加上电磁尾巴，即 DeWitt--Brehme--Hobbs 方程的降阶形式。\eqref{eq:ZPlocal} 中 $q^2FF$ 项各部分哪些带 $G$，需要回到 ZP 的推导逐项核对；这一检验在核对之后才算完成。
+\begin{itemize}[nosep]
+\item 沿用旧稿 \S1 的四段：自力背景与耦合问题的提出；带电小黑洞是自然对象（$\xi=q/m\le1$，两种自力相当）；ZP、LFW 的结果与其假设；GW 方法及其推广；Futamase--Hogan--Itoh 2008 等相关工作。
+\item 需要改写或补充：
+  \begin{itemize}[nosep]
+  \item 加入 LFW 2014 结论中关于缺口的原话（calc.tex \S summary 已引）。
+  \item 加入二阶部分的动机：一阶被“锁定”为 DW 形式（calc.tex \S7 开头），问题是二阶是否仍然如此。
+  \item 加入精确解检验的动机：二阶“多出的项”依赖正则场的约定，需要规范无关的量（AB 平衡条件）。
+  \item 旧稿中关于 Futamase--Hogan--Itoh 与 ZP 逐项对照的待核项仍需处理。
+  \end{itemize}
+\item 本文的贡献与局限（照 calc.tex 第 9 章“哪些不是新的”的立场写）：方程形式不是新结论；新在推导本身、近区不产生局部力的论证、二阶的近区验证与精确解检验。
+\end{itemize}
 
 %======================================================================
-\section{讨论}\label{sec:discussion}
+\section{解族假设与展开}\label{sec:o-assump}
+\status{部分：旧稿 \S2 可沿用}
 %======================================================================
-
-\paragraph{各条假设的作用。}到目前为止，各条假设的用处如下。假设 (i) 给出远区背景和一阶扰动的光滑性，是分布论证（\S\ref{sec:distribution}）和推迟解论证（引理 B）的出发点。假设 (ii) 给出近区背景，其稳态性和渐近平直性是推出来的。假设 (iii) 把两个区域联系起来，给出 \eqref{eq:beta-exp} 中的 $1/r$ 结构，从而使源只能是 $\delta^3$。零磁荷条件保证势在 $r\ge\lambda\bar R$ 上整体存在。附加假设 (H) 在零阶和一阶远区方程中都没有用到；它的作用在一阶运动中才出现：固定偶极矩，并使质心和电荷中心重合（\S\ref{sec:dipoles}）。这一点值得强调：直到一阶远区为止，推导对任意带电小物体都成立；“黑洞”只通过近区背景的多极结构进入运动方程。
-
-\paragraph{近极端情形。}(i)--(iii) 是对固定 $\xi$ 提出的。常数 $\bar R$、光滑性背后的导数界，都可能依赖 $\xi$。GW 允许近区一阶扰动随 $\bar t$ 线性增长、二阶扰动随 $\bar t$ 二次增长。在近极端 Kerr--Newman 背景上，近区扰动的弛豫时间约为 $1/\kappa$，$\kappa$ 是表面引力，在 $\xi\to1$（取 $\bar a=0$）时趋于零。因此，按 $\lambda$ 展开的各阶系数可能在 $\xi\to1$ 时发散，使展开对 $\xi$ 不一致。要回答推导在何处失效，需要追踪每一步中的 $\xi$ 依赖，这正是本文把每条假设的用处都写明的原因。这一问题留给后续的工作。
-
-\paragraph{现状。}本文已经完成的部分是：假设的表述（第~\ref{sec:assumptions} 节），零阶运动和一阶远区方程组（第~\ref{sec:zeroth} 节，其中推迟解一步依赖引理 B 所引定理的核对），一阶运动的定义以及质心与电荷中心的重合（\S\ref{sec:motion-def}、\S\ref{sec:dipoles}），以及目标方程的极限检验（第~\ref{sec:checks} 节）。主结果命题~\ref{prop:main} 在背景不带电时已经推出（\S\ref{sec:F0done}）；背景带电的情形需要完成 \S\ref{sec:remaining} 中的第三、四级计算。
+\begin{itemize}[nosep]
+\item 沿用旧稿 \S2：三条极限假设的 Einstein--Maxwell 形式、电磁规范的光滑性、零磁荷、近区零阶为次极端 RN（或 KN）的假设 (H)。
+\item 远区/近区展开的约定与标度（calc.tex \S2）：$x=\lambda(\bar x+\zeta)$；远区第 $n$ 阶 $r^{m-n}$ 系数进入近区第 $m$ 阶；“slot”计数（长度幂次 $+$ $(M,q)$ 幂次 $=$ 近区阶数）。
+\item P 规范的定义（以质心为中心，一阶场 Lorenz 规范，$h^{\rm H}(\gamma)=0$）。
+\item 审稿人可能的问题：解族假设对带电黑洞是否合理；近区零阶为 RN；电荷守恒；视界正则性。这一节要专门回答。
+\end{itemize}
 
 %======================================================================
-\appendix
-\section{恒等式的推导}\label{app:identities}
+\section{近区方程的结构}\label{sec:o-structure}
+\status{完成}
 %======================================================================
+\begin{itemize}[nosep]
+\item $\ell=1$ 电宇称、时间反演为偶的部分的系数矩阵（calc.tex 情形 1、2 的矩阵）；左零组合给出运动方程，恒等组合不约束运动。
+\item 纯规范扰动检验：规范扰动的系数必须落在矩阵的零空间中（calc.tex \S3“检验：纯规范扰动”）。
+\item 微分同胚恒等式 $Q[\mathcal L_\xi G_0,G_2]=-\mathcal E^{(1)}[\mathcal L_\xi G_2]$，把一阶场之间的二次项化成线性算子的列（calc.tex \S6）。
+\item 量纲与宇称论证：决定运动的那一块中没有不含远区数据的项。
+\end{itemize}
 
-\paragraph{式 \eqref{eq:id1}。}由 \eqref{eq:T}，
-\begin{equation}
-4\pi\nabla^aT_{ab}=(\nabla^aF_{ac})F_b{}^c+F^{ac}\nabla_aF_{bc}-\tfrac12F^{cd}\nabla_bF_{cd}.
-\end{equation}
-由 $\dd F=0$，即 $\nabla_aF_{bc}+\nabla_bF_{ca}+\nabla_cF_{ab}=0$，中间一项等于 $\tfrac12F^{ac}\nabla_bF_{ac}$，与最后一项相消。剩下的 $\nabla^aF_{ac}=-\M_c$ 给出 $4\pi\nabla^aT_{ab}=-F_b{}^c\M_c$。再由 $\nabla^aG_{ab}=0$ 得 $\nabla^aE_{ab}=-8\pi\nabla^aT_{ab}=2F_b{}^c\M_c$。
+%======================================================================
+\section{一阶运动}\label{sec:o-first}
+\status{完成：论文主体，calc.tex \S6}
+%======================================================================
+\begin{itemize}[nosep]
+\item 零阶：Lorentz 力 $Ma=qE$ 是近区一阶 $\ell=1$ 方程的可解条件；近区一阶解在 Lorenz 规范下与远区奇异场的 $r^0$ 项逐项一致（独立检验）。
+\item 一阶：近区二阶方程，二次项由微分同胚恒等式计算；单极修正吸收进 $M,q$。
+\item 结果：ZP 方程 (8.2) 的线性化形式 \texttt{eq:eom4}；唯一新出现的近区耦合 $-\tfrac12qh^{\rm R}_{00}E_i$ 由规范协变完全确定。
+\item 检验：远区规范变换下的协变性；四种情形（真空/电真空，带电/不带电）逐级对照已知结果。
+\item 与 ZP 的比较：$\tfrac53M^2\boldsymbol E\times\boldsymbol B$、$11-2q^2/M^2$ 等局部系数来自正则场的远区展开，不来自近区。
+\item 待补：正则场局部系数的独立检验（例如 Ernst 解按 $M,q$ 展开），或明确声明取自 ZP；时间反演为奇的一块与磁宇称部分。
+\end{itemize}
 
-\paragraph{式 \eqref{eq:id2}。}$\M^a=\nabla_bF^{ab}$ 是反对称张量的散度，$\nabla_a\nabla_bF^{ab}=0$。
+%======================================================================
+\section{二阶的预备：诱导偶极为零}\label{sec:o-dipole}
+\status{完成：calc.tex \S7}
+%======================================================================
+\begin{itemize}[nosep]
+\item RN 在均匀电场、磁场中的静态 $\ell=1$ 响应：规范不变量 $I_1,I_2,I_3$；化成单个常微分方程；衰减解在视界奇异。
+\item 结果：诱导电偶极与磁偶极为零（$\alpha=\chi=0$），对 $M,q$ 精确；Kerr--Newman 自旋模式满足 $\mu=qJ/M$。
+\item 与已知的 RN Love 数为零（Cardoso 等 2017，Pere\~niguez--Cardoso 2022）的关系；我们的版本包括加速度，并处理偶极相对质心的定义。新意有限，作为预备结果。
+\end{itemize}
 
-\paragraph{式 \eqref{eq:M1}。}对 $\nabla_bF^{ab}=(-g)^{-1/2}\partial_b\big[(-g)^{1/2}g^{ac}g^{bd}F_{cd}\big]$ 变分，用 $\delta g^{ac}=-h^{ac}$、$\delta(-g)^{1/2}=\tfrac12(-g)^{1/2}h$，得
-$\delta(\nabla_bF^{ab})=\nabla_b\big[f^{ab}+\tfrac12hF^{ab}-h^{ac}F_c{}^b-h^{bd}F^a{}_d\big]-\tfrac12h\,\nabla_bF^{ab}$，
-方括号中后两项合起来就是 $-2h^{c[a}F_c{}^{b]}$。背景满足 $\nabla_bF^{ab}=0$ 时最后一项为零。
+%======================================================================
+\section{二阶运动}\label{sec:o-second}
+\status{部分：calc.tex \S8}
+%======================================================================
+\begin{itemize}[nosep]
+\item \textbf{方法。}Gralla 2012 的二阶模板；检查点 1（$q=0$）复现其系数，$a_{22}$ 由线性化方程确定。
+\item \textbf{真空带电（检查点 1.5）。}P 规范中近区二阶、三阶都是 RN 上的线性问题；三阶可解条件 $Ma_2=qe_2-MD^C_2$；近区不产生局部项；RN 上 $\ell=2$ 潮汐响应的 $q$ 修正。
+\item \textbf{规范协变论证。}二阶运动是检验体在正则场中的二阶微扰 Lorentz 力方程，正则场 $=$ 总场 $-$ 随世界线移动的 P 规范奇异场；Gralla 的 $\delta\mathcal E_{ij}Z^{(1)j}$ 是两种正则场定义之差。
+\item \textbf{电真空的修正项对照。}换成 Gralla 型正则场时多出 $\delta\mathcal E_{ik}Z^k+a_{1i}\dot Z^0-a_{0i}(a_1\cdot Z)-\tfrac qM[Z^k\partial_kf^{\rm H}_{i0}+f^{\rm H}_{ik}\dot Z^k]$（规范数据全部消去，已核对）。
+\item \textbf{电真空的近区验证（检查点 2）。}
+  \begin{itemize}[nosep]
+  \item 背景场 $\times$ 一阶正则场的交叉项为零，包括磁场与加速度；时间导数的交叉项不进入二阶。
+  \item 只含背景的局部项（$E^3$、$E\,\partial E$、$E\times$ 曲率）出现在平衡关系中；未定组合是背景坐标在 $x^4$ 阶的规范；12 个规范生成元下的不变性检验通过。
+  \item MP 检验：朴素约定下 $X\neq0$，而精确解处处平衡，所以这些项的归属依赖二阶奇异场的约定；MP 适配的约定在一般背景下无法由近区规范实现。
+  \end{itemize}
+\item \textbf{结论写法。}没有与约定无关的新耦合力；“多出哪些局部项”必须连同所用约定一起陈述；与 DW 型正则场的比较需要二阶奇异场的协变定义，超出本文。
+\item 待做：Pound 等人二阶工作与带电情形的关系（文献核查）；二阶奇异场的协变定义（若要给出确定的局部项）。
+\end{itemize}
 
-\paragraph{数值检验。}式 \eqref{eq:id1}、\eqref{eq:M1}（含一般背景下的附加项）和 \eqref{eq:dT}，已用任意度规和任意势、以精确有理数运算逐项检验，见项目中的 \texttt{derivations/p1/check\_c1\_identities.py}。
+%======================================================================
+\section{精确解检验}\label{sec:o-exact}
+\status{部分：calc.tex \S8 AB 部分}
+%======================================================================
+\begin{itemize}[nosep]
+\item Alekseev--Belinski 平衡条件；两非极端黑洞不能平衡，构型取小带电黑洞加大 RN 裸奇点。
+\item 不变量：视界面积、电荷、表面引力给出局部质量 $\mu$ 与红移 $N$；大源用总质量与总电荷；检验体极限精确回到 Bonnor 条件。
+\item $B_1=e\,m_2R^2(e_2^2-m_2^2)(R-m_2)/[e_2(e_2^2-m_2R)^3]$（闭式）；$B_2$ 可精确求值。
+\item 一阶检验：精确解满足“检验体在正则场中静止”，误差 $O(\varepsilon^2)$。定位：正则场直接取自精确解，检验的是“由正则场驱动”这条规则，不检验 ZP 的局部系数，是独立旁证。
+\item 二阶：在 $H$ 上切分的朴素规则在 MP 极限下失效；在 MP 线性变量 $1/\sqrt H$、$\Phi/\sqrt H$ 上切分后 MP 严格闭合；非极端剩余 $\lim R^3\Delta'=(e_2^2-m_2^2)^2/5$，结构上为有效质量 $m_{\rm eff}\approx\mu[1-\tfrac1{20}(\mu^2-e^2)(E^2-a^2)]$ 的梯度力，作为待确认结果提出。
+\item 待做：Bini--Geralico--Ruffini 2007 是否已做过一阶平衡与 AB 的对照（文献核查，决定“新颖性”的写法）；有效质量系数需近区二阶 $\ell=0$ 响应独立确认；$E^2-a^2$ 组合的 $O(m_2/R)$ 修正。
+\end{itemize}
 
-\bibliographystyle{plainnat}
-\bibliography{refs}
+%======================================================================
+\section{近极端极限}\label{sec:o-extremal}
+\status{部分：calc.tex \S8 路线 2}
+%======================================================================
+\begin{itemize}[nosep]
+\item 检验体在近 MP 背景中的慢速运动：模空间度规 $\tfrac m2U^3v^2$ 加正比于 $(\eta,\delta)$ 的势力。
+\item AB：静态自力在 MP 点线性消失（$B_1\propto(Q^2-M^2)$，$B_2\propto(Q-M)$）。
+\item 结论限定为“在静态与检验体近似下，没有新的主导阶结构”。
+\item 开放问题：越接近极端，视界弛豫越慢，GW 的准静态假设可能失效；这可能产生记忆项或与视界动力学耦合的项。只作为开放问题提出。
+\end{itemize}
+
+%======================================================================
+\section{讨论}\label{sec:o-disc}
+\status{待写}
+%======================================================================
+\begin{itemize}[nosep]
+\item 总结：一阶推导完成了 LFW 指出的缺口；二阶仍是检验体形式；耦合在已检验范围内不改变方程形式。
+\item 哪些不是新的（照 calc.tex 第 9 章写）：方程形式、ZP 的局部系数、模空间动力学。
+\item 否定性结论的价值：诱导偶极、诱导自旋不进入二阶；背景与正则场无额外耦合。
+\item 开放问题：二阶奇异场的协变定义与 DW 型比较；有效质量效应的确认；近极端弛豫；长时间自洽演化。
+\end{itemize}
+
+%======================================================================
+\section*{附录}
+\addcontentsline{toc}{section}{附录}
+%======================================================================
+\begin{enumerate}[label=\Alph*.,nosep]
+\item 系数矩阵与恒等式（旧稿附录“恒等式的推导”可沿用）。\status{完成}
+\item Gralla 2012 的订正：式 (11)、(13) 的两个 $M^2$ 系数，式 (46)--(48) 的 $a_{22}$，式 (47) 与 (12) 的矛盾，式 (29) 缺因子 $M$；均已代入线性化方程核对。\status{完成}
+\item Gralla--Wald 2008 式 (106) 的订正：纯规范扰动代入其第一行与关系式 (107) 不成立，我们的矩阵成立；核对针对 arXiv v5。\status{部分：待确认 2011 年勘误 CQG 28, 159501 的内容}
+\item 计算的实现与复现：\texttt{trunc.py} 等脚本、核对方式（包括 $\sqrt{-g}$ 截断错误的发现与修正）。\status{部分}
+\end{enumerate}
+
+%======================================================================
+\section*{图表计划}
+\addcontentsline{toc}{section}{图表计划}
+%======================================================================
+\begin{itemize}[nosep]
+\item 表 1：四种一阶情形的逐级对照（calc.tex 总结表）。
+\item 表 2：二阶各类项的归属（交叉项为零；只含背景的项依赖约定；时间导数交叉项不进入）。
+\item 图 1：AB 构型示意（小黑洞与 RN 裸奇点、Weyl 棒）。
+\item 图 2：$B_1$、$B_2$ 随距离与荷质比的变化；可加“只用 ZP / 精确解”的对照（需先写清“只用 ZP”的定义）。
+\item 图 3（可选）：MP 检验中各约定下的剩余量对比。
+\end{itemize}
+
+%======================================================================
+\section*{投稿前必须完成的事项}
+\addcontentsline{toc}{section}{投稿前必须完成的事项}
+%======================================================================
+\begin{enumerate}[nosep]
+\item 旧稿待核清单中的各项（引理 B 的出处、唯一性定理条件、多极矩、电磁规范光滑性、Futamase--Hogan--Itoh 对照、$G\to0$ 极限的约定）。
+\item 正则场局部系数的独立检验，或明确声明取自 ZP。
+\item 文献核查：Bini--Geralico--Ruffini 2007；Pound 等人的二阶工作与带电情形。
+\item 确认 Gralla--Wald 2008 的 2011 年勘误内容（必要时去信作者，由作者本人决定）。
+\item 摘要、引言、结论的措辞与第 6、7 节的验证范围严格一致。
+\item 把本稿的提纲逐节扩写成正文。
+\end{enumerate}
 
 \end{document}
