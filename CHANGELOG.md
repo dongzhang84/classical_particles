@@ -7,6 +7,7 @@
 ## 2026-11-26
 
 ### 论文引言
+- 引言第 1 段：保留开头两句，补一两句历史（Abraham、Lorentz、Dirac 1938、Eliezer 1943），经 DeWitt–Brehme/Hobbs 过渡到 MiSaTaQuWa；新增 4 条文献（Dirac、Eliezer 已用 Crossref 核对）。
 - `paper/paper.tex` §1 引言写成正文：自力背景、带电小黑洞、ZP/LFW/Zimmerman 2015、GW 方法及二阶工作、FHI 2008、其他工作、空缺、二阶问题与静态平衡精确解、主要结果、定位、结构；加参考文献列表。
 - 引文逐条对照原文核对（LFW、ZVPH、Gralla 2010、ZP、FHI、Burton–Osburn、BGR 2007、AB 2007 的原话或结论）；更正旧稿错误：Pound 2010 是一阶自洽展开（二阶是 Gralla 2012、Pound 2012/2017）；ZVPH 的原话针对 δg2、δF2。
 - refs.bib：补全期刊信息（Gralla 2013 → PRD 87 104020，Moxon–Flanagan，LFW 2014a，Zimmerman 2015，Harte 2009 等），新增 GW 勘误、Pound 2012/2017、Barack–Pound、Bonnor 1993、BGR 2007、Majumdar、Papapetrou、Ferrell–Eardley。
