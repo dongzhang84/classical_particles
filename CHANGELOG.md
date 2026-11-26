@@ -6,6 +6,11 @@
 
 ## 2026-11-26
 
+### 论文引言
+- `paper/paper.tex` §1 引言写成正文：自力背景、带电小黑洞、ZP/LFW/Zimmerman 2015、GW 方法及二阶工作、FHI 2008、其他工作、空缺、二阶问题与静态平衡精确解、主要结果、定位、结构；加参考文献列表。
+- 引文逐条对照原文核对（LFW、ZVPH、Gralla 2010、ZP、FHI、Burton–Osburn、BGR 2007、AB 2007 的原话或结论）；更正旧稿错误：Pound 2010 是一阶自洽展开（二阶是 Gralla 2012、Pound 2012/2017）；ZVPH 的原话针对 δg2、δF2。
+- refs.bib：补全期刊信息（Gralla 2013 → PRD 87 104020，Moxon–Flanagan，LFW 2014a，Zimmerman 2015，Harte 2009 等），新增 GW 勘误、Pound 2012/2017、Barack–Pound、Bonnor 1993、BGR 2007、Majumdar、Papapetrou、Ferrell–Eardley。
+
 ### 论文提纲
 - `paper/paper.tex` 改写为合并后单篇论文的提纲（按 calc.tex 第 9 章方案，9 节 + 附录，每节注明内容、calc.tex 出处、完成状态、旧稿可沿用部分；附图表计划与投稿前必做清单）。
 - 旧稿移到 `paper/archive/paper_2026-11-24.{tex,pdf}`；不再单独保留 outline.tex。
