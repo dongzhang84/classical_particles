@@ -79,7 +79,7 @@
 
 \subsection{约定与场方程}\label{sec:conv}
 
-号差取 $(-,+,+,+)$，单位取 $G=c=1$，电磁量用高斯单位。理论中只有度规 $g_{ab}$ 和电磁势 $A_a$ 两个场，电磁场强为 $F=\dd A$，其能量--动量张量为
+在本文中，号差取 $(-,+,+,+)$，单位取 $G=c=1$，电磁量用高斯单位。理论中只有度规 $g_{ab}$ 和电磁势 $A_a$ 两个场，电磁场强为 $F=\dd A$，其能量--动量张量为
 \begin{equation}
 4\pi T_{ab}=F_{ac}F_b{}^c-\tfrac14g_{ab}F_{cd}F^{cd}.
 \label{eq:T}
@@ -98,14 +98,14 @@ $E_{ab}$ 和 $\M^a$ 都是 $(g,A)$ 的非线性泛函。后面把场按小参数
 
 \subsection{解族与标度}\label{sec:family}
 
-我们考虑 Einstein--Maxwell 方程的一族解 $(g_{ab}(\lambda),A_a(\lambda))$，参数 $\lambda\ge0$ 同时控制物体的尺寸、质量和电荷：物体的质量为 $\lambda M$，电荷为 $\lambda q$，荷质比 $\xi=q/M$ 在整族解中保持不变。$\lambda\to0$ 时物体缩成一条世界线，留下一个不含物体的背景。
+用一族解来描述“越来越小的物体”，这一思路来自 \citet{GerochJang1975}，GW 把它推广到包括物体自身引力的情形。我们考虑 Einstein--Maxwell 方程的一族解 $(g_{ab}(\lambda),A_a(\lambda))$，参数 $\lambda\ge0$ 同时控制物体的尺寸、质量和电荷：物体的质量为 $\lambda M$，电荷为 $\lambda q$，荷质比 $\xi=q/M$ 在整族解中保持不变。$\lambda\to0$ 时物体缩成一条世界线，留下一个不含物体的背景。
 
 近区的标度由 Einstein--Maxwell 方程的一个对称性确定：对任意常数 $c$，变换
 \begin{equation}
 (g_{ab},A_a)\ \to\ (c^2g_{ab},\,cA_a)
 \label{eq:scaling-sym}
 \end{equation}
-把解映为解。原因是 $G_{ab}$ 在常数共形变换下不变；$T_{ab}$（指标全在下）中的 $F_{ac}F_{bd}g^{cd}$ 和 $g_{ab}F^2$ 都不随 $c$ 改变；$\nabla_bF^{ab}$ 整体乘以 $c^{-1}$，方程本身不变。\citet{Gralla2010} 正是据此选取电磁势的标度。对每个时刻 $t_0$，定义近区坐标 $\bar t=(t-t_0)/\lambda$、$\bar x^i=x^i/\lambda$，以及近区的场
+把解映为解。原因是 $G_{ab}$ 在常数共形变换下不变；$T_{ab}$（指标全在下）中的 $F_{ac}F_{bd}g^{cd}$ 和 $g_{ab}F^2$ 都不随 $c$ 改变；$\nabla_bF^{ab}$ 整体乘以 $c^{-1}$，方程本身不变。\citet{Gralla2010} 正是据此选取电磁势的标度。按 GW（其第 II 节），对每个时刻 $t_0$，定义近区坐标 $\bar t=(t-t_0)/\lambda$、$\bar x^i=x^i/\lambda$，以及近区的场
 \begin{equation}
 \bar g_{ab}=\lambda^{-2}g_{ab},\qquad \bar A_a=\lambda^{-1}A_a.
 \label{eq:scaled}
