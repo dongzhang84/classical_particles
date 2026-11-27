@@ -79,17 +79,22 @@
 
 \subsection{约定与场方程}\label{sec:conv}
 
-号差取 $(-,+,+,+)$，单位取 $G=c=1$，电磁量用高斯单位。电磁场 $F=\dd A$，能量--动量张量为
+号差取 $(-,+,+,+)$，单位取 $G=c=1$，电磁量用高斯单位。理论中只有度规 $g_{ab}$ 和电磁势 $A_a$ 两个场，电磁场强为 $F=\dd A$，其能量--动量张量为
 \begin{equation}
 4\pi T_{ab}=F_{ac}F_b{}^c-\tfrac14g_{ab}F_{cd}F^{cd}.
 \label{eq:T}
 \end{equation}
-Einstein--Maxwell 方程记为
+场方程由两部分组成。一部分是以 \eqref{eq:T} 为源的 Einstein 方程 $G_{ab}=8\pi T_{ab}$，它决定度规；另一部分是弯曲时空中的无源 Maxwell 方程 $\nabla_bF^{ab}=0$，它决定电磁场，其中的协变导数依赖度规。另一半 Maxwell 方程 $\dd F=0$ 由 $F=\dd A$ 自动满足。只有 Einstein 方程是不够的：由 Bianchi 恒等式，它只给出 $\nabla^aT_{ab}=F_{bc}\nabla_aF^{ac}=0$，当 $F$ 退化时这比 Maxwell 方程弱，所以 Maxwell 方程必须单独列出。两部分合起来构成封闭的方程组，通称 Einstein--Maxwell 方程。我们把两部分的左边分别记为
 \begin{equation}
-E_{ab}\equiv G_{ab}-8\pi T_{ab}=0,\qquad \M^a\equiv\nabla_bF^{ab}=0.
+E_{ab}\equiv G_{ab}-8\pi T_{ab},\qquad \M^a\equiv\nabla_bF^{ab},
+\label{eq:EMdef}
+\end{equation}
+场方程就是
+\begin{equation}
+E_{ab}=0,\qquad \M^a=0.
 \label{eq:EM}
 \end{equation}
-有源时 $\M^a=4\pi j^a$。在这一约定下，Coulomb 势 $A=-(q/r)\,\dd t$ 给出 $\M^t=4\pi q\,\delta^3$；电荷为 $q$、质量为 $m$ 的检验粒子满足 $m\,u^b\nabla_bu^a=q\,F^a{}_bu^b$，同号电荷相斥。
+$E_{ab}$ 和 $\M^a$ 都是 $(g,A)$ 的非线性泛函。后面把场按小参数展开时，要用到它们在给定背景上的线性化算子 $E^{(1)}_{ab}[h,a]$、$\M^{(1)a}[h,a]$ 以及二次部分；两个算子都同时含度规扰动 $h$ 和势扰动 $a$，这正是电真空中两种扰动耦合的来源。有源时 Maxwell 方程为 $\M^a=4\pi j^a$。在这一约定下，Coulomb 势 $A=-(q/r)\,\dd t$ 给出 $\M^t=4\pi q\,\delta^3$；电荷为 $q$、质量为 $m$ 的检验粒子满足 $m\,u^b\nabla_bu^a=q\,F^a{}_bu^b$，同号电荷相斥。
 
 \subsection{解族与标度}\label{sec:family}
 
