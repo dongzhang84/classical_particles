@@ -551,44 +551,131 @@ ZP 假设物体在度规 $g+h^{\rm R}$、电磁场 $F+f^{\rm R}$ 中按检验粒
 
 %======================================================================
 \section{二阶运动}\label{sec:o-second}
-\status{部分：calc.tex \S7、\S8；原第 5 节“诱导偶极为零”已并入本节，作为 \S\ref{sec:o-dipole}}
 %======================================================================
+
+二阶运动来自 \eqref{eq:hier} 的第三式，即近区 $m=3$ 的方程
+\begin{equation*}
+\mathcal E^{(1)}\big[\bar G^{(3)}\big]=-2\mathcal Q\big[\bar G^{(1)},\bar G^{(2)}\big]-\mathcal C\big[\bar G^{(1)},\bar G^{(1)},\bar G^{(1)}\big].
+\end{equation*}
+它的左边仍是第~\ref{sec:o-structure} 节的同一个线性算子，可解条件仍由同一个左零向量读出；要做的事情也和第~\ref{sec:o-first} 节一样：把低阶的近区场解出来，算出源项，读出运动。与一阶相比，有三处新的困难。第一，源项要用到近区一阶场对 $M$、$q$ 精确的形式，其中可能出现物体在外场中的诱导偶极，它会带来检验体方程以外的力。第二，二阶的奇异场与正则场怎样切分，不再像一阶那样由场的光滑性唯一确定。第三，源项中出现只由背景场和 $M$、$q$ 构成的项，它们算作奇异场还是正则场，需要专门讨论。
+
+本节的结论是：\emph{二阶运动仍然是检验体的形式，即物体在“总场减去随世界线移动的奇异场”中按二阶微扰的 Lorentz 力运动；在已检验的范围内，不存在与切分约定无关的新的电磁--引力耦合力。}这一结论的适用范围在 \S\ref{sec:second-ev} 中写明。据我们所知，带电小物体在电真空中、引力与电磁耦合的二阶运动方程此前没有推导过：已有的二阶结果限于真空背景中不带电的物体 \citep{Pound2012,Gralla2012,Pound2017}，或平直时空中只有电磁场的物体 \citep{MoxonFlanagan2018}；耦合情形只做到一阶（ZP；LFW）。\citet{BarackPound2019} 在综述中也把“既有质量又带电的物体”列为需要从第一性原理发展的方向。
+
 \subsection{近区一阶解对 $M$、$q$ 精确：诱导偶极为零}\label{sec:o-dipole}
-\begin{itemize}[nosep]
-\item RN 在均匀电场、磁场和加速度中的静态 $\ell=1$ 响应，对 $M$、$q$ 精确（\S\ref{sec:first-near1} 只到 $M$、$q$ 的一次）：规范不变量 $I_1,I_2,I_3$；化成单个常微分方程；衰减解在视界奇异。
-\item 结果：诱导电偶极与磁偶极为零（$\alpha=\chi=0$），对 $M,q$ 精确；Kerr--Newman 自旋模式满足 $\mu=qJ/M$。
-\item 与已知的 RN Love 数为零（Cardoso 等 2017，Pere\~niguez--Cardoso 2022）的关系；我们的版本包括加速度，并处理偶极相对质心的定义。新意有限；计算细节放附录。
-\end{itemize}
 
-\textbf{【以下两段由原 \S2.7 移来，作为二阶的准备】}
+\S\ref{sec:first-near1} 把近区一阶方程解到了 $M$、$q$ 的一次，这对一阶运动已经足够。二阶需要更多：近区一阶场中可能含有随 $1/\bar r^2$ 衰减的 $\ell=1$ 项，即物体在外场中的诱导电偶极 $p_i=\alpha E_i$ 和诱导磁偶极 $\mu_i=\chi B_i$。由量纲，$\alpha,\chi\sim(M,q)^3$，在远区是 $O(\lambda^3)$；偶极在外场梯度中受的力 $\tfrac12\alpha\,\partial_i(E^2)$、$\tfrac12\chi\,\partial_i(B^2)$ 因而是 $O(\lambda^3)$，与二阶自力同阶（参见 \S\ref{sec:H}）。检验体方程中没有这样的力，它也不能通过把场换成正则场得到。所以在讨论二阶运动之前，必须先知道 $\alpha$、$\chi$ 是否为零。这需要把近区一阶方程对 $M$、$q$ 精确地求解。
 
-\paragraph{二阶远区扰动。}二阶远区扰动的结构与一阶（\S\ref{sec:first-far}）相同，奇异部分从 $1/r^2$ 开始。它在规范变换下的变化含 $\xi$ 与一阶场的二次项，以及二阶生成元 $\Xi$，形式与 \citet{Gralla2012} 的真空情形相同，另加电磁部分。
+\paragraph{问题。}背景取 Schwarzschild 型坐标中的 RN 解，$f=1-2M/r+q^2/r^2$，$A=-(q/r)\,\dd t$，$D\equiv r^2f=r^2-2Mr+q^2$。考虑静态、$\ell=1$ 的线性扰动，在大 $r$ 处趋于均匀电场 $\boldsymbol E$、均匀磁场 $\boldsymbol B$ 和加速度 $\boldsymbol a$，在视界处正则。由 \S\ref{sec:struct-matrix}，加速度不是独立的，$M\boldsymbol a=q\boldsymbol E$：带电黑洞在电场中必须加速，否则方程无解。两种宇称分开处理。
 
-\paragraph{P 规范。}按 \citet{Gralla2012}，我们取一个以质心为中心的规范，称为 P 规范：近区到一阶不依赖 $\bar t$，质量偶极为零；一阶远区场取 Lorenz 规范；一阶场在 $\gamma$ 附近的光滑部分（记为 H 场）在 $\gamma$ 上为零，$h^{\rm H}(\gamma)=0$，$a^{\rm H}(\gamma)$ 为纯规范。在 P 规范中，物体的位置就是 $\gamma$，偏离 $\gamma$ 的运动全部编码在场的光滑部分中。在与 P 规范光滑相关的规范 $h=h^{\rm P}-\mathcal L_\xi g$ 中，世界线修正为 $Z^{(1)}=\xi|_\gamma$，二阶为 $Z^{(2)}=(\Xi+\xi\cdot\partial\xi)|_\gamma$ \citep{Gralla2012}。
+\paragraph{磁宇称。}取 $h_{t\phi}=h_0(r)\sin^2\theta$，$\delta A_\phi=w(r)\sin^2\theta$，线性化 Einstein--Maxwell 方程化为
+\begin{equation}
+r^2h_0''-2h_0+4q\,w'=0,\qquad r\,D\,w''+2(Mr-q^2)\,w'-2r\,w+q\,(r\,h_0'-2h_0)=0 .
+\label{eq:dip-mag}
+\end{equation}
+在视界处正则的解只有三个：外场解 $w=\tfrac B2(r^2-3q^2)$、$h_0=2qB\,r$；转动坐标系 $h_0\propto r^2$，是规范；以及 $w=\mu/r$、$h_0=-\tfrac{2M}q\tfrac\mu r+\tfrac{q\mu}{r^2}$，它是 Kerr--Newman 解对自旋的线性化，自旋 $J=M\mu/q$，满足 $\mu=qJ/M$，即旋磁比 $g=2$。最后一个是物体自身的自旋，是自由参数，不是外场诱导出来的。其余的解含对数，在视界处发散。外场解是有限项多项式，没有 $1/r$ 型的偶极项，所以 $\chi=0$。外场解到 $M$、$q$ 的一次正是 \S\ref{sec:first-near1} 中的 $h_{0i}=2q(\boldsymbol B\times n)_i$。这一结果与 \citet{PereniguezCardoso2022} 对磁响应的结论一致。
+
+\paragraph{电宇称：规范不变量。}偶宇称的扰动取 $h_{tt}=fH_0\cos\theta$、$h_{rr}=H_2\cos\theta/f$、$h_{AB}=r^2K\cos\theta\,\Omega_{AB}$、$h_{r\theta}=-h_1\sin\theta$、$\delta A_t=a_t\cos\theta$。这里有一个在不带电时不存在的困难：平移原点会在 Coulomb 势中产生电偶极项 $q\,\delta\cdot n/r^2$，在质量项中产生质量偶极，所以“电偶极”本身依赖于原点。物理的量是相对质心的电偶极。静态 $\ell=1$ 的规范矢量 $\xi^r=X(r)\cos\theta$、$\xi^\theta=-Y(r)\sin\theta/r^2$ 包含了这一平移。$q\neq0$ 时可以用 $a_t$ 吸收 $X$、用 $K$ 吸收 $Y$，得到三个规范不变量 $I_1,I_2,I_3$，它们就是 $a_t=K=0$ 规范中的 $H_0$、$H_2$、$h_1$；被吸收的 $X$ 正是把电偶极移到原点的平移，所以这些不变量自动相对质心定义了偶极。把一般解代入，三个不变量只依赖一个幅度 $\kappa$，并且都是 $r$ 的有限项多项式，例如 $I_1=\tfrac23\kappa(q^2-M^2)\,r$，没有 $1/r^k$ 项。只剩一个幅度，与加速度和电场不独立（$M\boldsymbol a=q\boldsymbol E$）是一致的。
+
+\paragraph{电宇称：衰减解在视界处发散。}还要说明另一个可能的解被视界正则性排除。在 $a_t=K=0$ 规范中，Einstein 方程的一个分量只含 $H_0$：
+\begin{equation}
+r^2D\,H_0''+2r(r^2-q^2)\,H_0'-2(r^2-q^2)\,H_0=0 .
+\label{eq:dip-ode}
+\end{equation}
+$H_0=r$ 是一个解，即上面的外场解。令 $H_0=r\,v$ 降阶，并用 $D=(r-r_+)(r-r_-)$、$r_+r_-=q^2$ 作部分分式，得 $v'=1/D^2$，第二个解为
+\begin{equation*}
+H_0=r\int\frac{\dd r}{D^2}.
+\end{equation*}
+它在大 $r$ 处趋于 $-1/(3r^2)$，正是偶极型的衰减解；在视界处，非极端时它像 $1/(r-r_+)$ 加对数那样发散，极端时像 $(r-M)^{-3}$ 那样发散。视界正则性排除了这个解，所以 $\alpha=0$。
+
+\paragraph{结论与定位。}带电黑洞在均匀外场中的诱导电偶极和磁偶极都严格为零，这对 $M$、$q$ 精确，与原点和规范的选取无关。所以诱导偶极不进入二阶运动。这与 RN 黑洞的潮汐 Love 数和磁化率为零的已知结果 \citep{CardosoEtAl2017,PereniguezCardoso2022} 一致。电宇称 $\ell=1$ 的响应在其他设定下有人计算过：Kerr--Newman 黑洞的 Teukolsky 处理 \citep{ChakrabortyEtAl2026}，以及带高阶导数修正的极端 RN \citep{NoumiWong2026}；但我们未见文献在线性化 Einstein--Maxwell 中处理带电黑洞必然的加速，而上面看到，加速度正是电宇称问题中的驱动项之一。包含加速度的精确解，如 Ernst 解 \citep{Ernst1976} 和 \citet{OvcharenkoPodolsky2026} 给出的 Bertotti--Robinson 外场中加速的 RN 黑洞，可以按外场线性化，直接检验 $\alpha=0$；这一检验我们没有做。计算的细节放在附录。
+
+\subsection{P 规范与二阶世界线}\label{sec:second-P}
+
+二阶远区扰动 $(j,b)\equiv\tfrac12\partial_\lambda^2(g,A)|_{\lambda=0}$ 的结构与一阶相同，奇异部分从 $1/r^2$ 开始。它在规范变换下的变化含 $\xi$ 与一阶场的二次项，以及二阶生成元 $\Xi$。
+
+为了定义二阶的世界线，我们沿用 \citet{Gralla2012} 的做法，取一个以质心为中心的规范，称为 P 规范：近区到一阶不依赖 $\bar t$，质量偶极为零；一阶远区场取 Lorenz 规范；一阶场在 $\gamma$ 附近的光滑部分（记为 H 场）在 $\gamma$ 上为零，$h^{\rm H}(\gamma)=0$，$a^{\rm H}(\gamma)$ 为纯规范。在 P 规范中，物体的位置就是 $\gamma$，偏离 $\gamma$ 的运动全部编码在场的光滑部分中。在与 P 规范光滑相关的规范 $h=h^{\rm P}-\mathcal L_\xi g$ 中，世界线修正为 $Z^{(1)}=\xi|_\gamma$，二阶为 $Z^{(2)}=(\Xi+\xi\cdot\partial\xi)|_\gamma$。
+
+电真空中，这一构造有一处与真空不同，而它正好由上一小节保证。真空中近区一阶场可以取为零，“质心”只需要零阶的 Schwarzschild 解质量偶极为零。电真空中近区一阶场是 RN 黑洞在均匀外场和加速度中的响应，不为零；P 规范的条件要改成：近区到一阶等于 \S\ref{sec:o-dipole} 的解，并且质量偶极和电偶极都为零。由 \S\ref{sec:o-dipole}，这个解在视界正则的条件下除规范和自旋模式外是唯一的，相对质心的电偶极为零，所以这一条件可以满足。此外，P 规范在二阶的存在要求近区 $m=3$ 的可解条件能通过选取二阶加速度 $a_2$ 来满足；由第~\ref{sec:o-structure} 节，可解条件对 $a_2$ 是线性的，系数为 $M\neq0$，所以总能满足。
 
 \paragraph{奇异场与正则场。}P 规范中近区解里由 $M$、$q$ 和背景数据决定的部分，称为奇异场 S；总场减去奇异场是正则场 R。在一般的规范中，奇异场要随世界线移动：二阶的正则场是总场减去被 $\xi$ 拖动后的奇异场，
 \begin{equation}
-j^{\rm R}=j-\big(j^{\rm S}-\mathcal L_\xi h^{\rm S}\big),
+j^{\rm R}=j-\big(j^{\rm S}-\mathcal L_\xi h^{\rm S}\big),\qquad b^{\rm R}=b-\big(b^{\rm S}-\mathcal L_\xi a^{\rm S}\big).
 \label{eq:Rdef}
 \end{equation}
-电磁部分类似。这些只是定义，它们为什么给出运动方程，在第~\ref{sec:o-first} 节和第~\ref{sec:o-second} 节论证。二阶奇异场中光滑项的归属不是唯一的，这一点在第~\ref{sec:o-second} 节专门讨论。
+与一阶不同，二阶奇异场中哪些光滑项算作“由 $M$、$q$ 和背景数据决定”，并不唯一；这一点在 \S\ref{sec:second-ev} 讨论。
 
-\textbf{【移来的内容到此为止】}
+\subsection{协变论证：二阶运动方程}\label{sec:second-cov}
 
+在 P 规范中，物体不动：$Z=0$。设此时 $Z=0$ 满足检验体在 H 场中的二阶微扰 Lorentz 力方程，即在度规 $g+\lambda h^{\rm H}+\lambda^2j^{\rm H}$、势 $A+\lambda a^{\rm H}+\lambda^2b^{\rm H}$ 中，把 Lorentz 力方程展开到 $\lambda^2$。这是近区 $m=3$ 可解条件在 P 规范中的内容，下两小节用近区计算检验它。
+
+在这一前提下，结论由协变性直接得到。Lorentz 力方程在微分同胚和电磁规范变换下协变：同一个微分同胚把 Lorentz 力轨道映成 Lorentz 力轨道（参见 \S\ref{sec:struct-Q} 中协变性的用法）。用 $(\xi,\Xi,\chi)$ 变到与 P 规范光滑相关的规范，运动变为 $Z^{(1)}=\xi|_\gamma$、$Z^{(2)}=(\Xi+\xi\cdot\partial\xi)|_\gamma$，H 场相应地被拉回：
+\begin{gather*}
+h^{\rm H}-\mathcal L_\xi g=h-h^{\rm S},\qquad
+j^{\rm H}-\mathcal L_\xi h^{\rm H}+\tfrac12\big(\mathcal L_\xi\mathcal L_\xi g-\mathcal L_\Xi g\big)=j-\big(j^{\rm S}-\mathcal L_\xi h^{\rm S}\big),
+\end{gather*}
+势的情形相同。右边正是 \eqref{eq:Rdef} 的正则场。所以
+\begin{equation}
+\boxed{\;\text{二阶运动}=\text{检验体在正则场 }(h^{\rm R},j^{\rm R};\,a^{\rm R},b^{\rm R})\text{ 中的二阶微扰 Lorentz 力方程，}\;}
+\label{eq:eom2}
+\end{equation}
+正则场按 \eqref{eq:Rdef} 定义。这一步是精确的，不需要解出 $\Xi$。物体的电荷由 Gauss 定律守恒。质量若在一阶随时间变化，会以 $\bar t\,\delta\dot M/\bar r$ 的形式出现在近区二阶场中；这一项是 $\bar t\,\partial_{t_0}$ 作用在近区一阶场的单极部分上，而单极部分已并入 $M$ 并为零，所以到二阶运动所需的阶数，$M$ 不变。
+
+前提的状况需要分情形说明。背景为真空时，前提由近区计算直接验证（\S\ref{sec:second-vac}）。背景为一般电真空时，背景场与物体一阶场之间的交叉项已由近区计算确立为零；只含背景场的项出现在平衡关系中，前提成立的条件是按“奇异场 $=$ 近区解中由 $M$、$q$ 和背景数据决定的部分”这一原则把它们归入奇异场（\S\ref{sec:second-ev}）。所以 \eqref{eq:eom2} 在电真空中的成立，依赖这一归属原则。
+
+\subsection{真空背景中的带电黑洞}\label{sec:second-vac}
+
+背景 $F=0$、$R_{ab}=0$ 时，$\gamma$ 是背景测地线。P 规范中，一阶场在 $\gamma$ 附近没有 $r^0$ 项：奇异场在真空中没有 $r^0$ 项，正则场在 $\gamma$ 上的值被规范变换吸收。由阶次的对应，近区一阶场只剩单极修正，吸收进 $M$、$q$ 后为零。于是近区二阶和三阶的方程都是 RN 上的线性问题：\eqref{eq:hier} 中的二次项和三次项都至少含一个近区一阶场，全部为零。这是带电物体自身的电荷与质量直接耦合（$q^2M$、$qM^2$ 型）第一次进入运动、而又没有背景场混入的最干净的情形。
+
+在 $\ell=1$ 块中取最一般的拟设，把完整的 Einstein--Maxwell 方程展开到所需的阶，得到的结果是：
 \begin{itemize}[nosep]
-\item \textbf{方法。}Gralla 2012 的二阶模板；检查点 1（$q=0$）复现其系数，$a_{22}$ 由线性化方程确定。
-\item \textbf{真空带电（检查点 1.5）。}P 规范中近区二阶、三阶都是 RN 上的线性问题；三阶可解条件 $Ma_2=qe_2-MD^C_2$；近区不产生局部项；RN 上 $\ell=2$ 潮汐响应的 $q$ 修正。
-\item \textbf{规范协变论证。}二阶运动是检验体在正则场中的二阶微扰 Lorentz 力方程，正则场 $=$ 总场 $-$ 随世界线移动的 P 规范奇异场；Gralla 的 $\delta\mathcal E_{ij}Z^{(1)j}$ 是两种正则场定义之差。
-\item \textbf{电真空的修正项对照。}换成 Gralla 型正则场时多出 $\delta\mathcal E_{ik}Z^k+a_{1i}\dot Z^0-a_{0i}(a_1\cdot Z)-\tfrac qM[Z^k\partial_kf^{\rm H}_{i0}+f^{\rm H}_{ik}\dot Z^k]$（规范数据全部消去，已核对）。
-\item \textbf{电真空的近区验证（检查点 2）。}
-  \begin{itemize}[nosep]
-  \item 背景场 $\times$ 一阶正则场的交叉项为零，包括磁场与加速度；时间导数的交叉项不进入二阶。
-  \item 只含背景的局部项（$E^3$、$E\,\partial E$、$E\times$ 曲率）出现在平衡关系中；未定组合是背景坐标在 $x^4$ 阶的规范；12 个规范生成元下的不变性检验通过。
-  \item MP 检验：朴素约定下 $X\neq0$，而精确解处处平衡，所以这些项的归属依赖二阶奇异场的约定；MP 适配的约定在一般背景下无法由近区规范实现。
-  \end{itemize}
-\item \textbf{结论写法。}没有与约定无关的新耦合力；“多出哪些局部项”必须连同所用约定一起陈述；与 DW 型正则场的比较需要二阶奇异场的协变定义，超出本文。
-\item 待做：Pound 等人二阶工作与带电情形的关系（文献核查）；二阶奇异场的协变定义（若要给出确定的局部项）。
+\item $m=2$：唯一的约束是 $M\boldsymbol a_1=q\boldsymbol f$，其中 $\boldsymbol a_1$、$\boldsymbol f$ 是一阶的加速度和均匀电场；它与第~\ref{sec:o-first} 节在背景场为零时的结果相同。$\bar r^0$ 项与 \S\ref{sec:first-near1} 逐项相同，只是这里的外场是物体自身的一阶正则场。
+\item $m=3$：约束为
+\begin{equation}
+6Ma_2-6q\boldsymbol E_2+6M\dot h_C+6q\,\dot a_C-(M^2-q^2)(h_E+2h_F)=0 .
+\label{eq:ck15}
+\end{equation}
+其中 $\dot h_C=D^C_2$ 是二阶场中常数 $h_{0i}$ 的时间导数，$\boldsymbol E_2-\dot a_C=e_2$ 是规范无关的二阶均匀电场（与 \S\ref{sec:first-data} 中 $e$ 的合成相同），$h_E$、$h_F$ 是一阶远区场 $h_{ij}$ 中 $\ell=1$ 的 $r^2$ 项。最后一项只表示 $a_2$、$\boldsymbol E_2$ 的规范依赖：$h_E$、$h_F$ 的结构正好由平直规范矢量 $\xi_i=r^3(c_1v_i+c_2n_i\,n\cdot v)$ 生成，$h_E+2h_F=6(c_1+c_2)$；同一个 $\xi$ 作用在 RN 背景上，使 $a_2$ 平移 $M(c_1+c_2)$、$\boldsymbol E_2$ 平移 $q(c_1+c_2)$，三者之和为 $6M^2-6q^2-6(M^2-q^2)=0$。在 $h_E=h_F=0$ 的规范中（Gralla 的 P 规范即如此），
+\begin{equation}
+M\boldsymbol a_2=q\,e_2-M\,D^C_2 .
+\label{eq:ck15a2}
+\end{equation}
 \end{itemize}
+\eqref{eq:ck15a2} 正是主关系 \eqref{eq:master} 在源项为零时的形式（$D^A=-2\boldsymbol a_2$）：同一个关系贯穿零阶、一阶和二阶，只是数据换成了二阶的。它恰好是检验体在 H 场中的二阶微扰 Lorentz 力方程在 $Z=0$ 处的内容，因为后者的所有二次项都含 $h^{\rm H}(\gamma)$ 或速度，在 P 规范中为零。所以 \S\ref{sec:second-cov} 的前提在真空中成立。特别是，\emph{近区没有产生任何局部项}：没有 $\dot{\boldsymbol E}$、$\dot{\boldsymbol a}_1$ 的项，也没有 $q^2/M$、$qM$ 型的自耦合修正；二阶近区场对一阶数据的依赖经时间导数进入三阶，但在可解条件中全部消去。
+
+同样的计算给出近区二阶的静态 $\ell=2$ 部分，即 RN 在潮汐场中的响应，包括潮汐场在 Coulomb 场上感应出的 $\ell=2$ 电磁场。它属于二阶奇异场。把已知的闭式解换到各向同性坐标、按 $1/\bar r$ 展开，与我们的解比较了 $h_{tt}$、$h_{t\phi}$ 和势的各项，全部一致：偶宇称的度规部分与 \citet{CardosoEtAl2017} 一致，电磁部分与 \citet{RaiSantoni2024} 给出的形式一致；奇宇称与 \citet{CardosoEtAl2017} 一致。这是对我们计算方法的一个检验。物体也没有获得诱导自旋：近区 $m$ 阶的 Kerr--Newman 自旋模式通过自旋力进入 $m+1$ 阶的运动，二阶运动需要近区一阶的自旋，而它为零。
+
+\subsection{一般电真空：近区验证与它的范围}\label{sec:second-ev}
+
+背景带电时，近区一阶场不为零，$m=3$ 的源项不为零。按 \S\ref{sec:struct-dim} 的思路，把 $\ell=1$ 块中的源项按数据分类。近区方程对数据是多项式的，所以各类可以分开计算。检验体方程在 P 规范中 $Z=0$ 处对 H 场的预言是：除了 \eqref{eq:ck15a2} 中的线性项，其余一律为零，因为 $h^{\rm H}(\gamma)=0$ 使所有乘积项为零。
+
+\paragraph{背景场与一阶场的交叉项：为零。}只取“背景均匀场与加速度 $(\boldsymbol E,\boldsymbol B,\boldsymbol a_0)$ 乘以一阶数据 $(\boldsymbol a_1,\boldsymbol f,\boldsymbol b)$”的双线性部分，把近区一阶解（\S\ref{sec:o-dipole}）和近区二阶中线性于一阶数据的解（上一小节）代入，完整地计算 $m=3$ 的方程。$a_2$ 的关系与 \eqref{eq:ck15} 的静态部分完全相同，不含任何双线性源项。双线性项只出现在一阶远区场 $r^2$ 项必须满足的场方程中，例如 $h_B-2h_C=2(\boldsymbol B\times\boldsymbol f-\boldsymbol E\times\boldsymbol b)$，它们不进入 $a_2$。所以\emph{背景的均匀电场、磁场和加速度与物体一阶正则场之间，没有检验体方程以外的局部耦合力}。这一计算包括磁场和加速度。含时间导数的交叉项（背景乘一阶数据的时间导数，或背景的时间导数乘一阶数据）按阶次最早出现在近区四阶，不进入二阶运动。
+
+\paragraph{只含背景场的项：出现，但归属依赖约定。}只含背景数据的项包括 $E^3$、$E\,\partial E$、$E$ 乘曲率，系数是 $M$、$q$ 的多项式。我们在静态、轴对称、纯电的背景中做了计算：背景坐标取 Fermi 规范，按 \eqref{eq:ck15} 的约定取 $h_E=h_F=0$，读出 $6(Ma_2-qe_2)$ 中只含背景的部分 $X$，它不为零（表达式见附录）。所有含 $a_2$ 的条件在全部轴对称规范生成元下严格不变，这是对整套计算的一个非平凡检验。
+
+$X\neq0$ 并不意味着存在新的力。检验是 Majumdar--Papapetrou 构型：把背景取为极端 RN 在静态观者 Fermi 坐标中的局部值，物体也取极端（$q=M$）。精确解在 MP 中处处平衡，所以任何正确的切分都必须给出零；而“近区解中的光滑项一律归正则场”这一朴素约定给出 $X\neq0$。这说明朴素约定把一部分奇异场，即奇异场与背景 Taylor 项的乘积，错归到了正则场。在 MP 中适用的切分是在线性变量 $(-g_{00})^{-1/2}$、$A_0(-g_{00})^{-1/2}$ 上取光滑部分；但要让近区计算实现这一切分，近区必须取共形平坦的规范，而这对一般背景在近区二阶就不相容。所以近区方法本身给不出一个唯一的、与约定无关的“多余的力”。按 P 规范的原则，奇异场是近区解中由 $M$、$q$ 和背景数据决定的部分，这些只含背景的项属于奇异场，\eqref{eq:eom2} 成立。
+
+\paragraph{范围。}综合起来，本小节能写的结论和它的范围是：
+\begin{itemize}[nosep]
+\item 背景场与物体一阶场之间没有新的耦合力：由近区计算确立，包括电场、磁场和加速度；
+\item 只含背景场的局部项：只在静态、轴对称、纯电的背景中实际计算过；磁场和时间依赖下的同类项没有计算，我们按同样的归属原则类推；
+\item 在已检验的范围内，不存在与切分约定无关的新的电磁--引力耦合力；若要给出与 Detweiler--Whiting 型正则场对应的、确定的二阶局部项，需要二阶奇异场的协变定义，这超出近区方法。
+\end{itemize}
+与约定无关的检验需要一个规范无关的可观测量；静态情形中，它由第~\ref{sec:o-exact} 节的精确解提供。
+
+\subsection{与 Gralla 的正则场定义的关系}\label{sec:second-Gralla}
+
+\citet{Gralla2012} 在真空中得到的二阶方程，是正则场中的测地方程加一项 $\delta\mathcal E_{ij}Z^{(1)j}$，$\delta\mathcal E_{ij}$ 是一阶 H 场的潮汐部分。Gralla 本人已经指出，这一项反映运动实际上只在他所说的 BG 场中是测地线；\citet{Pound2017} 进一步说明，差别来自奇异场的定义：Gralla 把 $\mathcal L_\xi h^{\rm R}$ 一项算进了奇异场，因此他的有效度规不是真空解。\citet{BarackPound2019} 认为两种表述大体上的关系已经清楚，但尚未逐项比较。\eqref{eq:Rdef} 把 $-\mathcal L_\xi h^{\rm H}$ 留在正则场中，与 Pound 的选择一致；在这一定义下，\eqref{eq:eom2} 不多出任何项。我们的计算与上述解释一致：在 \eqref{eq:eom2} 中把正则场换成 Gralla 型的定义 $j^{\rm R}_{\rm G}=j-(j^{\rm P}-\mathcal L_\xi h^{\rm P})$，真空中恰好多出 $\delta\mathcal E_{ij}Z^{(1)j}$。
+
+本文在这里新增的是电真空中的完整形式。两种定义之差 $-\mathcal L_\xi h^{\rm H}$、$-\mathcal L_\xi a^{\rm H}$ 线性地进入二阶微扰 Lorentz 力方程。P 规范中一阶 H 场在 $\gamma$ 附近为 $h^{\rm H}_{00}=-2\boldsymbol a_1\cdot x-\delta\mathcal E_{kl}x^kx^l$，$a^{\rm H}_0=\boldsymbol f\cdot x+\dots$，$a^{\rm H}_i=\tfrac12(\boldsymbol b\times x)_i$。代入后，规范矢量的导数全部消去（对任意线性 $\xi$ 逐项核对），结果只依赖位移 $Z=\xi|_\gamma$：
+\begin{equation}
+\ddot Z^{(2)}_i\Big|_{\rm Gralla}-\ddot Z^{(2)}_i\Big|_{\eqref{eq:eom2}}
+=\delta\mathcal E_{ik}Z^k+a_{1i}\,\dot Z^0-a_{0i}\,(\boldsymbol a_1\cdot Z)-\frac qM\Big[Z^k\partial_kf^{\rm H}_{i0}+f^{\rm H}_{ik}\dot Z^k\Big].
+\label{eq:ck2C}
+\end{equation}
+$q=0$、真空时只剩 $\delta\mathcal E_{ik}Z^k$。方括号中是一阶正则电磁场在位移处的取值和偏离速度上的磁力，在 \eqref{eq:eom2} 中它们本来就包含在检验体方程里。$a_{1i}\dot Z^0$ 和 $-a_{0i}(\boldsymbol a_1\cdot Z)$ 只在物体带电（$\boldsymbol a_1\neq0$）时出现，后者还需要背景场使零阶世界线加速（$\boldsymbol a_0\neq0$），是电真空中带电物体特有的修正。它们都来自正则场定义的差，不是新的力。
+
+\medskip
+总结本节：二阶上，诱导偶极为零，背景场与物体一阶场之间没有新的耦合，二阶运动由 \eqref{eq:eom2} 给出；只含背景场的局部项依赖二阶奇异场的约定。下一节用精确解给出一个与约定无关的检验。
 
 %======================================================================
 \section{精确解检验}\label{sec:o-exact}
@@ -651,6 +738,7 @@ j^{\rm R}=j-\big(j^{\rm S}-\mathcal L_\xi h^{\rm S}\big),
 %======================================================================
 \begin{enumerate}[label=\Alph*.,nosep]
 \item 系数矩阵与恒等式（旧稿附录“恒等式的推导”可沿用）。\status{完成}
+\item 诱导偶极的计算（\S\ref{sec:o-dipole}）：两种宇称的扰动方程、规范矢量与不变量 $I_1,I_2,I_3$ 的显式形式、一般解。二阶近区计算的拟设与行化简（\S\ref{sec:second-vac}、\S\ref{sec:second-ev}），只含背景项 $X$ 的表达式。\status{完成，待写入}
 \item Gralla 2012 的订正：式 (11)、(13) 的两个 $M^2$ 系数，式 (46)--(48) 的 $a_{22}$，式 (47) 与 (12) 的矛盾，式 (29) 缺因子 $M$；均已代入线性化方程核对。\status{完成}
 \item Gralla--Wald 2008 中 $\ell=1$ 系数矩阵的订正：纯规范扰动代入其中两行不成立，我们的矩阵成立；核对针对 arXiv v5。2011 年勘误（CQG 28, 159501）已核对，未涉及这一矩阵。\status{完成}
 \item 计算的实现与复现：\texttt{trunc.py} 等脚本、核对方式（包括 $\sqrt{-g}$ 截断错误的发现与修正）。\status{部分}
