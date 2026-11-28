@@ -180,7 +180,7 @@ g_{\mu\nu}=\sum_{i,j\ge0}\alpha^i\beta^j\,g^{[ij]}_{\mu\nu}(t,\theta,\phi)=\sum_
 
 \subsection{与已有框架的比较}\label{sec:compare}
 
-和 GW 相比，这里的场从真空中的度规换成了耦合的 $(g,A)$，物体同样可以是任意的，包括黑洞，物体的自身引力同样保留。和 GHW 相比，GHW 处理的是平直时空中的物质物体，不含自身引力，并且直接假设电磁场是物体电流的推迟解加上一个随 $\lambda$ 光滑的外场；这里不做这一假设，推迟解的结构要在一阶远区里推出来（第~\ref{sec:o-first} 节）。和 \citet{Gralla2010} 相比，三条假设的写法相同，我们补充了三点：电磁规范变换的光滑性要求，零磁荷条件，以及指定物体为黑洞的附加假设 (H)。\citet{Gralla2010} 只推到零阶。\citet{Gralla2012} 的二阶推导使用的是 GW 的同一组假设，另外假设物体的自旋和更高的多极矩可以忽略；在我们这里，这一角色由 (H) 中取 $\bar a=0$ 承担，RN 解的多极结构完全由 $M$、$q$ 决定。所以二阶不需要新的极限假设。
+和 GW 相比，这里的场从真空中的度规换成了耦合的 $(g,A)$，物体同样可以是任意的，包括黑洞，物体的自身引力同样保留。和 GHW 相比，GHW 处理的是平直时空中的物质物体，不含自身引力，并且直接假设电磁场是物体电流的推迟解加上一个随 $\lambda$ 光滑的外场；这里不做这一假设，推迟解的结构要在一阶远区里推出来（\S\ref{sec:first-far}，以那里的一条引理为前提）。和 \citet{Gralla2010} 相比，三条假设的写法相同，我们补充了三点：电磁规范变换的光滑性要求，零磁荷条件，以及指定物体为黑洞的附加假设 (H)。\citet{Gralla2010} 只推到零阶。\citet{Gralla2012} 的二阶推导使用的是 GW 的同一组假设，另外假设物体的自旋和更高的多极矩可以忽略；在我们这里，这一角色由 (H) 中取 $\bar a=0$ 承担，RN 解的多极结构完全由 $M$、$q$ 决定。所以二阶不需要新的极限假设。
 
 最后要指出，(i)--(iii) 是对固定的 $\xi$ 提出的。常数 $\bar R$，以及 (ii)、(iii) 中“光滑”背后隐含的导数界，都可能依赖 $\xi$。$\xi\to1$ 时它们能否一致地选取，决定了推导在近极端情形是否仍然成立，这一点在第~\ref{sec:o-extremal} 节讨论。
 
@@ -383,7 +383,15 @@ w_4=(Y)+3(Z),
 
 \subsection{远区一阶场与检验体的答案}\label{sec:first-far}
 
-\paragraph{远区扰动。}第 $n$ 阶远区扰动 $(h^{(n)},a^{(n)})=\tfrac1{n!}\partial^n_\lambda(g,A)|_{\lambda=0}$ 在 $\gamma$ 以外满足背景上的线性化 Einstein--Maxwell 方程（$n\ge2$ 时带有低阶场构成的源）。本节只用一阶，下面省去上标，$(h,a)$ 即一阶远区扰动，$f=\dd a$。由 \S\ref{sec:consequences}，它在 $\gamma$ 附近最多像 $1/r$ 那样奇异，$1/r$ 的系数就是近区背景 \eqref{eq:RN} 在大 $\bar r$ 处的 $1/\bar r$ 项，即质量 $M$ 和电荷 $q$ 的 Coulomb 场。按 GW 的论证（\citealt{Gralla2010} 把它推广到一般场论），$(h,a)$ 作为分布在整个时空中满足带点源的线性化方程，源是沿 $\gamma$ 的质量 $M$ 和电荷 $q$。线性化 Einstein 方程的可积性要求点源的能动量守恒，这正是零阶运动 $M\boldsymbol a=q\boldsymbol E$；它已在 \S\ref{sec:struct-matrix} 由近区方程推出，两者一致。于是可以对度规和势同时取 Lorenz 规范，在没有入射辐射的条件下，$(h,a)$ 是这一耦合点源问题的推迟解。由于背景电磁场不为零，度规扰动和势扰动在线性化方程中耦合，推迟 Green 函数也是耦合的 \citep{ZimmermanPoisson2014}。
+\paragraph{远区扰动。}第 $n$ 阶远区扰动 $(h^{(n)},a^{(n)})=\tfrac1{n!}\partial^n_\lambda(g,A)|_{\lambda=0}$ 在 $\gamma$ 以外满足背景上的线性化 Einstein--Maxwell 方程（$n\ge2$ 时带有低阶场构成的源）。本节只用一阶，下面省去上标，$(h,a)$ 即一阶远区扰动，$f=\dd a$。由 \S\ref{sec:consequences}，它在 $\gamma$ 附近最多像 $1/r$ 那样奇异，$1/r$ 的系数就是近区背景 \eqref{eq:RN} 在大 $\bar r$ 处的 $1/\bar r$ 项，即质量 $M$ 和电荷 $q$ 的 Coulomb 场。按 GW 的论证（\citealt{Gralla2010} 把它推广到一般场论），$(h,a)$ 作为分布在整个时空中满足带点源的线性化方程，源是沿 $\gamma$ 的质量 $M$ 和电荷 $q$。线性化 Einstein 方程的可积性要求点源的能动量守恒，这正是零阶运动 $M\boldsymbol a=q\boldsymbol E$；它已在 \S\ref{sec:struct-matrix} 由近区方程推出，两者一致。于是可以对度规和势同时取 Lorenz 规范。由于背景电磁场不为零，度规扰动和势扰动在线性化方程中耦合，推迟 Green 函数也是耦合的 \citep{ZimmermanPoisson2014}。
+
+\paragraph{推迟解。}$(h,a)$ 与同一点源的推迟解之差，在 $\gamma$ 外光滑，并且在包括 $\gamma$ 在内的整个区域上满足齐次方程（两者的分布源相同）。要说明 $(h,a)$ 是推迟解加光滑场，需要下面的引理。
+
+\emph{引理。}在 Lorenz 规范下，满足齐次耦合方程组、并且在 $\gamma$ 外光滑的分布，处处光滑。
+
+\emph{证明概要。}Lorenz 规范下方程组的主部是 $g^{ab}\nabla_a\nabla_b$ 乘单位矩阵，耦合只出现在低阶项中。对这类主部为标量、实主型的方程组，源为零时波前集包含在特征集 $\{g^{ab}k_ak_b=0\}$ 中，并沿零双特征线传播 \citep{Hormander1985,Dencker1982}。若差值的波前集含有 $\gamma$ 上的一点 $(x,k)$，则 $k$ 是零余矢量，过它的零双特征线投影为一条零测地线；$\gamma$ 类时，这条零测地线上有 $\gamma$ 外的点，差值在那里光滑，与传播性矛盾。所以波前集为空。
+
+这一论证有两处尚待核实：所引传播定理对这类方程组的确切形式和条件，以及由 (i)--(iii) 给出的 $(h,a)$ 能否经在 $\gamma$ 外光滑的规范变换化到 Lorenz 规范（GW 在真空情形是直接这样选取坐标的）。\emph{在本文中，推迟解这一步以该引理为前提。}由引理，$(h,a)$ 等于推迟解加一个光滑的齐次解；后者对应入射辐射。与 GW 一样，我们把它取为零：这是对初始条件的选择，不是推导的结论。GW 也指出，保留它并不影响论证，它可以并入正则场一路带入计算。
 
 \paragraph{两种规范。}\label{sec:gauge}无穷小微分同胚 $\xi$ 和电磁规范 $\chi$ 作用在一阶扰动上：
 \begin{equation}
@@ -432,7 +440,7 @@ $H^E$ 和 $H^D-H^F$ 不受约束，它们是平直时空中的规范自由度。
 \begin{equation*}
 h_{00}=5q\,\boldsymbol E\cdot n,\qquad h_{ij}=q\big(-4E_{(i}n_{j)}+\delta_{ij}\boldsymbol E\cdot n\big),\qquad a_0=-\Big(M+\frac{q^2}{2M}\Big)\boldsymbol E\cdot n,
 \end{equation*}
-以及 $h_{0i}=2q(\boldsymbol B\times n)_i$、$a_i=M(\boldsymbol B\times n)_i$，与 \eqref{eq:Sr0} 逐项相同。这两组结果来源完全不同：\eqref{eq:Sr0} 来自远区推迟 Green 函数的 Hadamard 展开，这里的结果来自近区 RN 背景上的线性化方程。它们一致，是匹配本身的一个非平凡检验，也检验了矩阵 \eqref{eq:matrix} 中的电磁列和 Maxwell 行。\emph{这一对照是本文新做的}：它要求近区一阶场不为零，而这只在电真空中出现。
+以及 $h_{0i}=2q(\boldsymbol B\times n)_i$、$a_i=M(\boldsymbol B\times n)_i$，与 \eqref{eq:Sr0} 逐项相同。这里要分清哪些是选取的，哪些是检验。$H^E$ 和 $H^D-H^F$ 是规范自由度，上面的取值只是为了对应远区所用的 Lorenz 规范，它们的一致不是检验。真正非平凡的一致是由方程确定的那些量：$H^A=5q\boldsymbol E$、$H^D+H^F=q\boldsymbol E$、$H'=-(M+q^2/2M)\boldsymbol E$，以及磁宇称部分的系数 $2q$ 和 $M$。这两组结果来源完全不同：\eqref{eq:Sr0} 来自远区推迟 Green 函数的 Hadamard 展开，这里的结果来自近区 RN 背景上的线性化方程。它们一致，是匹配本身的一个非平凡检验，也检验了矩阵 \eqref{eq:matrix} 中的电磁列和 Maxwell 行。\emph{这一对照是本文新做的}：它要求近区一阶场不为零，而这只在电真空中出现。
 
 \paragraph{近区一阶场的组成。}综上，近区一阶场由四部分组成：
 \begin{enumerate}[nosep]
@@ -461,7 +469,7 @@ e_i&=f^{\rm R}_{i0}+\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j .\label{eq:e2}
 \item $D^C$：$h^{\rm R}_{i0}$ 对时间的导数，以及 \S\ref{sec:struct-sym} 已经指出的 $\dot\zeta_i(t_0+\lambda\bar t)$ 中的 $\bar t\,\ddot\zeta_i$。世界线的加速度就从这里进入。
 \item $e$：近区看到的均匀电场。$f^{\rm R}_{i0}$ 是正则场；$\zeta^k\partial_kF_{i0}$ 是背景电场在位移处的值。$F_{ij}\dot\zeta^j$ 由两半合成：$A_0$ 经平移带出的 $\tfrac12F_{ji}\bar x^j\dot\zeta^i$ 给出 $E^0$ 中的一半，$A_i$ 中的 $\tfrac12\bar tF_{ji}\dot\zeta^j$ 给出 $E^C$ 中的另一半，只有两半相加，才是规范无关的运动电场 $\boldsymbol v\times\boldsymbol B$。这与 \S\ref{sec:struct-matrix} 中 $E^0$、$E^C$ 只以 $e=E^0-E^C$ 出现是一致的。
 \end{itemize}
-数据中只出现正则场：由 \S\ref{sec:first-far}，奇异场在 $h_{00}$、$h_{ij}$、$a_0$ 中没有 $\ell=1$ 的 $r^1$ 项，在 $h_{0i}$、$a_i$ 中的 $r^0$ 项只有磁宇称，它们都不进入这一块。\emph{奇异场与正则场的分离不是我们加进去的，而是由近区方程的宇称结构自动给出的。}
+数据中只出现正则场：由 \S\ref{sec:first-far}，奇异场在 $h_{00}$、$h_{ij}$、$a_0$ 中没有 $\ell=1$ 的 $r^1$ 项，在 $h_{0i}$、$a_i$ 中的 $r^0$ 项只有磁宇称，它们都不进入这一块。这一点由两件事共同保证：奇异场展开本身的结构，以及这一块的宇称和时间反演分类。前者来自 ZP 给出的耦合 Hadamard 表示：奇异场在 $\gamma$ 附近的 $O(r)$ 项只有 $x^ix^j/s$ 型和 $s$ 乘常数型两种（$s$ 为到 $\gamma$ 的距离），所以在 $h_{00}$、$h_{ij}$、$a_0$ 中是 $x$ 的偶函数，在 $h_{0i}$、$a_i$ 中是静态的；后者把这些项排除在决定运动的那一块之外。单靠宇称并不能得出这一结论。
 
 \subsection{源项}\label{sec:first-source}
 
@@ -537,7 +545,7 @@ ZP 假设物体在度规 $g+h^{\rm R}$、电磁场 $F+f^{\rm R}$ 中按检验粒
 
 方法上，他们不用匹配渐近展开，而是在以世界线为顶点的零坐标中，把度规和势的各个函数按到世界线的距离作单一的幂次展开，展开的具体形式是假设的；黑洞被处理为背景上在世界线处奇异的扰动，要求它在世界线附近以 RN 场和 Coulomb 场为主，没有视界的条件。运动方程来自一个可积性条件：零锥截面必须是光滑形变的球面。作者本人指出，所假设的展开限制了模型，其普遍性有待研究。本文的假设是解族的存在与光滑性，以及近区背景为 Kerr--Newman（第~\ref{sec:o-assump} 节），远区场的形式（推迟解）是推出来的。
 
-结果上，两者的重叠是 Lorentz 力和电磁辐射反作用：他们得到了系数为 $\tfrac23q^2$ 的 Abraham--Lorentz--Dirac 项，在本文中它包含在 $qf^{\rm R}_{i0}$ 的局部部分里。他们还得到一个正比于 $q^2$ 乘背景场二次式的项，结构上对应正则场局部项中 $q^2$ 阶的 $\boldsymbol E\times\boldsymbol B$ 型项；两者的系数要在统一的约定下才能比较，本文不展开。不同之处有三点。第一，他们的方程中没有引力自力：没有正比于 $M^2$ 的项，也没有任何由度规扰动驱动的力；本文的 $-Mh^{\rm R}_{i0,0}+\tfrac12Mh^{\rm R}_{00,i}$ 和耦合项 $-\tfrac12qh^{\rm R}_{00}E_i$ 在那里没有对应。第二，他们称为尾巴项的部分含有未定的积分函数和依赖坐标选取的矢量，作者也承认其物理意义有待研究；本文的尾巴效应完全包含在正则场中，正则场由推迟解唯一确定。第三，他们通过重新定义速度吸收了一个正比于 $qM$ 乘背景场导数的项，而在本文和 ZP 中，相应的 $qM\dot{\boldsymbol E}$ 项是有确定系数的物理的力。他们也没有与 Detweiler--Whiting 处方或 ZP 的方程作比较。
+结果上，两者的重叠是 Lorentz 力和电磁辐射反作用：他们得到了系数为 $\tfrac23q^2$ 的 Abraham--Lorentz--Dirac 项，在本文中它包含在 $qf^{\rm R}_{i0}$ 的局部部分里。他们还得到一个正比于 $q^2$ 乘背景场二次式的项，就我们所见，它在结构上对应正则场局部项中 $q^2$ 阶的 $\boldsymbol E\times\boldsymbol B$ 型项；两者的系数要在统一的约定下才能比较，本文不展开。不同之处有三点。第一，他们的最终方程中没有可以与 MiSaTaQuWa 型引力自力对应的项：没有正比于 $M^2$ 的项，也没有由度规扰动驱动的力；本文的 $-Mh^{\rm R}_{i0,0}+\tfrac12Mh^{\rm R}_{00,i}$ 和耦合项 $-\tfrac12qh^{\rm R}_{00}E_i$ 在那里没有对应。第二，他们称为尾巴项的部分含有未定的积分函数和依赖坐标选取的矢量，作者也承认其物理意义有待研究；本文的尾巴效应完全包含在正则场中，正则场由推迟解唯一确定。第三，他们在推导中得到一个正比于 $qM$ 乘背景场导数的项，随后用速度的一个无穷小 Lorentz 变换把它吸收掉了，而在本文和 ZP 中，相应的 $qM\dot{\boldsymbol E}$ 项是有确定系数的物理的力。他们也没有与 Detweiler--Whiting 处方或 ZP 的方程作比较。
 
 \subsection{本节的结果}\label{sec:first-summary}
 
