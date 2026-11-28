@@ -547,16 +547,7 @@ ZP 假设物体在度规 $g+h^{\rm R}$、电磁场 $F+f^{\rm R}$ 中按检验粒
 
 结果上，两者的重叠是 Lorentz 力和电磁辐射反作用：他们得到了系数为 $\tfrac23q^2$ 的 Abraham--Lorentz--Dirac 项，在本文中它包含在 $qf^{\rm R}_{i0}$ 的局部部分里。他们还得到一个正比于 $q^2$ 乘背景场二次式的项，就我们所见，它在结构上对应正则场局部项中 $q^2$ 阶的 $\boldsymbol E\times\boldsymbol B$ 型项；两者的系数要在统一的约定下才能比较，本文不展开。不同之处有三点。第一，他们的最终方程中没有可以与 MiSaTaQuWa 型引力自力对应的项：没有正比于 $M^2$ 的项，也没有由度规扰动驱动的力；本文的 $-Mh^{\rm R}_{i0,0}+\tfrac12Mh^{\rm R}_{00,i}$ 和耦合项 $-\tfrac12qh^{\rm R}_{00}E_i$ 在那里没有对应。第二，他们称为尾巴项的部分含有未定的积分函数和依赖坐标选取的矢量，作者也承认其物理意义有待研究；本文的尾巴效应完全包含在正则场中，正则场由推迟解唯一确定。第三，他们在推导中得到一个正比于 $qM$ 乘背景场导数的项，随后用速度的一个无穷小 Lorentz 变换把它吸收掉了，而在本文和 ZP 中，相应的 $qM\dot{\boldsymbol E}$ 项是有确定系数的物理的力。他们也没有与 Detweiler--Whiting 处方或 ZP 的方程作比较。
 
-\subsection{本节的结果}\label{sec:first-summary}
-
-本节的新结果，按推导的顺序：
-\begin{enumerate}[nosep]
-\item 由近区一阶方程解出带电黑洞在均匀电场、磁场和加速度中的 $\bar r^0$ 响应，它在 Lorenz 规范下与远区奇异场的 $r^0$ 项逐项一致（\S\ref{sec:first-near1}）。
-\item 近区二阶方程中一阶场之间的二次项，经微分同胚恒等式化成矩阵的两列，在决定运动的组合中只剩 $2q\,c_{00}\boldsymbol E$（\S\ref{sec:first-source}）。
-\item 一阶运动方程 \eqref{eq:eom1}：Lorentz 力的线性化加正则场的自力，即 Detweiler--Whiting 处方在耦合情形下的形式，从场方程推出（\S\ref{sec:first-eom}）；它在远区光滑规范变换下协变（\S\ref{sec:first-gauge}）。
-\item 近区不产生局部力，ZP 中的局部系数全部来自正则场（\S\ref{sec:first-ZP}）。
-\end{enumerate}
-第 3 条回答了 LFW 指出的问题：在引力与电磁耦合的情形，Detweiler--Whiting 处方有了匹配渐近展开的论证。
+回到本文的主线。在一阶上，引力与电磁的耦合没有改变运动方程的形式：带电黑洞像检验粒子一样，在背景加正则场中按 Lorentz 力运动，近区本身不产生局部力。这个结论在二阶是否仍然成立，取决于近区三阶方程。那里的源含有近区二阶场，而近区二阶场包含 RN 黑洞对均匀外场和加速度的响应；如果黑洞在外场中获得诱导偶极，它在外场梯度中受的力就会进入二阶运动，成为检验体方程以外的项。所以在处理二阶运动之前，先在第~\ref{sec:o-dipole} 节求这一响应。
 
 %======================================================================
 \section{二阶的预备：诱导偶极为零}\label{sec:o-dipole}
@@ -632,7 +623,14 @@ j^{\rm R}=j-\big(j^{\rm S}-\mathcal L_\xi h^{\rm S}\big),
 %======================================================================
 \paragraph{主要结果（草稿）。}
 \begin{enumerate}[nosep]
-\item \emph{一阶}（\S\ref{sec:o-structure}--\S\ref{sec:o-first}）。零阶 Lorentz 力是近区一阶方程的可解条件；一阶运动方程是 ZP 方程的线性化形式。近区本身不产生局部力：ZP 中的局部系数全部来自正则场在世界线附近的展开。这给出了 LFW 所说的匹配渐近展开论证。
+\item \emph{一阶}（\S\ref{sec:o-structure}--\S\ref{sec:o-first}）。按推导的顺序：
+  \begin{enumerate}[nosep,label=(\alph*)]
+  \item 零阶 Lorentz 力是近区一阶方程的可解条件（\S\ref{sec:struct-matrix}）。
+  \item 由近区一阶方程解出带电黑洞在均匀电场、磁场和加速度中的 $\bar r^0$ 响应；其中由方程确定的部分在 Lorenz 规范下与远区奇异场的 $r^0$ 项逐项一致（\S\ref{sec:first-near1}）。
+  \item 近区二阶方程中一阶场之间的二次项，经微分同胚恒等式化成系数矩阵的两列，在决定运动的组合中只剩 $2q\,c_{00}\boldsymbol E$（\S\ref{sec:first-source}）。
+  \item 一阶运动方程 \eqref{eq:eom1}：Lorentz 力的线性化加正则场的自力，即 Detweiler--Whiting 处方在耦合情形下的形式，从场方程推出（\S\ref{sec:first-eom}）；它在远区光滑规范变换下协变（\S\ref{sec:first-gauge}）。这给出了 LFW 所说的匹配渐近展开论证。
+  \item 近区本身不产生局部力：ZP 中的局部系数全部来自正则场在世界线附近的展开（\S\ref{sec:struct-dim}、\S\ref{sec:first-ZP}）。系数本身取自 ZP。
+  \end{enumerate}
 \item \emph{诱导偶极}（\S\ref{sec:o-dipole}）。RN 黑洞在均匀电场和磁场中的诱导电偶极与磁偶极为零，对 $q/M$ 精确成立。这与已知的 RN 潮汐 Love 数和磁化率为零 \citep{CardosoEtAl2017,PereniguezCardoso2022} 一致；我们的版本包括加速度，并处理了偶极相对质心的定义。
 \item \emph{二阶}（\S\ref{sec:o-second}）。我们把 \citet{Gralla2012} 的二阶规范论证推广到 Einstein--Maxwell，得到二阶运动是检验体在“随世界线移动的正则场”中的形式，并写出它与 Gralla 型正则场定义之间的全部修正项。真空中的带电情形由近区计算直接验证。在电真空中，近区计算表明背景场与物体一阶正则场之间没有检验体方程以外的耦合；只含背景场的局部项会出现在二阶平衡关系中，但 Majumdar--Papapetrou 检验表明它们的归属依赖二阶奇异场的切分约定，不是与约定无关的新力。
 \item \emph{精确解检验}（\S\ref{sec:o-exact}）。我们把 Alekseev--Belinski 平衡条件改写成规范无关的形式：小黑洞用视界面积、电荷与表面引力，大源用总质量与总电荷；检验体极限精确回到 Bonnor 条件。一阶修正有闭式，与“运动由正则场驱动”一致。二阶在一种 Majumdar--Papapetrou 适配的切分下闭合。
