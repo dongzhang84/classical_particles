@@ -10,6 +10,7 @@
 
 \newcommand{\dd}{\mathrm d}
 \newcommand{\M}{\mathcal M}
+\newenvironment{rev}{\par\bfseries}{\par}
 \newcommand{\status}[1]{\hfill{\small\color{blue!50!black}[#1]}}
 
 \title{带电小黑洞在电真空中的运动：\\一阶推导、二阶结构与精确解检验}
@@ -21,7 +22,7 @@
 
 \begin{center}
 \fbox{\parbox{0.92\textwidth}{\small
-\textbf{草稿状态。}引言、第 2、3 节已写成正文（2026 年 11 月 26 日；第 2 节中唯一性定理的条件仍需对照原文核实）；其余各节目前是提纲，按 \texttt{derivations/p1/calc.tex} 第 9 章“工作总览”的合并方案写成，把原定的两篇（一阶推导；二阶结构与精确解检验）合为一篇。每节列出：要写的内容、主要结果、在 calc.tex 中的位置、完成状态。旧稿 \texttt{paper/archive/paper\_2026-11-24.tex}（只到一阶）中可以沿用的部分逐节注明。状态标记：[完成] 结果已有、只需改写；[部分] 有结果但需补充或核对；[待做] 尚未完成。
+\textbf{草稿状态。}引言、第 2、3 节已写成正文（2026 年 11 月 26 日；第 2 节中唯一性定理的条件仍需对照原文核实）；\textbf{第 3 节于 2026 年 11 月 27 日按“从场方程一路推下来”的要求改写，粗体为改动处。}其余各节目前是提纲，按 \texttt{derivations/p1/calc.tex} 第 9 章“工作总览”的合并方案写成，把原定的两篇（一阶推导；二阶结构与精确解检验）合为一篇。每节列出：要写的内容、主要结果、在 calc.tex 中的位置、完成状态。旧稿 \texttt{paper/archive/paper\_2026-11-24.tex}（只到一阶）中可以沿用的部分逐节注明。状态标记：[完成] 结果已有、只需改写；[部分] 有结果但需补充或核对；[待做] 尚未完成。
 }}
 \end{center}
 
@@ -225,48 +226,150 @@ j^{\rm R}=j-\big(j^{\rm S}-\mathcal L_\xi h^{\rm S}\big),
 \section{近区方程的结构}\label{sec:o-structure}
 %======================================================================
 
-这一节说明运动方程怎样从近区方程中读出。在真空中，GW 已经给出了做法：在近区二阶的线性化 Einstein 方程中，取出与世界线修正同类型的那一块，消去近区未知的齐次解，剩下的关系就是一阶运动方程。电真空中有三个新的特点，使这一做法不能直接照搬。第一，场从度规一个变成度规和势两个，方程中多出 Maxwell 方程，输入中多出电磁的远区数据和电磁齐次解。第二，近区零阶的 RN 带电荷 $q$，线性化算子本身就把度规扰动和电磁扰动耦合在一起。第三，真空中近区一阶场可以取为零，而在电真空中，背景均匀场和加速度在近区一阶就出现，近区一阶场不为零，于是近区二阶方程中出现一阶场之间的二次项。本节建立在这三点下仍然成立的结构：运动方程由唯一一个非平凡的方程组合给出（\S\ref{sec:struct-matrix}）；这一结构可以用纯规范扰动独立检验（\S\ref{sec:struct-gauge}）；二次项中只有一类进入，并且可以化成线性算子的列（\S\ref{sec:struct-dim}、\S\ref{sec:struct-Q}）；决定运动的那一块中不存在不含远区数据的项（\S\ref{sec:struct-dim}）。具体的系数和由此得到的运动方程在第~\ref{sec:o-first} 节给出。
+\begin{rev}
+这一节从场方程 \eqref{eq:EM} 出发，推出决定运动的那个关系。推导只用一条原理：在假设 (i)--(iii) 下，近区场按 $\lambda$ 展开的每一阶都存在，所以每一阶的近区方程都必须有解。每一阶的近区方程都是 RN 背景上的同一个线性方程，只是源不同；它的输入一部分由远区给定，另一部分在这一阶上还不能确定。方程有解，要求远区给定的那部分输入满足一个关系；这些输入中含有世界线的修正，所以这个关系就是运动方程。
+\end{rev}
+
+在真空中，GW 已经按这一思路，从近区二阶的线性化 Einstein 方程中读出了一阶运动。电真空中有三个新的特点，使这一做法不能直接照搬。第一，场从度规一个变成度规和势两个，方程中多出 Maxwell 方程，输入中多出电磁的远区数据和电磁齐次解。第二，近区零阶的 RN 带电荷 $q$，线性化算子本身就把度规扰动和电磁扰动耦合在一起。第三，真空中近区一阶场可以取为零，而在电真空中，背景均匀场和加速度在近区一阶就出现，近区一阶场不为零，于是近区二阶方程中出现一阶场之间的二次项。\textbf{本节按推导的顺序展开：先由场方程得到近区的逐阶方程，并说明它的输入怎样分成已知和未知两类（\S\ref{sec:struct-hier}）；再用 RN 的对称性把问题约化到决定运动的那一块，写出这一块的一般形式（\S\ref{sec:struct-sym}）；然后算出这一块的系数矩阵，由可解条件得到唯一一个非平凡关系（\S\ref{sec:struct-matrix}），并用纯规范扰动检验它（\S\ref{sec:struct-gauge}）；最后处理关系右边的源项：说明其中只有一类二次项进入，并且不存在不含远区数据的项（\S\ref{sec:struct-dim}），再把这类二次项化成矩阵的列（\S\ref{sec:struct-Q}）。}具体的数据和由此得到的运动方程在第~\ref{sec:o-first} 节给出。
+
+\begin{rev}
+\subsection{近区的逐阶方程}\label{sec:struct-hier}
+
+记 $G=(g,A)$，并把 \eqref{eq:EMdef} 的两部分合写成 $\mathcal E[G]\equiv\big(E_{ab}[G],\,\M^a[G]\big)$。由 \S\ref{sec:family}，近区场 $\bar G=(\bar g,\bar A)$ 在近区坐标里满足同一组方程 $\mathcal E[\bar G]=0$，方程中不显含 $\lambda$：这是标度对称性 \eqref{eq:scaling-sym} 的作用，$\lambda$ 只通过解本身进入。把 $\mathcal E$ 在近区背景 $\bar G^{(0)}$ 附近展开，
+\begin{equation}
+\mathcal E\big[\bar G^{(0)}+\delta\big]=\mathcal E^{(1)}[\delta]+\mathcal Q[\delta,\delta]+\mathcal C[\delta,\delta,\delta]+\dots,
+\label{eq:Eexpand}
+\end{equation}
+其中 $\mathcal E^{(1)}$ 是 \S\ref{sec:conv} 中的线性化算子 $\big(E^{(1)}_{ab},\M^{(1)a}\big)$ 在 RN 背景上的取值，$\mathcal Q$、$\mathcal C$ 是对称的二次和三次部分。代入近区展开 $\bar G=\sum_m\lambda^m\bar G^{(m)}$，按 $\lambda$ 的幂次整理。零阶是 $\mathcal E[\bar G^{(0)}]=0$，由 (H)，$\bar G^{(0)}$ 是 RN 解。以后各阶给出
+\begin{equation}
+\begin{aligned}
+\mathcal E^{(1)}\big[\bar G^{(1)}\big]&=0,\\
+\mathcal E^{(1)}\big[\bar G^{(2)}\big]&=-\mathcal Q\big[\bar G^{(1)},\bar G^{(1)}\big],\\
+\mathcal E^{(1)}\big[\bar G^{(3)}\big]&=-2\mathcal Q\big[\bar G^{(1)},\bar G^{(2)}\big]-\mathcal C\big[\bar G^{(1)},\bar G^{(1)},\bar G^{(1)}\big].
+\end{aligned}
+\label{eq:hier}
+\end{equation}
+这是本文的核心方程组。每一阶都是同一个线性算子 $\mathcal E^{(1)}$ 作用在这一阶的场上，右边是由低阶场构成的源。零阶、一阶、二阶的运动分别来自这里的第一、二、三式。
+
+\paragraph{输入的分类。}\eqref{eq:hier} 的解在大 $\bar r$ 处的形式由 \S\ref{sec:expansions} 的阶次对应决定：近区第 $m$ 阶中 $\bar r^{m-n}$ 的项来自远区第 $n$ 阶。远区场对 $t$ 的 Taylor 展开经 $t-t_0=\lambda\bar t$ 产生 $\bar t$ 的幂次，也按同一规则计阶，每个 $\bar t$ 与一个 $\bar r$ 同阶。据此，$\bar G^{(m)}$ 中的项分成两类。
+\begin{itemize}[nosep]
+\item $n\le m-1$ 的项，即 $\bar r$、$\bar t$ 的正幂次项。它们来自远区背景和前 $m-1$ 阶远区场在 $\gamma$ 上的值和导数，以及平移 $\zeta^i$ 产生的项。求第 $m$ 阶时，它们视为给定，称为\emph{远区数据}。其中含有待定的世界线修正。
+\item $n\ge m$ 的项，即 $\bar r^0$ 和 $\bar r$ 的负幂次项，以及它们经 $t_0$ 依赖产生的 $\bar t$ 项。它们来自远区第 $m$ 阶及更高阶的场，而这些场此时还没有确定。从近区一方看，它们是 $\mathcal E^{(1)}$ 的齐次解，系数在这一阶上是自由的，由近区解的内部结构和更高阶的匹配决定。我们称之为\emph{未知齐次项}。
+\end{itemize}
+于是第 $m$ 阶的问题是：给定远区数据，是否存在未知齐次项，使 \eqref{eq:hier} 在大 $\bar r$ 展开的每一阶上都成立。对一般的数据，答案是否定的；数据必须满足的条件，就是 \S\ref{sec:expansions} 所说的可解条件。它不是额外的假设，而是“解族存在”这一假设的直接后果。
+
+\paragraph{领头的非平凡阶。}把 $\mathcal E^{(1)}$ 按近区背景展开，$\mathcal E^{(1)}=\mathcal E_0+\mathcal E_1+\dots$。$\mathcal E_0$ 是 Minkowski 时空、零背景电磁场上的线性化算子，其中度规和势互不耦合；$\mathcal E_k$ 含背景中 $(M,q)^k/\bar r^k$ 的项，每多一个 $M$ 或 $q$ 就多一个 $1/\bar r$。$\mathcal E^{(1)}$ 是二阶微分算子。远区数据中 $\bar r$ 的一次项被 $\mathcal E_0$ 消去（两次导数作用在线性函数上为零），经 $\mathcal E_1$ 给出 $(M,q)/\bar r^2$；未知齐次项中 $\bar r^0$ 的项经 $\mathcal E_0$ 直接给出 $1/\bar r^2$，$\bar t/\bar r$ 的项给出 $\bar t/\bar r^3$ 和（经时间导数）$1/\bar r^2$。所以在静态部分的 $1/\bar r^2$ 阶和 $\bar t/\bar r^3$ 阶上，数据和未知项第一次同时出现，可解条件就在这两阶上读出。这也说明，在这两阶上背景只需保留到 $M$、$q$ 的一次：
+\begin{equation}
+\bar g^{(0)}=\eta+\frac{2M}{\bar r}\,\delta_{\alpha\beta}\,\dd\bar x^\alpha\dd\bar x^\beta+\dots,\qquad
+\bar A^{(0)}=-\frac q{\bar r}\,\dd\bar t+\dots,
+\label{eq:bgOM}
+\end{equation}
+\eqref{eq:RN} 中 $(M^2,q^2,qM)/\bar r^2$ 的项只影响 $1/\bar r^3$ 阶。$m=1,2$ 时，远区数据中 $\bar r$ 的二次项（例如潮汐项 $R_{0i0j}\bar x^i\bar x^j$）只有 $\ell=0,2$ 部分，不进入下面的 $\ell=1$ 块；$m=3$ 时数据中还有 $\bar r$ 的三次项，需要更高阶的背景，这一点在第~\ref{sec:o-second} 节处理。
+\end{rev}
 
 \subsection{决定运动的那一块}\label{sec:struct-sym}
 
 近区零阶的 RN 解是静态、球对称、在空间反射下不变的，所以它的线性化 Einstein--Maxwell 算子与转动、空间反射和时间反演都对易。扰动按张量球谐函数分解后，不同 $\ell$、不同宇称、不同时间反演性质的部分互不混合。世界线修正 $\ddot Z^i$ 是一个矢量，在空间反射下与电偶极同类，在时间反演下为偶，所以与运动有关的只是 $\ell=1$、电宇称、时间反演为偶的那一块；其余部分只确定场，不约束运动。
 
-对称张量 $Q_{\alpha\beta}$ 的 $\ell=1$ 电宇称部分可以写成
+\textbf{对任意一个对称张量场 $X_{\alpha\beta}$（下面它既可以是度规扰动，也可以是 Einstein 方程的分量），}它的 $\ell=1$ 电宇称部分可以写成
 \begin{equation}
-Q_{00}=Q^A_in^i,\qquad Q_{i0}=Q^B_jn^jn_i+Q^C_i,\qquad Q_{ij}=Q^D_kn^kn_in_j+Q^E_{(i}n_{j)}+Q^F_kn^k\delta_{ij},
+X_{00}=X^A_in^i,\qquad X_{i0}=X^B_jn^jn_i+X^C_i,\qquad X_{ij}=X^D_kn^kn_in_j+X^E_{(i}n_{j)}+X^F_kn^k\delta_{ij},
 \label{eq:harm}
 \end{equation}
-这是由 $n^i=x^i/r$、$\delta_{ij}$ 和一个常矢量能构造的全部对称张量；矢量 $V_\alpha$（例如电磁势）的对应部分为 $V_0=V^0_in^i$、$V_i=V^B_jn^jn_i+V^C_i$。系数 $Q^A_i,\dots$ 是三维矢量，对应 $\ell=1$ 的三个 $m$ 值。时间反演下 $g_{00}$、$g_{ij}$、$A_0$ 为偶，$g_{0i}$、$A_i$ 为奇，所以在这一块中 $g_{0i}$、$A_i$ 的分量必须是 $\bar t$ 的奇函数。
+这是由 $n^i=\bar x^i/\bar r$、$\delta_{ij}$ 和一个常矢量能构造的全部对称张量，\textbf{系数 $X^A_i,\dots,X^F_i$ 可以依赖 $\bar r$ 和 $\bar t$}；矢量 $V_\alpha$（例如电磁势）的对应部分为 $V_0=V^0_in^i$、$V_i=V^B_jn^jn_i+V^C_i$。系数是三维矢量，对应 $\ell=1$ 的三个 $m$ 值。时间反演下 $g_{00}$、$g_{ij}$、$A_0$ 为偶，$g_{0i}$、$A_i$ 为奇，所以在这一块中 $g_{0i}$、$A_i$ 的分量必须是 $\bar t$ 的奇函数。
 
-按 \S\ref{sec:expansions} 的阶次对应，近区第 $m$ 阶中这一块的输入分成两类。一类是远区数据：度规的四个矢量 $D^A,D^C,D^E,D^F$（来自正则场的一阶导数和世界线修正）和电磁的两个矢量 $E^0,E^C$（来自电磁正则场的一阶导数）。另一类是近区未知的齐次解：度规的 $H^A,H^D,H^E,H^F,\dot K^B,\dot K^C$ 和电磁的 $H',\dot K'^B,\dot K'^C$。电磁数据和电磁齐次解是电真空中新增的输入。
+\begin{rev}
+\paragraph{这一块的输入。}把 \eqref{eq:harm} 用于 $\bar G^{(m)}=(h,a)$，按上一小节的分类和计阶，只保留进入领头非平凡阶的项。远区数据是 $\bar r$、$\bar t$ 的一次项，未知齐次项是 $\bar r^0$ 和 $\bar t/\bar r$ 的项：
+\begin{equation}
+\begin{aligned}
+h_{00}&=\bar r\,D^A\!\cdot n+H^A\!\cdot n,\qquad
+h_{i0}=\bar t\,D^C_i+\frac{\bar t}{\bar r}\big(\dot K^B\!\cdot n\,n_i+\dot K^C_i\big),\\
+h_{ij}&=\bar r\big(n_{(i}D^E_{j)}+\delta_{ij}\,D^F\!\cdot n\big)+H^D\!\cdot n\,n_in_j+H^E_{(i}n_{j)}+H^F\!\cdot n\,\delta_{ij},\\
+a_0&=\bar r\,E^0\!\cdot n+H'\!\cdot n,\qquad
+a_i=\bar t\,E^C_i+\frac{\bar t}{\bar r}\big(\dot K'^B\!\cdot n\,n_i+\dot K'^C_i\big).
+\end{aligned}
+\label{eq:block-input}
+\end{equation}
+$\bar r$ 的一次项必须是 $\bar x$ 的线性函数，\eqref{eq:harm} 中其余的结构（如 $\bar r\,(V\!\cdot n)n_in_j$）不是 $\bar x$ 的多项式，不会出现；静态的 $h_{i0}$、$a_i$ 和含 $\bar t$ 的 $h_{00}$、$h_{ij}$、$a_0$ 又被时间反演排除。所以数据只有 $D^A,D^C,D^E,D^F$ 四个度规矢量和 $E^0,E^C$ 两个电磁矢量。$\bar t\,D^C$ 和 $\bar t\,E^C$ 来自远区场对 $t$ 的导数；平移 $x^i=\lambda(\bar x^i+\zeta^i(t))$ 使 $\dd x^i$ 中多出 $\lambda\dot\zeta^i\dd t$，从而 $h_{i0}$ 中多出 $\dot\zeta_i$，它在 $t_0$ 附近展开的 $\bar t\,\ddot\zeta_i$ 一项就落在 $D^C$ 中。世界线修正正是这样进入数据的。$\dot K$、$\dot K'$ 上的点表示它们是低一阶的 $1/\bar r$ 项对 $t_0$ 的导数。数据的具体表达式在第~\ref{sec:o-first} 节给出。$m=1$ 时这一块只有静态的数据，即加速度和背景电场给出的 $h_{00}=-2\,a\cdot\bar x$、$a_0=\boldsymbol E\cdot\bar x$，相当于 $D^A=-2a$、$E^0=\boldsymbol E$。
+
+\paragraph{这一块的输出。}电磁应力无迹，所以 $E_{ab}=0$ 等价于 $R_{ab}-8\pi T_{ab}=0$，我们取后者的分量。按 \eqref{eq:harm} 在两个领头阶上写成
+\begin{equation}
+\begin{gathered}
+(R-8\pi T)_{00}=\frac{R^A\!\cdot n}{\bar r^2},\qquad
+(R-8\pi T)_{i0}=\frac{\bar t}{\bar r^3}\big(R^B\!\cdot n\,n_i+R^C_i\big),\\
+(R-8\pi T)_{ij}=\frac1{\bar r^2}\big(R^D\!\cdot n\,n_in_j+R^E_{(i}n_{j)}+R^F\!\cdot n\,\delta_{ij}\big),\\
+\M^0=\frac{R^X\!\cdot n}{\bar r^2},\qquad
+\M^i=\frac{\bar t}{\bar r^3}\big(R^Y\!\cdot n\,n^i+R^Z_i\big).
+\end{gathered}
+\label{eq:block-output}
+\end{equation}
+$(R-8\pi T)_{i0}$ 和 $\M^i$ 在时间反演下为奇，所以取 $\bar t/\bar r^3$ 阶。对每一列输入，背景各向同性，输出对输入矢量线性且各向同性，必然取 \eqref{eq:block-output} 的形式，不会出现别的张量结构。所以这一块的方程是九个矢量方程。
+\end{rev}
 
 \subsection{系数矩阵与可解条件}\label{sec:struct-matrix}
 
-把这一块的 Einstein 方程和 Maxwell 方程按 \eqref{eq:harm} 的结构投影，每个方程都是输入矢量的线性组合，系数是 $M$、$q$ 的多项式。记远区数据为 $d$，未知齐次解为 $u$，方程写成
+\begin{rev}
+把 \eqref{eq:block-input} 的每一列代入 \eqref{eq:Eexpand} 的线性部分，用 \eqref{eq:bgOM} 计算，读出 \eqref{eq:block-output} 的系数。由上一小节的阶次分析，数据列只经过 $\mathcal E_1$ 进入，系数正比于 $M$ 或 $q$；未知列只经过 $\mathcal E_0$ 进入，系数是纯数。结果是
+{\small\setlength{\arraycolsep}{2.5pt}
+\begin{equation}
+\begin{array}{c|rrrrrr|rrrrrrrrr}
+ & D^A & D^C & D^E & D^F & E^0 & E^C & H^A & H^D & H^E & H^F & \dot K^B & \dot K^C & H' & \dot K'^B & \dot K'^C\\\hline
+R^A & \tfrac32M & -M & \tfrac12M & \tfrac12M & -2q & 2q & 1&0&0&0&1&-1&0&0&0\\
+R^B & 0 & 3M & 0&0&0&0& 0&0&0&0&\tfrac32&\tfrac32&0&0&0\\
+R^C & 0 & -M & 0&0&0&0& 0&0&0&0&-\tfrac12&-\tfrac12&0&0&0\\
+R^D & 3M & 0 & 0 & 3M &0&0& \tfrac32&-\tfrac32&0&-\tfrac32&3&0&0&0&0\\
+R^E & 0 & -2M & 0 & -2M & 4q & -4q & -1&1&0&1&-1&1&0&0&0\\
+R^F & -\tfrac32M & M & \tfrac12M & -\tfrac52M & -2q & 2q & -\tfrac12&\tfrac32&0&\tfrac32&-1&0&0&0&0\\\hline
+R^X & \tfrac12q & 0 & \tfrac12q & \tfrac12q & -2M & 2M & 0&0&0&0&0&0&-2&-1&1\\
+R^Y & 0 & -3q & 0&0&0&0& 0&0&0&0&0&0&0&3&3\\
+R^Z & 0 & q & 0&0&0&0& 0&0&0&0&0&0&0&-1&-1
+\end{array}
+\label{eq:matrix}
+\end{equation}}
+表中每一行给出 \eqref{eq:block-output} 中一个系数矢量对各列输入的依赖。前六行是 Einstein 方程，后三行是 Maxwell 方程。度规列在 Einstein 行中的部分（左上和中上的块）是真空中已有的结果，GW 给出过（其中两行的订正见 \S\ref{sec:struct-gauge}）；电磁列 $E^0$、$E^C$，Maxwell 三行，以及数据列中正比于 $q$ 的项，是电真空中新出现的，由本文算出。各项的来源是：$E^0$、$E^C$ 列在 Einstein 行中是 Coulomb 场与均匀电场的交叉应力，在 Maxwell 行中是均匀电场在 $O(M)$ 背景中的散度；$D$ 列在 Maxwell 行中是 Coulomb 场在被 $D$ 弯曲的度规中的散度。$E^0$、$E^C$ 两列在每一行中都大小相等、符号相反，所以电磁数据只通过均匀电场 $e\equiv E^0-E^C$ 进入，这是电磁规范不变性的直接反映。
+
+记远区数据为 $d$，未知齐次项为 $u$，源项（\eqref{eq:hier} 的右边在这一块中的投影）为 $s$，这一块的方程就是
+\end{rev}
 \begin{equation}
 \mathsf A\,d+\mathsf U\,u=s,
 \label{eq:matrixform}
 \end{equation}
-$s$ 是二次项等源项。未知项 $u$ 由近区方程本身确定，不能事先给出，所以能约束远区数据的只有那些消去全部未知项的组合：若行向量 $w$ 满足 $w\,\mathsf U=0$，则
+\textbf{$\mathsf A$、$\mathsf U$ 分别是 \eqref{eq:matrix} 中竖线左、右两部分。}未知项 $u$ 由近区方程本身确定，不能事先给出，所以能约束远区数据的只有那些消去全部未知项的组合：若行向量 $w$ 满足 $w\,\mathsf U=0$，则
 \begin{equation}
 w\,\mathsf A\,d=w\,s.
 \label{eq:solv}
 \end{equation}
 这样的 $w$ 构成 $\mathsf U$ 的左零空间。左零空间中的大多数组合使 \eqref{eq:solv} 两边恒为零，是恒等关系；非平凡的组合给出远区数据之间的一个关系，而远区数据中含有 $\ddot Z^i$，所以这个关系就是运动方程。
 
-在电真空中，这一结构有两个具体的特点，都可以由矩阵直接读出。第一，Maxwell 方程那几行不给出独立的关系：电磁齐次解 $H'$、$\dot K'^B$、$\dot K'^C$ 只出现在 Maxwell 方程中，Maxwell 方程的两个独立组合分别确定 $H'$ 和 $\dot K'^B+\dot K'^C$，此外不剩任何关系，所以 Maxwell 方程只确定电磁齐次解。第二，Einstein 方程中未知项出现的组合与真空情形相同，所以非平凡的组合本身不变，变化只在于这个组合中多出了电磁源项，它正比于 $q$ 乘电磁远区数据。电磁场对运动的影响因此只通过两条途径进入：Einstein 方程中的电磁应力，以及 RN 背景中的电荷对线性化算子的修正。
+\begin{rev}
+\paragraph{左零空间。}由 \eqref{eq:matrix} 直接读出，$\mathsf U$ 的秩为 5，左零空间是 4 维的，可以取为
+\begin{gather}
+w_1=-\tfrac23(B)+\tfrac23(D)+(E),\qquad
+w_2=-(A)-\tfrac23(B)+(D)+(F),\\
+w_3=(B)+3(C),\qquad
+w_4=(Y)+3(Z),
+\end{gather}
+这里 $(A),\dots,(Z)$ 指 \eqref{eq:matrix} 中 $R^A,\dots,R^Z$ 那一行。例如 $w_1$：(D) 中未知项以 $\tfrac32(H^A-H^D-H^F)+3\dot K^B$ 出现，(E) 中以 $-(H^A-H^D-H^F)-\dot K^B+\dot K^C$ 出现，$\tfrac23$(D)$+$(E) 剩下 $\dot K^B+\dot K^C$，再由 (B) 消去。把它们作用在数据列上，$w_2$、$w_3$、$w_4$ 给出恒为零的结果，是恒等关系；只有 $w_1$ 非平凡，
+\begin{equation}
+2M\,D^A_i-4M\,D^C_i+4q\,e_i=(w_1s)_i .
+\label{eq:master}
+\end{equation}
+这就是决定运动的关系。它在每一阶上形式相同，不同阶之间只有数据的含义和源项 $s$ 不同。
+\end{rev}
 
-同一个结构也适用于近区一阶方程。电真空中近区一阶场由背景均匀场和加速度驱动，它的 $\ell=1$ 部分满足同样形式的方程，非平凡组合给出 $M\boldsymbol a=q\boldsymbol E$。所以零阶的 Lorentz 力也是近区方程的可解条件。\citet{Gralla2010} 是用场方程的 Bianchi 恒等式作用在一阶的有效点粒子描述上得到这一结果的；这里的推导走的是另一条路，并且它与一阶、二阶的运动方程用的是同一套结构。
+在电真空中，这一结构有两个具体的特点，都可以由矩阵直接读出。第一，Maxwell 方程那几行不给出独立的关系：电磁齐次解 $H'$、$\dot K'^B$、$\dot K'^C$ 只出现在 Maxwell 方程中，\textbf{(Z) 确定 $\dot K'^B+\dot K'^C=qD^C$，(X) 确定 $H'$，(Y) 与 (Z) 成比例，}此外不剩任何关系，所以 Maxwell 方程只确定电磁齐次解。第二，Einstein 方程中未知项出现的组合与真空情形相同，所以非平凡的组合本身不变，变化只在于这个组合中多出了电磁源项，\textbf{即 \eqref{eq:master} 中的 $4q\,e$，}它正比于 $q$ 乘电磁远区数据。电磁场对运动的影响因此只通过两条途径进入：Einstein 方程中的电磁应力，以及 RN 背景中的电荷对线性化算子的修正。
+
+\textbf{\eqref{eq:hier} 的第一式也是这样的问题，而且源为零。代入 $m=1$ 的数据 $D^A=-2a$、$e=\boldsymbol E$、$D^C=0$，\eqref{eq:master} 给出 $-4Ma+4q\boldsymbol E=0$，即 $M\boldsymbol a=q\boldsymbol E$。}所以零阶的 Lorentz 力也是近区方程的可解条件。\citet{Gralla2010} 是用场方程的 Bianchi 恒等式作用在一阶的有效点粒子描述上得到这一结果的；这里的推导走的是另一条路，并且它与一阶、二阶的运动方程用的是同一套结构。\textbf{一阶运动来自 \eqref{eq:hier} 的第二式，这时 $s=-\mathcal Q[\bar G^{(1)},\bar G^{(1)}]$ 不为零；\S\ref{sec:struct-dim}、\S\ref{sec:struct-Q} 说明怎样计算 $w_1s$。}
 
 \subsection{纯规范扰动的检验}\label{sec:struct-gauge}
 
-纯规范扰动，即 $(h,a)=(\mathcal L_\xi g^{(0)},\mathcal L_\xi A^{(0)}+\dd\chi)$，是线性化方程的精确解，所以由场方程推出的任何关系都必须对它成立。取若干个生成元，例如 $\xi_0=\bar t\,(\boldsymbol c\cdot\bar{\boldsymbol x})$ 以及空间方向的线性和二次生成元，算出它们在 \eqref{eq:harm} 中给出的各个输入矢量，代入 \eqref{eq:matrixform}，必须恒为零。这要求每个规范扰动对应的列组合落在矩阵的零空间中。
+纯规范扰动，即 $(h,a)=(\mathcal L_\xi g^{(0)},\mathcal L_\xi A^{(0)}+\dd\chi)$，是线性化方程的精确解，所以由场方程推出的任何关系都必须对它成立。取若干个生成元，例如 $\xi_0=\bar t\,(\boldsymbol c\cdot\bar{\boldsymbol x})$ 以及空间方向的线性和二次生成元，算出它们在 \eqref{eq:block-input} 中给出的各个输入矢量，代入 \eqref{eq:matrixform}，必须恒为零。这要求每个规范扰动对应的列组合落在矩阵的零空间中。\textbf{以 $\xi_0=\bar t\,(\boldsymbol c\cdot\bar{\boldsymbol x})$ 为例，它给出 $D^A=2c$、$D^C=c$、$\dot K^B=-2Mc$，势的部分 $\mathcal L_\xi A^{(0)}$ 给出 $H'=qc$、$\dot K'^C=qc$。代入 (A) 行得 $3Mc-Mc-2Mc=0$，代入 (X) 行得 $qc-2qc+qc=0$，其余各行同样为零。代入 \eqref{eq:master} 的左边得 $4Mc-4Mc=0$，所以运动方程本身是规范不变的。电磁规范变换 $\chi=\bar t\,(\boldsymbol c\cdot\bar{\boldsymbol x})$ 给出 $E^0=E^C=c$，只通过 $e=0$ 进入，自动满足。}
 
 这个检验不依赖具体的计算方法，可以逐列核对矩阵。我们的矩阵对所有生成元都满足它。用同样的检验，我们发现文献中真空情形的对应矩阵有两行不满足：代入第一个生成元，其中一行给出非零的结果。对照直接计算，这两行是排印错误，它们不进入运动方程，所以文献中的运动方程不受影响。在用线性化方程直接核对真空二阶的过程中，我们还发现 \citet{Gralla2012} 中近区二阶潮汐解和一个规范变换中的若干系数需要订正。这些订正的细节放在附录。
 
 \subsection{量纲与宇称：哪些项能进入}\label{sec:struct-dim}
 
-近区一阶场不为零，带来的问题是：近区二阶方程中一阶场之间的二次项，以及只由 $M$、$q$ 和背景场构成的项，会不会进入决定运动的那一块。如果会，近区本身就会产生一个局部力，它不来自正则场。下面的两条论证排除了这种可能，只留下一类可以算出的二次项。
+\textbf{现在看 \eqref{eq:master} 的右边。}近区一阶场不为零，带来的问题是：近区二阶方程中一阶场之间的二次项，以及只由 $M$、$q$ 和背景场构成的项，会不会进入决定运动的那一块。如果会，近区本身就会产生一个局部力，它不来自正则场。下面的两条论证排除了这种可能，只留下一类可以算出的二次项。
 
 \emph{量纲。}决定运动的那一块中，相应 $\bar r$ 幂次的系数是无量纲的。远区数据 $D$、$E$ 的量纲为长度的倒数，背景场 $F$ 和加速度 $a$ 也是长度的倒数，$M$、$q$ 是长度。所以线性依赖远区数据的项只能是（数据）$\times(M\ \text{或}\ q)$；不含数据的项只能是 $(M,q)^2F^2$ 或 $(M,q)^2\partial F$ 型。
 
@@ -278,7 +381,7 @@ w\,\mathsf A\,d=w\,s.
 
 剩下的一类二次项，是常数场 $c$ 与外场型一阶场的乘积。常数场是 RN 背景的规范变换：取线性的生成元 $\xi$ 使 $\mathcal L_\xi\eta=c$，则近区一阶场中的常数部分及其响应就是 $\mathcal L_\xi G_0$，$G_0$ 为 RN 背景。这样，二次项可以用一个恒等式化成线性算子的作用，不需要直接计算二阶展开。
 
-记 $\mathcal E[G]$ 为 Einstein--Maxwell 方程的左边，$G=(g,A)$；$\mathcal E^{(1)}$ 和 $\mathcal Q$ 为它在 $G_0$ 附近的线性和二次部分。设 $G_2$ 是外场型的一阶场，满足 $\mathcal E^{(1)}[G_2]=0$。场方程在微分同胚下协变，$\mathcal E[\phi^*G]=\phi^*\mathcal E[G]$。取 $G=G_0+\mu_2G_2$，$\phi$ 为 $\xi$ 生成的流，参数为 $\mu_1$，则
+\textbf{沿用 \S\ref{sec:struct-hier} 的记号 $\mathcal E$、$\mathcal E^{(1)}$、$\mathcal Q$，$G_0$ 为 RN 背景。}设 $G_2$ 是外场型的一阶场，满足 $\mathcal E^{(1)}[G_2]=0$。场方程在微分同胚下协变，$\mathcal E[\phi^*G]=\phi^*\mathcal E[G]$。取 $G=G_0+\mu_2G_2$，$\phi$ 为 $\xi$ 生成的流，参数为 $\mu_1$，则
 \begin{equation*}
 \phi^*G=G_0+\mu_1\mathcal L_\xi G_0+\mu_2G_2+\mu_1\mu_2\,\mathcal L_\xi G_2+O(\mu_1^2).
 \end{equation*}
@@ -287,7 +390,7 @@ w\,\mathsf A\,d=w\,s.
 \mathcal Q\big[\mathcal L_\xi G_0,\,G_2\big]=-\,\mathcal E^{(1)}\big[\mathcal L_\xi G_2\big].
 \label{eq:Qident}
 \end{equation}
-这里的李导数同时作用在度规和势上，$\mathcal L_\xi A$ 中含 $\xi^cF_{ca}$，这正是电真空中坐标变换与电磁扰动混合的地方。右边是已知的线性算子作用在 $\mathcal L_\xi G_2$ 上，而 $\mathcal L_\xi G_2$ 可以直接写出，并按 \eqref{eq:harm} 归入矩阵的某几列。于是这一类二次项也成为 \eqref{eq:matrixform} 中已知的列，可解条件的计算仍然只是线性代数。这一恒等式本身是协变性的直接推论；用它把近区二阶的二次项化成矩阵的列，是本文处理电真空近区的关键一步。
+这里的李导数同时作用在度规和势上，$\mathcal L_\xi A$ 中含 $\xi^cF_{ca}$，这正是电真空中坐标变换与电磁扰动混合的地方。右边是已知的线性算子作用在 $\mathcal L_\xi G_2$ 上，而 $\mathcal L_\xi G_2$ 可以直接写出，\textbf{并按 \eqref{eq:block-input} 归入矩阵 \eqref{eq:matrix} 的某几列}。于是这一类二次项也成为 \eqref{eq:matrixform} 中已知的列，可解条件的计算仍然只是线性代数。这一恒等式本身是协变性的直接推论；用它把近区二阶的二次项化成矩阵的列，是本文处理电真空近区的关键一步。
 
 %======================================================================
 \section{一阶运动}\label{sec:o-first}
