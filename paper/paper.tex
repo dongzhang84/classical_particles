@@ -574,7 +574,11 @@ r^2h_0''-2h_0+4q\,w'=0,\qquad r\,D\,w''+2(Mr-q^2)\,w'-2r\,w+q\,(r\,h_0'-2h_0)=0 
 \end{equation}
 在视界处正则的解只有三个：外场解 $w=\tfrac B2(r^2-3q^2)$、$h_0=2qB\,r$；转动坐标系 $h_0\propto r^2$，是规范；以及 $w=\mu/r$、$h_0=-\tfrac{2M}q\tfrac\mu r+\tfrac{q\mu}{r^2}$，它是 Kerr--Newman 解对自旋的线性化，自旋 $J=M\mu/q$，满足 $\mu=qJ/M$，即旋磁比 $g=2$。最后一个是物体自身的自旋，是自由参数，不是外场诱导出来的。其余的解含对数，在视界处发散。外场解是有限项多项式，没有 $1/r$ 型的偶极项，所以 $\chi=0$。外场解到 $M$、$q$ 的一次正是 \S\ref{sec:first-near1} 中的 $h_{0i}=2q(\boldsymbol B\times n)_i$。这一结果与 \citet{PereniguezCardoso2022} 对磁响应的结论一致。
 
-\paragraph{电宇称：规范不变量。}偶宇称的扰动取 $h_{tt}=fH_0\cos\theta$、$h_{rr}=H_2\cos\theta/f$、$h_{AB}=r^2K\cos\theta\,\Omega_{AB}$、$h_{r\theta}=-h_1\sin\theta$、$\delta A_t=a_t\cos\theta$。这里有一个在不带电时不存在的困难：平移原点会在 Coulomb 势中产生电偶极项 $q\,\delta\cdot n/r^2$，在质量项中产生质量偶极，所以“电偶极”本身依赖于原点。物理的量是相对质心的电偶极。静态 $\ell=1$ 的规范矢量 $\xi^r=X(r)\cos\theta$、$\xi^\theta=-Y(r)\sin\theta/r^2$ 包含了这一平移。$q\neq0$ 时可以用 $a_t$ 吸收 $X$、用 $K$ 吸收 $Y$，得到三个规范不变量 $I_1,I_2,I_3$，它们就是 $a_t=K=0$ 规范中的 $H_0$、$H_2$、$h_1$；被吸收的 $X$ 正是把电偶极移到原点的平移，所以这些不变量自动相对质心定义了偶极。把一般解代入，三个不变量只依赖一个幅度 $\kappa$，并且都是 $r$ 的有限项多项式，例如 $I_1=\tfrac23\kappa(q^2-M^2)\,r$，没有 $1/r^k$ 项。只剩一个幅度，与加速度和电场不独立（$M\boldsymbol a=q\boldsymbol E$）是一致的。
+\paragraph{电宇称：规范不变量。}偶宇称的扰动取 $h_{tt}=fH_0\cos\theta$、$h_{rr}=H_2\cos\theta/f$、$h_{AB}=r^2K\cos\theta\,\Omega_{AB}$、$h_{r\theta}=-h_1\sin\theta$、$\delta A_t=a_t\cos\theta$。这里有一个在不带电时不存在的困难：平移原点会在 Coulomb 势中产生电偶极项 $q\,\delta\cdot n/r^2$，在质量项中产生质量偶极，所以“电偶极”本身依赖于原点。物理的量是相对质心的电偶极。静态 $\ell=1$ 的规范矢量 $\xi^r=X(r)\cos\theta$、$\xi^\theta=-Y(r)\sin\theta/r^2$ 包含了这一平移。$q\neq0$ 时可以用 $a_t$ 吸收 $X$、用 $K$ 吸收 $Y$，得到三个规范不变量 $I_1,I_2,I_3$，它们就是 $a_t=K=0$ 规范中的 $H_0$、$H_2$、$h_1$；被吸收的 $X$ 正是把电偶极移到原点的平移，所以这些不变量自动相对质心定义了偶极。把一般解代入，三个不变量只依赖一个幅度 $\kappa$，并且都是 $r$ 的有限项多项式，即
+\begin{equation*}
+I_1=\tfrac23\kappa(q^2-M^2)\,r,\qquad I_2=-\tfrac23\kappa\big(5M^2r-3Mq^2-3Mr^2+q^2r\big),\qquad I_3=-\tfrac13\kappa\,r^2\big(2M^2-3Mr+q^2\big),
+\end{equation*}
+没有 $1/r^k$ 项。极端时（$q=M$）$I_1$ 为零，而 $I_2=2\kappa M(r-M)^2$、$I_3=\kappa Mr^2(r-M)$ 不为零。$I_1$ 的消失有一个简单的原因：极端时外场解仍属于 Majumdar--Papapetrou 族，即调和函数 $U=1+M/\rho$ 加上一个线性项（$\rho$ 为各向同性半径），而这一族满足逐点的关系 $\sqrt{-g_{tt}}-A_t=1$（取 $q=M>0$）。这一关系在空间坐标变换下保持，所以在 $\delta A_t=0$ 的规范中 $\delta\sqrt{-g_{tt}}=0$，即 $H_0=0$；$I_1$ 正是这一规范中的 $H_0$。只剩一个幅度，与加速度和电场不独立（$M\boldsymbol a=q\boldsymbol E$）是一致的。
 
 \paragraph{电宇称：衰减解在视界处发散。}还要说明另一个可能的解被视界正则性排除。在 $a_t=K=0$ 规范中，Einstein 方程的一个分量只含 $H_0$：
 \begin{equation}
@@ -585,7 +589,7 @@ $H_0=r$ 是一个解，即上面的外场解。令 $H_0=r\,v$ 降阶，并用 $D
 \begin{equation*}
 H_0=r\int\frac{\dd r}{D^2}.
 \end{equation*}
-它在大 $r$ 处趋于 $-1/(3r^2)$，正是偶极型的衰减解；在视界处，非极端时它像 $1/(r-r_+)$ 加对数那样发散，极端时像 $(r-M)^{-3}$ 那样发散。视界正则性排除了这个解，所以 $\alpha=0$。
+它在大 $r$ 处趋于 $-1/(3r^2)$，正是偶极型的衰减解；在视界处，非极端时它像 $1/(r-r_+)$ 加对数那样发散；极端时 $D=(r-M)^2$，$H_0=-r/[3(r-M)^3]$，在简并视界处像 $(r-M)^{-3}$ 那样发散。视界正则性排除了这个解，所以 $\alpha=0$。极端时还可以从 Majumdar--Papapetrou 族直接看出这一点：族内唯一的 $\ell=1$ 衰减模是 $\delta U\propto n\cdot\boldsymbol p/\rho^2$，它只是 $M/\rho$ 的平移，已被不变量扣除；上面的衰减解不在这一族中（$\sqrt{-g_{tt}}-A_t\neq1$），并在视界处发散。所以 $\alpha=0$ 对 $q\le M$ 全部成立。
 
 \paragraph{结论与定位。}带电黑洞在均匀外场中的诱导电偶极和磁偶极都严格为零，这对 $M$、$q$ 精确，与原点和规范的选取无关。所以诱导偶极不进入二阶运动。这与 RN 黑洞的潮汐 Love 数和磁化率为零的已知结果 \citep{CardosoEtAl2017,PereniguezCardoso2022} 一致。电宇称 $\ell=1$ 的响应在其他设定下有人计算过：Kerr--Newman 黑洞的 Teukolsky 处理 \citep{ChakrabortyEtAl2026}，以及带高阶导数修正的极端 RN \citep{NoumiWong2026}；但我们未见文献在线性化 Einstein--Maxwell 中处理带电黑洞必然的加速，而上面看到，加速度正是电宇称问题中的驱动项之一。包含加速度的精确解，如 Ernst 解 \citep{Ernst1976} 和 \citet{OvcharenkoPodolsky2026} 给出的 Bertotti--Robinson 外场中加速的 RN 黑洞，可以按外场线性化，直接检验 $\alpha=0$；这一检验我们没有做。计算的细节放在附录。
 
