@@ -22,7 +22,7 @@
 
 \begin{center}
 \fbox{\parbox{0.92\textwidth}{\small
-\textbf{草稿状态。}引言、第 2、3 节已写成正文（2026 年 11 月 26 日；第 2 节中唯一性定理的条件仍需对照原文核实）；第 2、3 节于 2026 年 11 月 27 日按“从场方程一路推下来”的要求改写并定稿。原 \S2.6、\S2.7 的内容已拆到第 3、4、6 节第一次用到的地方；第 4、6 节中移来的段落仍有粗体标记，写这两节时再融入正文。其余各节目前是提纲，按 \texttt{derivations/p1/calc.tex} 第 9 章“工作总览”的合并方案写成，把原定的两篇（一阶推导；二阶结构与精确解检验）合为一篇。每节列出：要写的内容、主要结果、在 calc.tex 中的位置、完成状态。旧稿 \texttt{paper/archive/paper\_2026-11-24.tex}（只到一阶）中可以沿用的部分逐节注明。状态标记：[完成] 结果已有、只需改写；[部分] 有结果但需补充或核对；[待做] 尚未完成。
+\textbf{草稿状态。}引言、第 2、3 节已写成正文（2026 年 11 月 26 日；第 2 节中唯一性定理的条件仍需对照原文核实）；第 2、3 节于 2026 年 11 月 27 日按“从场方程一路推下来”的要求改写并定稿。原 \S2.6、\S2.7 的内容已拆到第 3、4、6 节第一次用到的地方；第 4、6 节中移来的段落仍有粗体标记，写这两节时再融入正文。第 4 节已于 2026 年 11 月 27 日写成正文。其余各节目前是提纲，按 \texttt{derivations/p1/calc.tex} 第 9 章“工作总览”的合并方案写成，把原定的两篇（一阶推导；二阶结构与精确解检验）合为一篇。每节列出：要写的内容、主要结果、在 calc.tex 中的位置、完成状态。旧稿 \texttt{paper/archive/paper\_2026-11-24.tex}（只到一阶）中可以沿用的部分逐节注明。状态标记：[完成] 结果已有、只需改写；[部分] 有结果但需补充或核对；[待做] 尚未完成。
 }}
 \end{center}
 
@@ -375,30 +375,180 @@ w_4=(Y)+3(Z),
 
 %======================================================================
 \section{一阶运动}\label{sec:o-first}
-\status{完成：论文主体，calc.tex \S6}
 %======================================================================
-\textbf{【以下两段由原 \S2.6、\S2.7 移来，作为计算远区数据的准备】}
 
-\paragraph{远区扰动。}第 $n$ 阶远区扰动 $(h^{(n)},a^{(n)})=\tfrac1{n!}\partial^n_\lambda(g,A)|_{\lambda=0}$ 在 $\gamma$ 附近按 $r$ 展开。一阶扰动在 $\gamma$ 附近分成两部分：一部分在 $\gamma$ 上奇异，领头项是质量和电荷的 Coulomb 场 $2M\delta_{\alpha\beta}/r$ 与 $-q\delta_{\alpha0}/r$，其后的项由 $M$、$q$ 和背景在 $\gamma$ 上的局部量（加速度、电磁场、曲率）决定；另一部分在 $\gamma$ 上光滑，包含尾巴积分的贡献，它的值和导数在 $\gamma$ 上是近区方程要用到的远区数据。二阶扰动的结构相同，奇异部分从 $1/r^2$ 开始。
+第~\ref{sec:o-structure} 节把运动方程归结为一个关系 \eqref{eq:master}：近区第 $m$ 阶的远区数据 $D^A$、$D^C$、$e$ 满足 $2MD^A-4MD^C+4q\,e=w_1s$，并且在 $m=1$ 时由它读出了零阶运动 $M\boldsymbol a=q\boldsymbol E$。本节取 $m=2$，把关系的两边都具体算出来：左边需要远区一阶场在 $\gamma$ 附近的形式，以及世界线修正 $\zeta^i$ 怎样进入近区；右边需要近区一阶场的完整解，以及它构成的源项。两边相等，就是一阶运动方程。推导中不再引入新的原理，用到的只是第~\ref{sec:o-assump} 节的假设和第~\ref{sec:o-structure} 节的结构。
+
+先把结果说在前面。\emph{本节从 Einstein--Maxwell 场方程推出了带电小黑洞在一般电真空背景中的一阶运动方程 \eqref{eq:eom1}：它恰好是检验粒子的 Lorentz 力方程在世界线附近的线性化，其中的度规扰动和电磁场扰动换成 Detweiler--Whiting 正则场。}ZP 和 LFW 得到的是同一个方程，但都把“运动由正则场驱动”作为出发点：ZP 把它当作 Detweiler--Whiting 处方采用，LFW 依赖关于重整化的假设。在引力与电磁耦合的情形，这一处方此前没有从场方程推出过；LFW 在结论中明确把它列为尚未完成的工作。本节完成了这一推导。推导过程中还得到三个本身有意义的结果：近区一阶解与远区奇异场逐项一致（\S\ref{sec:first-near1}），一阶场之间的二次项可以由微分同胚恒等式手算出来（\S\ref{sec:first-source}），以及近区不产生任何局部力（\S\ref{sec:first-ZP}）。
+
+\subsection{远区一阶场与检验体的答案}\label{sec:first-far}
+
+\paragraph{远区扰动。}第 $n$ 阶远区扰动 $(h^{(n)},a^{(n)})=\tfrac1{n!}\partial^n_\lambda(g,A)|_{\lambda=0}$ 在 $\gamma$ 以外满足背景上的线性化 Einstein--Maxwell 方程（$n\ge2$ 时带有低阶场构成的源）。本节只用一阶，下面省去上标，$(h,a)$ 即一阶远区扰动，$f=\dd a$。由 \S\ref{sec:consequences}，它在 $\gamma$ 附近最多像 $1/r$ 那样奇异，$1/r$ 的系数就是近区背景 \eqref{eq:RN} 在大 $\bar r$ 处的 $1/\bar r$ 项，即质量 $M$ 和电荷 $q$ 的 Coulomb 场。按 GW 的论证（\citealt{Gralla2010} 把它推广到一般场论），$(h,a)$ 作为分布在整个时空中满足带点源的线性化方程，源是沿 $\gamma$ 的质量 $M$ 和电荷 $q$。线性化 Einstein 方程的可积性要求点源的能动量守恒，这正是零阶运动 $M\boldsymbol a=q\boldsymbol E$；它已在 \S\ref{sec:struct-matrix} 由近区方程推出，两者一致。于是可以对度规和势同时取 Lorenz 规范，在没有入射辐射的条件下，$(h,a)$ 是这一耦合点源问题的推迟解。由于背景电磁场不为零，度规扰动和势扰动在线性化方程中耦合，推迟 Green 函数也是耦合的 \citep{ZimmermanPoisson2014}。
 
 \paragraph{两种规范。}\label{sec:gauge}无穷小微分同胚 $\xi$ 和电磁规范 $\chi$ 作用在一阶扰动上：
 \begin{equation}
 h\to h-\mathcal L_\xi g,\qquad a\to a-\mathcal L_\xi A-\dd\chi .
 \label{eq:gauge1}
 \end{equation}
-第二式中的 $\mathcal L_\xi A$ 包含 $\xi^cF_{ca}$，所以在电真空中，坐标变换也改变电磁扰动。二阶扰动的变换含 $\xi$ 与一阶场的二次项，以及二阶生成元 $\Xi$，形式与 \citet{Gralla2012} 的真空情形相同，另加电磁部分。
+第二式中的 $\mathcal L_\xi A$ 包含 $\xi^cF_{ca}$，所以在电真空中，坐标变换也改变电磁扰动。坐标变换同时改变世界线在坐标中的位置，$\zeta^i\to\zeta^i+\xi^i|_\gamma$。下面的推导在 Lorenz 规范中进行，\S\ref{sec:first-gauge} 再检验结果在一般的光滑规范变换下的协变性。
 
-\textbf{【移来的内容到此为止】}
+\paragraph{奇异场与正则场。}按 \citet{DetweilerWhiting2003}，并采用 ZP 在耦合情形中的构造，把推迟解分成奇异场 $(h^{\rm S},a^{\rm S})$ 和正则场 $(h^{\rm R},a^{\rm R})$。奇异场只依赖 $\gamma$ 附近的局部量，在 $\gamma$ 上奇异；正则场在 $\gamma$ 上光滑，满足齐次的线性化方程，包含全部尾巴积分。奇异场在 $\gamma$ 附近可以按距离展开，各项由 $M$、$q$ 和背景在 $\gamma$ 上的局部量（加速度、电磁场、曲率）决定。我们在带加速度的 Fermi 坐标 \eqref{eq:fermiacc}、\eqref{eq:Abg} 中把它展开到 $r^0$。$r^0$ 项有三个来源：Coulomb 场乘上 $\gamma$ 附近的红移和平行移动因子中的 $a\cdot x$；电荷源经背景电磁场对度规的一阶耦合；质量源经背景电磁场对势的一阶耦合。结果是（$n^i=x^i/r$，用到了 $M\boldsymbol a=q\boldsymbol E$）
+\begin{equation}
+\begin{gathered}
+h^{\rm S}_{00}\supset5q\,\boldsymbol E\cdot n,\qquad
+h^{\rm S}_{0i}\supset2q(\boldsymbol B\times n)_i,\qquad
+h^{\rm S}_{ij}\supset q\big(-4E_{(i}n_{j)}+\delta_{ij}\,\boldsymbol E\cdot n\big),\\
+a^{\rm S}_0\supset-\Big(M+\frac{q^2}{2M}\Big)\boldsymbol E\cdot n,\qquad
+a^{\rm S}_i\supset M(\boldsymbol B\times n)_i .
+\end{gathered}
+\label{eq:Sr0}
+\end{equation}
+$a^{\rm S}_0$ 中的 $-\tfrac{q^2}{2M}\boldsymbol E\cdot n=-\tfrac12q\,\boldsymbol a\cdot n$ 来自 Coulomb 势乘红移因子。奇异场的 $O(r)$ 项在 $h^{\rm S}_{00}$、$h^{\rm S}_{ij}$、$a^{\rm S}_0$ 中是 $x$ 的偶函数，在 $h^{\rm S}_{0i}$、$a^{\rm S}_i$ 中是静态的；按 \S\ref{sec:struct-sym} 的宇称和时间反演分类，它们都不进入决定运动的那一块。\eqref{eq:Sr0} 将在 \S\ref{sec:first-near1} 中与近区解对照。
 
+\paragraph{检验体的答案。}在推导之前，先写出要与之比较的方程。设一个质量 $M$、电荷 $q$ 的检验粒子在度规 $g+h$、电磁场 $F+f$ 中按 Lorentz 力运动，$(h,f)$ 是任意光滑的一阶扰动，粒子相对 $\gamma$ 的位移为 $\zeta^i$。在 Fermi 坐标中，以 $\gamma$ 上的固有时 $t$ 为参数，把运动方程对 $\zeta$ 和 $(h,f)$ 同时线性化。背景部分：$\Gamma^i_{00}=(1+a\cdot x)a_i+R_{0i0j}x^j$，$u^0=(1+a\cdot x)^{-1}$，场取在位移处，$F_{i0}(x)=E_i+x^k\partial_kF_{i0}$，速度带来磁力 $F_{ij}\dot\zeta^j$；其中 $-(a\cdot\zeta)a_i$ 与 $\tfrac qM(a\cdot\zeta)E_i$ 由零阶运动相消。扰动部分：$\gamma$ 上 $\delta\Gamma^i_{00}=h_{i0,0}-\tfrac12h_{00,i}-h_{ij}a_j$，$1/u^0$ 多出 $-\tfrac12h_{00}$，$F^i{}_0$ 多出 $f_{i0}-h_{ij}E_j$；其中 $h_{ij}a_j$ 与 $-\tfrac qMh_{ij}E_j$ 也由零阶运动相消。合起来，
+\begin{equation}
+M\ddot\zeta_i=-M R_{0i0j}\zeta^j+q\big(\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j\big)
++q\,f_{i0}-\tfrac12q\,h_{00}E_i-M\,h_{i0,0}+\tfrac12M\,h_{00,i},
+\label{eq:testbody}
+\end{equation}
+右边的扰动在 $\gamma$ 上取值。前三项是测地偏离、场梯度和 $\boldsymbol v\times\boldsymbol B$ 力，后四项是扰动场对检验粒子的作用。下面要证明的是：从场方程推出的世界线修正满足 \eqref{eq:testbody}，其中 $(h,f)$ 恰好是正则场 $(h^{\rm R},f^{\rm R})$。
+
+\subsection{近区一阶解：带电黑洞在均匀场和加速度中}\label{sec:first-near1}
+
+\S\ref{sec:struct-matrix} 在 $m=1$ 时只用了左零向量 $w_1$，读出了 $M\boldsymbol a=q\boldsymbol E$。源项 $w_1s$ 需要近区一阶场的完整形式，所以先用矩阵 \eqref{eq:matrix} 的其余各行把 $m=1$ 的方程解完。
+
+\paragraph{电宇称部分。}$m=1$ 时这一块的数据是 $D^A=-2\boldsymbol a$、$E^0=\boldsymbol E$，其余数据为零，未知项只有静态的 $H^A,H^D,H^E,H^F,H'$。各行给出
 \begin{itemize}[nosep]
-\item 零阶：Lorentz 力 $Ma=qE$ 是近区一阶 $\ell=1$ 方程的可解条件；近区一阶解在 Lorenz 规范下与远区奇异场的 $r^0$ 项逐项一致（独立检验）。
-\item 一阶：近区二阶方程，二次项由微分同胚恒等式计算；单极修正吸收进 $M,q$。
-\item 结果：ZP 方程 (8.2) 的线性化形式 \texttt{eq:eom4}；唯一新出现的近区耦合 $-\tfrac12qh^{\rm R}_{00}E_i$ 由规范协变完全确定。
-\item 检验：远区规范变换下的协变性；四种情形（真空/电真空，带电/不带电）逐级对照已知结果。
-\item 与 ZP 的比较：$\tfrac53M^2\boldsymbol E\times\boldsymbol B$、$11-2q^2/M^2$ 等局部系数来自正则场的远区展开，不来自近区。
-\item 与 \citet{FutamaseHoganItoh2008} 式 (3.74) 的比较（引言中已预告）。
-\item 待补：正则场局部系数的独立检验（例如 Ernst 解按 $M,q$ 展开），或明确声明取自 ZP；时间反演为奇的一块与磁宇称部分。
+\item (A)：$-3M\boldsymbol a+H^A-2q\boldsymbol E=0$，所以 $H^A=3M\boldsymbol a+2q\boldsymbol E=5q\boldsymbol E$；
+\item (D)：$-6M\boldsymbol a+\tfrac32(H^A-H^D-H^F)=0$，所以 $H^D+H^F=q\boldsymbol E$；
+\item (E)、(F)：代入以上两式后自动成立，(F) 化为 $3M\boldsymbol a-3q\boldsymbol E=0$；
+\item (X)：$-q\boldsymbol a-2M\boldsymbol E-2H'=0$，所以 $H'=-M\boldsymbol E-\tfrac12q\boldsymbol a=-\big(M+\tfrac{q^2}{2M}\big)\boldsymbol E$。
 \end{itemize}
+$H^E$ 和 $H^D-H^F$ 不受约束，它们是平直时空中的规范自由度。
+
+\paragraph{磁宇称部分。}背景磁场给出 $a_i=\tfrac12(\boldsymbol B\times\bar{\boldsymbol x})_i$，属于磁宇称，与上面不混合。它在 $O(M)$ 背景中的响应是 $a_i=M(\boldsymbol B\times n)_i$。它与 Coulomb 场的交叉应力 $8\pi T_{0i}=2q(\boldsymbol B\times n)_i/\bar r^2$ 驱动度规：对 $h_{0i}=W(\boldsymbol B\times n)_i$，平直算子给出 $R_{0i}=W(\boldsymbol B\times n)_i/\bar r^2$，所以 $W=2q$。这是带电黑洞在磁场中获得的场角动量引起的参考系拖曳。
+
+\paragraph{与远区奇异场的对照。}由 \S\ref{sec:consequences} 的阶次对应，近区 $m=1$ 中 $\bar r^0$ 的项来自远区一阶场在 $\gamma$ 附近的 $r^0$ 项。远区一阶场是奇异场加正则场；正则场在 $\gamma$ 上光滑，它的 $r^0$ 项只是常数，没有 $\ell=1$ 的角度依赖。所以近区解中 $\ell=1$ 的 $\bar r^0$ 项必须全部来自奇异场。取 $H^D=0$、$H^E=-4q\boldsymbol E$、$H^F=q\boldsymbol E$，近区解给出
+\begin{equation*}
+h_{00}=5q\,\boldsymbol E\cdot n,\qquad h_{ij}=q\big(-4E_{(i}n_{j)}+\delta_{ij}\boldsymbol E\cdot n\big),\qquad a_0=-\Big(M+\frac{q^2}{2M}\Big)\boldsymbol E\cdot n,
+\end{equation*}
+以及 $h_{0i}=2q(\boldsymbol B\times n)_i$、$a_i=M(\boldsymbol B\times n)_i$，与 \eqref{eq:Sr0} 逐项相同。这两组结果来源完全不同：\eqref{eq:Sr0} 来自远区推迟 Green 函数的 Hadamard 展开，这里的结果来自近区 RN 背景上的线性化方程。它们一致，是匹配本身的一个非平凡检验，也检验了矩阵 \eqref{eq:matrix} 中的电磁列和 Maxwell 行。\emph{这一对照是本文新做的}：它要求近区一阶场不为零，而这只在电真空中出现。
+
+\paragraph{近区一阶场的组成。}综上，近区一阶场由四部分组成：
+\begin{enumerate}[nosep]
+\item 常数度规 $c_{\alpha\beta}$，即正则场在 $\gamma$ 上的值加上平移产生的项，
+\begin{equation}
+c_{00}=h^{\rm R}_{00}-2\,a\cdot\zeta,\qquad c_{0i}=h^{\rm R}_{0i}+\dot\zeta_i,\qquad c_{ij}=h^{\rm R}_{ij},
+\label{eq:cconst}
+\end{equation}
+以及它在 RN 背景中的 $1/\bar r$ 响应（这里的 $c_{\alpha\beta}$ 与 \eqref{eq:beta-exp} 中的 $1/r$ 系数无关）。$c_{00}$ 中的 $-2a\cdot\zeta$ 来自 $g_{00}=-(1+a\cdot x)^2$ 在 $x=\lambda(\bar x+\zeta)$ 处的值，$c_{0i}$ 中的 $\dot\zeta_i$ 来自 $\dd x^i$ 中的 $\lambda\dot\zeta^i\dd t$。
+\item 外场部分：$h_{00}=-2a\cdot\bar x$、$a_0=\boldsymbol E\cdot\bar x$、$a_i=\tfrac12(\boldsymbol B\times\bar{\boldsymbol x})_i$，以及上面求出的 $\bar r^0$ 响应。记这一部分为 $G_2$，它单独满足 $\mathcal E^{(1)}[G_2]=0$。
+\item 常数势，是纯规范，不产生场。
+\item 单极修正 $\delta M/\bar r$、$\delta q/\bar r$。
+\end{enumerate}
+物体的偶极已由平移消去（\S\ref{sec:struct-hier}）。
+
+\subsection{近区二阶的远区数据}\label{sec:first-data}
+
+现在取 $m=2$。按 \S\ref{sec:struct-hier} 的分类，数据来自远区背景和远区一阶场在 $\gamma$ 附近的展开，再经平移 $x=\lambda(\bar x+\zeta(t))$ 和 $t=t_0+\lambda\bar t$ 代入近区坐标。读出 \eqref{eq:block-input} 中的系数，进入 \eqref{eq:master} 的三个数据是
+\begin{align}
+D^A_i&=h^{\rm R}_{00,i}-2a_i\,(a\cdot\zeta)-2R_{0i0j}\zeta^j,\qquad D^C_i=h^{\rm R}_{i0,0}+\ddot\zeta_i,\label{eq:DAC}\\
+e_i&=f^{\rm R}_{i0}+\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j .\label{eq:e2}
+\end{align}
+各项的来源如下。
+\begin{itemize}[nosep]
+\item $D^A$：$h^{\rm R}_{00}$ 的梯度；$-(1+a\cdot x)^2$ 中的交叉项 $-2(a\cdot\bar x)(a\cdot\zeta)$；潮汐项 $-R_{0i0j}x^ix^j$ 中的交叉项 $-2R_{0i0j}\bar x^i\zeta^j$。
+\item $D^C$：$h^{\rm R}_{i0}$ 对时间的导数，以及 \S\ref{sec:struct-sym} 已经指出的 $\dot\zeta_i(t_0+\lambda\bar t)$ 中的 $\bar t\,\ddot\zeta_i$。世界线的加速度就从这里进入。
+\item $e$：近区看到的均匀电场。$f^{\rm R}_{i0}$ 是正则场；$\zeta^k\partial_kF_{i0}$ 是背景电场在位移处的值。$F_{ij}\dot\zeta^j$ 由两半合成：$A_0$ 经平移带出的 $\tfrac12F_{ji}\bar x^j\dot\zeta^i$ 给出 $E^0$ 中的一半，$A_i$ 中的 $\tfrac12\bar tF_{ji}\dot\zeta^j$ 给出 $E^C$ 中的另一半，只有两半相加，才是规范无关的运动电场 $\boldsymbol v\times\boldsymbol B$。这与 \S\ref{sec:struct-matrix} 中 $E^0$、$E^C$ 只以 $e=E^0-E^C$ 出现是一致的。
+\end{itemize}
+数据中只出现正则场：由 \S\ref{sec:first-far}，奇异场在 $h_{00}$、$h_{ij}$、$a_0$ 中没有 $\ell=1$ 的 $r^1$ 项，在 $h_{0i}$、$a_i$ 中的 $r^0$ 项只有磁宇称，它们都不进入这一块。\emph{奇异场与正则场的分离不是我们加进去的，而是由近区方程的宇称结构自动给出的。}
+
+\subsection{源项}\label{sec:first-source}
+
+\eqref{eq:hier} 第二式的源是 $s=-\mathcal Q[\bar G^{(1)},\bar G^{(1)}]$。由 \S\ref{sec:struct-dim}，进入决定运动的那一块的只有常数 $c$ 与外场部分 $G_2$ 的乘积，以及单极修正。
+
+\paragraph{$c\times G_2$。}常数 $c_{\alpha\beta}$ 及其 $1/\bar r$ 响应是 RN 背景的一个规范变换。取
+\begin{equation}
+\xi^0=-c_{0i}\bar x^i-\tfrac12c_{00}\,\bar t,\qquad \xi^i=\tfrac12c_{ij}\bar x^j,
+\label{eq:xic}
+\end{equation}
+则 $\mathcal L_\xi\eta=c$，近区一阶场中的这一部分就是 $\mathcal L_\xi G_0$，$G_0$ 为 RN 背景。由 \eqref{eq:Eexpand}，$\mathcal Q[\bar G^{(1)},\bar G^{(1)}]$ 中的交叉项是 $2\mathcal Q[\mathcal L_\xi G_0,G_2]$，再由恒等式 \eqref{eq:Qident}，
+\begin{equation*}
+s\supset-2\mathcal Q[\mathcal L_\xi G_0,G_2]=\mathcal E^{(1)}[\mathcal L_\xi G_2].
+\end{equation*}
+二次项因此化成了线性算子作用在 $\mathcal L_\xi G_2$ 上。$\mathcal L_\xi G_2$ 可以直接写出：$G_2$ 是静态的，$\xi^0\partial_0$ 不起作用，由 \eqref{eq:xic}，
+\begin{itemize}[nosep]
+\item 对 $h_{00}=-2a\cdot\bar x$：$(\mathcal L_\xi h)_{00}=\tfrac12c_{kl}\bar x^l\partial_kh_{00}+2h_{00}\partial_0\xi^0=\big(2c_{00}\,a-c\,a\big)\cdot\bar x$，是 $D^A$ 列，$D^{A\prime}=2c_{00}\,a-c\,a$，其中 $(c\,a)_i=c_{ij}a_j$；
+\item 对 $a_0=\boldsymbol E\cdot\bar x$：$(\mathcal L_\xi a)_0=\tfrac12c_{kl}\bar x^lE_k+a_0\partial_0\xi^0$，是 $E^0$ 列，$e'=\tfrac12c\,\boldsymbol E-\tfrac12c_{00}\boldsymbol E$；
+\item 其余各项或者是静态的 $h_{0i}$、$a_i$，属于另一块；或者是 $O(M,q)\,\bar r^0$ 的项，落在未知列 $H$、$H'$ 中，被 $w_1$ 消去。磁型部分与 $c_{0i}$ 的乘积也是这样。
+\end{itemize}
+$\mathcal L_\xi G_2$ 不含 $\bar t$ 的线性项，所以 $D^{C\prime}=0$。于是 $w_1s=w_1\mathsf A\,d'$，用 \eqref{eq:master} 左边的系数，
+\begin{equation}
+w_1s=2M\,D^{A\prime}+4q\,e'=4Mc_{00}\,a-2M\,c\,a+2q\,c\,\boldsymbol E-2q\,c_{00}\boldsymbol E=2q\,c_{00}\,\boldsymbol E ,
+\label{eq:w1s}
+\end{equation}
+最后一步用了 $M\boldsymbol a=q\boldsymbol E$：$c\,a$ 与 $c\,\boldsymbol E$ 两项相消，$4Mc_{00}a=4qc_{00}\boldsymbol E$。$c_{ij}$ 和 $c_{0i}$ 都没有留下，只剩 $c_{00}$。恒等组合 $w_2$、$w_3$、$w_4$ 作用在这些列上为零，与 \S\ref{sec:struct-matrix} 一致。
+
+我们也不用 \eqref{eq:Qident}，直接把度规 $\eta+O(M)+\mu_1h_c+\mu_2h_2$ 和相应的势代入完整的 Einstein--Maxwell 方程，取 $\mu_1\mu_2$ 阶、$M$ 和 $q$ 的一次、$1/\bar r^2$ 阶，投影到 $\ell=1$ 电宇称。结果的各个分量依赖 $c_{ij}$ 和 $c_{0i}\boldsymbol B$，但在 $w_1$ 组合中这些依赖全部消去，只剩 \eqref{eq:w1s}；$w_2$ 组合为零；结果也不依赖 \S\ref{sec:first-near1} 中的规范参数 $H^E$、$H^D-H^F$。各分量列在附录中。
+
+\paragraph{单极修正。}若近区一阶场含 $\delta M/\bar r$、$\delta q/\bar r$，直接计算给出 $w_1s\supset-4(\delta q\,\boldsymbol E-\delta M\,\boldsymbol a)$，这只是把零阶关系中的 $M$、$q$ 换成 $M+\lambda\delta M$、$q+\lambda\delta q$。下面约定 $M$、$q$ 是物体的全部质量和电荷，$\delta M=\delta q=0$。
+
+\paragraph{这一步的意义。}在真空中近区一阶场可以取为零，GW 的近区二阶方程没有二次项。电真空中二次项不可避免，直接计算需要 Einstein--Maxwell 方程的二阶展开。恒等式 \eqref{eq:Qident} 把它化成已有矩阵的两列，整个计算可以手算。\emph{用微分同胚协变性处理近区二次项，是本文针对电真空的新做法。}
+
+\subsection{运动方程}\label{sec:first-eom}
+
+把 \eqref{eq:DAC}、\eqref{eq:e2}、\eqref{eq:cconst}、\eqref{eq:w1s} 代入 \eqref{eq:master}：
+\begin{equation*}
+\begin{split}
+4M\big(h^{\rm R}_{i0,0}+\ddot\zeta_i\big)={}&2M\big(h^{\rm R}_{00,i}-2a_i(a\cdot\zeta)-2R_{0i0j}\zeta^j\big)\\
+&+4q\big(f^{\rm R}_{i0}+\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j\big)-2q\big(h^{\rm R}_{00}-2a\cdot\zeta\big)E_i .
+\end{split}
+\end{equation*}
+含 $a\cdot\zeta$ 的两项 $-4Ma_i(a\cdot\zeta)+4q(a\cdot\zeta)E_i$ 由零阶运动相消。整理得
+\begin{equation}
+\boxed{\;
+M\ddot\zeta_i=-MR_{0i0j}\zeta^j+q\big(\zeta^k\partial_kF_{i0}+F_{ij}\dot\zeta^j\big)
++q\,f^{\rm R}_{i0}-\tfrac12q\,h^{\rm R}_{00}E_i-M\,h^{\rm R}_{i0,0}+\tfrac12M\,h^{\rm R}_{00,i}\;}
+\label{eq:eom1}
+\end{equation}
+这正是 \eqref{eq:testbody}，其中的扰动换成了正则场。\emph{这是本文的第一个主要结果：带电小黑洞在电真空中的一阶运动，就是检验粒子在“背景加正则场”中的 Lorentz 力运动。}这一点不是假设，而是近区方程有解的条件。
+
+逐项看：前三项是 Lorentz 力方程沿 $\gamma$ 的线性化，即测地偏离、场梯度和 $\boldsymbol v\times\boldsymbol B$ 力。后四项是一阶自力，只依赖正则场在 $\gamma$ 上的值和一阶导数。$-M h^{\rm R}_{i0,0}+\tfrac12Mh^{\rm R}_{00,i}$ 是引力自力，形式与 MiSaTaQuWa 方程相同；$q f^{\rm R}_{i0}$ 是电磁自力；$-\tfrac12qh^{\rm R}_{00}E_i$ 是引力自场对 Lorentz 力的修正，物理上是正则场的红移改变了物体所感受的背景电场。最后这一项在真空中不存在，是 \eqref{eq:eom1} 中唯一显式含背景电磁场的自力项，它来自 \eqref{eq:w1s}，即 $c_{00}$ 与均匀电场的乘积。
+
+两个极限：令 $q=0$，得到不带电物体在电真空中的运动，形式与 MiSaTaQuWa 方程相同，只是尾巴场换成了耦合问题中的正则场；令 $F=0$，从而 $\boldsymbol a=0$，得到真空中带电物体的运动，自力是引力和电磁两部分之和，互不耦合。
+
+\subsection{规范协变的检验}\label{sec:first-gauge}
+
+\eqref{eq:eom1} 是在 Lorenz 规范中推出的。对远区作光滑的规范变换 \eqref{eq:gauge1}，$\xi^\mu(t,x)$ 光滑，正则场按 \eqref{eq:gauge1} 变化，世界线的坐标位置变为 $\zeta^i+\xi^i(t,0)$。物理上同一个运动，在新规范中必须满足同一个方程。我们取 $\xi^\mu$ 为 $x$ 的任意二次多项式，系数是 $t$ 的任意函数，背景取 \eqref{eq:fermiacc}，$\boldsymbol E(t)$ 随时间任意变化，$F_{ij}$、$\partial_kF_{\alpha\beta}$ 和 Riemann 分量取一般值，验证了 \eqref{eq:eom1} 两边的变化恒等相等。唯一用到的背景条件是 $M\boldsymbol a=q\boldsymbol E$。
+
+这个检验能识别系数：把 $-\tfrac12qh^{\rm R}_{00}E_i$ 的系数改成 $-\tfrac13$，或者添一项 $-qh^{\rm R}_{ij}E_j$，不变性都被破坏。所以 \eqref{eq:eom1} 中唯一的耦合项 $-\tfrac12qh^{\rm R}_{00}E_i$ 是规范协变所必需的，而近区推导没有用到任何协变性的论证，独立地给出了同一系数。
+
+\subsection{与 ZP、LFW 的比较；近区不产生局部力}\label{sec:first-ZP}
+
+ZP 假设物体在度规 $g+h^{\rm R}$、电磁场 $F+f^{\rm R}$ 中按检验粒子的 Lorentz 力运动。把这一假设在 $\gamma$ 附近线性化，就是 \eqref{eq:testbody} 中取 $(h,f)=(h^{\rm R},f^{\rm R})$，与 \eqref{eq:eom1} 逐项相同。在协变的写法中，ZP 的方程含有 $\nabla_t h^{\rm R}_{0i}$、$\nabla_ih^{\rm R}_{00}$ 和 $-qh^{\rm R}_{ij}E_j$；在带加速度的 Fermi 坐标中，$\gamma$ 上 $\Gamma^i_{00}=\Gamma^0_{0i}=a_i$，协变导数展开后多出的 $Ma_jh^{\rm R}_{ij}$ 由零阶运动等于 $qh^{\rm R}_{ij}E_j$，正好抵消后者，剩下的就是 \eqref{eq:eom1}。LFW 从另一组假设（角平均加质量重整化）出发得到了同一结果；\citet{Zimmerman2015} 用点粒子有效场论也得到了它。\emph{三种处方给出同一个方程；据我们所知，本文第一次从场方程本身推出了它。}
+
+\paragraph{近区不产生局部力。}要得到显式的运动方程，还需要正则场在 $\gamma$ 上的值和导数。ZP 由耦合的 Hadamard 展开给出了它们：正则场等于若干局部项加上尾巴积分，局部项由 $M$、$q$ 和背景场决定。代入后，运动方程中出现 $\tfrac53M^2\,\boldsymbol E\times\boldsymbol B$、正比于 $qM\big(11-2q^2/M^2\big)\dot{\boldsymbol E}$ 的项等局部力。由 \S\ref{sec:struct-dim}，决定运动的那一块中，近区方程不产生不含远区数据的项；\eqref{eq:eom1} 中的所有自力都通过正则场进入。所以这些局部系数全部来自正则场在世界线附近的展开，而与物体的近区结构无关，也与物体是不是黑洞无关。\emph{这一结论是本文的又一个结果：点粒子方法中“驱动运动的只是正则场”这一假设，在一阶上由近区方程的量纲和宇称结构保证。}
+
+\paragraph{本节的限度。}正则场局部项的系数取自 ZP，本文没有独立推导。时间反演为奇的一块和磁宇称的 $\ell=1$ 部分不含 $\ddot\zeta$，与自旋的演化有关；在 $\bar a=0$ 的约定下本文没有分析它们。推导依赖第~\ref{sec:o-assump} 节的解族假设和 (H)。
+
+\subsection{与 Futamase--Hogan--Itoh 的比较}\label{sec:first-FHI}
+
+\citet{FutamaseHoganItoh2008} 同样从 Einstein--Maxwell 方程出发，讨论一般电真空背景中小带电黑洞的运动，与本文的问题最接近。两者在方法和结果上都有实质的不同。
+
+方法上，他们不用匹配渐近展开，而是在以世界线为顶点的零坐标中，把度规和势的各个函数按到世界线的距离作单一的幂次展开，展开的具体形式是假设的；黑洞被处理为背景上在世界线处奇异的扰动，要求它在世界线附近以 RN 场和 Coulomb 场为主，没有视界的条件。运动方程来自一个可积性条件：零锥截面必须是光滑形变的球面。作者本人指出，所假设的展开限制了模型，其普遍性有待研究。本文的假设是解族的存在与光滑性，以及近区背景为 Kerr--Newman（第~\ref{sec:o-assump} 节），远区场的形式（推迟解）是推出来的。
+
+结果上，两者的重叠是 Lorentz 力和电磁辐射反作用：他们得到了系数为 $\tfrac23q^2$ 的 Abraham--Lorentz--Dirac 项，在本文中它包含在 $qf^{\rm R}_{i0}$ 的局部部分里。他们还得到一个正比于 $q^2$ 乘背景场二次式的项，结构上对应正则场局部项中 $q^2$ 阶的 $\boldsymbol E\times\boldsymbol B$ 型项；两者的系数要在统一的约定下才能比较，本文不展开。不同之处有三点。第一，他们的方程中没有引力自力：没有正比于 $M^2$ 的项，也没有任何由度规扰动驱动的力；本文的 $-Mh^{\rm R}_{i0,0}+\tfrac12Mh^{\rm R}_{00,i}$ 和耦合项 $-\tfrac12qh^{\rm R}_{00}E_i$ 在那里没有对应。第二，他们称为尾巴项的部分含有未定的积分函数和依赖坐标选取的矢量，作者也承认其物理意义有待研究；本文的尾巴效应完全包含在正则场中，正则场由推迟解唯一确定。第三，他们通过重新定义速度吸收了一个正比于 $qM$ 乘背景场导数的项，而在本文和 ZP 中，相应的 $qM\dot{\boldsymbol E}$ 项是有确定系数的物理的力。他们也没有与 Detweiler--Whiting 处方或 ZP 的方程作比较。
+
+\subsection{本节的结果}\label{sec:first-summary}
+
+本节的新结果，按推导的顺序：
+\begin{enumerate}[nosep]
+\item 由近区一阶方程解出带电黑洞在均匀电场、磁场和加速度中的 $\bar r^0$ 响应，它在 Lorenz 规范下与远区奇异场的 $r^0$ 项逐项一致（\S\ref{sec:first-near1}）。
+\item 近区二阶方程中一阶场之间的二次项，经微分同胚恒等式化成矩阵的两列，在决定运动的组合中只剩 $2q\,c_{00}\boldsymbol E$（\S\ref{sec:first-source}）。
+\item 一阶运动方程 \eqref{eq:eom1}：Lorentz 力的线性化加正则场的自力，即 Detweiler--Whiting 处方在耦合情形下的形式，从场方程推出（\S\ref{sec:first-eom}）；它在远区光滑规范变换下协变（\S\ref{sec:first-gauge}）。
+\item 近区不产生局部力，ZP 中的局部系数全部来自正则场（\S\ref{sec:first-ZP}）。
+\end{enumerate}
+第 3 条回答了 LFW 指出的问题：在引力与电磁耦合的情形，Detweiler--Whiting 处方有了匹配渐近展开的论证。
 
 %======================================================================
 \section{二阶的预备：诱导偶极为零}\label{sec:o-dipole}
@@ -415,6 +565,8 @@ h\to h-\mathcal L_\xi g,\qquad a\to a-\mathcal L_\xi A-\dd\chi .
 \status{部分：calc.tex \S8}
 %======================================================================
 \textbf{【以下两段由原 \S2.7 移来，作为二阶的准备】}
+
+\paragraph{二阶远区扰动。}二阶远区扰动的结构与一阶（\S\ref{sec:first-far}）相同，奇异部分从 $1/r^2$ 开始。它在规范变换下的变化含 $\xi$ 与一阶场的二次项，以及二阶生成元 $\Xi$，形式与 \citet{Gralla2012} 的真空情形相同，另加电磁部分。
 
 \paragraph{P 规范。}按 \citet{Gralla2012}，我们取一个以质心为中心的规范，称为 P 规范：近区到一阶不依赖 $\bar t$，质量偶极为零；一阶远区场取 Lorenz 规范；一阶场在 $\gamma$ 附近的光滑部分（记为 H 场）在 $\gamma$ 上为零，$h^{\rm H}(\gamma)=0$，$a^{\rm H}(\gamma)$ 为纯规范。在 P 规范中，物体的位置就是 $\gamma$，偏离 $\gamma$ 的运动全部编码在场的光滑部分中。在与 P 规范光滑相关的规范 $h=h^{\rm P}-\mathcal L_\xi g$ 中，世界线修正为 $Z^{(1)}=\xi|_\gamma$，二阶为 $Z^{(2)}=(\Xi+\xi\cdot\partial\xi)|_\gamma$ \citep{Gralla2012}。
 
